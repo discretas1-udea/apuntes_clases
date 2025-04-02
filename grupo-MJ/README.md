@@ -14,4 +14,5 @@
 | 3      | 5     | 20/03/2025   | Tablas de verdad - Parte 1         | Clase 5 [[pdf]](clase5_20-03-2025.pdf)    |
 | 4      | 6     | 25/03/2025   | Tablas de verdad - Parte 2         | Clase 6 [[pdf]](clase6_25-03-2024.pdf)    |
 | 4      | 7     | 27/03/2025   | Enfoque axiomatico - Parte 1       | Clase 7 [[pdf]](clase7_27-03-2025.pdf)    |
+| 5      | 8     | 01/04/2025   | Enfoque axiomatico - Parte 2       | Clase 8 [[pdf]](clase8_01-04-2025.pdf)    |
 
