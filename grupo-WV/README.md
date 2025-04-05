@@ -1,7 +1,7 @@
 # Matematicas Discretas 1 - Ude@
 
-* **Grupo**: 05
-* **Horario**: MJ 10-12
+* **Grupo**: 01
+* **Horario**: WM 14-16
 
 
 | Semana | Clase | Fecha           | Tema                               | Notas de clase                            |
@@ -14,5 +14,6 @@
 | 3      | 5     | 21/03/2025      | Enfoque axiomatico - Parte 1       | Clase 5 [[pdf]](clase5_21-03-2025.pdf)    |
 | 4      | ---   | 26/03/2025      | ---                                | ---                                       |
 | 4      | 6     | 28/03/2025      | Enfoque axiomatico - Parte 2       | Clase 6  [[pdf]](clase6_28-03-2025.pdf)   |
-| 5      | 7     | 02/04/2025      | Enfoque axiomatico - Parte 3       | Clase 7  [[pdf]](clase1_07-03-2025.pdf)   |
+| 5      | 7     | 02/04/2025      | Enfoque axiomatico - Parte 3       | Clase 7  [[pdf]](clase7_02-04-2025.pdf)   |
+| 5      | 5     | 04/04/2025      | Enfoque axiomatico - Parte 3       | Clase 7  [[pdf]](clase8_04-04-2025.pdf)   |
 
