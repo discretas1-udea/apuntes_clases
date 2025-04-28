@@ -25,4 +25,5 @@ A continuación se muestran los enlaces para acceder a los apuntes del curso:
 15. https://sites.google.com/view/school-project-berkeley/home
 16. https://spectrum.ieee.org/robot-gift-guide-2019
 17. https://ai4k12.org/curriculum-ai4all-open-learning/
-18. https://web.stanford.edu/class/cs103/  
+18. https://web.stanford.edu/class/cs103/
+19. https://introtodeeplearning.com/  
