@@ -21,4 +21,7 @@
 | 7      | -     | 16/04/2025      | Semana Santa                       | ---                                       |
 | 7      | -     | 18/04/2025      | Semana Santa                       | ---                                       |
 | 8      | 9     | 24/04/2025      | Lógica cuantificacional - Parte 1  | Clase 9  [[pdf]](clase9_23-04-2025.pdf)   |
-| 8      | 10    | 26/04/2025      | Lógica cuantificacional - Parte 2  | Clase 1o  [[pdf]](clase10_25-04-2025.pdf) |
+| 8      | 10    | 26/04/2025      | Lógica cuantificacional - Parte 2  | Clase 10  [[pdf]](clase10_25-04-2025.pdf) |
+| 9      | 11    | 30/04/2025      | No se avanzo en nada               | Clase 11  [[pdf]](clase11_30-04-2025.pdf) |
+| 9      | 12    | 02/05/2025      | Lógica cuantificacional - Parte 3  | Clase 12  [[pdf]](clase12_02-05-2025.pdf) |
+
