@@ -27,3 +27,4 @@ A continuación se muestran los enlaces para acceder a los apuntes del curso:
 17. https://ai4k12.org/curriculum-ai4all-open-learning/
 18. https://web.stanford.edu/class/cs103/
 19. https://introtodeeplearning.com/  
+20. https://people.eng.unimelb.edu.au/adrianrp/COMP90054/
