@@ -20,5 +20,9 @@
 | 6      | ---   | 10/04/2025   | Parcial 1 - Logica proposicional   | ---                                       |
 | 7      | ---   | 15/04/2025   | Semana Santa                       | ---                                       |
 | 7      | ---   | 17/04/2025   | Semana Santa                       | ---                                       |
-| 8      | ---   | 22/04/2025   | Logica proposicional - Parte 1     | Clase 10 [[pdf]](clase10_22-04-2025.pdf)  |
-
+| 8      | 10    | 22/04/2025   | Logica proposicional - Parte 1     | Clase 10 [[pdf]](clase10_22-04-2025.pdf)  |
+| 8      | 11    | 24/04/2025   | Logica proposicional - Parte 2     | Clase 11 [[pdf]](clase11_24-04-2025.pdf)  |
+| 9      | 12    | 29/04/2025   | Logica proposicional - Parte 3     | Clase 12 [[pdf]](clase12_29-04-2025.pdf)  |
+| 9      | ---   | 01/05/2025   | Dia del trabajo                    | ---                                       |
+| 10     | 13    | 06/05/2025   | Logica proposicional - Parte 4     | Clase 13 [[pdf]](clase13_06-05-2025.pdf)  |
+| 11     | 14   | 08/05/2025    |                                    |                                           |

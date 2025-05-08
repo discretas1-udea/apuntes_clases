@@ -6,6 +6,10 @@ A continuación se muestran los enlaces para acceder a los apuntes del curso:
 * **MJ10-12** [[link]](grupo-MJ/README.md)
 * **WV14-16** [[link]](grupo-WV/README.md)
 
+## Codigos
+
+En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleados en clase.s
+
 ## Referencias
 
 1. https://web.stanford.edu/class/cs103/
