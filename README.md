@@ -32,3 +32,8 @@ En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleado
 18. https://web.stanford.edu/class/cs103/
 19. https://introtodeeplearning.com/  
 20. https://people.eng.unimelb.edu.au/adrianrp/COMP90054/
+21. https://web.stanford.edu/class/archive/cs/cs221/cs221.1186/
+22. https://builds.openlogicproject.org/
+23. https://rynchn.github.io/math/
+24. https://carnap.io/
+25. https://keymaerax.org/
