@@ -25,4 +25,4 @@
 | 9      | 12    | 29/04/2025   | Logica proposicional - Parte 3     | Clase 12 [[pdf]](clase12_29-04-2025.pdf)  |
 | 9      | ---   | 01/05/2025   | Dia del trabajo                    | ---                                       |
 | 10     | 13    | 06/05/2025   | Logica proposicional - Parte 4     | Clase 13 [[pdf]](clase13_06-05-2025.pdf)  |
-| 11     | 14   | 08/05/2025    |                                    |                                           |
+| 11     | 14    | 08/05/2025   |                                    |                                           |
