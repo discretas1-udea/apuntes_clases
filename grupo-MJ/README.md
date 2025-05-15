@@ -20,9 +20,14 @@
 | 6      | ---   | 10/04/2025   | Parcial 1 - Logica proposicional   | ---                                       |
 | 7      | ---   | 15/04/2025   | Semana Santa                       | ---                                       |
 | 7      | ---   | 17/04/2025   | Semana Santa                       | ---                                       |
-| 8      | 10    | 22/04/2025   | Logica proposicional - Parte 1     | Clase 10 [[pdf]](clase10_22-04-2025.pdf)  |
-| 8      | 11    | 24/04/2025   | Logica proposicional - Parte 2     | Clase 11 [[pdf]](clase11_24-04-2025.pdf)  |
-| 9      | 12    | 29/04/2025   | Logica proposicional - Parte 3     | Clase 12 [[pdf]](clase12_29-04-2025.pdf)  |
+| 8      | 10    | 22/04/2025   | Logica cuantificacional - Parte 1  | Clase 10 [[pdf]](clase10_22-04-2025.pdf)  |
+| 8      | 11    | 24/04/2025   | Logica cuantificacional - Parte 2  | Clase 11 [[pdf]](clase11_24-04-2025.pdf)  |
+| 9      | 12    | 29/04/2025   | Logica cuantificacional - Parte 3  | Clase 12 [[pdf]](clase12_29-04-2025.pdf)  |
 | 9      | ---   | 01/05/2025   | Dia del trabajo                    | ---                                       |
-| 10     | 13    | 06/05/2025   | Logica proposicional - Parte 4     | Clase 13 [[pdf]](clase13_06-05-2025.pdf)  |
-| 11     | 14    | 08/05/2025   |                                    |                                           |
+| 10     | 13    | 06/05/2025   | Logica cuantificacional - Parte 4  | Clase 13 [[pdf]](clase13_06-05-2025.pdf)  |
+| 10     | 14    | 08/05/2025   | Logica cuantificacional - Parte 5  | Clase 14 [[pdf]](clase14_08-05-2025.pdf)  |
+| 11     | 15    | 13/05/2025   | Conceptos basicos de Prolog        | Clase 15 [[pdf]](clase15_13-05-2025.pdf)  |
+| 11     | 16    | 15/05/2025   | Logica cuantificacional - Parte 6  | Clase 16 [[pdf]](clase16_15-05-2025.pdf)  |
+| 12     | 17    | 20/05/2025   |                                    |                                           |
+| 12     | 18    | 22/05/2025   |                                    |                                           |
+
