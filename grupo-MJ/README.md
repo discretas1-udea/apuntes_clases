@@ -28,6 +28,6 @@
 | 10     | 14    | 08/05/2025   | Logica cuantificacional - Parte 5  | Clase 14 [[pdf]](clase14_08-05-2025.pdf)  |
 | 11     | 15    | 13/05/2025   | Conceptos basicos de Prolog        | Clase 15 [[pdf]](clase15_13-05-2025.pdf)  |
 | 11     | 16    | 15/05/2025   | Logica cuantificacional - Parte 6  | Clase 16 [[pdf]](clase16_15-05-2025.pdf)  |
-| 12     | 17    | 20/05/2025   |                                    |                                           |
+| 12     | 17    | 20/05/2025   | Logica cuantificacional - Parte 7  | Clase 17 [[pdf]](clase17_20-05-2025.pdf)  |
 | 12     | 18    | 22/05/2025   |                                    |                                           |
 
