@@ -27,7 +27,7 @@
 | 10     | 13    | 07/05/2025      | Lógica cuantificacional - Parte 4  | Clase 13  [[pdf]](clase13_07-05-2025.pdf) |
 | 10     | 14    | 09/05/2025      | Lógica cuantificacional - Parte 5  | Clase 14  [[pdf]](clase14_09-05-2025.pdf) |
 | 11     | 15    | 14/05/2025      | Lógica cuantificacional - Parte 5  | Clase 15  [[pdf]](clase15_14-05-2025.pdf) |
-| 11     | 16    | 16/05/2025      | Lógica cuantificacional - Parte 6  | Clase 16  [[pdf]](clase15_16-05-2025.pdf) |
-| 12     | 17    | 21/05/2025      | Lógica cuantificacional - Parte 7  | Clase 17  [[pdf]](clase16_21-05-2025.pdf) |
+| 11     | 16    | 16/05/2025      | Lógica cuantificacional - Parte 6  | Clase 16  [[pdf]](clase16_16-05-2025.pdf) |
+| 12     | 17    | 21/05/2025      | Lógica cuantificacional - Parte 7  | Clase 17  [[pdf]](clase17_21-05-2025.pdf) |
 | 12     | 18    | 23/05/2025      |                                    |                                           |
 
