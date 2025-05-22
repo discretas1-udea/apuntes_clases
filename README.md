@@ -37,3 +37,6 @@ En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleado
 23. https://rynchn.github.io/math/
 24. https://carnap.io/
 25. https://keymaerax.org/
+26. https://tedsider.org/
+27. https://tedsider.org/teaching/higher_order_20/higher_order_crash_course.pdf
+28. https://tedsider.org/teaching/higher_order_20/HO_crash_course_paradoxes.pdf
