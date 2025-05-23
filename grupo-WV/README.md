@@ -29,5 +29,5 @@
 | 11     | 15    | 14/05/2025      | Lógica cuantificacional - Parte 5  | Clase 15  [[pdf]](clase15_14-05-2025.pdf) |
 | 11     | 16    | 16/05/2025      | Lógica cuantificacional - Parte 6  | Clase 16  [[pdf]](clase16_16-05-2025.pdf) |
 | 12     | 17    | 21/05/2025      | Lógica cuantificacional - Parte 7  | Clase 17  [[pdf]](clase17_21-05-2025.pdf) |
-| 12     | 18    | 23/05/2025      | Teoria de conjuntos - Parte 1      | Clase 18 [[pdf]](clase18_22-05-2025.pdf)  |
+| 12     | 18    | 23/05/2025      | Teoria de conjuntos - Parte 1      | Clase 18 [[pdf]](clase18_23-05-2025.pdf)  |
 
