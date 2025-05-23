@@ -29,5 +29,5 @@
 | 11     | 15    | 13/05/2025   | Conceptos basicos de Prolog        | Clase 15 [[pdf]](clase15_13-05-2025.pdf)  |
 | 11     | 16    | 15/05/2025   | Logica cuantificacional - Parte 6  | Clase 16 [[pdf]](clase16_15-05-2025.pdf)  |
 | 12     | 17    | 20/05/2025   | Logica cuantificacional - Parte 7  | Clase 17 [[pdf]](clase17_20-05-2025.pdf)  |
-| 12     | 18    | 22/05/2025   |                                    |                                           |
+| 12     | 18    | 22/05/2025   | Teoria de conjuntos - Parte 1      | Clase 18 [[pdf]](clase18_22-05-2025.pdf)  |
 
