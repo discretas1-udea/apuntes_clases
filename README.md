@@ -40,3 +40,7 @@ En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleado
 26. https://tedsider.org/
 27. https://tedsider.org/teaching/higher_order_20/higher_order_crash_course.pdf
 28. https://tedsider.org/teaching/higher_order_20/HO_crash_course_paradoxes.pdf
+29. https://www.grc.nasa.gov/www/k-12/rocket/guided.htm
+30. https://bvanderlei.github.io/jupyter-guide-to-linear-algebra/intro.html
+31. https://www.grc.nasa.gov/www/k-12/airplane/guided.htm
+32. https://course.fast.ai/
