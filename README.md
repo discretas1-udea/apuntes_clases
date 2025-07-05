@@ -44,3 +44,4 @@ En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleado
 30. https://bvanderlei.github.io/jupyter-guide-to-linear-algebra/intro.html
 31. https://www.grc.nasa.gov/www/k-12/airplane/guided.htm
 32. https://course.fast.ai/
+33. https://lumetta.web.engr.illinois.edu/120-S19/
