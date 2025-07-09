@@ -38,4 +38,5 @@
 | 15     | 23    | 17/06/2025   | Relaciones - Parte 3               | Clase 24[[pdf]](clase24_17-06-2025.pdf) |
 | 15     | 23    | 17/06/2025   | Clase de sensibilización - Lógica  | Resumen [[pdf]](resumen_clase_sensibilizacion_logica_17-06-2025.pdf) - Diapositivas [[pdf]](diapositivas_clase_sensibilizacion_logica_17-06-2025.pdf) |
 | 16     | 24    | 24/06/2025   | Relaciones - Parte 4               | Clase 25[[pdf]](clase25_24-06-2025.pdf) |
+| 16     | 24    | 25/06/2025   | Relaciones - Parte 4               | Clase 26[[pdf]](clase26_25-06-2025.pdf)] |
 
