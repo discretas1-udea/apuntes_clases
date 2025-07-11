@@ -40,5 +40,6 @@
 | 16     | 26    | 20/06/2025      | Relaciones - Parte 3               | Clase 24 [[pdf]](clase24_20-06-2025.pdf)  |
 | 17     | 27    | 24/06/2025      | Relaciones - Parte 4  (vacaciones) | Clase 25 [[pdf]](clase25_24-06-2025.pdf)  |
 | 17     | 28    | 25/06/2025      | Algebra Booleana - Parte 1 (vacaciones) | Clase 26 [[pdf]](clase26_25-06-2025.pdf) |
-| 18     | 29    | 09/07/2025      | Algebra Booleana - Parte 2         | - Ejemplos Logisim [[dir]](ejemplos_logisim/) |
+| 18     | 29    | 09/07/2025      | Algebra Booleana - Parte 2         | Clase 27 [[pdf]](clase27_09-07-2025.pdf) - Ejemplos Logisim [[dir]](ejemplos_logisim/) |
+| 18     | 30    | 11/07/2025      | Sistemas numericos | Clase 28 [[pdf]](clase28_11-07-2025.pdf) |
 

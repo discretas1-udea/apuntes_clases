@@ -33,11 +33,11 @@
 | 13     | 19    | 27/05/2025   | Teoria de conjuntos - Parte 2      | Clase 19 [[pdf]](clase19_27-05-2025.pdf)  |
 | 13     | 20    | 29/05/2025   | Teoria de conjuntos - Parte 3      | Clase 20 [[pdf]](clase20_29-05-2025.pdf)  |
 | 14     | 21    | 03/06/2025   | Teoria de conjuntos - Parte 4      | Clase 21 [[pdf]](clase21_03-06-2025.pdf)  |
-| 14     | 22    | 05/06/2025   | Relaciones - Parte 1               | Clase 22[[pdf]](clase22_05-06-2025.pdf) |
-| 15     | 22    | 10/06/2025   | Relaciones - Parte 2               | Clase 23[[pdf]](clase23_10-06-2025.pdf) |
-| 15     | 23    | 17/06/2025   | Relaciones - Parte 3               | Clase 24[[pdf]](clase24_17-06-2025.pdf) |
+| 14     | 22    | 05/06/2025   | Relaciones - Parte 1               | Clase 22 [[pdf]](clase22_05-06-2025.pdf) |
+| 15     | 22    | 10/06/2025   | Relaciones - Parte 2               | Clase 23 [[pdf]](clase23_10-06-2025.pdf) |
+| 15     | 23    | 17/06/2025   | Relaciones - Parte 3               | Clase 24 [[pdf]](clase24_17-06-2025.pdf) |
 | 15     | 23    | 17/06/2025   | Clase de sensibilización - Lógica  | Resumen [[pdf]](resumen_clase_sensibilizacion_logica_19-06-2025.pdf) - Diapositivas [[pdf]](diapositivas_clase_sensibilizacion_logica_19-06-2025.pdf) |
-| 16     | 24    | 24/06/2025   | Relaciones - Parte 4  (vacaciones) | Clase 25[[pdf]](clase25_24-06-2025.pdf) |
-| 16     | 24    | 25/06/2025   | Algebra Booleana - Parte 1 (vacaciones) | Clase 26[[pdf]](clase26_25-06-2025.pdf) |
-| 17     | 25    | 08/07/2025   | Algebra Booleana - Parte 2 (vacaciones) | Clase 27[[pdf]](clase27_08-07-2025.pdf) - Ejemplos Logisim [[dir]](ejemplos_logisim/) |
-| 18     | 25    | 10/07/2025   | Sistemas numericos | |
+| 16     | 24    | 24/06/2025   | Relaciones - Parte 4  (vacaciones) | Clase 25 [[pdf]](clase25_24-06-2025.pdf) |
+| 16     | 24    | 25/06/2025   | Algebra Booleana - Parte 1 (vacaciones) | Clase 26 [[pdf]](clase26_25-06-2025.pdf) |
+| 17     | 25    | 08/07/2025   | Algebra Booleana - Parte 2 (vacaciones) | Clase 27 [[pdf]](clase27_08-07-2025.pdf) - Ejemplos Logisim [[dir]](ejemplos_logisim/) |
+| 18     | 25    | 10/07/2025   | Sistemas numericos | Clase 28 [[pdf]](clase28_10-07-2025.pdf) |
