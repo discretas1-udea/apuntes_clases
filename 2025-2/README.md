@@ -22,3 +22,4 @@
 
 1. https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content
 2. http://tupdigital.web.unq.edu.ar/wp-content/uploads/sites/55/2020/04/1_3_Logica_Proposicional.pdf
+3. https://www2.ulpgc.es/hege/almacen/download/46/46531/logica.pdf
