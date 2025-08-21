@@ -16,4 +16,9 @@
 
 1. https://discrete-math-puzzles.github.io/
 2. https://github.com/alexanderskulikov/discrete-math-python-scripts
-3. 
+3. https://cursos.virtual.uniandes.edu.co/isis1104/
+
+### Tema 1 - Logica proposicional
+
+1. https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content
+2. http://tupdigital.web.unq.edu.ar/wp-content/uploads/sites/55/2020/04/1_3_Logica_Proposicional.pdf
