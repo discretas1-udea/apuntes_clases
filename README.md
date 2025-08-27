@@ -8,7 +8,7 @@ A continuación se muestran los enlaces para acceder a los apuntes del curso:
 
 ## Codigos
 
-En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleados en clase.s
+En la carpeta [[codigos]](codigos/) se muestran algunos de los códigos empleados en clase.
 
 ## Referencias
 

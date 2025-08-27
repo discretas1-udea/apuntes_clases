@@ -10,6 +10,7 @@
 | 1      | 1     | 14/08/2025   | Lógica proposicional - Parte 1     | Clase 2 [[pdf]](clase02_14-08-2025.pdf)   | Logica proposicional, tipos de enunciados, proposiciones, tipos de proposiciones |
 | 2      | 2     | 19/08/2025   | Lógica proposicional - Parte 2     | Clase 3 [[pdf]](clase03_19-08-2025.pdf)   | Operadores logicos (negacion, conjuncion, disyuncion, disyuncion exclusiva)|
 | 2      | 4     | 21/08/2025   | Lógica proposicional - Parte 3     | Clase 4 [[pdf]](clase04_21-08-2025.pdf)   | Operadores logicos (condicional, bicondicional), traducción de lenguaje natural a lenguaje proposicional |
+| 3      | 5     | 26/08/2025   | Lógica proposicional - Parte 4     | Clase 5 [[pdf]](clase05_26-08-2025.pdf)   | Reciproco, contrareciproco, contrario - Evaluacion de expresiones logicas |
 
 
 ## Referencias
