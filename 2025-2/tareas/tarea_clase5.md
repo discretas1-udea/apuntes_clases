@@ -1,4 +1,3 @@
-
 # Tarea - clase 5
 
 **Fecha**: 26/08/2025
@@ -19,6 +18,7 @@ A continuación se listan algunos ejercicios de repaso para reforzar los concept
    * $(P \land Q) \lor (\neg R \lor S)$
    * $P \land (Q \lor \neg R) \lor S$
    * $\neg(P \oplus \neg Q)\to S$
+  
 3. En las siguientes expresiones logicas emplean las variables $p$, $q$ y $r$. Para el caso se sabe que $p$ es verdadera, $q$ es falsa y el estado de $r$ no se conoce por ahora. Diga si cada proposición es verdadera, falsa o tiene un estado desconocido.
    * $p \lor r$
    * $p \land r$
