@@ -12,7 +12,8 @@
 | 2      | 4     | 21/08/2025   | Lógica proposicional - Parte 3     | Clase 4 [[pdf]](clase04_21-08-2025.pdf)   | Operadores logicos (condicional, bicondicional), traducción de lenguaje natural a lenguaje proposicional |
 | 3      | 5     | 26/08/2025   | Lógica proposicional - Parte 4     | Clase 5 [[pdf]](clase05_26-08-2025.pdf)   | Reciproco, contrareciproco, contrario - Evaluacion de expresiones logicas |
 | 3      | 6     | 28/08/2025   | Tablas de verdad | Clase 6 [[pdf]](clase06_28-08-2025.pdf)   | Evaluación de expresiones logicas, Tablas de verdad (Quedo faltando los tipos de proposiciones logicas)|
-
+| 4      | 7     | 02/09/2025   | Enfoque axiomatico (Parte 1) | Clase 7 [[pdf]](clase07_02-09-2025.pdf)   | Se culmino el tema de los tipos de proposiciones y se inicio la presentación del enfoque axiomatico|
+| 4      | 8     | 04/09/2025   | Enfoque axiomatico (Parte 2) | Clase 8 [[pdf]](clase08_04-09-2025.pdf)   | Se definió la fecha para la primera evaluación y se continuo el estudio del enfoque axiomatico mediante el desarrollo de ejemplos |
 
 ## Referencias
 
