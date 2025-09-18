@@ -15,7 +15,10 @@
 | 4      | 7     | 02/09/2025   | Enfoque axiomatico (Parte 1) | Clase 7 [[pdf]](clase07_02-09-2025.pdf)   | Se culmino el tema de los tipos de proposiciones y se inicio la presentación del enfoque axiomatico|
 | 4      | 8     | 04/09/2025   | Enfoque axiomatico (Parte 2) | Clase 8 [[pdf]](clase08_04-09-2025.pdf)   | Se definió la fecha para la primera evaluación y se continuo el estudio del enfoque axiomatico mediante el desarrollo de ejemplos |
 | 5      | 9     | 09/09/2025   | Enfoque axiomatico (Parte 3) | Clase 9 [[pdf]](clase09_09-09-2025.pdf)   | Demostración de argumentos validos mediante tablas de verdad |
-| 5      | 10    | 11/09/2025   | Enfoque axiomatico (Parte 4) | Clase 10 [[pdf]](clase10_11-09-2025.pdf)   | Demostración de argumentoa validos mediante el uso de acciomas |
+| 5      | 10    | 11/09/2025   | Enfoque axiomatico (Parte 4) | Clase 10 [[pdf]](clase10_11-09-2025.pdf)   | Demostración de argumentoa validos mediante el uso de axiomas |
+| 6      | 11    | 16/09/2025   | Lógica cuantificacional (Parte 1) | Clase 11 [[pdf]](clase11_16-09-2025.pdf)   | Introducción a la logica cuantificacional. Ejemplos básicos de traducción de lenguaje natural a logica de predicados |
+| 6      | 12    | 18/09/2025   | Lógica cuantificacional (Parte 2) |    | Conceptos importantes sobre logica cuantificacional: predicado, variable, constante, universo de dominio, conjunto de verdad |
+
 
 
 ## Referencias
