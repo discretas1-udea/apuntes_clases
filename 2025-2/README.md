@@ -17,9 +17,11 @@
 | 5      | 9     | 09/09/2025   | Enfoque axiomatico (Parte 3) | Clase 9 [[pdf]](clase09_09-09-2025.pdf)   | Demostración de argumentos validos mediante tablas de verdad |
 | 5      | 10    | 11/09/2025   | Enfoque axiomatico (Parte 4) | Clase 10 [[pdf]](clase10_11-09-2025.pdf)   | Demostración de argumentoa validos mediante el uso de axiomas |
 | 6      | 11    | 16/09/2025   | Lógica cuantificacional (Parte 1) | Clase 11 [[pdf]](clase11_16-09-2025.pdf)   | Introducción a la logica cuantificacional. Ejemplos básicos de traducción de lenguaje natural a logica de predicados |
-| 6      | 12    | 18/09/2025   | Lógica cuantificacional (Parte 2) |    | Conceptos importantes sobre logica cuantificacional: predicado, variable, constante, universo de dominio, conjunto de verdad |
-
-
+| 6      | 12    | 18/09/2025   | Lógica cuantificacional (Parte 2) |  Clase 12 [[pdf]](clase12_18-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: predicado, variable, constante, universo de dominio, conjunto de verdad |
+| 7      | ---   | 23/09/2025   | Parcial 1 - Logica proposicional |    | Este dia se realizo el primer parcial del curso |
+| 7      | 13    | 25/09/2025   | Lógica cuantificacional (Parte 3) | Clase 13 [[pdf]](clase13_25-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: se reforzaron conceptos de la clase anterior y se introdujo los conceptos relacionados con los cuantificadores|
+| 8      | 14    | 30/09/2025   | Lógica cuantificacional (Parte 4) | Clase 14 [[pdf]](clase14_30-09-2025.pdf)  | Se trato principalmente los cuantificadores y su relacion con el universo de discurso|
+| 8      | 15    | 02/10/2025   | Lógica cuantificacional (Parte 5) |   | |
 
 ## Referencias
 
