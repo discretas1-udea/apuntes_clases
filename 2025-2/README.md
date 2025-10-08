@@ -21,7 +21,9 @@
 | 7      | ---   | 23/09/2025   | Parcial 1 - Logica proposicional |    | Este dia se realizo el primer parcial del curso |
 | 7      | 13    | 25/09/2025   | Lógica cuantificacional (Parte 3) | Clase 13 [[pdf]](clase13_25-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: se reforzaron conceptos de la clase anterior y se introdujo los conceptos relacionados con los cuantificadores|
 | 8      | 14    | 30/09/2025   | Lógica cuantificacional (Parte 4) | Clase 14 [[pdf]](clase14_30-09-2025.pdf)  | Se trato principalmente los cuantificadores y su relacion con el universo de discurso|
-| 8      | 15    | 02/10/2025   | Lógica cuantificacional (Parte 5) |   | |
+| 8      | 15    | 02/10/2025   | Lógica cuantificacional (Parte 5) | Clase 15 [[pdf]](clase15_01-10-2025.pdf) | Se retomaron los conceptos principales mediante ejemplos resueltos en clase, se abordo la representación de expresiones con cuantificadores para el caso de un universo de discurdo finito. |
+| 9      | 15    | 07/10/2025   | Lógica cuantificacional (Parte 6) | Clase 16 [[pdf]](clase15_01-10-2025.pdf)  | Se abordaron varios ejemplos de traducción de expresiones en lenguaje natural a logica cuantificacional y viceversa|
+| 9     | 15     | 09/10/2025   | Lógica cuantificacional (Parte 7) |   | |
 
 ## Referencias
 
