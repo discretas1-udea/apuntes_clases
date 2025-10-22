@@ -1,6 +1,6 @@
 # Matematicas Discretas 1 - Ude@
 
-* **Grupo**: 
+* **Grupo**: 4
 * **Horario**: MJ 8-10
 
 
@@ -22,8 +22,14 @@
 | 7      | 13    | 25/09/2025   | Lógica cuantificacional (Parte 3) | Clase 13 [[pdf]](clase13_25-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: se reforzaron conceptos de la clase anterior y se introdujo los conceptos relacionados con los cuantificadores|
 | 8      | 14    | 30/09/2025   | Lógica cuantificacional (Parte 4) | Clase 14 [[pdf]](clase14_30-09-2025.pdf)  | Se trato principalmente los cuantificadores y su relacion con el universo de discurso|
 | 8      | 15    | 02/10/2025   | Lógica cuantificacional (Parte 5) | Clase 15 [[pdf]](clase15_01-10-2025.pdf) | Se retomaron los conceptos principales mediante ejemplos resueltos en clase, se abordo la representación de expresiones con cuantificadores para el caso de un universo de discurdo finito. |
-| 9      | 15    | 07/10/2025   | Lógica cuantificacional (Parte 6) | Clase 16 [[pdf]](clase15_01-10-2025.pdf)  | Se abordaron varios ejemplos de traducción de expresiones en lenguaje natural a logica cuantificacional y viceversa|
-| 9     | 15     | 09/10/2025   | Lógica cuantificacional (Parte 7) |   | |
+| 9      | 16    | 07/10/2025   | Lógica cuantificacional (Parte 6) | Clase 16 [[pdf]](clase15_01-10-2025.pdf)  | Se abordaron varios ejemplos de traducción de expresiones en lenguaje natural a logica cuantificacional y viceversa|
+| 9     | 17     | 09/10/2025   | Lógica cuantificacional (Parte 7) | Clase 17 [[pdf]](clase16_09-10-2025.pdf)  | Se reforzaron los conceptos basicos sobre logica de predicados, se analizaron equivalencias en espresiones con cuantificadores. |
+| 10     | 18     | 14/10/2025   | Lógica cuantificacional (Parte 8) | Clase 18 [[pdf]](clase16_09-10-2025.pdf)  | Se estudiaron expresiones con cuantificadores anidados. |
+| 10     | 19    | 16/10/2025   | Lógica cuantificacional (Parte 9) | Clase 19 [[pdf]](clase16_09-10-2025.pdf)  | Se analizaron ejemplo de traducción de lenguaje natural a lenguaje formal|
+| 11     | 20    | 21/10/2025   | Lógica cuantificacional (Parte 10) | Clase 20 [[pdf]](clase17_21-10-2025.pdf)  | Se analizaron algunos ejemplos de demostraciones de lógica cuantificacional |
+| 11     | 21    | 23/10/2025   |   |  |
+
+
 
 ## Referencias
 
@@ -39,5 +45,13 @@
 3. https://www2.ulpgc.es/hege/almacen/download/46/46531/logica.pdf
 4. https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content
 
-   
+### Tema 2 - Logica cuantificacional
+
+1. https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/
+2. https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/pages/syllabus/
+3. https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/
+4. https://people.csail.mit.edu/meyer/mcs.pdf
+5. https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/
+6. https://builds.openlogicproject.org/
+7. https://haslab.github.io/MFES/2122/
 
