@@ -54,4 +54,7 @@
 5. https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/
 6. https://builds.openlogicproject.org/
 7. https://haslab.github.io/MFES/2122/
+8. https://introtodeeplearning.com/
+9. https://appinventor.mit.edu/explore/ai-with-mit-app-inventor
+10. https://code.org/es-ES
 
