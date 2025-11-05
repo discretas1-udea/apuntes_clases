@@ -27,7 +27,12 @@
 | 10     | 18     | 14/10/2025   | Lógica cuantificacional (Parte 8) | Clase 18 [[pdf]](clase16_09-10-2025.pdf)  | Se estudiaron expresiones con cuantificadores anidados. |
 | 10     | 19    | 16/10/2025   | Lógica cuantificacional (Parte 9) | Clase 19 [[pdf]](clase16_09-10-2025.pdf)  | Se analizaron ejemplo de traducción de lenguaje natural a lenguaje formal|
 | 11     | 20    | 21/10/2025   | Lógica cuantificacional (Parte 10) | Clase 20 [[pdf]](clase17_21-10-2025.pdf)  | Se analizaron algunos ejemplos de demostraciones de lógica cuantificacional |
-| 11     | 21    | 23/10/2025   |   |  |
+| 11     | 21    | 23/10/2025   | Conjuntos (Parte 1)   | Clase 21 [[pdf]](clase18_23-10-2025.pdf) | Definición, conceptos fundamentales, representación, tipos de conjuntos, relaciones entre subconjuntos |
+| 12     | 22    | 28/10/2025   | Conjuntos (Parte 2)   | Clase 21 [[pdf]](clase19_28-10-2025.pdf) | Operaciones entre conjuntos, cardinalidad, identidades importantes |
+| 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. |  |  |
+| 13     | 24    | 04/11/2025   | Conjuntos (Parte 3)   | Clase 21 [[pdf]](clase20_04-11-2025.pdf) | Empleo de identidates de conjuntos. |
+| 13     | 25   |    |  |  |  |
+
 
 
 
