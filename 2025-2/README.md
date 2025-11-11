@@ -29,7 +29,7 @@
 | 11     | 20    | 21/10/2025   | Lógica cuantificacional (Parte 10) | Clase 20 [[pdf]](clase17_21-10-2025.pdf)  | Se analizaron algunos ejemplos de demostraciones de lógica cuantificacional |
 | 11     | 21    | 23/10/2025   | Conjuntos (Parte 1)   | Clase 21 [[pdf]](clase18_23-10-2025.pdf) | Definición, conceptos fundamentales, representación, tipos de conjuntos, relaciones entre subconjuntos |
 | 12     | 22    | 28/10/2025   | Conjuntos (Parte 2)   | Clase 21 [[pdf]](clase19_28-10-2025.pdf) | Operaciones entre conjuntos, cardinalidad, identidades importantes |
-| 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial1_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
+| 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial2_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
 | 13     | 24    | 04/11/2025   | Conjuntos (Parte 3)   | Clase 21 [[pdf]](clase20_04-11-2025.pdf) | Empleo de identidates de conjuntos. |
 | 13     | 25   |  06/11/2025   | Relaciones (Parte 1) | Clase 21 [[pdf]](clase21_06-11-2025.pdf) | Definiciones: n-tupla, producto cartesiano, algunas representaciones de productos cartesianos, definición de funciones, algunas funciones importantes  |  
 | 14     | 26   |  12/11/2025   | Relaciones (Parte 2) |  |  |  
