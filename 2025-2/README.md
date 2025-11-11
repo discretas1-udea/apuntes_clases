@@ -31,10 +31,8 @@
 | 12     | 22    | 28/10/2025   | Conjuntos (Parte 2)   | Clase 21 [[pdf]](clase19_28-10-2025.pdf) | Operaciones entre conjuntos, cardinalidad, identidades importantes |
 | 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial1_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
 | 13     | 24    | 04/11/2025   | Conjuntos (Parte 3)   | Clase 21 [[pdf]](clase20_04-11-2025.pdf) | Empleo de identidates de conjuntos. |
-| 13     | 25   |    |  |  |  |
-
-
-
+| 13     | 25   |  06/11/2025   | Relaciones (Parte 1) | Clase 21 [[pdf]](clase21_06-11-2025.pdf) | Definiciones: n-tupla, producto cartesiano, algunas representaciones de productos cartesianos, definición de funciones, algunas funciones importantes  |  
+| 14     | 26   |  12/11/2025   | Relaciones (Parte 2) |  |  |  
 
 ## Referencias
 
