@@ -64,3 +64,6 @@
 ### Tema 3 - Conjuntos y relaciones
 
 1. https://www.mentematematica.com/?g=12
+2. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/
+3. https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)
+4. 
