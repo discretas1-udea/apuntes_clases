@@ -32,7 +32,9 @@
 | 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial2_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
 | 13     | 24    | 04/11/2025   | Conjuntos (Parte 3)   | Clase 21 [[pdf]](clase20_04-11-2025.pdf) | Empleo de identidates de conjuntos. |
 | 13     | 25   |  06/11/2025   | Relaciones (Parte 1) | Clase 21 [[pdf]](clase21_06-11-2025.pdf) | Definiciones: n-tupla, producto cartesiano, algunas representaciones de productos cartesianos, definición de funciones, algunas funciones importantes  |  
-| 14     | 26   |  11/11/2025   | Relaciones (Parte 2) |  |  |  
+| 14     | 26   |  11/11/2025   | Relaciones (Parte 2) | Clase 22 [[pdf]](clase22_11-11-2025.pdf) | Relaciones y representación |  
+| 14     | 27   |  13/11/2025   | Relaciones (Parte 3) | Clase 23 [[pdf]](clase23_13-11-2025.pdf) | Propiedades de las relaciones, relaciones de orden |
+  
 
 ## Referencias
 
@@ -66,4 +68,3 @@
 1. https://www.mentematematica.com/?g=12
 2. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/
 3. https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)
-4. 
