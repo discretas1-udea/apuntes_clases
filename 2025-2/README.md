@@ -69,3 +69,13 @@
 1. https://www.mentematematica.com/?g=12
 2. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/
 3. https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)
+
+### Tema 4 - Algebra booleana y sistema numericos
+
+1. https://web.stanford.edu/class/archive/engr/engr40m.1178/
+2. https://everycircuit.com/
+3. https://ocw.mit.edu/courses/6-111-introductory-digital-systems-laboratory-spring-2006/
+4. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-111-introductory-digital-systems-laboratory-spring-2006/index.htm
+5. https://web.stanford.edu/class/archive/ee/ee108b/ee108b.1082/
+6. http://www.ee.ic.ac.uk/pcheung/teaching/ee3_DSD/
+7. https://www.cs.columbia.edu/~sedwards/classes/2011/4840/index.html
