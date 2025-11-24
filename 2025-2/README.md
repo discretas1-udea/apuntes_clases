@@ -34,7 +34,8 @@
 | 13     | 25   |  06/11/2025   | Relaciones (Parte 1) | Clase 21 [[pdf]](clase21_06-11-2025.pdf) | Definiciones: n-tupla, producto cartesiano, algunas representaciones de productos cartesianos, definición de funciones, algunas funciones importantes  |  
 | 14     | 26   |  11/11/2025   | Relaciones (Parte 2) | Clase 22 [[pdf]](clase22_11-11-2025.pdf) | Relaciones y representación |  
 | 14     | 27   |  13/11/2025   | Relaciones (Parte 3) | Clase 23 [[pdf]](clase23_13-11-2025.pdf) | Propiedades de las relaciones, relaciones de orden |
-  
+| 15     | ---   |  18/11/2025   | ---- | --- | No se pudó realizar la clase. Problemas de acceso a internet. |
+| 15     | ---   |  20/11/2025   | Parcial 3 - Conjuntos y relaciones. | Enunciado [[pdf]](discretas1_parcial3_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial3_2025-2_virtual_GR4_sol.pdf) | Debido a los problemas de internet y a la observación sobre el comportamiento del grupo a lo largo del semestre la forma de evaluación del parcial 3 se modificó |  
 
 ## Referencias
 
