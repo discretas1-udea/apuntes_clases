@@ -36,6 +36,9 @@
 | 14     | 27   |  13/11/2025   | Relaciones (Parte 3) | Clase 23 [[pdf]](clase23_13-11-2025.pdf) | Propiedades de las relaciones, relaciones de orden |
 | 15     | ---   |  18/11/2025   | ---- | --- | No se pudó realizar la clase. Problemas de acceso a internet. |
 | 15     | ---   |  20/11/2025   | Parcial 3 - Conjuntos y relaciones. | Enunciado [[pdf]](discretas1_parcial3_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial3_2025-2_virtual_GR4_sol.pdf) | Debido a los problemas de internet y a la observación sobre el comportamiento del grupo a lo largo del semestre la forma de evaluación del parcial 3 se modificó |  
+| 16     | 28 |  25/11/2025   | Algebra booleana - Parte 1  | pdf | Se coloco el trabajo final y se empezo a explorar el algebra booleana. |
+| 16     | 29 |  27/11/2025   | Algebra booleana - Parte 2  | pdf [[ejemplos logisim]](ejemplos_logisim/) | Algebra booleana, introducción al diseño digital |
+| 16     | 30 |  28/11/2025   | Sistemas numericos  | --- |  |
 
 ## Referencias
 
