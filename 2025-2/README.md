@@ -18,7 +18,7 @@
 | 5      | 10    | 11/09/2025   | Enfoque axiomatico (Parte 4) | Clase 10 [[pdf]](clase10_11-09-2025.pdf)   | Demostración de argumentoa validos mediante el uso de axiomas |
 | 6      | 11    | 16/09/2025   | Lógica cuantificacional (Parte 1) | Clase 11 [[pdf]](clase11_16-09-2025.pdf)   | Introducción a la logica cuantificacional. Ejemplos básicos de traducción de lenguaje natural a logica de predicados |
 | 6      | 12    | 18/09/2025   | Lógica cuantificacional (Parte 2) |  Clase 12 [[pdf]](clase12_18-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: predicado, variable, constante, universo de dominio, conjunto de verdad |
-| 7      | ---   | 23/09/2025   | Parcial 1 - Logica proposicional |  Enunciado [[pdf]](discretas1_parcial1_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial1_2025-2_virtual_GR4_sol.pdf)  | Este dia se realizo el primer parcial del curso |
+| 7      | ---   | 23/09/2025   | Parcial 1 - Logica proposicional |  Enunciado [[pdf]](discretas1_parcial1_2025-2_virtual_GR4.pdf) - Formulas [[pdf]](formulas_parcial1.pdf) - Solución [[pdf]](discretas1_parcial1_2025-2_virtual_GR4_sol.pdf)  | Este dia se realizo el primer parcial del curso |
 | 7      | 13    | 25/09/2025   | Lógica cuantificacional (Parte 3) | Clase 13 [[pdf]](clase13_25-09-2025.pdf)  | Conceptos importantes sobre logica cuantificacional: se reforzaron conceptos de la clase anterior y se introdujo los conceptos relacionados con los cuantificadores|
 | 8      | 14    | 30/09/2025   | Lógica cuantificacional (Parte 4) | Clase 14 [[pdf]](clase14_30-09-2025.pdf)  | Se trato principalmente los cuantificadores y su relacion con el universo de discurso|
 | 8      | 15    | 02/10/2025   | Lógica cuantificacional (Parte 5) | Clase 15 [[pdf]](clase15_01-10-2025.pdf) | Se retomaron los conceptos principales mediante ejemplos resueltos en clase, se abordo la representación de expresiones con cuantificadores para el caso de un universo de discurdo finito. |
@@ -29,16 +29,17 @@
 | 11     | 20    | 21/10/2025   | Lógica cuantificacional (Parte 10) | Clase 20 [[pdf]](clase17_21-10-2025.pdf)  | Se analizaron algunos ejemplos de demostraciones de lógica cuantificacional |
 | 11     | 21    | 23/10/2025   | Conjuntos (Parte 1)   | Clase 21 [[pdf]](clase18_23-10-2025.pdf) | Definición, conceptos fundamentales, representación, tipos de conjuntos, relaciones entre subconjuntos |
 | 12     | 22    | 28/10/2025   | Conjuntos (Parte 2)   | Clase 21 [[pdf]](clase19_28-10-2025.pdf) | Operaciones entre conjuntos, cardinalidad, identidades importantes |
-| 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial2_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
+| 12     | 23    | 30/10/2025   | Parcial 2 - Logica cuantificacional. | Enunciado [[pdf]](discretas1_parcial2_2025-2_virtual_GR4.pdf) - Formulas [[pdf]](formulas_parcial2.pdf) - Solución [[pdf]](discretas1_parcial2_2025-2_virtual_GR4_sol.pdf) | Este dia se realizó el segundo parcial del curso |
 | 13     | 24    | 04/11/2025   | Conjuntos (Parte 3)   | Clase 21 [[pdf]](clase20_04-11-2025.pdf) | Empleo de identidates de conjuntos. |
 | 13     | 25   |  06/11/2025   | Relaciones (Parte 1) | Clase 21 [[pdf]](clase21_06-11-2025.pdf) | Definiciones: n-tupla, producto cartesiano, algunas representaciones de productos cartesianos, definición de funciones, algunas funciones importantes  |  
 | 14     | 26   |  11/11/2025   | Relaciones (Parte 2) | Clase 22 [[pdf]](clase22_11-11-2025.pdf) | Relaciones y representación |  
 | 14     | 27   |  13/11/2025   | Relaciones (Parte 3) | Clase 23 [[pdf]](clase23_13-11-2025.pdf) | Propiedades de las relaciones, relaciones de orden |
 | 15     | ---   |  18/11/2025   | ---- | --- | No se pudó realizar la clase. Problemas de acceso a internet. |
-| 15     | ---   |  20/11/2025   | Parcial 3 - Conjuntos y relaciones. | Enunciado [[pdf]](discretas1_parcial3_2025-2_virtual_GR4.pdf) - Solución [[pdf]](discretas1_parcial3_2025-2_virtual_GR4_sol.pdf) | Debido a los problemas de internet y a la observación sobre el comportamiento del grupo a lo largo del semestre la forma de evaluación del parcial 3 se modificó |  
-| 16     | 28 |  25/11/2025   | Algebra booleana - Parte 1  | [[pdf]](clase24_25-11-2025.pdf) | Se coloco el trabajo final y se empezo a explorar el algebra booleana. |
-| 16     | 29 |  27/11/2025   | Algebra booleana - Parte 2  | [[pdf]](clase24_25-11-2025.pdf) [[ejemplos logisim]](ejemplos_logisim/) | Algebra booleana, introducción al diseño digital |
-| 16     | 30 |  28/11/2025   | Sistemas numericos  | [[pdf]](clase25_28-11-2025.pdf) | Sistemas numericos |
+| 15     | ---   |  20/11/2025   | Parcial 3 - Conjuntos y relaciones | Enunciado [[pdf]](discretas1_parcial3_2025-2_virtual_GR4.pdf) - Formulas [[pdf]](formulas_parcial3.pdf) - Solución [[pdf]](discretas1_parcial3_2025-2_virtual_GR4_sol.pdf) | Debido a los problemas de internet y a la observación sobre el comportamiento del grupo a lo largo del semestre la forma de evaluación del parcial 3 se modificó |  
+| 16     | 28 |  25/11/2025   | Algebra booleana - Parte 1  | Clase 24 [[pdf]](clase24_25-11-2025.pdf) | Se coloco el trabajo final y se empezo a explorar el algebra booleana. |
+| 16     | 29 |  27/11/2025   | Algebra booleana - Parte 2  | Clase 24 [[pdf]](clase24_25-11-2025.pdf) [[ejemplos logisim]](ejemplos_logisim/) | Algebra booleana, introducción al diseño digital |
+| 16     | 30 |  28/11/2025   | Sistemas numericos  | Clase 25 [[pdf]](clase25_28-11-2025.pdf) | Sistemas numericos |
+| 17     | 31 |  04/12/2025   | Parcial 4 - Algebra Booleana y Sistemas numericos  | Enunciado [[pdf]](discretas1_parcial4_2025-2.pdf) - Formulas [[pdf]](formulas_parcial4.pdf) - Solución [[pdf]](discretas1_parcial4_2025-2-sol.pdf) - Simulaciones [[link]](simulaciones_parcial4/) | Sistemas numericos |
 
 ## Referencias
 
