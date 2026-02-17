@@ -15,9 +15,9 @@ A continuación se describe el cronograma del curso por clases.
 | 2      | 3     | 17/02/2026   | Lógica proposicional - Parte 2     | Clase 3 [[pdf]](clase03_19-08-2025.pdf)   | Operadores logicos, tablas de verdad|
 | 2      | 4     | 19/02/2026   | Lógica proposicional - Parte 3     |   |  |
 | 3      | 5     | 24/02/2026   |  |   |  |
-| 3      | 6     | 26/02/2026   |  |  |  |
-| 4      | 7     | 03/02/2026   |  |  |  |
-| 4      | 8     | 05/02/2026   |  |  |  |
+| 3      | 6     | 26/02/2026   |  |   |  |
+| 4      | 7     | 03/02/2026   |  |   |  |
+| 4      | 8     | 05/02/2026   |  |   |  |
 
 ### Referencias
 
