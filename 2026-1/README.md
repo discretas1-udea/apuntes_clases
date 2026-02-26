@@ -12,10 +12,10 @@ A continuación se describe el cronograma del curso por clases.
 |--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
 | 1      | 1     | 10/02/2026   | Introducción al curso              | Clase 1 [[pdf]](clase_01/clase01_10-02-2026.pdf)   | Presentación del curso y evaluación     |
 | 1      | 2     | 12/02/2026   | Lógica proposicional - Parte 1     | Clase 2 [[pdf]](clase_02/clase02_11-02-2026.pdf)   | Logica proposicional, tipos de enunciados, proposiciones, tipos de proposiciones |
-| 2      | 3     | 17/02/2026   | Lógica proposicional - Parte 2     | Clase 3 [[pdf]](clase03_19-08-2025.pdf)   | Operadores logicos, tablas de verdad|
-| 2      | 4     | 19/02/2026   | Lógica proposicional - Parte 3     |   |  |
-| 3      | 5     | 24/02/2026   |  |   |  |
-| 3      | 6     | 26/02/2026   |  |   |  |
+| 2      | 3     | 17/02/2026   | Lógica proposicional - Parte 2     | Clase 3 [[pdf]](clase_03/apuntes_clase3_annotated.pdf)   | Operadores logicos, reglas de prioridad|
+| 2      | 4     | 19/02/2026   |  ---   | --- | No hubo clase, la internet estaba caida  |
+| 3      | 5     | 24/02/2026   | Lógica proposicional - Parte 3 | Clase 4 [[pdf]](clase_04/apuntes_clase4_annotated.pdf)  | Tablas de verdad |
+| 3      | 6     | 26/02/2026   |  |  Clase 5 [[pdf]](clase_05/apuntes_clase5_annotated.pdf) | Tipos de proposiciones (tautologia, contradicción, contingencia), equivalencia lógica, expresiones codicionales y sus variantes (condicional, reciproco, contrareciproco, inverso), condiciones de suficiencia y necesidad |
 | 4      | 7     | 03/02/2026   |  |   |  |
 | 4      | 8     | 05/02/2026   |  |   |  |
 
