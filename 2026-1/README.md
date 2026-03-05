@@ -15,9 +15,12 @@ A continuación se describe el cronograma del curso por clases.
 | 2      | 3     | 17/02/2026   | Lógica proposicional - Parte 2     | Clase 3 [[pdf]](clase_03/apuntes_clase3_annotated.pdf)   | Operadores logicos, reglas de prioridad|
 | 2      | 4     | 19/02/2026   |  ---   | --- | No hubo clase, la internet estaba caida  |
 | 3      | 5     | 24/02/2026   | Lógica proposicional - Parte 3 | Clase 4 [[pdf]](clase_04/apuntes_clase4_annotated.pdf)  | Tablas de verdad |
-| 3      | 6     | 26/02/2026   |  |  Clase 5 [[pdf]](clase_05/apuntes_clase5_annotated.pdf) | Tipos de proposiciones (tautologia, contradicción, contingencia), equivalencia lógica, expresiones codicionales y sus variantes (condicional, reciproco, contrareciproco, inverso), condiciones de suficiencia y necesidad |
-| 4      | 7     | 03/02/2026   |  |   |  |
-| 4      | 8     | 05/02/2026   |  |   |  |
+| 3      | 6     | 26/02/2026   | Lógica proposicional - Parte 4 |  Clase 5 [[pdf]](clase_05/apuntes_clase5_annotated.pdf) | Tipos de proposiciones (tautologia, contradicción, contingencia), equivalencia lógica, expresiones codicionales y sus variantes (condicional, reciproco, contrareciproco, inverso), condiciones de suficiencia y necesidad |
+| 4      | 7     | 03/03/2026   | Lógica proposicional - Parte 5 | Clase 6 [[pdf]](clase_06/apuntes_clase6_annotated.pdf)  | Enfoque axiomatico (equivalencias, simplificaciones) |
+| 4      | 8     | 05/03/2026   | Lógica proposicional - Parte 6 | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Argumentos logicos, validez, demostración de validez empleando tablas de verdad |
+| 5      | 9     | 10/03/2026   |  |  |  |
+| 5      | 10    | 12/03/2026   |  |  |  |
+
 
 ### Referencias
 
