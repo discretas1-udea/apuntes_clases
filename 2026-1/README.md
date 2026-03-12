@@ -18,7 +18,7 @@ A continuación se describe el cronograma del curso por clases.
 |        | 6     | 26/02/2026   | Lógica proposicional - Parte 4 |  Clase 5 [[pdf]](clase_05/apuntes_clase5_annotated.pdf) | Tipos de proposiciones (tautologia, contradicción, contingencia), equivalencia lógica, expresiones codicionales y sus variantes (condicional, reciproco, contrareciproco, inverso), condiciones de suficiencia y necesidad |
 | 4      | 7     | 03/03/2026   | Lógica proposicional - Parte 5 | Clase 6 [[pdf]](clase_06/apuntes_clase6_annotated.pdf)  | Enfoque axiomatico (equivalencias, simplificaciones) |
 |        | 8     | 05/03/2026   | Lógica proposicional - Parte 6 | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Argumentos logicos, validez, demostración de validez empleando tablas de verdad |
-| 5      | 9     | 10/03/2026   | Lógica proposicional - Parte 7  | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Silogismo, reglas de inferencia, demostración de validez (enfoquea xiomatico) |
+| 5      | 9     | 10/03/2026   | Lógica proposicional - Parte 7  | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) Informacion sobre el parcial [[pdf]](clase_07/sobre_parcial1_annotated.pdf) | Silogismo, reglas de inferencia, demostración de validez (enfoquea xiomatico) |
 |        | 10    | 12/03/2026   | Lógica proposicional - Parte 7 | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Ejemplos de demostraciones usando el enfoque axiomatico |
 
 ### Referencias
