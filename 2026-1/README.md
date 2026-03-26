@@ -19,7 +19,7 @@ A continuación se describe el cronograma del curso por clases.
 | 4      | 7     | 03/03/2026   | Lógica proposicional - Parte 5 | Clase 6 [[pdf]](clase_06/apuntes_clase6_annotated.pdf)  | Enfoque axiomatico (equivalencias, simplificaciones) |
 |        | 8     | 05/03/2026   | Lógica proposicional - Parte 6 | Clase 7 [[pdf]](clase_07/apuntes_clase7_anotado.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Argumentos logicos, validez, demostración de validez empleando tablas de verdad |
 | 5      | 9     | 10/03/2026   | Lógica proposicional - Parte 7  | Clase 7 [[pdf]](clase_07/apuntes_clase7_annotated.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) Informacion sobre el parcial [[pdf]](clase_07/sobre_parcial1_annotated.pdf) | Silogismo, reglas de inferencia, demostración de validez (enfoquea xiomatico) |
-|        | 10    | 12/03/2026   | Lógica proposicional - Parte 7 | Clase 7 [[pdf]](clase_07/apuntes_clase7_annotated.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Ejemplos de demostraciones usando el enfoque axiomatico |
+|        | 10    | 12/03/2026   | Lógica proposicional - Parte 8 | Clase 7 [[pdf]](clase_07/apuntes_clase7_annotated.pdf), Ejemplo resuelto [[pdf]](clase_07/ejemplo_clase7_resuelto.pdf) | Ejemplos de demostraciones usando el enfoque axiomatico |
 
 ### Referencias
 
@@ -32,7 +32,12 @@ A continuación se describe el cronograma del curso por clases.
 
 ## Tema 2 - Lógica cuantificacional
 
-To Do...
+| Semana | Clase | Fecha        | Tema                               | Notas de clase                            |Observaciones|
+|--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
+| 6      | 11    | 17/03/2026   | Lógica cuantificacional - Parte 1 | Clase 8 [[pdf]](clase_08/), Ejemplo resuelto [[pdf]](clase_08/) | Conceptos: Universo, variable, constantes, predicados |
+|        | 12    | 19/03/2026   | Lógica cuantificacional - Parte 2 | Clase 8 [[pdf]](clase_08/), Ejemplo resuelto [[pdf]](clase_07/) | Conceptos: Función proposicional, cuantificadores, conjunto de verdad, expresiones compuestas, Lenguaje natural .vs. Lenguaje formal |
+| 7      | 13    | 24/03/2026   | Parcial 1 - Logica proposicional  | Enunciado [pdf](parciales/parcial1/discretas1_parcial1_2026-1.pdf) - Formulas [[1]](parciales/parcial1/formulas_rapidas.pdf) [[2]](parciales/parcial1/formulas_parcial1.pdf)  - Solución [pdf](parciales/parcial1/discretas1_parcial1_2026-1_sol.pdf) | Se realizó el primer parcial del curso |
+
 
 ## Tema 3 - Conjuntos y Relaciones
 
