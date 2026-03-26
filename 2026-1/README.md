@@ -34,10 +34,12 @@ A continuación se describe el cronograma del curso por clases.
 
 | Semana | Clase | Fecha        | Tema                               | Notas de clase                            |Observaciones|
 |--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
-| 6      | 11    | 17/03/2026   | Lógica cuantificacional - Parte 1 | Clase 8 [[pdf]](clase_08/), Ejemplo resuelto [[pdf]](clase_08/) | Conceptos: Universo, variable, constantes, predicados |
-|        | 12    | 19/03/2026   | Lógica cuantificacional - Parte 2 | Clase 8 [[pdf]](clase_08/), Ejemplo resuelto [[pdf]](clase_07/) | Conceptos: Función proposicional, cuantificadores, conjunto de verdad, expresiones compuestas, Lenguaje natural .vs. Lenguaje formal |
-| 7      | 13    | 24/03/2026   | Parcial 1 - Logica proposicional  | Enunciado [pdf](parciales/parcial1/discretas1_parcial1_2026-1.pdf) - Formulas [[1]](parciales/parcial1/formulas_rapidas.pdf) [[2]](parciales/parcial1/formulas_parcial1.pdf)  - Solución [pdf](parciales/parcial1/discretas1_parcial1_2026-1_sol.pdf) | Se realizó el primer parcial del curso |
-
+| 6      | 11    | 17/03/2026   | Lógica cuantificacional - Parte 1 | Clase 8 [[pdf]](clase_08/clase8_annotated.pdf), Ejemplo resuelto [[pdf]](clase_08/ejemplos_clase8_annotated.pdf) | Conceptos: Universo, variable, constantes, predicados |
+|        | 12    | 19/03/2026   | Lógica cuantificacional - Parte 2 | Clase 8 [[pdf]](clase_08/clase8_annotated.pdf), Ejemplo resuelto [[pdf]](clase_08/ejemplos_clase8_annotated.pdf) | Conceptos: Función proposicional, cuantificadores, conjunto de verdad, expresiones compuestas, Lenguaje natural .vs. Lenguaje formal |
+| 7      | 13    | 24/03/2026   | Parcial 1 - Logica proposicional  | Enunciado [[pdf]](parciales/parcial1/discretas1_parcial1_2026-1.pdf) - Formulas [[1]](parciales/parcial1/formulas_rapidas.pdf) [[2]](parciales/parcial1/formulas_parcial1.pdf)  - Solución [[pdf]](parciales/parcial1/discretas1_parcial1_2026-1_sol.pdf) | Se realizó el primer parcial del curso |
+|        | 14    | 26/03/2026   | Lógica cuantificacional - Parte 3 | Clase 8 [[pdf]](clase_08/clase8_annotated.pdf), Ejemplo resuelto [[pdf]](clase_08/ejemplos_clase8_annotated.pdf) | Refuerzo de los conceptos claves mediante el desarrollo de ejemplos en clase |
+| ---      | ---    | 31/03/2026   | SEMANA SANTA - MARTES SANTO  | --- | No hubo clase |
+| ---      | ---    | 02/04/2026   | SEMANA SANTA - JUEVES SANTO  | --- | No hubo clase |
 
 ## Tema 3 - Conjuntos y Relaciones
 
