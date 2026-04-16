@@ -40,6 +40,12 @@ A continuación se describe el cronograma del curso por clases.
 |        | 14    | 26/03/2026   | Lógica cuantificacional - Parte 3 | Clase 8 [[pdf]](clase_08/clase8_annotated.pdf), Ejemplo resuelto [[pdf]](clase_08/ejemplos_clase8_annotated.pdf) | Refuerzo de los conceptos claves mediante el desarrollo de ejemplos en clase |
 | ---      | ---    | 31/03/2026   | SEMANA SANTA - MARTES SANTO  | --- | No hubo clase |
 | ---      | ---    | 02/04/2026   | SEMANA SANTA - JUEVES SANTO  | --- | No hubo clase |
+| 8        | 15    |  07/04/2026   | --- | --- | No hubo clase |
+|          | 16    |  09/04/2026   | Lógica cuantificacional - Parte 4 | Clase 9 [[pdf]](clase_09/clase9_annotated.pdf) | Sobre los cuantificadores |
+| 9        | 17    |  14/04/2026   | Lógica cuantificacional - Parte 5 | Clase 10 [[pdf]](clase_10/clase10_annotated.pdf) - Anotaciones clase 10 [[pdf]](clase_10/anotaciones_clase10_annotated.pdf) | Negación y cuantificadores, leyes de Morgan aplicadas a los cuantiticadores. **Fecha parcial 2**: 09/05/2026 (presencial) |
+|         | 18    |  16/04/2026   | Lógica cuantificacional - Parte 6 | Clase 10 [[pdf]](clase_10/clase10_annotated.pdf) - Anotaciones clase 10 [[pdf]](clase_10/anotaciones_clase10_annotated.pdf) | Ejemplos de traducción de expresiones de lenguaje natural a lenguaje formal (Logica de Primer Orden) |
+
+
 
 ## Tema 3 - Conjuntos y Relaciones
 
