@@ -47,6 +47,16 @@ A continuación se describe el cronograma del curso por clases.
 | 10        | 19    |  21/04/2026   | Lógica cuantificacional - Parte 7 | Clase 11 [[pdf]](clase_11/clase11_annotated.pdf) - Anotaciones clase 11 [[pdf]](clase_11/tarea_resuelta_annotated.pdf) | Cuantificadores anidados |
 |           | 20    |  23/04/2026   | Lógica cuantificacional - Parte 8 | Clase 12 [[pdf]](clase_12/clase12_annotated.pdf)  | Demostraciones |
 
+### Referencias
+
+1. **Diapositivas del curso**:
+   * **Clase 5** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase5.pdf)
+   * **Clase 6** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase6.pdf)
+   * **Clase 7** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase7.pdf)
+2. **Parciales viejos**:
+   * **Pacial 2 (2025-1)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial2_2025-1.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial2_2025-1_sol.pdf)
+   * **Pacial 2 (2025-2)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial2_2025-2.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial2_2025-2_sol.pdf)
+
 ## Tema 3 - Conjuntos y Relaciones
 
 To Do...
