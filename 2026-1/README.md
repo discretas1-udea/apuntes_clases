@@ -59,8 +59,90 @@ A continuación se describe el cronograma del curso por clases.
 
 ## Tema 3 - Conjuntos y Relaciones
 
-To Do...
+| Semana | Clase | Fecha        | Tema                               | Notas de clase                            |Observaciones|
+|--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
+| 11     | 21    | 28/04/2026   | Conjuntos - Parte 1 | Clase 13 [[pdf]](clase_13/clase13_annotated.pdf), Manuscritos clase 13 [[pdf]](clase_13/manuscritos_clase13_annotated.pdf) | Conceptos: conjuntos, notacion, representacion, diagrama de Venn, relaciones entre conjuntos, tipos de conjuntos |
+|        | 22    | 30/04/2026   | Conjuntos - Parte 2 |Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) | Conceptos: operaciones entre conjuntos, cardinalidad, identidades entre conjuntos, identidades de cardinalidad  |
+| 12     | 23    | 05/05/2026   | Conjuntos - Parte 3 | Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) | Ejemplos sobre conjuntos |
+|        | 24    | 07/05/2026   | --- | --- | No hubo clase: Se hablo sobre la logistica de la presentación del parcial 2 |
+| 13     | 25    | 12/05/2026   | --- | --- | No hubo clase: Se hablo sobre el parcial presencial. Quienes participaron tienen bonificacion de 0.2 para este |
+|        | 26    | 14/05/2026   | Relaciones - Parte 1 | Clase 15 [[pdf]](clase_15/clase15_annotated.pdf) | Se hablo sobre el concepto de aplicación de n-tuplas y producto cartesiano |
+| 14     | 27    | 19/05/2026   | Relaciones - Parte 2 | Clase 16  | Producto cartesiano, relaciones, formas de representación |
+|        | 28    | 21/05/2026   | Relaciones - Parte 3 | Clase 16  |  |
+
+
+### Referencias
+
+1. **Diapositivas del curso**:
+   * **Clase 8** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase8.pdf)
+   * **Clase 9** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase9.pdf)
+   * **Clase 10** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase10.pdf)
+   * **Clase 11** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase11.pdf)
+2. **Parciales viejos**:
+   * **Pacial 3 (2025-1)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-1.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-1_sol.pdf)
+   * **Pacial 3 (2025-2)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-2.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-2_sol.pdf)
 
 ## Tema 4 - Algebra de Boole
 
 To Do...
+
+## Recursos adicionales
+
+1. https://discrete-math-puzzles.github.io/
+2. https://github.com/alexanderskulikov/discrete-math-python-scripts
+3. https://cursos.virtual.uniandes.edu.co/isis1104/
+4. https://sites.google.com/site/sergiosramirezrico/cursos
+5. https://github.com/DrWaleedAYousef/Teaching
+6. https://github.com/gap-system/gap
+7. https://github.com/erkal/kite
+8. https://github.com/alexanderskulikov/discrete-math-python-scripts
+9. https://github.com/thofma/Hecke.jl
+10. https://docs.hecke.thofma.com/stable/
+11. https://github.com/oscarlevin/discrete-book
+12. https://github.com/Max-Starling/Notes
+13. https://github.com/disco-lang/disco
+14. https://github.com/Lipen/discrete-math-course
+15. https://github.com/ChanchalKumarMaji/Introduction-to-Discrete-Mathematics-for-Computer-Science-Specialization
+16. https://github.com/rafi007akhtar/CSE-resources
+17. https://github.com/hongshin/DiscreteMath
+18. https://ggc-discrete-math.github.io/index.html#_about_this_text
+19. https://github.com/Lipen/discrete-math-course
+20. https://lipen.github.io/discrete-math-course/index.html
+21. https://github.com/marcoteran
+22. https://github.com/kiboschool/course-discrete-math
+
+### Tema 1 - Logica proposicional
+
+1. https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content
+2. http://tupdigital.web.unq.edu.ar/wp-content/uploads/sites/55/2020/04/1_3_Logica_Proposicional.pdf
+3. https://www2.ulpgc.es/hege/almacen/download/46/46531/logica.pdf
+4. https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content
+
+### Tema 2 - Logica cuantificacional
+
+1. https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/
+2. https://ocw.mit.edu/courses/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/pages/syllabus/
+3. https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/
+4. https://people.csail.mit.edu/meyer/mcs.pdf
+5. https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/
+6. https://builds.openlogicproject.org/
+7. https://haslab.github.io/MFES/2122/
+8. https://introtodeeplearning.com/
+9. https://appinventor.mit.edu/explore/ai-with-mit-app-inventor
+10. https://code.org/es-ES
+
+### Tema 3 - Conjuntos y relaciones
+
+1. https://www.mentematematica.com/?g=12
+2. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-spring-2015/
+3. https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_and_Computation_Fundamentals/Mathematics_for_Computer_Science_(Lehman_Leighton_and_Meyer)
+
+### Tema 4 - Algebra booleana y sistema numericos
+
+1. https://web.stanford.edu/class/archive/engr/engr40m.1178/
+2. https://everycircuit.com/
+3. https://ocw.mit.edu/courses/6-111-introductory-digital-systems-laboratory-spring-2006/
+4. https://mitocw.ups.edu.ec/courses/electrical-engineering-and-computer-science/6-111-introductory-digital-systems-laboratory-spring-2006/index.htm
+5. https://web.stanford.edu/class/archive/ee/ee108b/ee108b.1082/
+6. http://www.ee.ic.ac.uk/pcheung/teaching/ee3_DSD/
+7. https://www.cs.columbia.edu/~sedwards/classes/2011/4840/index.html
