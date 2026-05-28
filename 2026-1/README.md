@@ -67,8 +67,11 @@ A continuación se describe el cronograma del curso por clases.
 |        | 24    | 07/05/2026   | --- | --- | No hubo clase: Se hablo sobre la logistica de la presentación del parcial 2 |
 | 13     | 25    | 12/05/2026   | --- | --- | No hubo clase: Se hablo sobre el parcial presencial. Quienes participaron tienen bonificacion de 0.2 para este |
 |        | 26    | 14/05/2026   | Relaciones - Parte 1 | Clase 15 [[pdf]](clase_15/clase15_annotated.pdf) | Se hablo sobre el concepto de aplicación de n-tuplas y producto cartesiano |
-| 14     | 27    | 19/05/2026   | Relaciones - Parte 2 | Clase 16  | Producto cartesiano, relaciones, formas de representación |
-|        | 28    | 21/05/2026   | Relaciones - Parte 3 | Clase 16  |  |
+| 14     | 27    | 19/05/2026   | Relaciones - Parte 2 | Clase 16 [[pdf]](clase_16/clase16_annotated.pdf)  | Producto cartesiano, relaciones, formas de representación |
+|        | 28    | 21/05/2026   | Relaciones - Parte 3 | Clase 16 [[pdf]](clase_16/clase16_annotated.pdf) | Temas tratados: Diferentes representaciones de las relaciones (forma matricial, matriz binaria, pares ordenados, digrafos), propiedades de las relaciones | 
+| 15     | 27    | 26/05/2026   | Relaciones - Parte 4 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf) | Relaciones de orden parcial y total, propiedades y representación.  |
+|        | 28    | 28/05/2026   | Relaciones - Parte 5 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf)  | Diagramas de Hasse, Elementos extremos (maximales, minimales, maximo y minimo), cotas |
+
 
 
 ### Referencias
