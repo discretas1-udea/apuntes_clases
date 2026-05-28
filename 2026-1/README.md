@@ -63,14 +63,14 @@ A continuación se describe el cronograma del curso por clases.
 |--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
 | 11     | 21    | 28/04/2026   | Conjuntos - Parte 1 | Clase 13 [[pdf]](clase_13/clase13_annotated.pdf), Manuscritos clase 13 [[pdf]](clase_13/manuscritos_clase13_annotated.pdf) | Conceptos: conjuntos, notacion, representacion, diagrama de Venn, relaciones entre conjuntos, tipos de conjuntos |
 |        | 22    | 30/04/2026   | Conjuntos - Parte 2 |Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) | Conceptos: operaciones entre conjuntos, cardinalidad, identidades entre conjuntos, identidades de cardinalidad  |
-| 12     | 23    | 05/05/2026   | Conjuntos - Parte 3 | Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) | Ejemplos sobre conjuntos |
+| 12     | 23    | 05/05/2026   | Conjuntos - Parte 3 | Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) [[video]](https://www.youtube.com/watch?v=l8BmbuFp7iE) | Ejemplos sobre conjuntos |
 |        | 24    | 07/05/2026   | --- | --- | No hubo clase: Se hablo sobre la logistica de la presentación del parcial 2 |
 | 13     | 25    | 12/05/2026   | --- | --- | No hubo clase: Se hablo sobre el parcial presencial. Quienes participaron tienen bonificacion de 0.2 para este |
 |        | 26    | 14/05/2026   | Relaciones - Parte 1 | Clase 15 [[pdf]](clase_15/clase15_annotated.pdf) | Se hablo sobre el concepto de aplicación de n-tuplas y producto cartesiano |
 | 14     | 27    | 19/05/2026   | Relaciones - Parte 2 | Clase 16 [[pdf]](clase_16/clase16_annotated.pdf)  | Producto cartesiano, relaciones, formas de representación |
 |        | 28    | 21/05/2026   | Relaciones - Parte 3 | Clase 16 [[pdf]](clase_16/clase16_annotated.pdf) | Temas tratados: Diferentes representaciones de las relaciones (forma matricial, matriz binaria, pares ordenados, digrafos), propiedades de las relaciones | 
 | 15     | 27    | 26/05/2026   | Relaciones - Parte 4 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf) | Relaciones de orden parcial y total, propiedades y representación.  |
-|        | 28    | 28/05/2026   | Relaciones - Parte 5 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf)  | Diagramas de Hasse, Elementos extremos (maximales, minimales, maximo y minimo), cotas |
+|        | 28    | 28/05/2026   | Relaciones - Parte 5 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf) [[video]](https://www.youtube.com/watch?v=IFG5TGGyA9o)  | Diagramas de Hasse, Elementos extremos (maximales, minimales, maximo y minimo), cotas |
 
 
 
