@@ -30,6 +30,7 @@ A continuación se describe el cronograma del curso por clases.
    * **Clase 3** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase3.pdf)
    * **Clase 4** [[link]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/slides/clase4.pdf)
 
+
 ## Tema 2 - Lógica cuantificacional
 
 | Semana | Clase | Fecha        | Tema                               | Notas de clase                            |Observaciones|
@@ -72,8 +73,6 @@ A continuación se describe el cronograma del curso por clases.
 | 15     | 27    | 26/05/2026   | Relaciones - Parte 4 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf) | Relaciones de orden parcial y total, propiedades y representación.  |
 |        | 28    | 28/05/2026   | Relaciones - Parte 5 | Clase 17 [[pdf]](clase_17/clase17_annotated.pdf) Fechas de cierre [[pdf]](clase_17/fechas_cierre_annotated.pdf) [[video]](https://www.youtube.com/watch?v=IFG5TGGyA9o)  | Diagramas de Hasse, Elementos extremos (maximales, minimales, maximo y minimo), cotas |
 
-
-
 ### Referencias
 
 1. **Diapositivas del curso**:
@@ -84,6 +83,10 @@ A continuación se describe el cronograma del curso por clases.
 2. **Parciales viejos**:
    * **Pacial 3 (2025-1)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-1.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-1_sol.pdf)
    * **Pacial 3 (2025-2)**: Enunciado [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-2.pdf) - Solución [[pdf]](https://discretas1-udea.github.io/discretas1-udea-20261/assets/exams/discretas1_parcial3_2025-2_sol.pdf)
+3. **Talleres de repaso**:
+   * **Taller 6** [[link]](../talleres/taller6-MD2025-1.pdf)
+   * **Taller 7** [[link]](../talleres/taller7-MD2025-1.pdf)
+   * **Taller 8** [[link]](../talleres/taller8-MD2025-1.pdf)
 
 ## Tema 4 - Algebra de Boole
 
