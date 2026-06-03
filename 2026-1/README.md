@@ -66,6 +66,7 @@ A continuación se describe el cronograma del curso por clases.
 |        | 22    | 30/04/2026   | Conjuntos - Parte 2 |Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) | Conceptos: operaciones entre conjuntos, cardinalidad, identidades entre conjuntos, identidades de cardinalidad  |
 | 12     | 23    | 05/05/2026   | Conjuntos - Parte 3 | Clase 14 [[pdf]](clase_14/clase14_annotated.pdf), Manuscritos clase 14 [[pdf]](clase_14/clase14_apuntes_annotated.pdf) [[video]](https://www.youtube.com/watch?v=l8BmbuFp7iE) | Ejemplos sobre conjuntos |
 |        | 24    | 07/05/2026   | --- | --- | No hubo clase: Se hablo sobre la logistica de la presentación del parcial 2 |
+|        | ---   | 09/05/2026   | Parcial 2 - Logica cuantificacional  | Enunciado [[pdf]](parciales/parcial2/discretas1_parcial2_2026-1.pdf) - Formulas [[pdf]](parciales/parcial2/formulas_parcial2.pdf)  - Solución [[pdf]](parciales/parcial2/discretas1_parcial2_2026-1_sol.pdf)  | El parcial se presento de manera presencial en cada sede |
 | 13     | 25    | 12/05/2026   | --- | --- | No hubo clase: Se hablo sobre el parcial presencial. Quienes participaron tienen bonificacion de 0.2 para este |
 |        | 26    | 14/05/2026   | Relaciones - Parte 1 | Clase 15 [[pdf]](clase_15/clase15_annotated.pdf) | Se hablo sobre el concepto de aplicación de n-tuplas y producto cartesiano |
 | 14     | 27    | 19/05/2026   | Relaciones - Parte 2 | Clase 16 [[pdf]](clase_16/clase16_annotated.pdf)  | Producto cartesiano, relaciones, formas de representación |
@@ -87,7 +88,7 @@ A continuación se describe el cronograma del curso por clases.
    * **Taller 6** [[link]](../talleres/taller6-MD2025-1.pdf)
    * **Taller 7** [[link]](../talleres/taller7-MD2025-1.pdf)
    * **Taller 8** [[link]](../talleres/taller8-MD2025-1.pdf)
-
+    
 ## Tema 4 - Algebra de Boole
 
 To Do...
