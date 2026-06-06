@@ -94,9 +94,11 @@ A continuación se describe el cronograma del curso por clases.
 
 | Semana | Clase | Fecha        | Tema                               | Notas de clase                            |Observaciones|
 |--------|-------|--------------|------------------------------------|-------------------------------------------|-------------|
-| 16     | ---   | 02/06/2026   | Parcial 3 - Conjuntos y relaciones |  |  |
+| 16     | ---   | 02/06/2026   | Parcial 3 - Conjuntos y relaciones | Enunciado [[pdf]](parciales/parcial3/discretas1_parcial3_2026-1.pdf) - Formulas [[pdf]](parciales/parcial3/discretas1_parcial3_2026-1-sol.pdf)  - Solución [[pdf]](parciales/parcial3/formulas_parcial3.pdf) | --- |
 |        | 29    | 04/06/2026   | Sistemas numericos | Clase 18 [[pdf]](clase_18/clase18_annotated.pdf) Anotaciones importantes [[pdf]](clase_18/anotaciones_clase_18_annotated.pdf) Videos [[video 1]](https://www.youtube.com/watch?v=wgbV6DLVezo) [[video 2]](https://www.youtube.com/watch?v=L9ZVMwemUis&source_ve_path=OTY3MTQ&embeds_referring_euri=https%3A%2F%2Fudearroba.udea.edu.co%2F) Anotaciones semestre anterior [[pdf]](clase_18/semestre_anterior/clase25_28-11-2025_annotated.pdf) |
 | 17     | 30    | 08/06/2026   | Algebra Booleana | | Clase adicional |
+
+
 
 ### Referencias
 
