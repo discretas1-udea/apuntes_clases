@@ -50,7 +50,7 @@ Si alguno de estos puntos no le resulta claro, se recomienda repasarlo antes de 
 
 Una **variable proposicional** ($p, q, r, \ldots$) representa un hecho con valor de verdad definido. Los **operadores** ($\neg, \land, \lor, \oplus, \rightarrow, \leftrightarrow$) permiten combinar variables para construir proposiciones compuestas. Los **signos de agrupación** ($(), []$) determinan el orden de evaluación cuando hay varios operadores en juego.
 
-Estos elementos deben combinarse siguiendo **reglas de formación**, que determinan si una expresión está bien formada. Una variable sola ($p$) es una expresión válida; un operador binario aplicado a dos expresiones válidas ($p \land q$) también lo es. En cambio, una secuencia como $p \land \;\_\_$ (un operador sin su segundo operando) no es una expresión válida, porque no existe una forma de asignarle un valor de verdad.
+Estos elementos deben combinarse siguiendo **reglas de formación**, que determinan si una expresión está bien formada. Una variable sola ($p$) es una expresión válida; un operador binario aplicado a dos expresiones válidas ($p \land q$) también lo es. En cambio, una secuencia como $p \land \square$ (un operador sin su segundo operando) no es una expresión válida, porque no existe una forma de asignarle un valor de verdad.
 
 ## 1.2 Proposiciones simples y compuestas
 
@@ -241,6 +241,8 @@ A continuación se presentan los ejercicios resueltos correspondientes a los tem
 - $q$: El número es impar.
 - **Expresión**: $p \lor q$
 
+> ⚠️ **Error conceptual frecuente**: un entero no puede ser par e impar a la vez —son mutuamente excluyentes— lo que podría sugerir que aquí correspondería usar $\oplus$ en vez de $\lor$. Sin embargo, la convención de traducción es distinta: el "o" del lenguaje natural se traduce como disyunción inclusiva ($\lor$) salvo que el enunciado indique explícitamente exclusividad (por ejemplo, con la construcción "o... o..., pero no ambos"). La traducción $p \lor q$ es correcta como *traducción literal* del enunciado; que $p$ y $q$ no puedan ser verdaderas simultáneamente en este caso particular es una propiedad de los números (mutuamente excluyentes), no algo que cambie la regla de traducción del conector "o".
+
 **4. "Si tiene una contraseña vigente, entonces puede iniciar sesión en la red."**
 
 - $p$: Tiene una contraseña vigente.
@@ -302,12 +304,12 @@ Por jerarquía, la expresión se agrupa como $Q \rightarrow \Big(R \rightarrow \
 
 Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R = F$. Pero si $R=V$, entonces $(P\land Q)\lor R$ es siempre verdadera (por la regla de la disyunción). Esto es una contradicción irresoluble.
 
-**Conclusión**: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión — es una **tautología** (siempre verdadera).
+**Conclusión**: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión — es **siempre verdadera**, sin importar los valores de $P$, $Q$ y $R$.
 
 > 💭 **Antes de continuar, pregúntese**: ¿por qué fue necesario descartar la posibilidad de que la expresión fuera falsa mediante un razonamiento completo, en lugar de probar un solo caso?
 >
 > <details><summary>Ver respuesta</summary>
-> Porque evaluar un único caso solo demuestra que la expresión <i>puede</i> ser verdadera en esa situación particular; no demuestra que sea imposible que sea falsa. Para afirmar que una expresión es una tautología se necesita mostrar que <b>ninguna</b> combinación de valores la hace falsa — ya sea revisando todos los casos posibles, o mediante un argumento por contradicción como el que se usó aquí.
+> Porque evaluar un único caso solo demuestra que la expresión <i>puede</i> ser verdadera en esa situación particular; no demuestra que sea imposible que sea falsa. Para afirmar que una expresión es siempre verdadera se necesita mostrar que <b>ninguna</b> combinación de valores la hace falsa — ya sea revisando todos los casos posibles, o mediante un argumento por contradicción como el que se usó aquí.
 > </details>
 
 ### Problema guiado
@@ -413,7 +415,7 @@ En este curso, las tablas de verdad emplean la notación binaria de ingeniería:
 | 1 | 0 | **0** |
 | 0 | 1 | **0** |
 
-Siempre falso: es una **contradicción**.
+El resultado es **siempre falso**, sin importar el valor de $P$.
 
 **2. $P \rightarrow Q \rightarrow \neg P \lor Q$**
 
@@ -426,7 +428,7 @@ Agrupación por jerarquía: $P \rightarrow \big(Q \rightarrow (\neg P \lor Q)\bi
 | 0 | 1 | 1 | 1 | 1 | **1** |
 | 0 | 0 | 1 | 1 | 1 | **1** |
 
-Siempre verdadero: es una **tautología**.
+El resultado es **siempre verdadero**, sin importar los valores de $P$ y $Q$.
 
 **3. $P \rightarrow Q \land \neg Q \rightarrow \neg P$**
 
@@ -439,9 +441,9 @@ Agrupación por jerarquía: $P \rightarrow \big((Q\land\neg Q) \rightarrow \neg 
 | 0 | 1 | 0 | 0 | 1 | 1 | **1** |
 | 0 | 0 | 1 | 0 | 1 | 1 | **1** |
 
-Siempre verdadero: otra **tautología**.
+El resultado es, otra vez, **siempre verdadero**, sin importar los valores de $P$ y $Q$.
 
-> 💭 **Antes de continuar, pregúntese**: ¿qué tienen en común los ejercicios 2 y 3 para que ambos resulten tautologías?
+> 💭 **Antes de continuar, pregúntese**: ¿qué tienen en común los ejercicios 2 y 3 para que ambos resulten siempre verdaderos, sin importar los valores de las variables?
 >
 > <details><summary>Ver respuesta</summary>
 > En ambos casos, una parte interna de la expresión termina siendo siempre verdadera (en el ejercicio 2, $Q\rightarrow(\neg P\lor Q)$ es siempre verdadera; en el ejercicio 3, $Q\land\neg Q$ es siempre falsa, lo que también vuelve verdadero el condicional que la contiene). Cuando eso ocurre, el condicional externo termina siendo verdadero sin importar el valor de las demás variables.
@@ -460,7 +462,7 @@ Siempre verdadero: otra **tautología**.
 | 0 | 0 | 1 | 0 | 0 | **1** |
 | 0 | 0 | 0 | 0 | 1 | **1** |
 
-Falso solo en un caso ($R=S=T=1$): es una **contingencia**.
+El resultado es **falso únicamente en el caso $R=S=T=1$**; en los otros siete casos es verdadero.
 
 ### Problema guiado
 
@@ -499,11 +501,11 @@ En la Fase 1 se evaluó la condición de anomalía $A = H \land \neg D \land \ne
 | F | V | F | F | V | **F** |
 | F | F | F | V | V | **F** |
 
-La condición de anomalía resulta verdadera en exactamente **una** de las cuatro combinaciones posibles: $H=V, D=F$ — precisamente el escenario observado en el caso ($A$ es una **contingencia**, no una certeza garantizada de antemano ni un resultado imposible).
+La condición de anomalía resulta verdadera en exactamente **una** de las cuatro combinaciones posibles: $H=V, D=F$ — precisamente el escenario observado en el caso. No es un resultado garantizado de antemano (no ocurre en los otros tres escenarios), pero tampoco es un resultado imposible: existe exactamente una combinación de valores que lo produce, y es justamente la que se observó.
 
 **Veredicto**: el análisis exhaustivo confirma que la situación reportada por HAL corresponde, de manera lógicamente precisa, al único escenario de los cuatro posibles en que el sistema se encuentra en un estado de anomalía real. Esto no revela *por qué* ocurrió la discrepancia — esa parte de la historia se deja para quien desee ver la película completa —, pero sí demuestra, con las herramientas desarrolladas en este documento, que la discrepancia es real, específica, y no puede descartarse como una coincidencia o un error de apreciación.
 
-Las herramientas empleadas en este documento —axiomas de verdad, jerarquía de operadores y tablas de verdad— son también la base directa de la siguiente sesión del curso, en la que se estudian las **equivalencias lógicas y las Leyes de De Morgan**: un conjunto de reglas que permiten transformar una expresión en otra equivalente sin necesidad de construir la tabla de verdad completa cada vez.
+Las herramientas empleadas en este documento —axiomas de verdad, jerarquía de operadores y tablas de verdad— son también la base directa de la siguiente sesión del curso, en la que se estudian las **equivalencias lógicas y las Leyes de De Morgan**: un conjunto de reglas que permiten transformar una expresión en otra equivalente sin necesidad de construir la tabla de verdad completa cada vez. Esto no es un simple atajo de conveniencia: como se vio en el Protocolo de 6 pasos, una tabla de verdad tiene $2^n$ filas. Una expresión con 5 variables ya requiere 32 filas; una con 10 variables requeriría 1024. Construir la tabla completa deja de ser una opción práctica mucho antes de eso — de ahí la necesidad de reglas que permitan simplificar y comparar expresiones sin enumerar todos los casos.
 
 ---
 
@@ -529,11 +531,11 @@ A continuación se presentan ejercicios de autoevaluación. Se recomienda resolv
 
 ### Construcción de tablas de verdad
 
-**E7.** Construya la tabla de $p \oplus \neg q$ y clasifique el resultado.
+**E7.** Construya la tabla de $p \oplus \neg q$.
 
-**E8.** Construya la tabla de $p \leftrightarrow (q \lor \neg p)$ y clasifique el resultado.
+**E8.** Construya la tabla de $p \leftrightarrow (q \lor \neg p)$.
 
-**E9.** Construya la tabla de $(p\land q) \lor (\neg p \land \neg q)$ y clasifique el resultado.
+**E9.** Construya la tabla de $(p\land q) \lor (\neg p \land \neg q)$.
 
 ### Casos aplicados
 
@@ -550,7 +552,7 @@ Al finalizar este documento, usted debería ser capaz de:
 - Determinar el valor de verdad de una proposición compuesta aplicando los axiomas de verdad de los seis operadores lógicos.
 - Evaluar expresiones lógicas complejas respetando el orden de precedencia y asociatividad de los operadores.
 - Traducir enunciados de lenguaje natural a lenguaje formal, y viceversa.
-- Construir una tabla de verdad completa siguiendo el protocolo de 6 pasos, y clasificar el resultado como tautología, contradicción o contingencia.
+- Construir una tabla de verdad completa siguiendo el protocolo de 6 pasos.
 - Reconocer y evitar los errores conceptuales más frecuentes al interpretar el operador condicional (causalidad y confusión con el recíproco).
 
 ---
@@ -609,11 +611,11 @@ Las siguientes fuentes son las que respaldan el contenido de este documento y de
 
 **E6.** $\neg A\lor B\land C \rightarrow A$, agrupado como $(\neg A \lor (B\land C))\rightarrow A$: $\neg A=F$; $B\land C = V\land F=F$; $F\lor F=F$; $F\rightarrow A = F\rightarrow V = \mathbf{V}$
 
-**E7.** Columna resultado: $1,0,0,1$ (para $p,q = VV, VF, FV, FF$). **Contingencia**.
+**E7.** Columna resultado: $1,0,0,1$ (para $p,q = VV, VF, FV, FF$).
 
-**E8.** Columna resultado: $1,0,0,0$. **Contingencia**.
+**E8.** Columna resultado: $1,0,0,0$.
 
-**E9.** Columna resultado: $1,0,0,1$. **Contingencia**.
+**E9.** Columna resultado: $1,0,0,1$.
 
 **E10.** $o \lor (e\land t)$. Evaluado con $o=F, e=V, t=F$: $F\lor(V\land F) = F\lor F = \mathbf{F}$. **No se concede el acceso.**
 

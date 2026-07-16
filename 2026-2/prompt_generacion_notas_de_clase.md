@@ -13,7 +13,7 @@ Soy profesor del curso Matemáticas Discretas 1 en la Universidad de Antioquia, 
 - **Estilo Schaum**: revisión teórica breve y clara → ejercicios resueltos (los que yo dicté en clase, con solución completa) → ejercicios propuestos con respuesta (autoevaluación).
 - **Con un hilo narrativo de aplicación**: una historia (película, caso, escenario) que sirve como vehículo para *aplicar* los conceptos ya aprendidos — nunca para *explicarlos*. Ver reglas de separación en la sección 6.
 
-No generes el documento final directamente. Sigue el proceso de las secciones 2 a 5 primero.
+No generes el documento final directamente. Sigue el proceso de las secciones 2 a 6 primero.
 
 ---
 
@@ -58,9 +58,24 @@ No avances a generar contenido sin resolver estas preguntas.
 
 ---
 
-## 6. Reglas no negociables de estructura y estilo
+## 6. Fase 5 — Autorrevisión rigurosa antes de entregar
 
-### 6.1 Separación estricta entre teoría y narrativa
+Antes de darme el documento como definitivo, revísalo tú mismo como lo haría un profesor experto evaluando el trabajo de un asistente, usando esta rúbrica de seis dimensiones (calificación mental 1-5, no hace falta mostrármela salvo que te la pida):
+
+1. **Rigor matemático**: recalcula a mano cada ejercicio, checkpoint y problema guiado del documento terminado, de forma independiente a como los escribiste la primera vez. No basta con haberlos verificado al momento de escribirlos — un ajuste posterior de redacción puede introducir un error que antes no estaba.
+2. **Completitud y autocontención**: haz una pasada específica buscando **términos técnicos usados sin definir**. Si un ejercicio, solución o instrucción usa una palabra técnica (clasificaciones, nombres de propiedades, notación especial) que no se definió explícitamente antes de su primer uso en el documento, hay dos salidas válidas: (a) agregar la definición mínima necesaria en el punto teórico correspondiente, o (b) si el tema se decide omitir, **eliminar el término de manera consistente en todos los puntos donde aparezca** — enunciados, soluciones, resultados de aprendizaje, checkpoints, ficha de bolsillo — no solo donde se detectó inicialmente. Repórtame cuál de las dos rutas tomaste y por qué.
+3. **Diseño pedagógico**: ¿hay contrastes concretos que refuercen visualmente una regla (por ejemplo, la misma expresión con distinto paréntesis dando resultados distintos), o el documento solo *afirma* la regla sin mostrarla en acción? ¿Hay puntos de confusión previsibles del estudiante que el documento no anticipa?
+4. **Presentación y accesibilidad técnica**: revisa el documento en busca de patrones de LaTeX que rompen el renderizado en GitHub/KaTeX antes de entregarlo — en particular, evita el carácter `_` suelto en modo matemático (usa `\square`, una palabra, o `\text{...}` para placeholders en vez de guiones bajos). Si yo señalo un error de este tipo y te pido corregirlo, verifica después que quedó aplicado en el archivo real, no solo propuesto en el chat.
+5. **Fidelidad a la fuente**: confirma que cada ejercicio de la Bitácora coincide exactamente con el de mis diapositivas, y que los ejercicios propuestos son genuinamente nuevos.
+6. **Contexto del estudiante**: revisa contra los criterios de la sección 9.
+
+Dame un resumen breve de hallazgos (si los hay) y de qué corregiste antes de considerar el documento listo. Si detectas algo que requiere una decisión mía (por ejemplo, si un tema completo debería incluirse o no), pregúntame en vez de decidir por tu cuenta.
+
+---
+
+## 7. Reglas no negociables de estructura y estilo
+
+### 7.1 Separación estricta entre teoría y narrativa
 
 Este fue el ajuste más importante del primer documento construido, y no se debe repetir el error:
 
@@ -69,26 +84,27 @@ Este fue el ajuste más importante del primer documento construido, y no se debe
 - Los bloques narrativos deben tener continuidad real entre sí (cada uno retoma el anterior y construye hacia un cierre/veredicto final), no ser preguntas sueltas con la misma etiqueta repetida sin relación.
 - Los autochequeos teóricos ("Compruebe su comprensión") son también neutros, sin personajes ni lenguaje de videojuego — reserva ese tono únicamente para los bloques narrativos.
 
-### 6.2 Fidelidad a los ejercicios reales
+### 7.2 Fidelidad a los ejercicios reales
 
 - Los ejercicios resueltos de la "Bitácora" (o sección equivalente) deben ser **exactamente** los que aparecen en mis diapositivas/PDFs, sin cambiar enunciados. Resuélvelos completos, paso a paso.
-- **Verifica cada cálculo a mano antes de escribirlo** — todas las tablas de verdad, evaluaciones y agrupaciones por jerarquía deben confirmarse operación por operación. Si un ejercicio resulta ser una tautología o contradicción de forma no evidente, dilo explícitamente y úsalo como oportunidad pedagógica (autoexplicación).
+- **Verifica cada cálculo a mano antes de escribirlo** — todas las tablas de verdad, evaluaciones y agrupaciones por jerarquía deben confirmarse operación por operación. Si un ejercicio resulta ser siempre verdadero, siempre falso, o verdadero solo en casos puntuales de forma no evidente, dilo explícitamente (usando el vocabulario técnico correspondiente solo si ya fue definido en el documento — ver 7.3) y úsalo como oportunidad pedagógica (autoexplicación).
 - Los ejercicios **propuestos** al final deben ser originales (no reciclados de mis diapositivas ni de ejercicios ya resueltos en el documento), pero del mismo nivel de dificultad y cubriendo todos los subtemas.
 
-### 6.3 Terminología y notación
+### 7.3 Terminología y notación
 
 - La terminología debe coincidir exactamente con el material oficial del curso. Cuando haya discrepancia entre las diapositivas y otro material de referencia, **las diapositivas priman**.
-- Usa notación LaTeX con delimitadores `$...$` / `$$...$$` para símbolos lógicos y matemáticos, consistente con las convenciones ya usadas en el sitio del curso (`lessons/modX/claseN.md`).
+- **No introduzcas ni uses ningún término técnico (clasificaciones, nombres de propiedades, notación especial) que no esté definido explícitamente en el documento antes de su primer uso.** Si decides tratar un tema de forma superficial o mencionarlo de pasada, no uses su vocabulario técnico en ejercicios o soluciones — descríbelo en lenguaje llano en su lugar. Ver también la Fase 5 (sección 6).
+- Usa notación LaTeX con delimitadores `$...$` / `$$...$$` para símbolos lógicos y matemáticos, consistente con las convenciones ya usadas en el sitio del curso (`lessons/modX/claseN.md`). Evita patrones que rompen el renderizado en GitHub/KaTeX, en particular el carácter `_` suelto en modo matemático (usa `\square` o `\text{...}` para placeholders, nunca guiones bajos sin llaves).
 - Registro formal en español: **usted**, nunca tuteo. Revisa conjugaciones antes de entregar (evalúe/construya/determine, no evalúa/construye/determina).
 
-### 6.4 Copyright y contenido de la historia
+### 7.4 Copyright y contenido de la historia
 
 - Nunca reproduzcas diálogos extensos, letras de canciones ni fragmentos largos de guion de la obra elegida como hilo narrativo. Los hechos de la trama (nombres, eventos públicos, contexto) se pueden narrar libremente; las citas textuales deben ser mínimas (menos de 15 palabras) y atribuidas.
 - Verifica con búsqueda web cualquier enlace externo (Wikipedia, video, tráiler) antes de incluirlo — nunca inventes URLs.
 
 ---
 
-## 7. Estructura estándar del documento final
+## 8. Estructura estándar del documento final
 
 Usa esta plantilla como base, adaptando nombres de sección al tema y a la historia elegida:
 
@@ -114,7 +130,7 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 
 ---
 
-## 8. Contexto del estudiante — aplica en cada decisión de redacción
+## 9. Contexto del estudiante — aplica en cada decisión de redacción
 
 - Muchos estudiantes son de regiones apartadas con acceso limitado a internet y a material bibliográfico físico: el documento debe ser suficiente por sí mismo; cualquier referencia externa es un complemento opcional, nunca un requisito.
 - Es un curso de **segundo semestre**: evita asumir conocimientos previos no cubiertos por el curso; explica cada símbolo la primera vez que aparece.
@@ -122,10 +138,12 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 
 ---
 
-## 9. Checklist final antes de entregar
+## 10. Checklist final antes de entregar
 
 - [ ] ¿Toda la teoría está libre de menciones a la narrativa?
-- [ ] ¿Todos los cálculos fueron verificados a mano?
+- [ ] ¿Todos los cálculos fueron verificados a mano, en una pasada final sobre el documento ya terminado (no solo al momento de escribir cada ejercicio)?
+- [ ] ¿Todo término técnico usado en el documento está definido antes de su primer uso, o fue eliminado de forma consistente en todos los puntos donde aparecía?
+- [ ] ¿Se revisó el documento en busca de patrones de LaTeX que rompen el renderizado (guiones bajos sueltos en modo matemático, llaves sin cerrar)?
 - [ ] ¿Los ejercicios resueltos son exactamente los de las diapositivas del profesor?
 - [ ] ¿Los ejercicios propuestos son originales?
 - [ ] ¿Todo el documento está en registro formal (usted)?
@@ -133,6 +151,7 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 - [ ] ¿Se compararon los símbolos y nombres contra el sitio del curso para evitar inconsistencias terminológicas?
 - [ ] ¿Incluye prerrequisitos, errores conceptuales, problema guiado, resultados de aprendizaje, ficha de bolsillo y referencias?
 - [ ] ¿Se presentó el bosquejo y se esperó aprobación antes de generar el documento completo?
+- [ ] ¿Se hizo la autorrevisión de la Fase 5 y se reportaron los hallazgos antes de entregar el documento como definitivo?
 
 ---
 
