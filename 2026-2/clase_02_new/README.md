@@ -350,8 +350,8 @@ Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R =
 > Sean $p=V$, $q=F$. Evalúe $(p \lor q) \rightarrow \neg p$.
 >
 > - $p \lor q = V \lor F = V$
-> - $\neg p = \_\_\_$
-> - $(p \lor q) \rightarrow \neg p = V \rightarrow \_\_\_ = \_\_\_$
+> - $\neg p = \square$
+> - $(p \lor q) \rightarrow \neg p = V \rightarrow \square = \square$
 >
 > <details><summary>Ver respuesta</summary>
 > $\neg p = F$. $\;\; V \rightarrow F = \mathbf{F}$.
