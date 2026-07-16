@@ -1,5 +1,4 @@
 # 🛰️ El Incidente del Discovery One
-
 ### Axiomas de Verdad, Jerarquía de Operadores y Tablas de Verdad
 
 *Notas de clase — Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional*
@@ -30,6 +29,18 @@ Semanas después de partir, HAL reporta un fallo inminente en la unidad AE-35, e
 Queda entonces una pregunta abierta: **¿HAL evaluó incorrectamente una condición lógica, o el error está en otra parte?**
 
 Este documento presenta, en primer lugar, las herramientas teóricas necesarias para responder ese tipo de preguntas de forma rigurosa (Axiomas de Verdad, Jerarquía de Operadores y Tablas de Verdad). Tras cada bloque teórico se incluyen ejercicios resueltos de práctica general y, de manera independiente, un **Expediente** que retoma el caso del Discovery One y aplica lo aprendido para avanzar en su resolución, hasta llegar a un veredicto final.
+
+## Antes de comenzar: lo que usted ya debería saber
+
+Este documento continúa lo trabajado en la clase anterior (Lógica Proposicional — Parte 1). Antes de avanzar, verifique que puede hacer lo siguiente:
+
+- Reconocer una **proposición** (un enunciado declarativo con un único valor de verdad) y distinguirla de preguntas, órdenes o exclamaciones.
+- Identificar los **seis operadores lógicos** por su símbolo: negación ($\neg$), conjunción ($\land$), disyunción ($\lor$), disyunción exclusiva ($\oplus$), condicional ($\rightarrow$) y bicondicional ($\leftrightarrow$).
+- Traducir un enunciado simple de lenguaje natural a una variable (por ejemplo, "Hoy llueve" → $p$).
+
+**Recordatorio rápido**: una proposición compuesta se forma uniendo proposiciones simples con un operador. Si $p$ = "Hoy llueve" y $q$ = "Hace frío", entonces $p \land q$ se lee "Hoy llueve y hace frío".
+
+Si alguno de estos puntos no le resulta claro, se recomienda repasarlo antes de continuar; el material completo, con más ejemplos, está disponible en: [Clase 01 — Fundamentos de Lógica Proposicional](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase1/). Si en este momento no cuenta con conexión a internet, puede continuar de todas formas: el recordatorio anterior es suficiente para seguir el resto del documento.
 
 ---
 
@@ -146,6 +157,12 @@ Se lee "Antecedente $\rightarrow$ Consecuente". Según el contexto, también se 
 
 **Ejemplo**: considere la afirmación *"Si Uribe gana las elecciones, entonces habrá paz"* ($W \rightarrow P$). En un escenario donde efectivamente gana ($W=V$) pero no hay paz ($P=F$): $W \rightarrow P = V \rightarrow F = F$, la implicación resulta falsa, porque se prometió algo que no se cumplió. En un escenario donde no gana ($W=F$) y tampoco hay paz ($P=F$): $W \rightarrow P = F \rightarrow F = V$, la implicación es verdadera, porque nunca se activó la condición que la haría exigible.
 
+> ⚠️ **Errores conceptuales frecuentes con el condicional**
+>
+> **1. Confundir el condicional con una relación de causa y efecto.** Considere $p$ = "Llueve" y $q$ = "La calle está mojada", con $p \rightarrow q$. Esto no significa que la lluvia sea la *causa* de que la calle esté mojada — solo describe una relación entre valores de verdad. La calle podría estar mojada por otra razón (un carro tanque de agua, por ejemplo) y la proposición $p \rightarrow q$ seguiría siendo verdadera si, cada vez que llueve, la calle también está mojada. El condicional no explica *por qué* ocurre algo; solo compara si dos hechos son consistentes entre sí.
+>
+> **2. Confundir $p \rightarrow q$ con su recíproco $q \rightarrow p$.** Estas dos expresiones **no** son equivalentes. Con el ejemplo anterior: $p \rightarrow q$ ("Si llueve, la calle está mojada") puede ser verdadera, mientras que $q \rightarrow p$ ("Si la calle está mojada, entonces llovió") puede ser falsa al mismo tiempo — la calle pudo mojarse por otra causa. Antes de dar por hecho que una implicación funciona "en ambos sentidos", verifique con una tabla de verdad si realmente es así; en general, no lo es.
+
 ### Bicondicional ($p \leftrightarrow q$)
 
 Verdadero cuando ambas proposiciones comparten el mismo valor de verdad.
@@ -251,6 +268,12 @@ A continuación se presentan los ejercicios resueltos correspondientes a los tem
 - La cláusula interna "la gente vendrá si los precios no son demasiado altos" se traduce como $\neg r \rightarrow q$.
 - **Expresión**: $p \rightarrow (\neg r \rightarrow q)$
 
+> 💭 **Antes de continuar, pregúntese**: ¿por qué la cláusula interna se tradujo como $\neg r \rightarrow q$ y no como $r \rightarrow q$?
+>
+> <details><summary>Ver respuesta</summary>
+> Porque el enunciado dice "si los precios <b>no</b> son demasiado altos", es decir, la condición que activa "la gente vendrá" es la negación de $r$, no $r$ directamente.
+> </details>
+
 ### Bloque B — Evaluación con axiomas de verdad
 
 **8.** Sea $h$ una proposición verdadera ("Hace calor") y $s$ una proposición falsa ("El día está soleado"). Determine:
@@ -280,6 +303,26 @@ Por jerarquía, la expresión se agrupa como $Q \rightarrow \Big(R \rightarrow \
 Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R = F$. Pero si $R=V$, entonces $(P\land Q)\lor R$ es siempre verdadera (por la regla de la disyunción). Esto es una contradicción irresoluble.
 
 **Conclusión**: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión — es una **tautología** (siempre verdadera).
+
+> 💭 **Antes de continuar, pregúntese**: ¿por qué fue necesario descartar la posibilidad de que la expresión fuera falsa mediante un razonamiento completo, en lugar de probar un solo caso?
+>
+> <details><summary>Ver respuesta</summary>
+> Porque evaluar un único caso solo demuestra que la expresión <i>puede</i> ser verdadera en esa situación particular; no demuestra que sea imposible que sea falsa. Para afirmar que una expresión es una tautología se necesita mostrar que <b>ninguna</b> combinación de valores la hace falsa — ya sea revisando todos los casos posibles, o mediante un argumento por contradicción como el que se usó aquí.
+> </details>
+
+### Problema guiado
+
+Complete el paso que falta.
+
+Sean $p=V$, $q=F$. Evalúe $(p \lor q) \rightarrow \neg p$.
+
+- $p \lor q = V \lor F = V$
+- $\neg p = \_\_\_$
+- $(p \lor q) \rightarrow \neg p = V \rightarrow \_\_\_ = \_\_\_$
+
+<details><summary>Ver respuesta</summary>
+$\neg p = F$. $\;\; V \rightarrow F = \mathbf{F}$.
+</details>
 
 ---
 
@@ -398,6 +441,12 @@ Agrupación por jerarquía: $P \rightarrow \big((Q\land\neg Q) \rightarrow \neg 
 
 Siempre verdadero: otra **tautología**.
 
+> 💭 **Antes de continuar, pregúntese**: ¿qué tienen en común los ejercicios 2 y 3 para que ambos resulten tautologías?
+>
+> <details><summary>Ver respuesta</summary>
+> En ambos casos, una parte interna de la expresión termina siendo siempre verdadera (en el ejercicio 2, $Q\rightarrow(\neg P\lor Q)$ es siempre verdadera; en el ejercicio 3, $Q\land\neg Q$ es siempre falsa, lo que también vuelve verdadero el condicional que la contiene). Cuando eso ocurre, el condicional externo termina siendo verdadero sin importar el valor de las demás variables.
+> </details>
+
 **4. $R \land S \rightarrow \neg T$**
 
 | $R$ | $S$ | $T$ | $R\land S$ | $\neg T$ | $(R\land S)\rightarrow\neg T$ |
@@ -412,6 +461,28 @@ Siempre verdadero: otra **tautología**.
 | 0 | 0 | 0 | 0 | 1 | **1** |
 
 Falso solo en un caso ($R=S=T=1$): es una **contingencia**.
+
+### Problema guiado
+
+Complete la última columna de la tabla de $p \land (q \lor \neg p)$.
+
+| $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 0 | 1 | ___ |
+| 1 | 0 | 0 | 0 | ___ |
+| 0 | 1 | 1 | 1 | ___ |
+| 0 | 0 | 1 | 1 | ___ |
+
+<details><summary>Ver respuesta</summary>
+
+| $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 1 | 0 | 1 | **1** |
+| 1 | 0 | 0 | 0 | **0** |
+| 0 | 1 | 1 | 1 | **0** |
+| 0 | 0 | 1 | 1 | **0** |
+
+</details>
 
 ---
 
@@ -431,6 +502,8 @@ En la Fase 1 se evaluó la condición de anomalía $A = H \land \neg D \land \ne
 La condición de anomalía resulta verdadera en exactamente **una** de las cuatro combinaciones posibles: $H=V, D=F$ — precisamente el escenario observado en el caso ($A$ es una **contingencia**, no una certeza garantizada de antemano ni un resultado imposible).
 
 **Veredicto**: el análisis exhaustivo confirma que la situación reportada por HAL corresponde, de manera lógicamente precisa, al único escenario de los cuatro posibles en que el sistema se encuentra en un estado de anomalía real. Esto no revela *por qué* ocurrió la discrepancia — esa parte de la historia se deja para quien desee ver la película completa —, pero sí demuestra, con las herramientas desarrolladas en este documento, que la discrepancia es real, específica, y no puede descartarse como una coincidencia o un error de apreciación.
+
+Las herramientas empleadas en este documento —axiomas de verdad, jerarquía de operadores y tablas de verdad— son también la base directa de la siguiente sesión del curso, en la que se estudian las **equivalencias lógicas y las Leyes de De Morgan**: un conjunto de reglas que permiten transformar una expresión en otra equivalente sin necesidad de construir la tabla de verdad completa cada vez.
 
 ---
 
@@ -467,6 +540,18 @@ A continuación se presentan ejercicios de autoevaluación. Se recomienda resolv
 **E10.** "El acceso a la sala de máquinas se concede si el usuario es un oficial autorizado, o si hay una emergencia declarada y el usuario tiene entrenamiento básico." Formalice la condición de acceso ($o$: es oficial autorizado; $e$: hay emergencia declarada; $t$: tiene entrenamiento básico) y evalúe el caso: el usuario no es oficial, sí hay emergencia declarada, no tiene entrenamiento básico. ¿Se concede el acceso?
 
 **E11.** "El sistema entra en modo seguro si y solo si detecta una falla crítica y no está en modo de mantenimiento." Formalice la condición ($f$: detecta falla crítica; $m$: está en modo de mantenimiento) y evalúe el caso: sí detecta falla crítica, sí está en modo de mantenimiento. ¿Se activa el modo seguro?
+
+---
+
+## Resultados de aprendizaje
+
+Al finalizar este documento, usted debería ser capaz de:
+
+- Determinar el valor de verdad de una proposición compuesta aplicando los axiomas de verdad de los seis operadores lógicos.
+- Evaluar expresiones lógicas complejas respetando el orden de precedencia y asociatividad de los operadores.
+- Traducir enunciados de lenguaje natural a lenguaje formal, y viceversa.
+- Construir una tabla de verdad completa siguiendo el protocolo de 6 pasos, y clasificar el resultado como tautología, contradicción o contingencia.
+- Reconocer y evitar los errores conceptuales más frecuentes al interpretar el operador condicional (causalidad y confusión con el recíproco).
 
 ---
 
