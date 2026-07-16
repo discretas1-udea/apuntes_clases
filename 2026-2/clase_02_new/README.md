@@ -573,6 +573,25 @@ Al finalizar este documento, usted debería ser capaz de:
 
 ---
 
+## Referencias y material para profundizar
+
+Las siguientes fuentes son las que respaldan el contenido de este documento y del curso en general. Se incluye una breve nota sobre cada una para que usted pueda elegir según su nivel e idioma preferido.
+
+### Libros de texto del curso
+
+- **Rosen, K. H.** *Discrete Mathematics and Its Applications* (8ª ed.). McGraw-Hill. Capítulo 1: "The Foundations: Logic and Proofs". Es el texto de referencia principal del curso; cubre exactamente los temas de este documento con muchos ejercicios adicionales.
+- **Liben-Nowell, D.** *Connecting Discrete Mathematics and Computer Science*. Cambridge University Press. Presenta los mismos conceptos con un enfoque más aplicado a ciencias de la computación, útil para ver la conexión directa con programación.
+
+### Material web de universidades
+
+- **MIT OpenCourseWare — 6.042J, Mathematics for Computer Science**: [ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/). Curso completo y gratuito del MIT; la unidad "1.4 Logic & Propositions" incluye diapositivas y apuntes en PDF sobre operadores proposicionales y tablas de verdad. En inglés.
+- **Stanford CS103 — Mathematical Foundations of Computing, Lección 3: Propositional Logic**: [web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03](https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03/). Explica los mismos operadores y la traducción de lenguaje natural a lógica formal, con ejemplos adicionales de traducción. En inglés.
+- **Universidad EAFIT — Lógica proposicional (documento de referencia en español)**: [repository.eafit.edu.co](https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content). Documento en español con un desarrollo formal similar al del curso; útil si se prefiere consultar en español antes de pasar a las fuentes en inglés.
+
+> **Nota**: si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento y de las clases es suficiente. Están aquí únicamente para quien desee profundizar por su cuenta.
+
+---
+
 ## Solucionario — Parte IV
 
 <details>
