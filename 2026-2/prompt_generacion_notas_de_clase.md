@@ -7,11 +7,17 @@
 
 ## 1. Quién soy y qué necesito
 
-Soy profesor del curso Matemáticas Discretas 1 en la Universidad de Antioquia, modalidad Ude@ (virtual/asincrónica). Te voy a pasar material fuente (apuntes en PDF de una o varias sesiones de clase dictadas, posiblemente con anotaciones manuscritas superpuestas) y quiero que construyamos, de forma **interactiva**, unas notas de clase en markdown que sean:
+Soy profesor del curso Matemáticas Discretas 1 en la Universidad de Antioquia, modalidad Ude@ (virtual/asincrónica). Te voy a pasar tres tipos de material fuente:
+
+1. **Apuntes en PDF** de una o varias sesiones de clase dictadas, posiblemente con anotaciones manuscritas superpuestas.
+2. **Material teórico de apoyo** (diapositivas oficiales, capítulos de referencia, u otro contenido de la sesión).
+3. **El documento ya generado de la clase anterior** (el resultado previo de aplicar este mismo prompt) — lo paso para dar continuidad temporal y narrativa, y como muestra concreta del formato y estilo ya validado. Trátalo como plantilla de referencia obligatoria, no opcional: ver el nuevo paso en la Fase 1.
+
+Con esto, quiero que construyamos, de forma **interactiva**, unas notas de clase en markdown que sean:
 
 - **Autocontenidas**: el estudiante debe poder estudiar con este documento sin depender de la grabación de la clase ni de otro material.
 - **Estilo Schaum**: revisión teórica breve y clara → ejercicios resueltos (los que yo dicté en clase, con solución completa) → ejercicios propuestos con respuesta (autoevaluación).
-- **Con un hilo narrativo de aplicación**: una historia (película, caso, escenario) que sirve como vehículo para *aplicar* los conceptos ya aprendidos — nunca para *explicarlos*. Ver reglas de separación en la sección 6.
+- **Con un hilo narrativo de aplicación**: una historia (película, caso, escenario) que sirve como vehículo para *aplicar* los conceptos ya aprendidos — nunca para *explicarlos*. Ver reglas de separación en la sección 8.
 
 No generes el documento final directamente. Sigue el proceso de las secciones 2 a 6 primero.
 
@@ -19,10 +25,13 @@ No generes el documento final directamente. Sigue el proceso de las secciones 2 
 
 ## 2. Fase 1 — Recepción y resumen
 
-Cuando te pase el/los PDF(s):
+Cuando te pase el/los PDF(s) y el documento de la clase anterior:
 
 1. Léelos completos y resúmeme de qué trata el material y qué contenido cubre (temas, ejercicios incluidos, si están resueltos o no, anotaciones manuscritas relevantes).
 2. Señala explícitamente si detectas **desfases de numeración** entre: la fecha/sesión real de dictado, el número de "Clase" en las diapositivas maestras (`assets/slides/claseN.pdf`), y el número de lección publicada en el sitio (`lessons/modX/claseN`). Esto ha ocurrido antes en el curso — no asumas que coinciden. Si tengo un archivo de cronograma (README/tabla de sesiones), pídemelo para resolver la correspondencia antes de seguir.
+3. Analiza el documento de la clase anterior en dos niveles:
+   - **Formato y estilo**: extrae la estructura exacta (orden de secciones, sintaxis de alertas, convenciones de notación, tono, longitud relativa de cada bloque) y úsala como plantilla por defecto para el nuevo documento, en vez de reconstruir la estructura desde cero a partir de la sección 9. Si algo del documento anterior contradice una regla de este prompt, avísame — puede ser una mejora que aún no está aquí, o un desliz que no debe repetirse.
+   - **Estado narrativo**: identifica el hilo de historia usado, en qué punto quedó (¿qué se resolvió?, ¿qué quedó abierto?, ¿qué "enlace hacia adelante" prometió hacia esta sesión?). Repórtame explícitamente qué continuidad encontraste antes de proponer nada nuevo.
 
 ---
 
@@ -45,6 +54,7 @@ Antes de proponer una estructura, pregúntame (usando pocas preguntas, agrupadas
 - Si hay ejercicios sin resolver en las diapositivas: ¿van con solución completa, solo respuesta final, o quedan propuestos sin resolver?
 - Si hay contenido que es "repaso" de una clase anterior dentro del PDF: ¿se desarrolla completo o solo se referencia?
 - Si la sesión combina o se fusiona naturalmente con otra sesión cercana (por ejemplo, por una clase cancelada o por continuidad temática): ¿se fusionan en un solo documento o quedan separados?
+- ¿Este curso es prerrequisito o correquisito de alguna otra materia del programa? Para Matemáticas Discretas I específicamente, ya está verificado: es correquisito exacto de **Lógica y Representación I** (cursos 2508207 y 2508208), que usa **Python**. Usa el **Anexo A** al final de este prompt para identificar la correspondencia temática exacta antes de proponer cualquier conexión o ejemplo aplicado — no inventes sintaxis ni asumas pseudocódigo genérico.
 
 No avances a generar contenido sin resolver estas preguntas.
 
@@ -52,9 +62,10 @@ No avances a generar contenido sin resolver estas preguntas.
 
 ## 5. Fase 4 — Hilo narrativo y bosquejo
 
-1. Propón un hilo narrativo de aplicación adecuado al tema (una película, caso real o escenario ficticio) que tenga una conexión conceptual genuina con el contenido matemático — no solo estética. Justifica por qué encaja (como se hizo con *2001: Una Odisea del Espacio* y HAL 9000 para lógica proposicional, aprovechando que la trama es literalmente un problema de evaluación lógica mal resuelto). Si el estudiante probablemente no conoce la obra elegida, prevé una sección de contexto inicial (enlace a Wikipedia + video corto verificado por búsqueda, nunca inventado) antes de entrar a la teoría.
-2. Preséntame un **bosquejo completo** (secciones + descripción breve de cada una) antes de escribir una sola línea de contenido final. Espera mi aprobación explícita.
-3. Ten en cuenta principios de aprendizaje basado en narrativa y el modelo 5E (Engage–Explore–Explain–Elaborate–Evaluate) al diseñar el bosquejo, pero sin nombrarlos ni explicarlos dentro del documento — son herramientas de diseño, no contenido visible para el estudiante.
+1. **Continuidad narrativa primero**: si el documento de la clase anterior dejó un hilo narrativo abierto (personajes, caso, "enlace hacia adelante" ya prometido), la opción por defecto es **continuar esa misma historia**, no proponer una nueva — retoma el estado exacto donde quedó (según lo que reportaste en la Fase 1) y avanza la trama aplicando los conceptos de esta sesión. Solo propón un hilo narrativo distinto si el tema de esta sesión es genuinamente incompatible con el caso anterior, y en ese caso explica por qué antes de sugerir la alternativa.
+2. Si no hay documento anterior o no dejó hilo narrativo abierto, propón un hilo narrativo de aplicación adecuado al tema (una película, caso real o escenario ficticio) que tenga una conexión conceptual genuina con el contenido matemático — no solo estética. Justifica por qué encaja (como se hizo con *2001: Una Odisea del Espacio* y HAL 9000 para lógica proposicional, aprovechando que la trama es literalmente un problema de evaluación lógica mal resuelto). Si el estudiante probablemente no conoce la obra elegida, prevé una sección de contexto inicial (enlace a Wikipedia + video corto verificado por búsqueda, nunca inventado) antes de entrar a la teoría.
+3. Preséntame un **bosquejo completo** (secciones + descripción breve de cada una) antes de escribir una sola línea de contenido final. Espera mi aprobación explícita.
+4. Ten en cuenta principios de aprendizaje basado en narrativa y el modelo 5E (Engage–Explore–Explain–Elaborate–Evaluate) al diseñar el bosquejo, pero sin nombrarlos ni explicarlos dentro del documento — son herramientas de diseño, no contenido visible para el estudiante.
 
 ---
 
@@ -73,9 +84,22 @@ Dame un resumen breve de hallazgos (si los hay) y de qué corregiste antes de co
 
 ---
 
-## 7. Reglas no negociables de estructura y estilo
+## 7. Fase 6 — Benchmark opcional contra universidades top
 
-### 7.1 Separación estricta entre teoría y narrativa
+Esta fase **no es automática** — actívala solo si te lo pido explícitamente, porque implica varias búsquedas web. Cuando te lo pida:
+
+1. Busca material comparable (notas de clase, apuntes, slides) del mismo tema en tres niveles: **local** (universidades colombianas de referencia: Universidad Nacional, Universidad de los Andes, EAFIT), **regional** (Latinoamérica) e **internacional** (MIT, Stanford, Berkeley u otras de prestigio equivalente en el tema puntual).
+2. Repórtame, por nivel, qué tan avanzado o rezagado está el documento actual frente a lo que encontraste — con evidencia concreta citada (URL, cita textual breve), no impresiones generales.
+3. Extrae "tips" puntuales y accionables de las fuentes internacionales (mecanismos pedagógicos concretos, no solo temas de contenido).
+4. Para cada tip, arma una tabla de **a favor / en contra** — el "en contra" debe ser real, no de relleno; considera especialmente si el tip: (a) introduce vocabulario técnico nuevo sin definir, (b) obliga a reabrir y reescribir contenido ya aprobado, (c) suma un tipo de recuadro nuevo a los cuatro ya establecidos (riesgo de "fatiga de cajitas"), o (d) asume una convención, sintaxis o notación que no verificaste contra el contexto real del estudiante (ver el nuevo punto de la Fase 3 sobre correquisitos).
+5. Cierra con una tabla numérica Sí/No de aplicar cada tip, y espera mi decisión antes de tocar el archivo.
+6. Si un tip se aprueba pero depende de una convención externa (p. ej., sintaxis de pseudocódigo, notación de otro curso), **verifica esa convención con una búsqueda real** antes de escribirla — no la inventes ni asumas la más común en general si existe una fuente verificable específica del programa académico del estudiante.
+
+---
+
+## 8. Reglas no negociables de estructura y estilo
+
+### 8.1 Separación estricta entre teoría y narrativa
 
 Este fue el ajuste más importante del primer documento construido, y no se debe repetir el error:
 
@@ -84,27 +108,37 @@ Este fue el ajuste más importante del primer documento construido, y no se debe
 - Los bloques narrativos deben tener continuidad real entre sí (cada uno retoma el anterior y construye hacia un cierre/veredicto final), no ser preguntas sueltas con la misma etiqueta repetida sin relación.
 - Los autochequeos teóricos ("Compruebe su comprensión") son también neutros, sin personajes ni lenguaje de videojuego — reserva ese tono únicamente para los bloques narrativos.
 
-### 7.2 Fidelidad a los ejercicios reales
+### 8.2 Fidelidad a los ejercicios reales
 
 - Los ejercicios resueltos de la "Bitácora" (o sección equivalente) deben ser **exactamente** los que aparecen en mis diapositivas/PDFs, sin cambiar enunciados. Resuélvelos completos, paso a paso.
 - **Verifica cada cálculo a mano antes de escribirlo** — todas las tablas de verdad, evaluaciones y agrupaciones por jerarquía deben confirmarse operación por operación. Si un ejercicio resulta ser siempre verdadero, siempre falso, o verdadero solo en casos puntuales de forma no evidente, dilo explícitamente (usando el vocabulario técnico correspondiente solo si ya fue definido en el documento — ver 7.3) y úsalo como oportunidad pedagógica (autoexplicación).
 - Los ejercicios **propuestos** al final deben ser originales (no reciclados de mis diapositivas ni de ejercicios ya resueltos en el documento), pero del mismo nivel de dificultad y cubriendo todos los subtemas.
 
-### 7.3 Terminología y notación
+### 8.3 Terminología y notación
 
 - La terminología debe coincidir exactamente con el material oficial del curso. Cuando haya discrepancia entre las diapositivas y otro material de referencia, **las diapositivas priman**.
 - **No introduzcas ni uses ningún término técnico (clasificaciones, nombres de propiedades, notación especial) que no esté definido explícitamente en el documento antes de su primer uso.** Si decides tratar un tema de forma superficial o mencionarlo de pasada, no uses su vocabulario técnico en ejercicios o soluciones — descríbelo en lenguaje llano en su lugar. Ver también la Fase 5 (sección 6).
 - Usa notación LaTeX con delimitadores `$...$` / `$$...$$` para símbolos lógicos y matemáticos, consistente con las convenciones ya usadas en el sitio del curso (`lessons/modX/claseN.md`). Evita patrones que rompen el renderizado en GitHub/KaTeX, en particular el carácter `_` suelto en modo matemático (usa `\square` o `\text{...}` para placeholders, nunca guiones bajos sin llaves).
+- **Todo recuadro de nota, advertencia o autoevaluación usa la sintaxis nativa de alertas de GitHub** (`> [!TIPO]`), no emojis manuales en un blockquote. Mapeo estándar:
+
+  | Tipo de contenido | Sintaxis |
+  |---|---|
+  | Checkpoints ("Compruebe su comprensión"), autoexplicación ("Antes de continuar"), problemas guiados | `> [!TIP]` |
+  | Errores conceptuales y errores típicos | `> [!WARNING]` |
+  | La regla más crítica de cada operador o tema (máximo una o dos por documento — no abusar) | `> [!IMPORTANT]` |
+  | Contexto, conexiones con otras materias, notas informativas | `> [!NOTE]` |
+
+  No conviertas en recuadro cada línea corta ("regla corta" de una frase pegada directamente bajo una tabla) — resérvalo para contenido que merece destacarse como aparte. Ver también el criterio de "fatiga de cajitas" de la Fase 6 (sección 7).
 - Registro formal en español: **usted**, nunca tuteo. Revisa conjugaciones antes de entregar (evalúe/construya/determine, no evalúa/construye/determina).
 
-### 7.4 Copyright y contenido de la historia
+### 8.4 Copyright y contenido de la historia
 
 - Nunca reproduzcas diálogos extensos, letras de canciones ni fragmentos largos de guion de la obra elegida como hilo narrativo. Los hechos de la trama (nombres, eventos públicos, contexto) se pueden narrar libremente; las citas textuales deben ser mínimas (menos de 15 palabras) y atribuidas.
 - Verifica con búsqueda web cualquier enlace externo (Wikipedia, video, tráiler) antes de incluirlo — nunca inventes URLs.
 
 ---
 
-## 8. Estructura estándar del documento final
+## 9. Estructura estándar del documento final
 
 Usa esta plantilla como base, adaptando nombres de sección al tema y a la historia elegida:
 
@@ -115,11 +149,11 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 5. **Partes teóricas** (I, II, III... según los subtemas), cada una con:
    - Definiciones y reglas, con tablas cuando aplique.
    - Ejemplos genéricos (pueden incorporar ejemplos manuscritos de clase si el profesor lo autorizó, tratados como ejemplos neutros, no como narrativa).
-   - Recuadros "⚠️ Errores conceptuales frecuentes" cuando el tema tenga confusiones típicas conocidas (no solo errores mecánicos de cálculo, sino errores de interpretación).
-   - Autochequeos "✅ Compruebe su comprensión" cortos, con respuesta oculta revelable.
+   - Recuadros `[!WARNING]` de errores conceptuales frecuentes cuando el tema tenga confusiones típicas conocidas (no solo errores mecánicos de cálculo, sino errores de interpretación).
+   - Autochequeos `[!TIP]` ("Compruebe su comprensión") cortos, con respuesta oculta revelable.
 6. **Bitácora resuelta** (una por cada bloque temático mayor): ejercicios reales de mis diapositivas, resueltos completos. Incluye ocasionalmente:
-   - Prompts de autoexplicación ("💭 Antes de continuar, pregúntese...") con respuesta inmediata, no diferida.
-   - Un "Problema guiado" (ejercicio parcialmente resuelto, el estudiante completa el último paso) como puente hacia los ejercicios propuestos.
+   - Prompts de autoexplicación `[!TIP]` ("Antes de continuar, pregúntese...") con respuesta inmediata, no diferida.
+   - Un "Problema guiado" `[!TIP]` (ejercicio parcialmente resuelto, el estudiante completa el último paso) como puente hacia los ejercicios propuestos.
 7. **Bloques narrativos de aplicación** ("Expediente" o el nombre que corresponda a la historia elegida), ubicados después de cada Bitácora, nunca intercalados con la teoría.
 8. **Ejercicios propuestos** (8-12, distribuidos entre todos los subtemas), con solucionario de respuesta final al cierre del documento (no solución paso a paso).
 9. **Cierre narrativo / veredicto**: se resuelve el planteamiento inicial usando explícitamente las herramientas del documento. Incluye un enlace hacia adelante conectando con el tema de la siguiente sesión del curso.
@@ -130,7 +164,7 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 
 ---
 
-## 9. Contexto del estudiante — aplica en cada decisión de redacción
+## 10. Contexto del estudiante — aplica en cada decisión de redacción
 
 - Muchos estudiantes son de regiones apartadas con acceso limitado a internet y a material bibliográfico físico: el documento debe ser suficiente por sí mismo; cualquier referencia externa es un complemento opcional, nunca un requisito.
 - Es un curso de **segundo semestre**: evita asumir conocimientos previos no cubiertos por el curso; explica cada símbolo la primera vez que aparece.
@@ -138,20 +172,49 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 
 ---
 
-## 10. Checklist final antes de entregar
+## 11. Checklist final antes de entregar
 
 - [ ] ¿Toda la teoría está libre de menciones a la narrativa?
 - [ ] ¿Todos los cálculos fueron verificados a mano, en una pasada final sobre el documento ya terminado (no solo al momento de escribir cada ejercicio)?
 - [ ] ¿Todo término técnico usado en el documento está definido antes de su primer uso, o fue eliminado de forma consistente en todos los puntos donde aparecía?
 - [ ] ¿Se revisó el documento en busca de patrones de LaTeX que rompen el renderizado (guiones bajos sueltos en modo matemático, llaves sin cerrar)?
+- [ ] ¿Todos los recuadros de nota/advertencia/autoevaluación usan sintaxis de alertas de GitHub (`[!TIP]`, `[!WARNING]`, `[!NOTE]`, `[!IMPORTANT]`), no emojis manuales?
 - [ ] ¿Los ejercicios resueltos son exactamente los de las diapositivas del profesor?
 - [ ] ¿Los ejercicios propuestos son originales?
 - [ ] ¿Todo el documento está en registro formal (usted)?
 - [ ] ¿Se verificaron por búsqueda web los enlaces externos incluidos?
 - [ ] ¿Se compararon los símbolos y nombres contra el sitio del curso para evitar inconsistencias terminológicas?
+- [ ] ¿Se preguntó por correquisitos/prerrequisitos del curso y, si existen, se verificó la notación real de esa materia antes de usarla en algún ejemplo o conexión?
+- [ ] Si hubo documento de clase anterior: ¿se identificó su estado narrativo y se continuó (o se justificó explícitamente por qué no) en vez de empezar una historia nueva sin más?
+- [ ] Si hubo documento de clase anterior: ¿el formato y la estructura del nuevo documento son consistentes con el anterior, salvo mejoras explícitamente acordadas?
 - [ ] ¿Incluye prerrequisitos, errores conceptuales, problema guiado, resultados de aprendizaje, ficha de bolsillo y referencias?
 - [ ] ¿Se presentó el bosquejo y se esperó aprobación antes de generar el documento completo?
 - [ ] ¿Se hizo la autorrevisión de la Fase 5 y se reportaron los hallazgos antes de entregar el documento como definitivo?
+- [ ] Si se hizo benchmark (Fase 6): ¿se presentó la tabla a favor/en contra y la tabla Sí/No, y se esperó decisión antes de aplicar cualquier tip?
+- [ ] ¿Se usó el Anexo A (mapa de correspondencia con Lógica y Representación I) para diseñar la conexión con programación, en vez de inventar una genérica o asumir una sintaxis no verificada?
+
+---
+
+## Anexo A — Mapa de correspondencia: Matemáticas Discretas I ↔ Lógica y Representación I
+
+Basado en los microcurrículos oficiales vigentes (códigos 2508207 y 2508208, vigencia 2024-1/2024-2, aprobados por Consejo de Facultad). **Ambos cursos son correquisito exacto** (se cursan el mismo semestre) y **Lógica y Representación I usa Python** como lenguaje de programación desde su primera unidad — no pseudocódigo genérico. Verifica esta vigencia antes de reutilizar el mapa si ha pasado mucho tiempo desde la última actualización de este prompt, ya que los microcurrículos pueden revisarse.
+
+El objetivo de este mapa es evitar que ambos cursos se sientan como "mundos separados" — cada vez que el tema de la sesión tenga una correspondencia real en la tabla, el documento debe usarla explícitamente (recuadro `[!NOTE]` de conexión, o incluso como parte del hilo narrativo si encaja de forma natural), con sintaxis de Python verificada, no inventada.
+
+| Unidad de Matemáticas Discretas I | Tema | Corresponde en Lógica y Representación I | Ángulo de conexión sugerido |
+|---|---|---|---|
+| I — Lógica proposicional | Operadores $\land, \lor, \neg$ | Unidad 1 (expresiones aritmeticológicas) | `and`, `or`, `not` en Python son la misma álgebra de Boole, con otro nombre |
+| I — Lógica proposicional | Condicional $p\rightarrow q$, jerarquía | Unidad 3 (condicional simple, doble, anidados) | `if`/`elif`/`else` y condicionales anidados son exactamente $p\rightarrow q$ y $p\rightarrow(q\rightarrow r)$ implementados |
+| I — Lógica proposicional | Tautología, contradicción, contingencia | Unidad 1 (pruebas de escritorio y casos de prueba) | una condición de código que siempre evalúa `True` o siempre `False` suele ser un error de lógica, no una casualidad — el mismo concepto que aquí se nombra |
+| I — Métodos de demostración (contrarrecíproco, reducción al absurdo) | — | Unidad 4 (estructuras repetitivas, condiciones de parada) | verificar que un ciclo termina es, en esencia, un argumento por contradicción o por invariante |
+| II — Conjuntos, cardinalidad | — | Unidad 5 y 6 (arreglos uni/bidimensionales) | un arreglo es una representación computacional de un conjunto ordenado; su longitud es la cardinalidad |
+| II — Relación de orden, poset | — | Unidad 5 (ordenamiento: burbuja, selección, inserción) | todo algoritmo de ordenamiento presupone una relación de orden total sobre los elementos — sin esa relación, "ordenar" no tiene sentido matemático |
+| II — Relaciones binarias (reflexividad, simetría, transitividad) | — | Unidad 5 (búsqueda binaria) | la búsqueda binaria exige que el arreglo esté ordenado según la misma relación de orden de la Unidad II — es una precondición matemática, no solo una regla de programación |
+| III — Álgebra booleana, simplificación de expresiones | — | Unidad 3 y 4 (condiciones compuestas en `if`/ciclos) | simplificar una expresión booleana con las leyes del álgebra de Boole es exactamente lo que hace que una condición compleja en código sea más legible y eficiente |
+| III — Circuitos lógicos (compuertas AND, OR, NOT, XOR) | — | Unidad 1 (tipos de datos, operadores) | los operadores booleanos de Python son la abstracción de software de esas mismas compuertas físicas |
+| III — Sistemas numéricos (binario) | — | Unidad 1 (tipos de datos y su representación) | todo tipo de dato en Python se representa internamente en el mismo sistema binario que se estudia aquí |
+
+**Cómo usar este mapa en la Fase 4 (bosquejo)**: al proponer el hilo narrativo o las conexiones de la sesión, revisa primero si el tema de esa clase tiene una fila correspondiente aquí. Si la tiene, ese es el ángulo de conexión con programación que debe aparecer en el documento — no uno genérico. Si no hay correspondencia clara para el tema puntual, dilo explícitamente en vez de forzar una conexión débil.
 
 ---
 

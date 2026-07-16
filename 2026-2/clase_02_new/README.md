@@ -10,8 +10,10 @@
 
 A lo largo de este documento se emplea, como hilo narrativo de aplicación, un caso inspirado en la película **2001: Una Odisea del Espacio** (Stanley Kubrick, 1968). No es necesario haber visto la película para seguir las notas; a continuación se ofrece el contexto mínimo necesario.
 
-> 📖 **Para ampliar**: [2001: A Space Odyssey — Wikipedia](https://es.wikipedia.org/wiki/2001:_A_Space_Odyssey_(pel%C3%ADcula)) · [HAL 9000 — Wikipedia](https://es.wikipedia.org/wiki/HAL_9000)
-> 🎬 **Video corto (2-3 min)**: [Tráiler oficial](https://www.youtube.com/watch?v=UgGCScAV7qU)
+> [!NOTE]
+> **Para ampliar**: [2001: A Space Odyssey — Wikipedia](https://es.wikipedia.org/wiki/2001:_A_Space_Odyssey_(pel%C3%ADcula)) · [HAL 9000 — Wikipedia](https://es.wikipedia.org/wiki/HAL_9000)
+>
+> **Video corto (2-3 min)**: [Tráiler oficial](https://www.youtube.com/watch?v=UgGCScAV7qU)
 
 **Dossier de la misión**:
 
@@ -40,6 +42,9 @@ Este documento continúa lo trabajado en la clase anterior (Lógica Proposiciona
 
 **Recordatorio rápido**: una proposición compuesta se forma uniendo proposiciones simples con un operador. Si $p$ = "Hoy llueve" y $q$ = "Hace frío", entonces $p \land q$ se lee "Hoy llueve y hace frío".
 
+> [!NOTE]
+> Matemáticas Discretas 1 es correquisito de Lógica y Representación I — se cursan en el mismo semestre porque se refuerzan mutuamente. Lo que aprenda aquí sobre operadores lógicos es la misma base formal que usará allá para construir condiciones y estructuras de control en Python.
+
 Si alguno de estos puntos no le resulta claro, se recomienda repasarlo antes de continuar; el material completo, con más ejemplos, está disponible en: [Clase 01 — Fundamentos de Lógica Proposicional](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase1/). Si en este momento no cuenta con conexión a internet, puede continuar de todas formas: el recordatorio anterior es suficiente para seguir el resto del documento.
 
 ---
@@ -58,7 +63,8 @@ Una proposición es **simple** (o atómica) cuando expresa un único hecho, sin 
 
 **Ejemplo**: la afirmación *"Jacob y Esaú son hijos de Isaac"* es, pese a contener la palabra "y", una proposición **simple**: describe un único hecho verificable (una relación de parentesco), no dos proposiciones distintas. En cambio, *"Como Jacob le dio un plato de lentejas a su padre, obtuvo la primogenitura"* sí es **compuesta**: contiene una estructura condicional, $L \rightarrow S$, donde $L$ = "Jacob le da el plato de lentejas a su padre" y $S$ = "Jacob obtiene la primogenitura".
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Clasifique las siguientes proposiciones como simples o compuestas:
 > 1. "El número 7 es primo."
@@ -76,7 +82,8 @@ No todo enunciado declarativo cumple esta condición. Considere la afirmación *
 
 Existe otro tipo de enunciado que tampoco es proposición: el **enunciado abierto**, aquel que contiene variables sin un valor fijo asignado. Por ejemplo, "$x + y = z$" no puede clasificarse como verdadera ni falsa mientras $x$, $y$ y $z$ no tengan valores concretos.
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Explique por qué la oración "Esta afirmación no puede probarse ni refutarse" presenta el mismo tipo de problema que el ejemplo anterior.
 >
@@ -112,6 +119,9 @@ Verdadera únicamente cuando ambas proposiciones son verdaderas.
 
 Verdadera cuando al menos una de las proposiciones es verdadera.
 
+> [!NOTE]
+> En lógica, "o" es inclusivo — no el "o... o..." exclusivo que a veces implica el lenguaje cotidiano. $p \lor q$ es verdadera incluso cuando ambas proposiciones lo son.
+
 | $p$ | $q$ | $p \lor q$ |
 |:---:|:---:|:---:|
 | V | V | V |
@@ -134,7 +144,8 @@ Verdadera cuando las dos proposiciones tienen valores diferentes.
 
 > **Regla corta**: valores diferentes dan $V$.
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Sean $p=V$ y $q=F$. Evalúe $\neg p \lor q$ y $p \oplus \neg q$.
 >
@@ -153,11 +164,15 @@ Se lee "Antecedente $\rightarrow$ Consecuente". Según el contexto, también se 
 | F | V | V |
 | F | F | V |
 
+> [!IMPORTANT]
 > **Regla de oro**: el condicional solo es falso cuando el antecedente es verdadero y el consecuente es falso ($V \rightarrow F = F$). En cualquier otro caso es verdadero, incluso cuando el antecedente es falso.
+>
+> **Dicho en palabras**: una implicación es verdadera exactamente cuando el antecedente es falso, o el consecuente es verdadero.
 
 **Ejemplo**: considere la afirmación *"Si Uribe gana las elecciones, entonces habrá paz"* ($W \rightarrow P$). En un escenario donde efectivamente gana ($W=V$) pero no hay paz ($P=F$): $W \rightarrow P = V \rightarrow F = F$, la implicación resulta falsa, porque se prometió algo que no se cumplió. En un escenario donde no gana ($W=F$) y tampoco hay paz ($P=F$): $W \rightarrow P = F \rightarrow F = V$, la implicación es verdadera, porque nunca se activó la condición que la haría exigible.
 
-> ⚠️ **Errores conceptuales frecuentes con el condicional**
+> [!WARNING]
+> **Errores conceptuales frecuentes con el condicional**
 >
 > **1. Confundir el condicional con una relación de causa y efecto.** Considere $p$ = "Llueve" y $q$ = "La calle está mojada", con $p \rightarrow q$. Esto no significa que la lluvia sea la *causa* de que la calle esté mojada — solo describe una relación entre valores de verdad. La calle podría estar mojada por otra razón (un carro tanque de agua, por ejemplo) y la proposición $p \rightarrow q$ seguiría siendo verdadera si, cada vez que llueve, la calle también está mojada. El condicional no explica *por qué* ocurre algo; solo compara si dos hechos son consistentes entre sí.
 >
@@ -174,13 +189,24 @@ Verdadero cuando ambas proposiciones comparten el mismo valor de verdad.
 | F | V | F |
 | F | F | V |
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Sean $p=F$, $q=V$, $r=F$. Evalúe $(p \rightarrow q) \leftrightarrow r$.
 >
 > <details><summary>Ver respuesta</summary>
 > $p \rightarrow q = F \rightarrow V = V$. $\;\; V \leftrightarrow r = V \leftrightarrow F = F$.
 > </details>
+
+> [!NOTE]
+> **Conexión con Lógica y Representación I**: este semestre, en el curso correquisito, usted trabaja en Python con estos mismos operadores, con otro nombre: la conjunción se escribe `and`, la disyunción `or`, la negación `not`. Por ejemplo, la expresión $(p \land \neg q) \lor r$ se vería así en Python:
+>
+> ```python
+> if (p and not q) or r:
+>     ...
+> ```
+>
+> Es la misma estructura lógica, solo con otra notación — dominar una ayuda a dominar la otra. Más adelante, cuando trabaje con condicionales anidados en Lógica y Representación I (un `if` dentro de otro `if`), estará aplicando exactamente la jerarquía de operadores que se estudia en la Parte II de este documento.
 
 ---
 
@@ -207,7 +233,8 @@ Para evaluar una expresión con valores dados: (1) sustituya cada variable por s
 
 $\neg p = F$. $\;\; \neg p \lor q = F \lor F = F$. $\;\; F \rightarrow r = F \rightarrow V = V$. Resultado: $V$.
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Agregue los paréntesis correspondientes, según la jerarquía, a la expresión $p \lor q \land \neg r \rightarrow s$.
 >
@@ -241,7 +268,8 @@ A continuación se presentan los ejercicios resueltos correspondientes a los tem
 - $q$: El número es impar.
 - **Expresión**: $p \lor q$
 
-> ⚠️ **Error conceptual frecuente**: un entero no puede ser par e impar a la vez —son mutuamente excluyentes— lo que podría sugerir que aquí correspondería usar $\oplus$ en vez de $\lor$. Sin embargo, la convención de traducción es distinta: el "o" del lenguaje natural se traduce como disyunción inclusiva ($\lor$) salvo que el enunciado indique explícitamente exclusividad (por ejemplo, con la construcción "o... o..., pero no ambos"). La traducción $p \lor q$ es correcta como *traducción literal* del enunciado; que $p$ y $q$ no puedan ser verdaderas simultáneamente en este caso particular es una propiedad de los números (mutuamente excluyentes), no algo que cambie la regla de traducción del conector "o".
+> [!WARNING]
+> **Error conceptual frecuente**: un entero no puede ser par e impar a la vez —son mutuamente excluyentes— lo que podría sugerir que aquí correspondería usar $\oplus$ en vez de $\lor$. Sin embargo, la convención de traducción es distinta: el "o" del lenguaje natural se traduce como disyunción inclusiva ($\lor$) salvo que el enunciado indique explícitamente exclusividad (por ejemplo, con la construcción "o... o..., pero no ambos"). La traducción $p \lor q$ es correcta como *traducción literal* del enunciado; que $p$ y $q$ no puedan ser verdaderas simultáneamente en este caso particular es una propiedad de los números (mutuamente excluyentes), no algo que cambie la regla de traducción del conector "o".
 
 **4. "Si tiene una contraseña vigente, entonces puede iniciar sesión en la red."**
 
@@ -270,7 +298,8 @@ A continuación se presentan los ejercicios resueltos correspondientes a los tem
 - La cláusula interna "la gente vendrá si los precios no son demasiado altos" se traduce como $\neg r \rightarrow q$.
 - **Expresión**: $p \rightarrow (\neg r \rightarrow q)$
 
-> 💭 **Antes de continuar, pregúntese**: ¿por qué la cláusula interna se tradujo como $\neg r \rightarrow q$ y no como $r \rightarrow q$?
+> [!TIP]
+> **Antes de continuar, pregúntese**: ¿por qué la cláusula interna se tradujo como $\neg r \rightarrow q$ y no como $r \rightarrow q$?
 >
 > <details><summary>Ver respuesta</summary>
 > Porque el enunciado dice "si los precios <b>no</b> son demasiado altos", es decir, la condición que activa "la gente vendrá" es la negación de $r$, no $r$ directamente.
@@ -306,7 +335,8 @@ Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R =
 
 **Conclusión**: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión — es **siempre verdadera**, sin importar los valores de $P$, $Q$ y $R$.
 
-> 💭 **Antes de continuar, pregúntese**: ¿por qué fue necesario descartar la posibilidad de que la expresión fuera falsa mediante un razonamiento completo, en lugar de probar un solo caso?
+> [!TIP]
+> **Antes de continuar, pregúntese**: ¿por qué fue necesario descartar la posibilidad de que la expresión fuera falsa mediante un razonamiento completo, en lugar de probar un solo caso?
 >
 > <details><summary>Ver respuesta</summary>
 > Porque evaluar un único caso solo demuestra que la expresión <i>puede</i> ser verdadera en esa situación particular; no demuestra que sea imposible que sea falsa. Para afirmar que una expresión es siempre verdadera se necesita mostrar que <b>ninguna</b> combinación de valores la hace falsa — ya sea revisando todos los casos posibles, o mediante un argumento por contradicción como el que se usó aquí.
@@ -314,17 +344,18 @@ Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R =
 
 ### Problema guiado
 
-Complete el paso que falta.
-
-Sean $p=V$, $q=F$. Evalúe $(p \lor q) \rightarrow \neg p$.
-
-- $p \lor q = V \lor F = V$
-- $\neg p = \_\_\_$
-- $(p \lor q) \rightarrow \neg p = V \rightarrow \_\_\_ = \_\_\_$
-
-<details><summary>Ver respuesta</summary>
-$\neg p = F$. $\;\; V \rightarrow F = \mathbf{F}$.
-</details>
+> [!TIP]
+> Complete el paso que falta.
+>
+> Sean $p=V$, $q=F$. Evalúe $(p \lor q) \rightarrow \neg p$.
+>
+> - $p \lor q = V \lor F = V$
+> - $\neg p = \_\_\_$
+> - $(p \lor q) \rightarrow \neg p = V \rightarrow \_\_\_ = \_\_\_$
+>
+> <details><summary>Ver respuesta</summary>
+> $\neg p = F$. $\;\; V \rightarrow F = \mathbf{F}$.
+> </details>
 
 ---
 
@@ -370,7 +401,8 @@ Una **tabla de verdad** es una herramienta tabular que muestra el resultado de u
 5. **Evaluar la expresión paso a paso**, de izquierda a derecha, respetando la jerarquía de operadores.
 6. **Revisar y validar** la tabla completa.
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > Construya la tabla de verdad de $p \leftrightarrow \neg q$.
 >
@@ -390,13 +422,15 @@ En este curso, las tablas de verdad emplean la notación binaria de ingeniería:
 
 ## 3.4 Errores típicos
 
-- **Número de filas incorrecto**: siempre debe ser $2^n$.
-- **Patrón mal distribuido**: la primera variable alterna cada $2^{n-1}$ filas, la segunda cada $2^{n-2}$, y así sucesivamente.
-- **Alcance incorrecto de la negación**: $\neg(p\land q) \neq \neg p \land q$; use paréntesis para evitar confusión.
-- **Confundir $\lor$ con $\oplus$**: $\lor$ permite que ambas proposiciones sean verdaderas; $\oplus$ no.
-- **Ignorar la jerarquía** al completar columnas auxiliares.
+> [!WARNING]
+> - **Número de filas incorrecto**: siempre debe ser $2^n$.
+> - **Patrón mal distribuido**: la primera variable alterna cada $2^{n-1}$ filas, la segunda cada $2^{n-2}$, y así sucesivamente.
+> - **Alcance incorrecto de la negación**: $\neg(p\land q) \neq \neg p \land q$; use paréntesis para evitar confusión.
+> - **Confundir $\lor$ con $\oplus$**: $\lor$ permite que ambas proposiciones sean verdaderas; $\oplus$ no.
+> - **Ignorar la jerarquía** al completar columnas auxiliares.
 
-> ✅ **Compruebe su comprensión**
+> [!TIP]
+> **Compruebe su comprensión**
 >
 > ¿Cuántas filas requiere la tabla de verdad de una expresión con 4 variables distintas?
 >
@@ -443,7 +477,8 @@ Agrupación por jerarquía: $P \rightarrow \big((Q\land\neg Q) \rightarrow \neg 
 
 El resultado es, otra vez, **siempre verdadero**, sin importar los valores de $P$ y $Q$.
 
-> 💭 **Antes de continuar, pregúntese**: ¿qué tienen en común los ejercicios 2 y 3 para que ambos resulten siempre verdaderos, sin importar los valores de las variables?
+> [!TIP]
+> **Antes de continuar, pregúntese**: ¿qué tienen en común los ejercicios 2 y 3 para que ambos resulten siempre verdaderos, sin importar los valores de las variables?
 >
 > <details><summary>Ver respuesta</summary>
 > En ambos casos, una parte interna de la expresión termina siendo siempre verdadera (en el ejercicio 2, $Q\rightarrow(\neg P\lor Q)$ es siempre verdadera; en el ejercicio 3, $Q\land\neg Q$ es siempre falsa, lo que también vuelve verdadero el condicional que la contiene). Cuando eso ocurre, el condicional externo termina siendo verdadero sin importar el valor de las demás variables.
@@ -466,25 +501,26 @@ El resultado es **falso únicamente en el caso $R=S=T=1$**; en los otros siete c
 
 ### Problema guiado
 
-Complete la última columna de la tabla de $p \land (q \lor \neg p)$.
-
-| $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 0 | 1 | ___ |
-| 1 | 0 | 0 | 0 | ___ |
-| 0 | 1 | 1 | 1 | ___ |
-| 0 | 0 | 1 | 1 | ___ |
-
-<details><summary>Ver respuesta</summary>
-
-| $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 0 | 1 | **1** |
-| 1 | 0 | 0 | 0 | **0** |
-| 0 | 1 | 1 | 1 | **0** |
-| 0 | 0 | 1 | 1 | **0** |
-
-</details>
+> [!TIP]
+> Complete la última columna de la tabla de $p \land (q \lor \neg p)$.
+>
+> | $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
+> |:---:|:---:|:---:|:---:|:---:|
+> | 1 | 1 | 0 | 1 | ___ |
+> | 1 | 0 | 0 | 0 | ___ |
+> | 0 | 1 | 1 | 1 | ___ |
+> | 0 | 0 | 1 | 1 | ___ |
+>
+> <details><summary>Ver respuesta</summary>
+>
+> | $p$ | $q$ | $\neg p$ | $q\lor\neg p$ | $p\land(q\lor\neg p)$ |
+> |:---:|:---:|:---:|:---:|:---:|
+> | 1 | 1 | 0 | 1 | **1** |
+> | 1 | 0 | 0 | 0 | **0** |
+> | 0 | 1 | 1 | 1 | **0** |
+> | 0 | 0 | 1 | 1 | **0** |
+>
+> </details>
 
 ---
 
@@ -590,7 +626,8 @@ Las siguientes fuentes son las que respaldan el contenido de este documento y de
 - **Stanford CS103 — Mathematical Foundations of Computing, Lección 3: Propositional Logic**: [web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03](https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03/). Explica los mismos operadores y la traducción de lenguaje natural a lógica formal, con ejemplos adicionales de traducción. En inglés.
 - **Universidad EAFIT — Lógica proposicional (documento de referencia en español)**: [repository.eafit.edu.co](https://repository.eafit.edu.co/server/api/core/bitstreams/80f3bcca-f425-4529-befa-f3942c57f902/content). Documento en español con un desarrollo formal similar al del curso; útil si se prefiere consultar en español antes de pasar a las fuentes en inglés.
 
-> **Nota**: si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento y de las clases es suficiente. Están aquí únicamente para quien desee profundizar por su cuenta.
+> [!NOTE]
+> Si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento y de las clases es suficiente. Están aquí únicamente para quien desee profundizar por su cuenta.
 
 ---
 
