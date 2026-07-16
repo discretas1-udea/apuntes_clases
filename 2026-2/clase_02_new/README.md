@@ -1,4 +1,5 @@
 # 🛰️ El Incidente del Discovery One
+
 ### Axiomas de Verdad, Jerarquía de Operadores y Tablas de Verdad
 
 *Notas de clase — Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional*
