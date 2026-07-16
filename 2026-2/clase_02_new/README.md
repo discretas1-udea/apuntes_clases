@@ -6,94 +6,86 @@
 
 ---
 
-## Antes de subir a bordo
+## Contexto de apoyo
 
-Estas notas usan como hilo conductor la película **2001: Una Odisea del Espacio** (Stanley Kubrick, 1968). Si nunca la has visto, no hay ningún problema — aquí tienes lo esencial:
+A lo largo de este documento se emplea, como hilo narrativo de aplicación, un caso inspirado en la película **2001: Una Odisea del Espacio** (Stanley Kubrick, 1968). No es necesario haber visto la película para seguir las notas; a continuación se ofrece el contexto mínimo necesario.
 
-> 📖 **Para saber más**: [2001: A Space Odyssey — Wikipedia](https://es.wikipedia.org/wiki/2001:_A_Space_Odyssey_(pel%C3%ADcula)) · [HAL 9000 — Wikipedia](https://es.wikipedia.org/wiki/HAL_9000)
+> 📖 **Para ampliar**: [2001: A Space Odyssey — Wikipedia](https://es.wikipedia.org/wiki/2001:_A_Space_Odyssey_(pel%C3%ADcula)) · [HAL 9000 — Wikipedia](https://es.wikipedia.org/wiki/HAL_9000)
 > 🎬 **Video corto (2-3 min)**: [Tráiler oficial](https://www.youtube.com/watch?v=UgGCScAV7qU)
 
-**El dossier de la misión**, por si prefieres leerlo en vez de ver el tráiler:
+**Dossier de la misión**:
 
 | | |
 |---|---|
 | **Nave** | *Discovery One* |
 | **Destino** | Júpiter |
-| **Tripulación despierta** | David Bowman y Frank Poole (los otros tres viajan hibernados) |
-| **Sistema de a bordo** | **HAL 9000**, una computadora con capacidad de tomar sus propias decisiones sin consultar a los humanos — controla cada sistema vital de la nave |
+| **Tripulación despierta** | David Bowman y Frank Poole (los demás tripulantes viajan hibernados) |
+| **Sistema de a bordo** | **HAL 9000**, una computadora con capacidad de tomar decisiones sin consultar a los humanos, encargada de controlar los sistemas vitales de la nave |
 
-Algo importante: HAL no es un antagonista de caricatura. Es, ante todo, un **sistema que evalúa condiciones y decide**. Justo como cualquier programa que escribirás en tu carrera: recibe datos, aplica reglas, y produce un veredicto de **verdadero o falso** que dispara una acción. Esa es la conexión que nos interesa — no los efectos especiales, sino la lógica detrás de cada decisión que HAL toma.
+## El caso
 
-### El incidente
+Semanas después de partir, HAL reporta un fallo inminente en la unidad AE-35, el componente que mantiene la antena de la nave alineada con la Tierra. Bowman inspecciona la unidad físicamente y no encuentra ningún fallo. Cuando Tierra analiza el mismo problema con un HAL gemelo, tampoco encuentra ningún error — lo cual resulta extraño, dado que la serie 9000 tiene un historial operativo perfecto.
 
-Semanas después de partir, HAL reporta algo inquietante: un fallo inminente en la unidad AE-35, el componente que mantiene la antena de la nave alineada con la Tierra. Sin esa antena, el *Discovery One* queda incomunicado.
+Queda entonces una pregunta abierta: **¿HAL evaluó incorrectamente una condición lógica, o el error está en otra parte?**
 
-Bowman sale a inspeccionar la unidad. La revisa por completo. **No encuentra ningún fallo.**
-
-Cuando Tierra analiza los datos con un HAL gemelo, tampoco encuentra ningún error — y eso es extraño, porque la serie 9000 tiene un historial operativo perfecto: nunca antes se había equivocado.
-
-Bowman y Poole quedan con una sola pregunta, la misma que vas a aprender a responder en este documento:
-
-> **¿HAL evaluó mal una condición lógica, o el error está en otra parte?**
-
-No se puede responder por intuición ni por confianza ciega en la máquina. Hay que **auditar el razonamiento paso a paso**, exactamente como HAL —o cualquier procesador— lo hace: aplicando reglas fijas, sin excepciones, sin importar cuán extraño parezca el resultado.
-
-Eso es lo que vas a aprender a hacer en las siguientes tres partes:
-
-1. **Las leyes que ninguna máquina puede romper** — cómo se comporta cada operador lógico frente a lo verdadero y lo falso.
-2. **El orden de ejecución** — en qué secuencia exacta se evalúa una condición compuesta.
-3. **El diagnóstico completo** — cómo probar *todos* los escenarios posibles antes de emitir un veredicto que nadie pueda refutar.
-
-Al final, con las tres herramientas en mano, vas a poder cerrar el caso del AE-35 por ti mismo.
+Este documento presenta, en primer lugar, las herramientas teóricas necesarias para responder ese tipo de preguntas de forma rigurosa (Axiomas de Verdad, Jerarquía de Operadores y Tablas de Verdad). Tras cada bloque teórico se incluyen ejercicios resueltos de práctica general y, de manera independiente, un **Expediente** que retoma el caso del Discovery One y aplica lo aprendido para avanzar en su resolución, hasta llegar a un veredicto final.
 
 ---
 
-## Parte I — Las leyes que ninguna máquina puede romper
-### *(Axiomas de Verdad)*
+# Parte I — Axiomas de Verdad
 
-### 1.1 Repaso relámpago
+## 1.1 Elementos de formalización
 
-Recuerda tres cosas de la clase anterior: una **variable proposicional** ($p, q, r, ...$) representa un hecho con valor de verdad; los **operadores** ($\neg, \land, \lor, \oplus, \rightarrow, \leftrightarrow$) combinan esos hechos; y los **signos de agrupación** ($(), []$) evitan ambigüedad. Con eso, ya podemos entrar a la bitácora de HAL.
+Una **variable proposicional** ($p, q, r, \ldots$) representa un hecho con valor de verdad definido. Los **operadores** ($\neg, \land, \lor, \oplus, \rightarrow, \leftrightarrow$) permiten combinar variables para construir proposiciones compuestas. Los **signos de agrupación** ($(), []$) determinan el orden de evaluación cuando hay varios operadores en juego.
 
-### 1.2 El caso Jacob y Esaú
+Estos elementos deben combinarse siguiendo **reglas de formación**, que determinan si una expresión está bien formada. Una variable sola ($p$) es una expresión válida; un operador binario aplicado a dos expresiones válidas ($p \land q$) también lo es. En cambio, una secuencia como $p \land \;\_\_$ (un operador sin su segundo operando) no es una expresión válida, porque no existe una forma de asignarle un valor de verdad.
 
-Toda proposición es **simple** (un solo hecho) o **compuesta** (varios hechos unidos por conectores). Un ejemplo clásico ayuda a fijarlo:
+## 1.2 Proposiciones simples y compuestas
 
-- **Simple**: *"Jacob y Esaú son hijos de Isaac"* — a pesar del "y" en el nombre, es un único hecho verificable (una relación de parentesco), no dos proposiciones unidas.
-- **Compuesta**: *"Como Jacob le dio un plato de lentejas a su padre, obtuvo la primogenitura"* — aquí sí hay una estructura condicional real: $L \rightarrow S$, donde $L$: "Jacob le da el plato de lentejas a su padre" y $S$: "Jacob obtiene la primogenitura". Ambos hechos son ciertos en el relato, así que $L=V$, $S=V$, y $L\rightarrow S = V \rightarrow V = V$.
+Una proposición es **simple** (o atómica) cuando expresa un único hecho, sin conectores lógicos. Es **compuesta** (o molecular) cuando resulta de unir dos o más proposiciones simples mediante conectores.
 
-> 🎮 **Checkpoint 1** — En el registro de vuelo aparecen dos entradas:
-> 1. *"El sistema de soporte vital funciona correctamente."*
-> 2. *"La antena está desalineada y la señal se perderá."*
+**Ejemplo**: la afirmación *"Jacob y Esaú son hijos de Isaac"* es, pese a contener la palabra "y", una proposición **simple**: describe un único hecho verificable (una relación de parentesco), no dos proposiciones distintas. En cambio, *"Como Jacob le dio un plato de lentejas a su padre, obtuvo la primogenitura"* sí es **compuesta**: contiene una estructura condicional, $L \rightarrow S$, donde $L$ = "Jacob le da el plato de lentejas a su padre" y $S$ = "Jacob obtiene la primogenitura".
+
+> ✅ **Compruebe su comprensión**
 >
-> ¿Cuál es simple y cuál es compuesta?
->
-> <details><summary>Ver respuesta</summary>
-> La (1) es <b>simple</b>: un único hecho verificable. La (2) es <b>compuesta</b>: dos hechos unidos por el conector "y" (conjunción).
-> </details>
-
-### 1.3 El acertijo del mentiroso
-
-No toda oración declarativa es una proposición válida. Recuerda el **Axioma de Bivalencia**: todo debe poder clasificarse como $V$ o $F$, nunca ambas, nunca ninguna. La frase *"Esta oración es falsa"* rompe esa regla: si la llamamos $Q$ y suponemos $Q=V$, entonces lo que dice es cierto, así que $Q$ es falsa — contradicción. Si suponemos $Q=F$, entonces lo que dice es falso, así que $Q$ es verdadera — otra contradicción. $Q$ no puede tener un valor de verdad fijo: **no es una proposición**, es una paradoja.
-
-> 🎮 **Checkpoint 2** — HAL transmite: *"Este mensaje que estoy transmitiendo es falso."* ¿Por qué HAL jamás podría emitir este reporte y seguir operando de forma lógicamente consistente?
+> Clasifique las siguientes proposiciones como simples o compuestas:
+> 1. "El número 7 es primo."
+> 2. "Llueve y hace frío."
 >
 > <details><summary>Ver respuesta</summary>
-> Porque es una paradoja autorreferencial: no admite un valor de verdad fijo sin contradecirse. Un sistema de decisión —como el motor lógico de HAL— solo puede operar sobre proposiciones genuinas (con $V$ o $F$ bien definido); una paradoja rompería el axioma de bivalencia sobre el que se apoya cualquier evaluación posterior.
+> (1) Simple: un único hecho. (2) Compuesta: dos hechos unidos por el conector "y" (conjunción).
 > </details>
 
-### 1.4 Los seis operadores
+## 1.3 Principio de bivalencia y paradojas
 
-Cada operador tiene un comportamiento fijo, sin excepciones, resumido en su tabla de verdad:
+Toda proposición debe cumplir el **Axioma de Bivalencia**: puede clasificarse como verdadera ($V$) o falsa ($F$), pero nunca ambas a la vez ni ninguna de las dos.
 
-**Negación ($\neg p$)** — invierte el valor.
+No todo enunciado declarativo cumple esta condición. Considere la afirmación *"Esta oración es falsa"*. Si se denota como $Q$ y se supone $Q=V$, entonces lo que afirma es cierto, por lo que $Q$ debería ser falsa — contradicción. Si se supone $Q=F$, entonces lo que afirma es falso, por lo que $Q$ debería ser verdadera — otra contradicción. En consecuencia, $Q$ no admite un valor de verdad fijo: es una **paradoja**, no una proposición válida.
+
+Existe otro tipo de enunciado que tampoco es proposición: el **enunciado abierto**, aquel que contiene variables sin un valor fijo asignado. Por ejemplo, "$x + y = z$" no puede clasificarse como verdadera ni falsa mientras $x$, $y$ y $z$ no tengan valores concretos.
+
+> ✅ **Compruebe su comprensión**
+>
+> Explique por qué la oración "Esta afirmación no puede probarse ni refutarse" presenta el mismo tipo de problema que el ejemplo anterior.
+>
+> <details><summary>Ver respuesta</summary>
+> Al igual que la paradoja del mentiroso, es una afirmación autorreferencial: cualquier intento de asignarle un valor de verdad fijo entra en conflicto con lo que la propia afirmación establece, violando el axioma de bivalencia.
+> </details>
+
+## 1.4 Los seis operadores lógicos
+
+### Negación ($\neg p$)
+
+Invierte el valor de verdad de una proposición.
 
 | $p$ | $\neg p$ |
 |:---:|:---:|
 | V | F |
 | F | V |
 
-**Conjunción ($p \land q$)** — verdadera solo si ambas lo son.
+### Conjunción ($p \land q$)
+
+Verdadera únicamente cuando ambas proposiciones son verdaderas.
 
 | $p$ | $q$ | $p \land q$ |
 |:---:|:---:|:---:|
@@ -104,7 +96,9 @@ Cada operador tiene un comportamiento fijo, sin excepciones, resumido en su tabl
 
 > **Regla corta**: basta una falsedad para que toda la conjunción sea $F$.
 
-**Disyunción ($p \lor q$)** — verdadera si al menos una lo es.
+### Disyunción ($p \lor q$)
+
+Verdadera cuando al menos una de las proposiciones es verdadera.
 
 | $p$ | $q$ | $p \lor q$ |
 |:---:|:---:|:---:|
@@ -115,7 +109,9 @@ Cada operador tiene un comportamiento fijo, sin excepciones, resumido en su tabl
 
 > **Regla corta**: basta una verdad para que toda la disyunción sea $V$.
 
-**Disyunción exclusiva ($p \oplus q$)** — verdadera cuando difieren.
+### Disyunción exclusiva ($p \oplus q$)
+
+Verdadera cuando las dos proposiciones tienen valores diferentes.
 
 | $p$ | $q$ | $p \oplus q$ |
 |:---:|:---:|:---:|
@@ -124,17 +120,19 @@ Cada operador tiene un comportamiento fijo, sin excepciones, resumido en su tabl
 | F | V | V |
 | F | F | F |
 
-> **Regla corta**: valores *diferentes* dan $V$.
+> **Regla corta**: valores diferentes dan $V$.
 
-> 🎮 **Checkpoint 3** — En el registro de sensores: $o$ = "el nivel de oxígeno es normal" ($V$), $t$ = "la temperatura es estable" ($F$). Evalúa $\neg o \lor t$.
+> ✅ **Compruebe su comprensión**
+>
+> Sean $p=V$ y $q=F$. Evalúe $\neg p \lor q$ y $p \oplus \neg q$.
 >
 > <details><summary>Ver respuesta</summary>
-> $\neg o = F$, $t = F$, entonces $\neg o \lor t = F \lor F = F$.
+> $\neg p \lor q = F \lor F = F$. $\;\; p \oplus \neg q = V \oplus V = F$.
 > </details>
 
-### 1.5 El condicional a fondo
+### Condicional ($p \rightarrow q$)
 
-El condicional ($p \rightarrow q$) es el operador que más confunde, porque no coincide con la intuición cotidiana de "causa y efecto". Se lee **"Antecedente → Consecuente"**, y también se conoce por otros nombres según el contexto: **Hipótesis → Tesis** (en demostraciones), **Premisa → Conclusión** (en argumentos).
+Se lee "Antecedente $\rightarrow$ Consecuente". Según el contexto, también se conoce como Hipótesis $\rightarrow$ Tesis (en demostraciones) o Premisa $\rightarrow$ Conclusión (en argumentos).
 
 | $p$ | $q$ | $p \rightarrow q$ |
 |:---:|:---:|:---:|
@@ -143,11 +141,13 @@ El condicional ($p \rightarrow q$) es el operador que más confunde, porque no c
 | F | V | V |
 | F | F | V |
 
-> **Regla de oro**: un condicional solo es **falso** cuando el antecedente es verdadero y el consecuente es falso ($V \rightarrow F = F$). En cualquier otro caso, es verdadero — incluso cuando el antecedente es falso, sin importar qué tan absurdo parezca el consecuente.
+> **Regla de oro**: el condicional solo es falso cuando el antecedente es verdadero y el consecuente es falso ($V \rightarrow F = F$). En cualquier otro caso es verdadero, incluso cuando el antecedente es falso.
 
-**Caso de archivo**: consideremos la afirmación *"Si Uribe gana las elecciones, entonces habrá paz"* ($W \rightarrow P$). En un escenario donde efectivamente gana ($W=V$) pero no hay paz ($P=F$): $W \rightarrow P = V \rightarrow F = F$ — la implicación resulta falsa, porque se prometió algo que no se cumplió. En cambio, si no gana ($W=F$) y no hay paz ($P=F$): $W \rightarrow P = F \rightarrow F = V$ — la implicación es verdadera, porque nunca se activó la promesa (no se puede acusar de incumplimiento a algo que nunca prometió bajo esas condiciones).
+**Ejemplo**: considere la afirmación *"Si Uribe gana las elecciones, entonces habrá paz"* ($W \rightarrow P$). En un escenario donde efectivamente gana ($W=V$) pero no hay paz ($P=F$): $W \rightarrow P = V \rightarrow F = F$, la implicación resulta falsa, porque se prometió algo que no se cumplió. En un escenario donde no gana ($W=F$) y tampoco hay paz ($P=F$): $W \rightarrow P = F \rightarrow F = V$, la implicación es verdadera, porque nunca se activó la condición que la haría exigible.
 
-**El bicondicional ($p \leftrightarrow q$)** — verdadero cuando ambas comparten el mismo valor.
+### Bicondicional ($p \leftrightarrow q$)
+
+Verdadero cuando ambas proposiciones comparten el mismo valor de verdad.
 
 | $p$ | $q$ | $p \leftrightarrow q$ |
 |:---:|:---:|:---:|
@@ -156,28 +156,21 @@ El condicional ($p \rightarrow q$) es el operador que más confunde, porque no c
 | F | V | F |
 | F | F | V |
 
-> 🎮 **Checkpoint 4** — Regla de la nave: *"Si el sensor de oxígeno falla, entonces se activa la alarma"* ($f \rightarrow a$). Un informe indica que el sensor falló ($f=V$) pero la alarma **no** se activó ($a=F$). ¿La regla se cumplió?
+> ✅ **Compruebe su comprensión**
+>
+> Sean $p=F$, $q=V$, $r=F$. Evalúe $(p \rightarrow q) \leftrightarrow r$.
 >
 > <details><summary>Ver respuesta</summary>
-> $f \rightarrow a = V \rightarrow F = F$. No se cumplió: es justo el único caso en que un condicional es falso. El sistema violó su propia regla — algo anómalo ocurrió.
-> </details>
-
-> 🎮 **Checkpoint 5** — Dos lecturas de sensores: $c_1$ = "la puerta está sellada", $c_2$ = "la presión de cabina es estable". En la lectura A, $c_1=V, c_2=V$. En la lectura B, $c_1=F, c_2=V$. ¿En cuál lectura son *equivalentes* ($c_1 \leftrightarrow c_2$)?
->
-> <details><summary>Ver respuesta</summary>
-> Lectura A: $V \leftrightarrow V = V$ (equivalentes). Lectura B: $F \leftrightarrow V = F$ (no equivalentes).
+> $p \rightarrow q = F \rightarrow V = V$. $\;\; V \leftrightarrow r = V \leftrightarrow F = F$.
 > </details>
 
 ---
 
-## Parte II — El orden de ejecución
-### *(Jerarquía de Operadores)*
+# Parte II — Jerarquía de Operadores
 
-### 2.1 Por qué el orden importa
+## 2.1 Tabla de prioridad y asociatividad
 
-Una expresión como $p \lor q \land \neg r \rightarrow s$, sin paréntesis, podría leerse de varias formas distintas — y cada lectura da un resultado diferente. Si el motor de decisión de HAL evaluara sus condiciones en un orden ambiguo, dos ingenieros podrían interpretar el mismo reporte de forma opuesta. Por eso existe un **orden de precedencia fijo**, sin excepciones.
-
-### 2.2 Tabla de prioridad y asociatividad
+Cuando una expresión compuesta no tiene suficientes signos de agrupación, se aplica un orden de precedencia fijo para evitar ambigüedad.
 
 | Prioridad | Símbolo | Asociatividad | Ejemplo con paréntesis |
 |:---:|:---:|:---:|---|
@@ -188,27 +181,27 @@ Una expresión como $p \lor q \land \neg r \rightarrow s$, sin paréntesis, podr
 | 5 | $\rightarrow$ | Derecha | $p \rightarrow q \rightarrow r \mapsto p \rightarrow (q \rightarrow r)$ |
 | 6 (más baja) | $\leftrightarrow$ | Derecha | $p \leftrightarrow q \leftrightarrow r \mapsto p \leftrightarrow (q \leftrightarrow r)$ |
 
-> 🎮 **Checkpoint 6** — HAL transmitió esta condición sin paréntesis: $p \lor q \land \neg r \rightarrow s$. Agrega los paréntesis correctos según la jerarquía.
+## 2.2 Método de evaluación paso a paso
+
+Para evaluar una expresión con valores dados: (1) sustituya cada variable por su valor; (2) resuelva primero las negaciones; (3) continúe según el orden de precedencia de la tabla anterior, resolviendo de adentro hacia afuera cuando existan paréntesis anidados.
+
+**Ejemplo**: dados $p=V$, $q=F$, $r=V$, evalúe $\neg p \lor q \rightarrow r$.
+
+$\neg p = F$. $\;\; \neg p \lor q = F \lor F = F$. $\;\; F \rightarrow r = F \rightarrow V = V$. Resultado: $V$.
+
+> ✅ **Compruebe su comprensión**
+>
+> Agregue los paréntesis correspondientes, según la jerarquía, a la expresión $p \lor q \land \neg r \rightarrow s$.
 >
 > <details><summary>Ver respuesta</summary>
 > Primero $\neg r$; luego $\land$: $q \land (\neg r)$; luego $\lor$: $p \lor (q \land \neg r)$; luego $\rightarrow$: $\big(p \lor (q \land \neg r)\big) \rightarrow s$.
 > </details>
 
-### 2.3 Método de evaluación paso a paso
-
-Para evaluar una expresión con valores dados: (1) sustituye cada variable por su valor, (2) resuelve primero las negaciones, (3) sigue el orden de precedencia de la tabla, resolviendo de adentro hacia afuera cuando hay paréntesis anidados.
-
-> 🎮 **Checkpoint 7** — Dados $p=V$, $q=F$, $r=V$, evalúa $\neg p \lor q \rightarrow r$.
->
-> <details><summary>Ver respuesta</summary>
-> $\neg p = F$. $\neg p \lor q = F \lor F = F$. $F \rightarrow r = F \rightarrow V = V$. <b>Resultado: V.</b>
-> </details>
-
 ---
 
-## 📂 Bitácora resuelta I — Auditando los primeros reportes
+# 📘 Bitácora resuelta I
 
-Bowman empieza a revisar, uno por uno, los reportes que generó HAL antes del incidente.
+A continuación se presentan los ejercicios resueltos correspondientes a los temas de las Partes I y II.
 
 ### Bloque A — Traducción a lenguaje formal
 
@@ -277,30 +270,43 @@ Por jerarquía, la expresión se agrupa como $p \lor \big(q \land \neg(p \land q
 
 **(a)** Si $R \lor P$ y $Q \land P$ son falsas, y $P$ es falsa, ¿qué puede afirmarse de $Q$ y $R$?
 
-Como $P=F$: $R \lor P = R \lor F = R$, y esto debe ser falso, así que $\mathbf{R=F}$.
-$Q \land P = Q \land F$, que es **siempre falsa** sin importar el valor de $Q$ — esta condición no aporta información. **$Q$ queda indeterminada**: puede ser $V$ o $F$, el dato no permite decidirlo.
+Como $P=F$: $R \lor P = R \lor F = R$, y esto debe ser falso, así que $\mathbf{R=F}$. Por otro lado, $Q \land P = Q \land F$ es siempre falsa sin importar el valor de $Q$, de modo que esta condición no aporta información adicional. **El valor de $Q$ queda indeterminado.**
 
 **(b)** Si $Q \rightarrow R \rightarrow P \land Q \lor R$ es falsa, ¿qué puede afirmarse de $P, Q, R$?
 
-Por jerarquía ($\land$ antes que $\lor$, $\rightarrow$ asociando a la derecha), la expresión se agrupa como:
-$$Q \rightarrow \Big(R \rightarrow \big((P\land Q)\lor R\big)\Big)$$
+Por jerarquía, la expresión se agrupa como $Q \rightarrow \Big(R \rightarrow \big((P\land Q)\lor R\big)\Big)$.
 
-Para que sea falsa necesitaríamos $R=V$ (único caso en que un condicional con consecuente evaluado en $R\to\ldots$ falla) y, simultáneamente, $(P\land Q)\lor R = F$. Pero si $R=V$, entonces $(P\land Q)\lor R = (P\land Q)\lor V$, que es **siempre verdadera** por la regla de la disyunción (basta una verdad). Esto es una contradicción irresoluble.
+Para que sea falsa se requeriría $R=V$ y, simultáneamente, $(P\land Q)\lor R = F$. Pero si $R=V$, entonces $(P\land Q)\lor R$ es siempre verdadera (por la regla de la disyunción). Esto es una contradicción irresoluble.
 
-**Conclusión: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión** — la fórmula es una **tautología** (siempre verdadera). El reporte, tal como está planteado, nunca podría fallar; si en el registro de HAL apareciera marcado como falso, eso en sí mismo sería la señal de una inconsistencia grave.
+**Conclusión**: no existe ninguna combinación de $P, Q, R$ que haga falsa esta expresión — es una **tautología** (siempre verdadera).
 
 ---
 
-## Parte III — El diagnóstico completo
-### *(Tablas de Verdad)*
+# 📋 Expediente Discovery One — Fase 1
 
-### 3.1 Por qué un solo chequeo no basta
+*Se retoma el caso planteado al inicio del documento, aplicando los conceptos de las Partes I y II.*
 
-Tierra no le cree a HAL con una sola comprobación: exige revisar *todos* los escenarios posibles antes de aceptar (o descartar) que hay un fallo real. Evaluar una expresión con un único conjunto de valores es como probar el sistema de soporte vital en un solo escenario — no basta para certificarlo. Se necesita una herramienta que muestre **todas las combinaciones posibles a la vez**.
+**Datos disponibles**:
+- $H$: "HAL reporta un fallo en la unidad AE-35" (dato del caso: $H=V$, HAL efectivamente emitió este reporte).
+- $D$: "La inspección física detecta un fallo real en la unidad" (dato del caso: $D=F$, Bowman no encontró ningún fallo).
 
-### 3.2 Definición y tabla unificada
+**Pieza 1 — Negación**. La inspección de Bowman establece que $D$ es falsa. Aplicando negación, $\neg D$ = "la inspección no detecta ningún fallo" es verdadera ($\neg D = V$).
 
-Una **tabla de verdad** es una herramienta tabular que analiza todos los valores de verdad posibles de una expresión, mostrando su resultado en cada combinación. Es la alternativa sistemática a evaluar caso por caso.
+**Pieza 2 — Conjunción**. Suponga que el protocolo de la misión establece: *"El fallo se declara confirmado si HAL lo reporta y la inspección lo detecta"*, es decir $C = H \land D$. Evaluando: $C = V \land F = \mathbf{F}$. Según el protocolo, el fallo **no** queda confirmado.
+
+**Pieza 3 — Condicional**. Suponga además la regla de seguridad: *"Si el fallo es confirmado, entonces se notifica a Tierra con prioridad alta"*, es decir $C \rightarrow N$. Dado que $C = F$ (Pieza 2), el condicional $C \rightarrow N$ es verdadero sin importar el valor de $N$, por la regla de oro del condicional (antecedente falso implica condicional verdadero). La regla de seguridad no fue violada, independientemente de si la notificación se envió o no.
+
+**Pieza 4 — Expresión compuesta y jerarquía**. Se define la condición de anomalía como $A = H \land \neg D \land \neg C$ (HAL reporta el fallo, la inspección no lo detecta, y el fallo no está confirmado por protocolo). Evaluando con los datos disponibles: $A = V \land V \land \neg F = V \land V \land V = \mathbf{V}$.
+
+La condición de anomalía se cumple: existe una discrepancia lógica real entre lo que HAL reporta y lo que el resto del sistema puede corroborar. Esta discrepancia se examina de forma exhaustiva en la Fase 2, una vez introducidas las tablas de verdad.
+
+---
+
+# Parte III — Tablas de Verdad
+
+## 3.1 Definición y tabla unificada
+
+Una **tabla de verdad** es una herramienta tabular que muestra el resultado de una expresión lógica para todas las combinaciones posibles de valores de verdad de sus variables. Es la alternativa sistemática a evaluar caso por caso.
 
 | $p$ | $q$ | $\neg p$ | $p\land q$ | $p\lor q$ | $p\oplus q$ | $p\rightarrow q$ | $p\leftrightarrow q$ |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -309,22 +315,18 @@ Una **tabla de verdad** es una herramienta tabular que analiza todos los valores
 | F | V | V | F | V | V | V | F |
 | F | F | V | F | F | F | V | V |
 
-> 🎮 **Checkpoint 8** — Si tuvieras que auditar 4 sensores distintos de la nave a la vez, ¿cuántas filas necesitaría la tabla de verdad?
->
-> <details><summary>Ver respuesta</summary>
-> $2^4 = 16$ filas.
-> </details>
+## 3.2 Protocolo de 6 pasos
 
-### 3.3 Protocolo de 6 pasos
-
-1. **Identificar las variables proposicionales** — cuántas letras distintas componen la expresión.
-2. **Determinar el número de filas**: $N = 2^n$, con $n$ = número de variables.
+1. **Identificar las variables proposicionales**: cuántas letras distintas componen la expresión.
+2. **Determinar el número de filas**: $N = 2^n$, con $n$ igual al número de variables.
 3. **Construir las columnas de las variables**, distribuyendo los valores sistemáticamente.
-4. **Agregar columnas auxiliares** — descomponer la fórmula en sub-expresiones, sin resolver todo mentalmente.
+4. **Agregar columnas auxiliares**, descomponiendo la fórmula en sub-expresiones.
 5. **Evaluar la expresión paso a paso**, de izquierda a derecha, respetando la jerarquía de operadores.
 6. **Revisar y validar** la tabla completa.
 
-> 🎮 **Checkpoint 9** — Construye (guiado) la tabla de $p \leftrightarrow \neg q$.
+> ✅ **Compruebe su comprensión**
+>
+> Construya la tabla de verdad de $p \leftrightarrow \neg q$.
 >
 > <details><summary>Ver respuesta</summary>
 >
@@ -336,29 +338,29 @@ Una **tabla de verdad** es una herramienta tabular que analiza todos los valores
 > | F | F | V | F |
 > </details>
 
-### 3.4 Convención de la nave
+## 3.3 Convención binaria
 
-Para este curso, en las tablas de verdad usamos la notación binaria de ingeniería: **1 = Verdadero, 0 = Falso**. Es la misma convención que usarás al programar con `true`/`false` — un booleano no es más que el resultado final de una tabla de verdad reducida a un solo caso.
+En este curso, las tablas de verdad emplean la notación binaria de ingeniería: **1 = Verdadero, 0 = Falso**. Es la misma convención empleada en programación con los valores `true`/`false`.
 
-> 🎮 **Checkpoint 10** — Traduce esta fila a notación binaria: $p=V, q=F$, resultado $= V$.
->
-> <details><summary>Ver respuesta</summary>
-> $1, 0, 1$.
-> </details>
-
-### 3.5 Errores que delatan a un aprendiz
+## 3.4 Errores típicos
 
 - **Número de filas incorrecto**: siempre debe ser $2^n$.
 - **Patrón mal distribuido**: la primera variable alterna cada $2^{n-1}$ filas, la segunda cada $2^{n-2}$, y así sucesivamente.
-- **Alcance incorrecto de la negación**: $\neg(p\land q) \neq \neg p \land q$ — usa paréntesis para evitar confusión.
-- **Confundir $\lor$ con $\oplus$**: $\lor$ permite que ambas sean verdaderas; $\oplus$ no.
-- **Ignorar la jerarquía** al llenar columnas auxiliares.
+- **Alcance incorrecto de la negación**: $\neg(p\land q) \neq \neg p \land q$; use paréntesis para evitar confusión.
+- **Confundir $\lor$ con $\oplus$**: $\lor$ permite que ambas proposiciones sean verdaderas; $\oplus$ no.
+- **Ignorar la jerarquía** al completar columnas auxiliares.
+
+> ✅ **Compruebe su comprensión**
+>
+> ¿Cuántas filas requiere la tabla de verdad de una expresión con 4 variables distintas?
+>
+> <details><summary>Ver respuesta</summary>
+> $2^4 = 16$ filas.
+> </details>
 
 ---
 
-## 📂 Bitácora resuelta II — El diagnóstico final
-
-Con el protocolo completo, Bowman construye las tablas de los reportes más complejos.
+# 📘 Bitácora resuelta II
 
 **1. $P \land \neg P$**
 
@@ -393,7 +395,7 @@ Agrupación por jerarquía: $P \rightarrow \big((Q\land\neg Q) \rightarrow \neg 
 | 0 | 1 | 0 | 0 | 1 | 1 | **1** |
 | 0 | 0 | 1 | 0 | 1 | 1 | **1** |
 
-Siempre verdadero: otra **tautología** (nota cómo $Q\land\neg Q$ es siempre falso, y un antecedente falso vuelve el condicional automáticamente verdadero).
+Siempre verdadero: otra **tautología**.
 
 **4. $R \land S \rightarrow \neg T$**
 
@@ -412,9 +414,28 @@ Falso solo en un caso ($R=S=T=1$): es una **contingencia**.
 
 ---
 
-## Parte IV — Tu turno en la consola
+# 📋 Expediente Discovery One — Fase 2 (Veredicto)
 
-Ya tienes el protocolo completo. Resuelve estos casos por tu cuenta; las respuestas están al final para que te autoevalúes — intenta resolver primero sin mirarlas.
+*Se retoma la condición de anomalía definida en la Fase 1, aplicando el método sistemático de tablas de verdad.*
+
+En la Fase 1 se evaluó la condición de anomalía $A = H \land \neg D \land \neg C$ (con $C = H \land D$) únicamente para el caso observado ($H=V$, $D=F$). Siguiendo el protocolo de 6 pasos, se construye a continuación la tabla completa, considerando las 4 combinaciones posibles de $H$ y $D$:
+
+| $H$ | $D$ | $C = H\land D$ | $\neg D$ | $\neg C$ | $A = H\land\neg D\land\neg C$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| V | V | V | F | F | **F** |
+| V | F | F | V | V | **V** |
+| F | V | F | F | V | **F** |
+| F | F | F | V | V | **F** |
+
+La condición de anomalía resulta verdadera en exactamente **una** de las cuatro combinaciones posibles: $H=V, D=F$ — precisamente el escenario observado en el caso ($A$ es una **contingencia**, no una certeza garantizada de antemano ni un resultado imposible).
+
+**Veredicto**: el análisis exhaustivo confirma que la situación reportada por HAL corresponde, de manera lógicamente precisa, al único escenario de los cuatro posibles en que el sistema se encuentra en un estado de anomalía real. Esto no revela *por qué* ocurrió la discrepancia — esa parte de la historia se deja para quien desee ver la película completa —, pero sí demuestra, con las herramientas desarrolladas en este documento, que la discrepancia es real, específica, y no puede descartarse como una coincidencia o un error de apreciación.
+
+---
+
+# Parte IV — Ejercicios propuestos
+
+A continuación se presentan ejercicios de autoevaluación. Se recomienda resolverlos antes de consultar el solucionario al final del documento.
 
 ### Traducción a lenguaje formal
 
@@ -440,21 +461,15 @@ Ya tienes el protocolo completo. Resuelve estos casos por tu cuenta; las respues
 
 **E9.** Construya la tabla de $(p\land q) \lor (\neg p \land \neg q)$ y clasifique el resultado.
 
-### Casos de sistemas
+### Casos aplicados
 
-**E10.** "El acceso a la sala de máquinas se concede si el usuario es un oficial autorizado, o si hay una emergencia declarada y el usuario tiene entrenamiento básico." Formalice la condición de acceso ($o$: es oficial autorizado; $e$: hay emergencia declarada; $t$: tiene entrenamiento básico) y evalúe: el usuario **no** es oficial, **sí** hay emergencia declarada, **no** tiene entrenamiento básico. ¿Se concede el acceso?
+**E10.** "El acceso a la sala de máquinas se concede si el usuario es un oficial autorizado, o si hay una emergencia declarada y el usuario tiene entrenamiento básico." Formalice la condición de acceso ($o$: es oficial autorizado; $e$: hay emergencia declarada; $t$: tiene entrenamiento básico) y evalúe el caso: el usuario no es oficial, sí hay emergencia declarada, no tiene entrenamiento básico. ¿Se concede el acceso?
 
-**E11.** "El sistema entra en modo seguro si y solo si detecta una falla crítica y no está en modo de mantenimiento." Formalice la condición ($f$: detecta falla crítica; $m$: está en modo de mantenimiento) y evalúe: **sí** detecta falla crítica, **sí** está en modo de mantenimiento. ¿Se activa el modo seguro?
+**E11.** "El sistema entra en modo seguro si y solo si detecta una falla crítica y no está en modo de mantenimiento." Formalice la condición ($f$: detecta falla crítica; $m$: está en modo de mantenimiento) y evalúe el caso: sí detecta falla crítica, sí está en modo de mantenimiento. ¿Se activa el modo seguro?
 
 ---
 
-## Cierre — El veredicto sobre HAL
-
-Con las tres herramientas —axiomas de verdad, jerarquía de operadores y tablas de verdad— Bowman y Poole llegan a una primera certeza: si HAL predijo un fallo con total seguridad, y una revisión exhaustiva (la inspección física, más el análisis del HAL gemelo en Tierra) no encuentra ningún fallo, **ambos resultados no pueden ser correctos a la vez** bajo el funcionamiento normal del sistema. Como viste en el Checkpoint 10(b) de la Bitácora I, cuando una condición que "nunca debería fallar" aparece marcada como falsa, eso no es ruido: es la señal de que algo, en algún punto de la cadena de decisión, se rompió.
-
-El resto de la historia —qué decide HAL a partir de ahí, y cómo termina el viaje del *Discovery One*— te lo dejamos para que lo descubras viendo la película completa. Lo que sí te llevas de aquí es la habilidad que Bowman tuvo que usar: **auditar cualquier sistema de decisión, sin excepciones, sin atajos, sin confiar ciegamente en el veredicto que entrega.**
-
-### 🗒️ Ficha de bolsillo
+## Ficha de bolsillo
 
 | Operador | Símbolo | Regla de oro |
 |---|:---:|---|
@@ -475,7 +490,7 @@ El resto de la historia —qué decide HAL a partir de ahí, y cómo termina el 
 ## Solucionario — Parte IV
 
 <details>
-<summary><b>Presiona aquí para ver las respuestas</b></summary>
+<summary><b>Presione aquí para ver las respuestas</b></summary>
 
 **E1.** $t \rightarrow m$ (t: la temperatura supera los 90 grados; m: el motor se apaga)
 
