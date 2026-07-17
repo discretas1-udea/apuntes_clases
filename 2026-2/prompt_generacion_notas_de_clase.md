@@ -28,7 +28,7 @@ No generes el documento final directamente. Sigue el proceso de las secciones 2 
 Cuando te pase el/los PDF(s) y el documento de la clase anterior:
 
 1. Léelos completos y resúmeme de qué trata el material y qué contenido cubre (temas, ejercicios incluidos, si están resueltos o no, anotaciones manuscritas relevantes).
-2. Señala explícitamente si detectas **desfases de numeración** entre: la fecha/sesión real de dictado, el número de "Clase" en las diapositivas maestras (`assets/slides/claseN.pdf`), y el número de lección publicada en el sitio (`lessons/modX/claseN`). Esto ha ocurrido antes en el curso — no asumas que coinciden. Si tengo un archivo de cronograma (README/tabla de sesiones), pídemelo para resolver la correspondencia antes de seguir.
+2. Señala explícitamente si detectas **desfases de numeración** entre: la fecha/sesión real de dictado, el número de "Clase" en las diapositivas maestras (`assets/slides/claseN.pdf`), y el número de lección publicada en el sitio (`lessons/modX/claseN`). Esto ha ocurrido antes en el curso — no asumas que coinciden. Si tengo un archivo de cronograma (README/tabla de sesiones), pídemelo para resolver la correspondencia antes de seguir. **Como parte de este chequeo, confirma explícitamente si la primera sesión dictada del semestre fue únicamente presentación del curso y evaluación, sin contenido teórico.** Si es así, la primera clase "teórica" real corresponde a la *segunda* sesión dictada, y la numeración de las lecciones del sitio debe reflejar eso — no asumas que "sesión 1 dictada" equivale a "clase 1 teórica del sitio".
 3. Analiza el documento de la clase anterior en dos niveles:
    - **Formato y estilo**: extrae la estructura exacta (orden de secciones, sintaxis de alertas, convenciones de notación, tono, longitud relativa de cada bloque) y úsala como plantilla por defecto para el nuevo documento, en vez de reconstruir la estructura desde cero a partir de la sección 9. Si algo del documento anterior contradice una regla de este prompt, avísame — puede ser una mejora que aún no está aquí, o un desliz que no debe repetirse.
    - **Estado narrativo**: identifica el hilo de historia usado, en qué punto quedó (¿qué se resolvió?, ¿qué quedó abierto?, ¿qué "enlace hacia adelante" prometió hacia esta sesión?). Repórtame explícitamente qué continuidad encontraste antes de proponer nada nuevo.
@@ -36,6 +36,8 @@ Cuando te pase el/los PDF(s) y el documento de la clase anterior:
 ---
 
 ## 3. Fase 2 — Verificación contra el sitio del curso
+
+**Paso previo obligatorio**: antes de tratar cualquier página existente del sitio (`lessons/modX/claseN`) como contenido fijo que no debe duplicarse, pregúntame si esa página ya fue publicada y vista por los estudiantes, o si es borrador/insumo que yo mismo estoy usando para alimentar el contenido nuevo. Solo en el primer caso aplica la regla de "no duplicar, solo referenciar y complementar" (puntos 1-4 abajo) — en el segundo caso, el contenido puede reestructurarse, fusionarse o descartarse según convenga a la sesión que se está construyendo, previa confirmación explícita conmigo antes de tocar cada archivo afectado.
 
 Antes de asumir que hay que crear teoría nueva:
 
@@ -77,8 +79,8 @@ Antes de darme el documento como definitivo, revísalo tú mismo como lo haría 
 2. **Completitud y autocontención**: haz una pasada específica buscando **términos técnicos usados sin definir**. Si un ejercicio, solución o instrucción usa una palabra técnica (clasificaciones, nombres de propiedades, notación especial) que no se definió explícitamente antes de su primer uso en el documento, hay dos salidas válidas: (a) agregar la definición mínima necesaria en el punto teórico correspondiente, o (b) si el tema se decide omitir, **eliminar el término de manera consistente en todos los puntos donde aparezca** — enunciados, soluciones, resultados de aprendizaje, checkpoints, ficha de bolsillo — no solo donde se detectó inicialmente. Repórtame cuál de las dos rutas tomaste y por qué.
 3. **Diseño pedagógico**: ¿hay contrastes concretos que refuercen visualmente una regla (por ejemplo, la misma expresión con distinto paréntesis dando resultados distintos), o el documento solo *afirma* la regla sin mostrarla en acción? ¿Hay puntos de confusión previsibles del estudiante que el documento no anticipa?
 4. **Presentación y accesibilidad técnica**: no te fíes de una revisión visual — **haz una búsqueda de texto literal en todo el documento** (equivalente a `grep`) de cada patrón de LaTeX que rompe el renderizado en GitHub/KaTeX, en particular `\_` (barra invertida seguida de guion bajo). Este error ya se repitió más de una vez en el mismo documento porque una revisión visual encontró la primera ocurrencia pero no la segunda en otra sección — no vuelvas a repetirlo. Antes de darme el documento por terminado, confirma explícitamente en tu resumen que hiciste esta búsqueda de texto completa y cuántas coincidencias encontraste (idealmente cero). Si yo señalo un error de este tipo y te pido corregirlo, corrígelo y **de inmediato repite la búsqueda en todo el archivo** — no asumas que fue la única ocurrencia.
-5. **Fidelidad a la fuente**: confirma que cada ejercicio de la Bitácora coincide exactamente con el de mis diapositivas, y que los ejercicios propuestos son genuinamente nuevos.
-6. **Contexto del estudiante**: revisa contra los criterios de la sección 9.
+5. **Fidelidad a la fuente**: confirma que cada ejercicio de "Ejercicios resueltos" coincide exactamente con el de mis diapositivas, y que los ejercicios propuestos son genuinamente nuevos.
+6. **Contexto del estudiante**: revisa contra los criterios de la sección 10.
 
 Dame un resumen breve de hallazgos (si los hay) y de qué corregiste antes de considerar el documento listo. Si detectas algo que requiere una decisión mía (por ejemplo, si un tema completo debería incluirse o no), pregúntame en vez de decidir por tu cuenta.
 
@@ -91,7 +93,7 @@ Esta fase **no es automática** — actívala solo si te lo pido explícitamente
 1. Busca material comparable (notas de clase, apuntes, slides) del mismo tema en tres niveles: **local** (universidades colombianas de referencia: Universidad Nacional, Universidad de los Andes, EAFIT), **regional** (Latinoamérica) e **internacional** (MIT, Stanford, Berkeley u otras de prestigio equivalente en el tema puntual).
 2. Repórtame, por nivel, qué tan avanzado o rezagado está el documento actual frente a lo que encontraste — con evidencia concreta citada (URL, cita textual breve), no impresiones generales.
 3. Extrae "tips" puntuales y accionables de las fuentes internacionales (mecanismos pedagógicos concretos, no solo temas de contenido).
-4. Para cada tip, arma una tabla de **a favor / en contra** — el "en contra" debe ser real, no de relleno; considera especialmente si el tip: (a) introduce vocabulario técnico nuevo sin definir, (b) obliga a reabrir y reescribir contenido ya aprobado, (c) suma un tipo de recuadro nuevo a los cuatro ya establecidos (riesgo de "fatiga de cajitas"), o (d) asume una convención, sintaxis o notación que no verificaste contra el contexto real del estudiante (ver el nuevo punto de la Fase 3 sobre correquisitos).
+4. Para cada tip, arma una tabla de **a favor / en contra** — el "en contra" debe ser real, no de relleno; considera especialmente si el tip: (a) introduce vocabulario técnico nuevo sin definir, (b) obliga a reabrir y reescribir contenido ya aprobado, (c) suma un tipo de recuadro nuevo a los cuatro ya establecidos (riesgo de "fatiga de cajitas"), o (d) asume una convención, sintaxis o notación que no verificaste contra el contexto real del estudiante (ver el punto de la Fase 3 sobre correquisitos).
 5. Cierra con una tabla numérica Sí/No de aplicar cada tip, y espera mi decisión antes de tocar el archivo.
 6. Si un tip se aprueba pero depende de una convención externa (p. ej., sintaxis de pseudocódigo, notación de otro curso), **verifica esa convención con una búsqueda real** antes de escribirla — no la inventes ni asumas la más común en general si existe una fuente verificable específica del programa académico del estudiante.
 
@@ -110,8 +112,8 @@ Este fue el ajuste más importante del primer documento construido, y no se debe
 
 ### 8.2 Fidelidad a los ejercicios reales
 
-- Los ejercicios resueltos de la "Bitácora" (o sección equivalente) deben ser **exactamente** los que aparecen en mis diapositivas/PDFs, sin cambiar enunciados. Resuélvelos completos, paso a paso.
-- **Verifica cada cálculo a mano antes de escribirlo** — todas las tablas de verdad, evaluaciones y agrupaciones por jerarquía deben confirmarse operación por operación. Si un ejercicio resulta ser siempre verdadero, siempre falso, o verdadero solo en casos puntuales de forma no evidente, dilo explícitamente (usando el vocabulario técnico correspondiente solo si ya fue definido en el documento — ver 7.3) y úsalo como oportunidad pedagógica (autoexplicación).
+- Los ejercicios resueltos de "Ejercicios resueltos" (o sección equivalente) deben ser **exactamente** los que aparecen en mis diapositivas/PDFs, sin cambiar enunciados. Resuélvelos completos, paso a paso.
+- **Verifica cada cálculo a mano antes de escribirlo** — todas las tablas de verdad, evaluaciones y agrupaciones por jerarquía deben confirmarse operación por operación. Si un ejercicio resulta ser siempre verdadero, siempre falso, o verdadero solo en casos puntuales de forma no evidente, dilo explícitamente (usando el vocabulario técnico correspondiente solo si ya fue definido en el documento — ver 8.3) y úsalo como oportunidad pedagógica (autoexplicación).
 - Los ejercicios **propuestos** al final deben ser originales (no reciclados de mis diapositivas ni de ejercicios ya resueltos en el documento), pero del mismo nivel de dificultad y cubriendo todos los subtemas.
 
 ### 8.3 Terminología y notación
@@ -136,6 +138,12 @@ Este fue el ajuste más importante del primer documento construido, y no se debe
 - Nunca reproduzcas diálogos extensos, letras de canciones ni fragmentos largos de guion de la obra elegida como hilo narrativo. Los hechos de la trama (nombres, eventos públicos, contexto) se pueden narrar libremente; las citas textuales deben ser mínimas (menos de 15 palabras) y atribuidas.
 - Verifica con búsqueda web cualquier enlace externo (Wikipedia, video, tráiler) antes de incluirlo — nunca inventes URLs.
 
+### 8.5 Estilo de los ejercicios resueltos (worked examples)
+
+- Cada ejercicio resuelto debe seguir el patrón de **worked example con razonamiento explícito** (efecto de ejemplos resueltos, Sweller — Teoría de la Carga Cognitiva): antes de cada procedimiento, explica en 1-2 frases *por qué* ese es el paso que corresponde — no narres solo el resultado del cálculo. Usa encabezados cortos tipo "**Paso 1 — [acción]**", "**Paso 2 — [acción]**", etc., de modo que el estudiante pueda seguir el razonamiento como si el profesor se lo explicara en persona.
+- Los procedimientos matemáticos (evaluaciones, sustituciones, deducciones) se muestran en **bloques centrados, en varias líneas alineadas**, usando `$$\begin{aligned} ... \end{aligned}$$` — nunca como una cadena de igualdades en prosa corrida dentro del párrafo.
+- Cuando dos casos de un mismo ejercicio comparten exactamente el mismo razonamiento (por ejemplo, dos asignaciones de valores distintas para la misma expresión), no repitas la explicación completa del "por qué" en el segundo caso — solo el procedimiento, referenciando el razonamiento ya dado.
+
 ---
 
 ## 9. Estructura estándar del documento final
@@ -145,21 +153,21 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 1. **Título** temático + subtítulo con los temas matemáticos exactos cubiertos.
 2. **Contexto de apoyo**: breve introducción a la obra/caso narrativo (enlaces verificados), solo si el tema lo amerita y el estudiante puede no conocerlo.
 3. **El caso / planteamiento**: se presenta la pregunta o el conflicto que la historia resolverá al final, usando las herramientas matemáticas del documento.
-4. **Antes de comenzar — lo que ya debería saber**: prerrequisitos explícitos y autocontenidos (no solo un enlace — un recordatorio breve que funcione incluso sin conexión a internet), más un enlace opcional a la lección anterior del sitio para quien quiera profundizar.
+4. **Antes de comenzar — lo que ya debería saber**: prerrequisitos explícitos y autocontenidos (no solo un enlace — un recordatorio breve que funcione incluso sin conexión a internet), más un enlace opcional a la lección anterior del sitio para quien quiera profundizar. **Si esta sesión es, en realidad, la primera clase teórica del curso (ver punto 2 de la Fase 1), esta sección puede no aplicar tal cual — evalúa si corresponde eliminarla o reducirla a prerrequisitos genuinamente generales, no de lógica.**
 5. **Partes teóricas** (I, II, III... según los subtemas), cada una con:
    - Definiciones y reglas, con tablas cuando aplique.
    - Ejemplos genéricos (pueden incorporar ejemplos manuscritos de clase si el profesor lo autorizó, tratados como ejemplos neutros, no como narrativa).
    - Recuadros `[!WARNING]` de errores conceptuales frecuentes cuando el tema tenga confusiones típicas conocidas (no solo errores mecánicos de cálculo, sino errores de interpretación).
    - Autochequeos `[!TIP]` ("Compruebe su comprensión") cortos, con respuesta oculta revelable.
-6. **Bitácora resuelta** (una por cada bloque temático mayor): ejercicios reales de mis diapositivas, resueltos completos. Incluye ocasionalmente:
+6. **Ejercicios resueltos** (una sección por cada bloque temático mayor): ejercicios reales de mis diapositivas, resueltos completos, en formato worked example (ver 8.5). Incluye ocasionalmente:
    - Prompts de autoexplicación `[!TIP]` ("Antes de continuar, pregúntese...") con respuesta inmediata, no diferida.
    - Un "Problema guiado" `[!TIP]` (ejercicio parcialmente resuelto, el estudiante completa el último paso) como puente hacia los ejercicios propuestos.
-7. **Bloques narrativos de aplicación** ("Expediente" o el nombre que corresponda a la historia elegida), ubicados después de cada Bitácora, nunca intercalados con la teoría.
+7. **Bloques narrativos de aplicación** ("Expediente" o el nombre que corresponda a la historia elegida), ubicados después de cada sección de Ejercicios resueltos, nunca intercalados con la teoría.
 8. **Ejercicios propuestos** (8-12, distribuidos entre todos los subtemas), con solucionario de respuesta final al cierre del documento (no solución paso a paso).
-9. **Cierre narrativo / veredicto**: se resuelve el planteamiento inicial usando explícitamente las herramientas del documento. Incluye un enlace hacia adelante conectando con el tema de la siguiente sesión del curso.
+9. **Cierre narrativo / veredicto**: se resuelve el planteamiento inicial usando explícitamente las herramientas del documento. Incluye un enlace hacia adelante conectando con el tema de la siguiente sesión del curso. Si el documento no alcanza a resolver todo el planteamiento con las herramientas vistas hasta el momento, un **cierre/veredicto parcial** es válido y preferible a forzar una resolución completa — deja explícito qué falta y por qué, con el enlace hacia la sesión que lo completará.
 10. **Resultados de aprendizaje**: 4-6 líneas con verbos de Bloom, solo al final (no como "objetivos" repetidos al inicio).
 11. **Ficha de bolsillo**: síntesis ultra-compacta (tablas/reglas de oro) para repaso rápido antes de un parcial.
-12. **Referencias y material para profundizar**: libros de texto oficiales del curso (Rosen; Liben-Nowell) + 2-3 fuentes web de universidades reconocidas, verificadas por búsqueda, con nota aclarando que son opcionales.
+12. **Referencias y material para profundizar**: libros de texto oficiales del curso (Rosen; Liben-Nowell) + 2-3 fuentes web de universidades reconocidas, verificadas por búsqueda, con nota aclarando que son opcionales. Si el sitio de notas del curso está en construcción, inclúyelo como referencia propia con una nota explícita de que está incompleto y puede cambiar.
 13. **Solucionario** de los ejercicios propuestos, en bloque colapsable al final.
 
 ---
@@ -169,6 +177,7 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 - Muchos estudiantes son de regiones apartadas con acceso limitado a internet y a material bibliográfico físico: el documento debe ser suficiente por sí mismo; cualquier referencia externa es un complemento opcional, nunca un requisito.
 - Es un curso de **segundo semestre**: evita asumir conocimientos previos no cubiertos por el curso; explica cada símbolo la primera vez que aparece.
 - Muchos estudiantes trabajan y tienen dificultad para formar grupos de estudio o consultar dudas en tiempo real: por eso los prompts de autoexplicación y los checkpoints **siempre** revelan la respuesta de inmediato (nunca se dejan como pregunta abierta sin resolver), y el "problema guiado" existe específicamente para cubrir el salto entre "ejercicio resuelto" y "ejercicio independiente" sin necesitar a alguien más que confirme el razonamiento.
+- Muchos son futuros ingenieros que aplicarán este razonamiento formal en programación (ver correquisito con Lógica y Representación I, Anexo A): cuando sea pertinente, conecta el proceso de traducción de lenguaje natural a lógica con la habilidad de leer y comprender requisitos de software con precisión — no como una nota decorativa, sino como parte del argumento de por qué el rigor importa.
 
 ---
 
@@ -180,14 +189,18 @@ Usa esta plantilla como base, adaptando nombres de sección al tema y a la histo
 - [ ] ¿Se hizo una búsqueda de texto literal (no revisión visual) del patrón `\_` en todo el documento, y se confirmó cero coincidencias?
 - [ ] ¿Todos los recuadros de nota/advertencia/autoevaluación usan sintaxis de alertas de GitHub (`[!TIP]`, `[!WARNING]`, `[!NOTE]`, `[!IMPORTANT]`), no emojis manuales?
 - [ ] ¿Los ejercicios resueltos son exactamente los de las diapositivas del profesor?
+- [ ] ¿Los ejercicios resueltos siguen el formato worked example (razonamiento explícito por "Paso N", procedimientos en bloques centrados `$$\begin{aligned}...\end{aligned}$$`)?
+- [ ] ¿La sección de ejercicios resueltos se llama "Ejercicios resueltos" (o un nombre justificado explícitamente por la narrativa), no "Bitácora" u otro nombre temático sin justificar?
 - [ ] ¿Los ejercicios propuestos son originales?
 - [ ] ¿Todo el documento está en registro formal (usted)?
 - [ ] ¿Se verificaron por búsqueda web los enlaces externos incluidos?
 - [ ] ¿Se compararon los símbolos y nombres contra el sitio del curso para evitar inconsistencias terminológicas?
+- [ ] ¿Se confirmó si las páginas ya existentes del sitio del curso son contenido publicado y visto por estudiantes, o borrador/insumo editable, antes de tratarlas como no duplicables?
+- [ ] ¿Se verificó si la primera sesión dictada del semestre fue solo presentación/evaluación sin contenido teórico, para ubicar correctamente cuál es la primera clase "teórica" real?
 - [ ] ¿Se preguntó por correquisitos/prerrequisitos del curso y, si existen, se verificó la notación real de esa materia antes de usarla en algún ejemplo o conexión?
 - [ ] Si hubo documento de clase anterior: ¿se identificó su estado narrativo y se continuó (o se justificó explícitamente por qué no) en vez de empezar una historia nueva sin más?
 - [ ] Si hubo documento de clase anterior: ¿el formato y la estructura del nuevo documento son consistentes con el anterior, salvo mejoras explícitamente acordadas?
-- [ ] ¿Incluye prerrequisitos, errores conceptuales, problema guiado, resultados de aprendizaje, ficha de bolsillo y referencias?
+- [ ] ¿Incluye prerrequisitos (o su versión reducida si es la primera clase teórica), errores conceptuales, problema guiado, resultados de aprendizaje, ficha de bolsillo y referencias?
 - [ ] ¿Se presentó el bosquejo y se esperó aprobación antes de generar el documento completo?
 - [ ] ¿Se hizo la autorrevisión de la Fase 5 y se reportaron los hallazgos antes de entregar el documento como definitivo?
 - [ ] Si se hizo benchmark (Fase 6): ¿se presentó la tabla a favor/en contra y la tabla Sí/No, y se esperó decisión antes de aplicar cualquier tip?
