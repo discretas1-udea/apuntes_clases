@@ -60,7 +60,18 @@ Espera mi aprobación antes de escribir el contenido final de cada ítem.
 
 ## 5. Fase 4 — Autorrevisión antes de entregar
 
-Aplica la rúbrica de la Sección 6 del prompt genérico, más estas verificaciones propias del curso:
+Aplica esta rúbrica de dos dimensiones antes de entregar cualquier bloque de autoevaluación, más las verificaciones propias del curso que siguen después:
+
+### Dimensión A — Fidelidad temática
+- **Trazabilidad**: cada ítem debe poder señalarse a una sección exacta de `claseN.md` (por ejemplo, "Ítem 3 → 2.4 Condicional"). Si no puedes señalar el origen, el ítem no se incluye.
+- **Cobertura**: antes de generar, lista todas las subsecciones teóricas de `claseN.md` y confirma que cada una tiene al menos un ítem en alguna serie — no concentres todo en 2-3 temas.
+- **No-invención**: prohibido introducir terminología, notación o casos que no aparezcan en `claseN.md`.
+
+### Dimensión B — Indagación auditable
+- Cada ítem de las Series (no de los "Ejercicios resueltos" de la clase, que ya están resueltos) debe seguir el formato de intento-antes-de-revelar de la Sección 6.1 — verifica que ningún ítem del bloque muestre la respuesta sin ese paso intermedio.
+- Confirma que el "Cierre — Autodiagnóstico" (Sección 6, punto 7) esté diseñado para poder alimentarse de los niveles de confianza declarados ítem por ítem, no solo de un conteo genérico de aciertos.
+
+Verificaciones propias del curso, adicionales a lo anterior:
 
 1. **Terminología y notación** exactamente iguales a las de `claseN.md` — mismos nombres de operadores, mismas convenciones (por ejemplo, notación binaria 1/0 en tablas de verdad si esa clase la usa).
 2. **Búsqueda de texto literal del patrón `\_`** en todo el archivo nuevo, igual que en el prompt de notas — reporta cuántas coincidencias encontraste (idealmente cero).
@@ -72,6 +83,27 @@ Aplica la rúbrica de la Sección 6 del prompt genérico, más estas verificacio
 ---
 
 ## 6. Estructura del archivo `claseN_autoevaluacion.md`
+
+### 6.1 Formato obligatorio de cada ítem (Series 1 a 3 y Reto Final)
+
+Cada ítem, sin excepción, sigue esta estructura de cuatro partes — el objetivo es que "revelar la respuesta" nunca sea el primer clic posible, sino el segundo:
+
+```
+**Ítem N**
+[enunciado]
+
+> ✍️ *Antes de ver la respuesta: escriba su procedimiento o resultado aquí, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta</summary>[solución completa]</details>
+```
+
+No omitas el bloque de intento y confianza "para no alargar el documento" — es el mecanismo central de esta rúbrica, no un adorno. Si el bloque de autoevaluación se va a usar también fuera de markdown (por ejemplo, un formulario), esta misma estructura de tres campos (intento, confianza, respuesta) debe conservarse para que los datos sean comparables.
+
+Con esto en cuenta, el archivo completo se estructura así:
 
 1. **Encabezado**: título con el tema de `claseN.md`, y una línea con enlace de vuelta al documento de la clase.
 2. **Calentamiento**
@@ -96,6 +128,10 @@ Aplica la rúbrica de la Sección 6 del prompt genérico, más estas verificacio
 - [ ] ¿Terminología y notación coinciden exactamente con `claseN.md`?
 - [ ] ¿Se presentó el bosquejo (Fase 3) y se esperó aprobación antes de escribir los ítems?
 - [ ] ¿El documento cierra con el autodiagnóstico y el solucionario colapsable, no intercalado?
+- [ ] ¿Cada ítem de las series es trazable a una subsección exacta de `claseN.md`?
+- [ ] ¿Todas las subsecciones teóricas de `claseN.md` están cubiertas por al menos un ítem?
+- [ ] ¿Todos los ítems siguen el formato de intento + confianza + respuesta (Sección 6.1), sin excepción?
+- [ ] ¿El Cierre — Autodiagnóstico está diseñado para agregar los niveles de confianza declarados, no solo un conteo de aciertos?
 
 ---
 
