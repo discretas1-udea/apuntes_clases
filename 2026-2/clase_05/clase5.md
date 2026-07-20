@@ -99,15 +99,15 @@ graph BT
 En nuestro caso, los **axiomas** son un conjunto de leyes lógicas que ya sabemos verdaderas (varias de ellas las demostramos con tabla de verdad en la sesión anterior). Una **demostración axiomática** consiste en partir de una expresión y transformarla, paso a paso, aplicando siempre una de estas leyes, hasta llegar a la expresión que queremos:
 
 $$
-\begin{aligned}
-A &\equiv A_1 \\
-  &\equiv A_2 \\
-  &\quad\vdots \\
-  &\equiv A_n \\
-  &\equiv B \\
+\begin{array}{rl}
+A & \equiv A_1 \\
+  & \equiv A_2 \\
+  & \quad\vdots \\
+  & \equiv A_n \\
+  & \equiv B \\
 \hline
-A &\equiv B
-\end{aligned}
+A & \equiv B
+\end{array}
 $$
 
 Cada $\equiv$ de la cadena debe estar justificado por una ley concreta — nunca por intuición.
