@@ -1,3 +1,5 @@
+![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
+
 # 🕵️ El Caso del Broche de Zafiro — La Ecuación de Holmes
 ### Enfoque Axiomático: Leyes del Álgebra de Proposiciones y Demostraciones por Cadena de Equivalencias
 

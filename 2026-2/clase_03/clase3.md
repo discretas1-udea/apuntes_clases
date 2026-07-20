@@ -1,3 +1,5 @@
+![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
+
 # 🛰️ El Incidente del Discovery One — El Veredicto
 ### Tablas de Verdad
 
