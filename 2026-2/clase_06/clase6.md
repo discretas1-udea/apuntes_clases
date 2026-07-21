@@ -317,58 +317,17 @@ Piénselo como el enfoque axiomático de la Clase 5, pero un nivel más arriba: 
 
 Estas son las reglas que usaremos. En cada fracción, lo que está **arriba** de la barra son las premisas (verdades que ya posee) y lo que está **debajo** es la conclusión (lo que tiene permiso de escribir).
 
-<table>
-  <thead>
-    <tr><th>Nombre</th><th>Regla</th><th>Idea intuitiva</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Modus Ponens</strong></td>
-      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ p \end{array}}{q}$$</td>
-      <td>Si se da la causa, ocurre el efecto.</td>
-    </tr>
-    <tr>
-      <td><strong>Modus Tollens</strong></td>
-      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ \neg q \end{array}}{\neg p}$$</td>
-      <td>Si no veo el efecto, la causa no ocurrió.</td>
-    </tr>
-    <tr>
-      <td><strong>Silogismo hipotético</strong> (Transitividad)</td>
-      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ q\rightarrow r \end{array}}{p\rightarrow r}$$</td>
-      <td>Si <em>p</em> lleva a <em>q</em> y <em>q</em> lleva a <em>r</em>, entonces <em>p</em> lleva a <em>r</em>.</td>
-    </tr>
-    <tr>
-      <td><strong>Silogismo disyuntivo</strong> (Eliminación)</td>
-      <td>$$\dfrac{\begin{array}{c} p\lor q \\ \neg p \end{array}}{q}$$</td>
-      <td>Si tengo dos opciones y descarto una, queda la otra.</td>
-    </tr>
-    <tr>
-      <td><strong>Simplificación</strong></td>
-      <td>$$\dfrac{p\land q}{p}$$</td>
-      <td>Si tengo el todo, tengo cada parte.</td>
-    </tr>
-    <tr>
-      <td><strong>Adición</strong></td>
-      <td>$$\dfrac{p}{p\lor q}$$</td>
-      <td>Si algo es verdad, "eso o cualquier cosa" también.</td>
-    </tr>
-    <tr>
-      <td><strong>Conjunción</strong></td>
-      <td>$$\dfrac{\begin{array}{c} p \\ q \end{array}}{p\land q}$$</td>
-      <td>Puedo unir dos verdades independientes.</td>
-    </tr>
-    <tr>
-      <td><strong>Prueba por casos</strong></td>
-      <td>$$\dfrac{\begin{array}{c} p\lor q \\ p\rightarrow r \\ q\rightarrow r \end{array}}{r}$$</td>
-      <td>Si mis dos opciones llevan al mismo sitio, ese sitio es seguro.</td>
-    </tr>
-    <tr>
-      <td><strong>Resolución</strong></td>
-      <td>$$\dfrac{\begin{array}{c} \neg p\lor r \\ p\lor q \end{array}}{q\lor r}$$</td>
-      <td>Se cancela la variable que aparece afirmada y negada; queda el resto.</td>
-    </tr>
-  </tbody>
-</table>
+| Nombre | Regla | Idea intuitiva |
+| :--- | :---: | :--- |
+| **Modus Ponens** | $\dfrac{{p\rightarrow q}\atop{p}}{q}$ | Si se da la causa, ocurre el efecto. |
+| **Modus Tollens** | $\dfrac{{p\rightarrow q}\atop{\neg q}}{\neg p}$ | Si no veo el efecto, la causa no ocurrió. |
+| **Silogismo hipotético** (Transitividad) | $\dfrac{{p\rightarrow q}\atop{q\rightarrow r}}{p\rightarrow r}$ | Si $p$ lleva a $q$ y $q$ lleva a $r$, entonces $p$ lleva a $r$. |
+| **Silogismo disyuntivo** (Eliminación) | $\dfrac{{p\lor q}\atop{\neg p}}{q}$ | Si tengo dos opciones y descarto una, queda la otra. |
+| **Simplificación** | $\dfrac{p\land q}{p}$ | Si tengo el todo, tengo cada parte. |
+| **Adición** | $\dfrac{p}{p\lor q}$ | Si algo es verdad, "eso o cualquier cosa" también. |
+| **Conjunción** | $\dfrac{{p}\atop{q}}{p\land q}$ | Puedo unir dos verdades independientes. |
+| **Prueba por casos** | $\dfrac{{p\lor q}\atop{{p\rightarrow r}\atop{q\rightarrow r}}}{r}$ | Si mis dos opciones llevan al mismo sitio, ese sitio es seguro. |
+| **Resolución** | $\dfrac{{\neg p\lor r}\atop{p\lor q}}{q\lor r}$ | Se cancela la variable que aparece afirmada y negada; queda el resto. |
 
 
 > [!WARNING]
