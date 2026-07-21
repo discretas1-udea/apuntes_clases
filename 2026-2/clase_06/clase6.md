@@ -69,7 +69,16 @@ Al final de esta sesión volveremos a esta reunión y cerraremos el caso — no 
 
 En lógica proposicional, un **argumento** es una secuencia de proposiciones. Todas, excepto la última, se llaman **premisas**; la última se llama **conclusión**. Lo escribimos poniendo las premisas sobre una línea y la conclusión debajo:
 
-$$\dfrac{P_1 \quad P_2 \quad \cdots \quad P_n}{Q}$$
+$$
+\begin{array}{c}
+P_1 \\
+P_2 \\
+\vdots \\
+P_n \\
+\hline
+\therefore\ Q
+\end{array}
+$$
 
 Las premisas $P_1,P_2,\dots,P_n$ son los hechos o suposiciones de partida; la conclusión $Q$ es lo que se pretende deducir de ellos. La barra horizontal se lee *"por lo tanto"* ($\therefore$).
 
@@ -87,9 +96,21 @@ En el lenguaje cotidiano usamos *verdadero* y *válido* casi como sinónimos. En
 
 El punto sutil es que la validez **no exige que las premisas sean verdaderas en la realidad**. Exige que la estructura sea correcta. Compare estos dos argumentos, que tienen **la misma forma**:
 
-$$\dfrac{\text{Si llueve, la calle se moja.} \quad \text{Llueve.}}{\text{La calle se moja.}}$$
-
-$$\dfrac{\text{Si la Luna es de queso, hay ratones astronautas.} \quad \text{La Luna es de queso.}}{\text{Hay ratones astronautas.}}$$
+$$
+\begin{array}{l}
+\text{Si llueve, la calle se moja.} \\
+\text{Llueve.} \\
+\hline
+\therefore\ \text{La calle se moja.}
+\end{array}
+\qquad\qquad
+\begin{array}{l}
+\text{Si la Luna es de queso, hay ratones astronautas.} \\
+\text{La Luna es de queso.} \\
+\hline
+\therefore\ \text{Hay ratones astronautas.}
+\end{array}
+$$
 
 Ambos tienen exactamente la forma $p\rightarrow q$; $p$; por lo tanto $q$, y ambos son **válidos**. En el segundo, las premisas son un disparate — pero eso no lo hace inválido. La validez solo garantiza que *si aceptáramos* las premisas, la conclusión sería inevitable.
 
@@ -128,7 +149,14 @@ Regla práctica: la conclusión suele ir después de un conector del tipo *"por 
 
 El ejemplo más antiguo y conocido de argumento válido:
 
-$$\dfrac{\text{Si Sócrates es hombre, entonces es mortal.} \quad \text{Sócrates es hombre.}}{\text{Sócrates es mortal.}}$$
+$$
+\begin{array}{l}
+\text{Si Sócrates es hombre, entonces es mortal.} \\
+\text{Sócrates es hombre.} \\
+\hline
+\therefore\ \text{Sócrates es mortal.}
+\end{array}
+$$
 
 Definiendo $p$: *"Sócrates es un hombre"* y $q$: *"Sócrates es mortal"*, la forma es:
 
@@ -166,7 +194,14 @@ Un solo renglón crítico con conclusión falsa basta para tumbar el argumento: 
 
 Determine la validez del siguiente argumento:
 
-$$\dfrac{p\rightarrow(q\lor\neg r) \quad q\rightarrow(p\land r)}{p\rightarrow r}$$
+$$
+\begin{array}{c}
+p\rightarrow(q\lor\neg r) \\
+q\rightarrow(p\land r) \\
+\hline
+\therefore\ p\rightarrow r
+\end{array}
+$$
 
 **Premisas:** $p\rightarrow(q\lor\neg r)$ y $q\rightarrow(p\land r)$. **Conclusión:** $p\rightarrow r$.
 
@@ -190,7 +225,14 @@ En la fila $p=1,\ q=0,\ r=0$ las dos premisas valen 1 (es un renglón crítico) 
 
 Un error de razonamiento muy frecuente —y con nombre propio— es **afirmar el consecuente**. Tiene esta forma:
 
-$$\dfrac{p\rightarrow q \quad q}{p}$$
+$$
+\begin{array}{c}
+p\rightarrow q \\
+q \\
+\hline
+\therefore\ p
+\end{array}
+$$
 
 Parece razonable ("si estudio, apruebo; aprobé; luego estudié"), pero es **no válida**. La tabla lo revela:
 
@@ -237,11 +279,16 @@ $$\bigl[\,p\land(p\rightarrow q)\land(s\lor r)\land(r\rightarrow\neg q)\,\bigr]\
 
 En forma estándar, con sus cuatro premisas:
 
-- $p$ &nbsp; (a)
-- $p\rightarrow q$ &nbsp; (b)
-- $s\lor r$ &nbsp; (c)
-- $r\rightarrow\neg q$ &nbsp; (d)
-- **Conclusión:** $\therefore\ s\lor t$
+$$
+\begin{array}{rl}
+p & \text{(a)} \\
+p\rightarrow q & \text{(b)} \\
+s\lor r & \text{(c)} \\
+r\rightarrow\neg q & \text{(d)} \\
+\hline
+\therefore\ s\lor t &
+\end{array}
+$$
 
 ## Método 1 — Tabla de verdad (fuerza bruta)
 
@@ -298,7 +345,14 @@ Un **silogismo** es un argumento que consiste en **dos premisas y una conclusió
 
 La forma de silogismo más famosa es el **Modus Ponens**, el mismo del argumento de Sócrates:
 
-$$\dfrac{\text{Si tiene contraseña vigente, puede iniciar sesión.} \quad \text{Tiene contraseña vigente.}}{\text{Puede iniciar sesión.}}$$
+$$
+\begin{array}{l}
+\text{Si tiene contraseña vigente, puede iniciar sesión.} \\
+\text{Tiene contraseña vigente.} \\
+\hline
+\therefore\ \text{Puede iniciar sesión.}
+\end{array}
+$$
 
 Simbólicamente, con $p$: *"tiene contraseña vigente"* y $q$: *"puede iniciar sesión"*:
 
@@ -358,14 +412,19 @@ Los tres ejercicios siguientes se resuelven íntegramente con reglas de inferenc
 
 Demuestre que el siguiente argumento es válido:
 
-- $p\rightarrow q$ &nbsp; (a)
-- $r\lor s$ &nbsp; (b)
-- $\neg s\rightarrow\neg t$ &nbsp; (c)
-- $\neg q\lor s$ &nbsp; (d)
-- $\neg s$ &nbsp; (e)
-- $(\neg p\land r)\rightarrow u$ &nbsp; (f)
-- $w\lor t$ &nbsp; (g)
-- **Conclusión:** $\therefore\ u\land r$
+$$
+\begin{array}{rl}
+p\rightarrow q & \text{(a)} \\
+r\lor s & \text{(b)} \\
+\neg s\rightarrow\neg t & \text{(c)} \\
+\neg q\lor s & \text{(d)} \\
+\neg s & \text{(e)} \\
+(\neg p\land r)\rightarrow u & \text{(f)} \\
+w\lor t & \text{(g)} \\
+\hline
+\therefore\ u\land r &
+\end{array}
+$$
 
 **Estrategia.** La meta es $u\land r$. Para $u$ necesitamos disparar la premisa (f), cuyo antecedente es $\neg p\land r$ — es decir, hay que conseguir $\neg p$ y $r$ por separado. Tenemos $\neg s$ (e) como palanca inicial: combinada con (d) da $\neg q$, y de ahí con (a) sale $\neg p$; combinada con (b) da $r$.
 
@@ -402,12 +461,17 @@ Por lo tanto se obtiene $u\land r$ — **el argumento es válido.**
 
 Demuestre que el siguiente argumento es válido:
 
-- $(\neg p\lor q)\rightarrow r$ &nbsp; (a)
-- $s\lor\neg q$ &nbsp; (b)
-- $\neg t$ &nbsp; (c)
-- $p\rightarrow t$ &nbsp; (d)
-- $(\neg p\land r)\rightarrow\neg s$ &nbsp; (e)
-- **Conclusión:** $\therefore\ \neg q$
+$$
+\begin{array}{rl}
+(\neg p\lor q)\rightarrow r & \text{(a)} \\
+s\lor\neg q & \text{(b)} \\
+\neg t & \text{(c)} \\
+p\rightarrow t & \text{(d)} \\
+(\neg p\land r)\rightarrow\neg s & \text{(e)} \\
+\hline
+\therefore\ \neg q &
+\end{array}
+$$
 
 **Estrategia.** La meta es $\neg q$. Si logramos $\neg s$, entonces con (b) por Eliminación sale $\neg q$. Para $\neg s$ hay que disparar (e), cuyo antecedente es $\neg p\land r$. Y $\neg p$ sale de (d) con $\neg t$; con $\neg p$ conseguimos también $r$ a través de (a).
 
@@ -454,11 +518,16 @@ Verifique su validez mediante una prueba formal.
 
 **Paso 3 — Traducir al lenguaje formal.**
 
-- $\neg L\rightarrow C$ &nbsp; (a)
-- $C\rightarrow\neg D$ &nbsp; (b)
-- $D\lor I$ &nbsp; (c)
-- $\neg I$ &nbsp; (d)
-- **Conclusión:** $\therefore\ L$
+$$
+\begin{array}{rl}
+\neg L\rightarrow C & \text{(a)} \\
+C\rightarrow\neg D & \text{(b)} \\
+D\lor I & \text{(c)} \\
+\neg I & \text{(d)} \\
+\hline
+\therefore\ L &
+\end{array}
+$$
 
 **Paso 4 — Estrategia y demostración.** La meta es $L$. De (c) y (d) sale $D$; con (b) y $D$, por Modus Tollens, sale $\neg C$; con (a) y $\neg C$, otra vez Modus Tollens, sale $\neg(\neg L)$; y Doble Negación cierra en $L$.
 
@@ -502,11 +571,15 @@ Primero traducimos cada observación a lenguaje formal. Definimos las proposicio
 
 Los cuatro testimonios, más un hecho técnico que el equipo da por sabido (*"un fallo del servicio de pagos siempre se registra como un timeout de pagos"*, es decir $F_p\rightarrow T$), quedan así:
 
-- $E\rightarrow T$ &nbsp; — Ana (a)
-- $\neg T$ &nbsp; — Beto (b)
-- $F_p\lor F_c$ &nbsp; — Carla (c)
-- $F_c\rightarrow R$ &nbsp; — Diego (d)
-- $F_p\rightarrow T$ &nbsp; — hecho técnico (e)
+$$
+\begin{array}{rl}
+E\rightarrow T & \text{(a) — Ana} \\
+\neg T & \text{(b) — Beto} \\
+F_p\lor F_c & \text{(c) — Carla} \\
+F_c\rightarrow R & \text{(d) — Diego} \\
+F_p\rightarrow T & \text{(e) — hecho técnico}
+\end{array}
+$$
 
 La meta no la fija nadie de antemano: es *descubrir* qué falló. Vamos a dejar que las reglas nos lleven.
 
