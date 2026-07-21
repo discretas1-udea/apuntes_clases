@@ -67,20 +67,11 @@ Al final de esta sesión volveremos a esta reunión y cerraremos el caso — no 
 
 ## I.1 Argumentos: premisas y conclusión
 
-En lógica proposicional, un **argumento** es una secuencia de proposiciones. Todas, excepto la última, se llaman **premisas**; la última se llama **conclusión**.
+En lógica proposicional, un **argumento** es una secuencia de proposiciones. Todas, excepto la última, se llaman **premisas**; la última se llama **conclusión**. Lo escribimos poniendo las premisas sobre una línea y la conclusión debajo:
 
-$$
-\begin{array}{l}
-P_1 \\\\
-P_2 \\\\
-\vdots \\\\
-P_n \\\\
-\hline
-\therefore\ Q
-\end{array}
-$$
+$$\dfrac{P_1 \quad P_2 \quad \cdots \quad P_n}{Q}$$
 
-Las premisas $P_1,P_2,\dots,P_n$ son los hechos o suposiciones de partida; la conclusión $Q$ es lo que se pretende deducir de ellos. El símbolo $\therefore$ se lee *"por lo tanto"*.
+Las premisas $P_1,P_2,\dots,P_n$ son los hechos o suposiciones de partida; la conclusión $Q$ es lo que se pretende deducir de ellos. La barra horizontal se lee *"por lo tanto"* ($\therefore$).
 
 La **forma** del argumento es su estructura lógica: el esqueleto que conecta las premisas con la conclusión, independientemente de sobre qué traten. Como veremos enseguida, la validez es una propiedad de esa forma, no del contenido.
 
@@ -94,23 +85,13 @@ En el lenguaje cotidiano usamos *verdadero* y *válido* casi como sinónimos. En
 > [!IMPORTANT]
 > Un argumento es **válido** si, y solo si, es imposible que su conclusión sea falsa cuando todas sus premisas son verdaderas. Es decir: siempre que las premisas se cumplan, la conclusión está obligada a cumplirse.
 
-El punto sutil es que la validez **no exige que las premisas sean verdaderas en la realidad**. Exige que la estructura sea correcta. Compare estos dos argumentos:
+El punto sutil es que la validez **no exige que las premisas sean verdaderas en la realidad**. Exige que la estructura sea correcta. Compare estos dos argumentos, que tienen **la misma forma**:
 
-$$
-\begin{array}{l}
-\text{Si llueve, la calle se moja.}\\\\
-\text{Llueve.}\\\\ \hline
-\therefore\ \text{La calle se moja.}
-\end{array}
-\qquad\qquad
-\begin{array}{l}
-\text{Si la Luna es de queso, hay ratones astronautas.}\\\\
-\text{La Luna es de queso.}\\\\ \hline
-\therefore\ \text{Hay ratones astronautas.}
-\end{array}
-$$
+$$\dfrac{\text{Si llueve, la calle se moja.} \quad \text{Llueve.}}{\text{La calle se moja.}}$$
 
-Ambos tienen **exactamente la misma forma** ($p\rightarrow q$; $p$; por lo tanto $q$), y ambos son **válidos**. En el segundo, las premisas son un disparate — pero eso no lo hace inválido. La validez solo garantiza que *si aceptáramos* las premisas, la conclusión sería inevitable.
+$$\dfrac{\text{Si la Luna es de queso, hay ratones astronautas.} \quad \text{La Luna es de queso.}}{\text{Hay ratones astronautas.}}$$
+
+Ambos tienen exactamente la forma $p\rightarrow q$; $p$; por lo tanto $q$, y ambos son **válidos**. En el segundo, las premisas son un disparate — pero eso no lo hace inválido. La validez solo garantiza que *si aceptáramos* las premisas, la conclusión sería inevitable.
 
 > [!TIP]
 > **Validez** no significa que lo que dice el argumento sea verdad en la vida real. Significa que, si aceptamos las premisas (aunque sean absurdas), la conclusión se sigue por obligación. La lógica se ocupa de la **forma del razonamiento**, no de verificar hechos.
@@ -121,14 +102,13 @@ A lo largo del curso usaremos tres notaciones equivalentes para representar un a
 
 | Forma | Representación | ¿Cuándo se usa? |
 |:---|:---:|:---|
-| **Estándar (vertical)** | $\begin{array}{l} p\rightarrow q \\\\ p \\\\ \hline \therefore\ q\end{array}$ | Para demostraciones paso a paso. |
+| **Estándar (barra)** | $\dfrac{p\rightarrow q \quad p}{q}$ | Para demostraciones paso a paso. |
 | **Horizontal (secuente)** | $p\rightarrow q,\ p\ \vdash\ q$ | Para enunciar un problema de forma compacta. El símbolo $\vdash$ se lee *"se deduce"*. |
 | **Condicional (gran implicación)** | $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$ | Para validar con **tabla de verdad**. |
 
 La forma condicional es clave: convierte todo el argumento en **una sola proposición**. La conjunción de todas las premisas se pone como antecedente, y la conclusión como consecuente:
 
-$$
-(P_1\land P_2\land\cdots\land P_n)\rightarrow Q$$
+$$(P_1\land P_2\land\cdots\land P_n)\rightarrow Q$$
 
 Y aquí está el puente con lo que ya sabe: **el argumento es válido si, y solo si, esta proposición es una tautología**. Validar un argumento se reduce a comprobar una tautología — algo que ya domina desde la Clase 3.
 
@@ -148,13 +128,7 @@ Regla práctica: la conclusión suele ir después de un conector del tipo *"por 
 
 El ejemplo más antiguo y conocido de argumento válido:
 
-$$
-\begin{array}{l}
-\text{Si Sócrates es un hombre, entonces Sócrates es mortal.}\\\\
-\text{Sócrates es un hombre.}\\\\ \hline
-\therefore\ \text{Sócrates es mortal.}
-\end{array}
-$$
+$$\dfrac{\text{Si Sócrates es hombre, entonces es mortal.} \quad \text{Sócrates es hombre.}}{\text{Sócrates es mortal.}}$$
 
 Definiendo $p$: *"Sócrates es un hombre"* y $q$: *"Sócrates es mortal"*, la forma es:
 
@@ -192,14 +166,7 @@ Un solo renglón crítico con conclusión falsa basta para tumbar el argumento: 
 
 Determine la validez del siguiente argumento:
 
-$$
-\begin{array}{l}
-p\rightarrow(q\lor\neg r) \\\\
-q\rightarrow(p\land r) \\\\
-\hline
-\therefore\ p\rightarrow r
-\end{array}
-$$
+$$\dfrac{p\rightarrow(q\lor\neg r) \quad q\rightarrow(p\land r)}{p\rightarrow r}$$
 
 **Premisas:** $p\rightarrow(q\lor\neg r)$ y $q\rightarrow(p\land r)$. **Conclusión:** $p\rightarrow r$.
 
@@ -214,9 +181,7 @@ $$
 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | — |
 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | ✔ (concl. V) |
 
-En la fila $p=1,\ q=0,\ r=0$ las dos premisas valen 1 (es un renglón crítico) pero la conclusión $p\rightarrow r$ vale 0. Ese único contraejemplo es suficiente:
-
-$$\therefore\ \text{el argumento es \textbf{no válido}.}$$
+En la fila $p=1,\ q=0,\ r=0$ las dos premisas valen 1 (es un renglón crítico) pero la conclusión $p\rightarrow r$ vale 0. Ese único contraejemplo es suficiente: **el argumento es no válido.**
 
 > [!WARNING]
 > **No confunda "premisas falsas en la vida real" con "argumento no válido".** Que un argumento sea no válido *no* depende de que sus premisas sean falsas — depende de que exista un escenario (un renglón crítico) donde las premisas se cumplan pero la conclusión falle. La invalidez es un defecto de **forma**, detectable con la tabla, no una opinión sobre el contenido.
@@ -225,14 +190,7 @@ $$\therefore\ \text{el argumento es \textbf{no válido}.}$$
 
 Un error de razonamiento muy frecuente —y con nombre propio— es **afirmar el consecuente**. Tiene esta forma:
 
-$$
-\begin{array}{l}
-p\rightarrow q \\\\
-q \\\\
-\hline
-\therefore\ p
-\end{array}
-$$
+$$\dfrac{p\rightarrow q \quad q}{p}$$
 
 Parece razonable ("si estudio, apruebo; aprobé; luego estudié"), pero es **no válida**. La tabla lo revela:
 
@@ -279,16 +237,11 @@ $$\bigl[\,p\land(p\rightarrow q)\land(s\lor r)\land(r\rightarrow\neg q)\,\bigr]\
 
 En forma estándar, con sus cuatro premisas:
 
-$$
-\begin{array}{ll}
-p & \text{(a)}\\\\
-p\rightarrow q & \text{(b)}\\\\
-s\lor r & \text{(c)}\\\\
-r\rightarrow\neg q & \text{(d)}\\\\
-\hline
-\therefore\ s\lor t
-\end{array}
-$$
+- $p$ &nbsp; (a)
+- $p\rightarrow q$ &nbsp; (b)
+- $s\lor r$ &nbsp; (c)
+- $r\rightarrow\neg q$ &nbsp; (d)
+- **Conclusión:** $\therefore\ s\lor t$
 
 ## Método 1 — Tabla de verdad (fuerza bruta)
 
@@ -303,9 +256,7 @@ Esto deja exactamente **dos renglones críticos**:
 | 1 | 1 | 0 | 1 | 0 | **1** | **1** |
 | 1 | 1 | 0 | 1 | 1 | **1** | **1** |
 
-En los dos renglones críticos la conclusión $s\lor t$ es verdadera (porque $s=1$ en ambos). No existe ningún renglón crítico con conclusión falsa:
-
-$$\therefore\ \text{el argumento es \textbf{válido}.}$$
+En los dos renglones críticos la conclusión $s\lor t$ es verdadera (porque $s=1$ en ambos). No existe ningún renglón crítico con conclusión falsa: **el argumento es válido.**
 
 ## Método 2 — Enfoque axiomático (reglas de inferencia)
 
@@ -315,7 +266,7 @@ En lugar de revisar 32 filas, construimos una cadena de deducciones. Cada línea
 
 **Paso 2 — Reescribir la premisa (d) para poder encadenarla.** La premisa $r\rightarrow\neg q$ tiene $r$ en el antecedente, pero lo que ya tenemos es $q$. Aplicamos Contrarrecíproco para "darle la vuelta" y luego Doble Negación para limpiarla, dejándola como $q\rightarrow\neg r$.
 
-**Paso 3 — Obtener $\neg r$.** Ahora sí: de $q$ (paso 3) y $q\rightarrow\neg r$ (paso 6), por Modus Ponens.
+**Paso 3 — Obtener $\neg r$.** Ahora sí: de $q$ (línea 3) y $q\rightarrow\neg r$ (línea 6), por Modus Ponens.
 
 **Paso 4 — Cerrar.** Con $\neg r$ y la premisa $s\lor r$ (c), por Eliminación (silogismo disyuntivo) obtenemos $s$; y de $s$, por Adición, se sigue $s\lor t$.
 
@@ -332,7 +283,7 @@ En lugar de revisar 32 filas, construimos una cadena de deducciones. Cada línea
 | 9 | $s$ | Eliminación (silogismo disyuntivo) en 7 y 8 |
 | 10 | $s\lor t$ | Adición en 9 |
 
-$$\therefore\ s\lor t \quad\text{(el argumento es válido)}$$
+Por lo tanto se obtiene $s\lor t$ — **el argumento es válido.**
 
 > [!TIP]
 > **Compare el costo de ambos métodos.** Con 5 variables, la tabla exigió razonar sobre $2^5=32$ filas (aunque el atajo de los renglones críticos nos ahorró escribirlas todas). El enfoque axiomático llegó a la misma conclusión en 10 líneas cortas, sin importar cuántas variables hubiera. Con 10 variables, la tabla tendría 1 024 filas; la demostración axiomática seguiría teniendo un puñado de pasos. **Esa es la razón de ser del enfoque axiomático.**
@@ -347,13 +298,7 @@ Un **silogismo** es un argumento que consiste en **dos premisas y una conclusió
 
 La forma de silogismo más famosa es el **Modus Ponens**, el mismo del argumento de Sócrates:
 
-$$
-\begin{array}{ll}
-\text{Si tiene una contraseña vigente, puede iniciar sesión en la red.} & \text{(premisa mayor)}\\\\
-\text{Tiene una contraseña vigente.} & \text{(premisa menor)}\\\\ \hline
-\therefore\ \text{Puede iniciar sesión en la red.}
-\end{array}
-$$
+$$\dfrac{\text{Si tiene contraseña vigente, puede iniciar sesión.} \quad \text{Tiene contraseña vigente.}}{\text{Puede iniciar sesión.}}$$
 
 Simbólicamente, con $p$: *"tiene contraseña vigente"* y $q$: *"puede iniciar sesión"*:
 
@@ -370,19 +315,61 @@ Piénselo como el enfoque axiomático de la Clase 5, pero un nivel más arriba: 
 
 ## III.3 Tabla de reglas de inferencia
 
-Estas son las reglas que usaremos. Todo lo que está sobre la línea son verdades que ya posee; lo que está debajo es lo que tiene permiso de escribir.
+Estas son las reglas que usaremos. En cada fracción, lo que está **arriba** de la barra son las premisas (verdades que ya posee) y lo que está **debajo** es la conclusión (lo que tiene permiso de escribir).
 
-| Nombre | Regla | Idea intuitiva |
-| :--- | :---: | :--- |
-| **Modus Ponens** | $\begin{array}{l} p\rightarrow q \\\\ p \\\\ \hline \therefore\ q\end{array}$ | Si se da la causa, ocurre el efecto. |
-| **Modus Tollens** | $\begin{array}{l} p\rightarrow q \\\\ \neg q \\\\ \hline \therefore\ \neg p\end{array}$ | Si no veo el efecto, la causa no ocurrió. |
-| **Silogismo hipotético** (Transitividad) | $\begin{array}{l} p\rightarrow q \\\\ q\rightarrow r \\\\ \hline \therefore\ p\rightarrow r\end{array}$ | Si $p$ lleva a $q$ y $q$ lleva a $r$, entonces $p$ lleva a $r$. |
-| **Silogismo disyuntivo** (Eliminación) | $\begin{array}{l} p\lor q \\\\ \neg p \\\\ \hline \therefore\ q\end{array}$ | Si tengo dos opciones y descarto una, queda la otra. |
-| **Simplificación** | $\begin{array}{l} p\land q \\\\ \hline \therefore\ p\end{array}$ | Si tengo el todo, tengo cada parte. |
-| **Adición** | $\begin{array}{l} p \\\\ \hline \therefore\ p\lor q\end{array}$ | Si algo es verdad, "eso o cualquier cosa" también. |
-| **Conjunción** | $\begin{array}{l} p \\\\ q \\\\ \hline \therefore\ p\land q\end{array}$ | Puedo unir dos verdades independientes. |
-| **Prueba por casos** | $\begin{array}{l} p\lor q \\\\ p\rightarrow r \\\\ q\rightarrow r \\\\ \hline \therefore\ r\end{array}$ | Si mis dos opciones llevan al mismo sitio, ese sitio es seguro. |
-| **Resolución** | $\begin{array}{l} \neg p\lor r \\\\ p\lor q \\\\ \hline \therefore\ q\lor r\end{array}$ | Se cancela la variable que aparece afirmada y negada; queda el resto. |
+<table>
+  <thead>
+    <tr><th>Nombre</th><th>Regla</th><th>Idea intuitiva</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Modus Ponens</strong></td>
+      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ p \end{array}}{q}$$</td>
+      <td>Si se da la causa, ocurre el efecto.</td>
+    </tr>
+    <tr>
+      <td><strong>Modus Tollens</strong></td>
+      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ \neg q \end{array}}{\neg p}$$</td>
+      <td>Si no veo el efecto, la causa no ocurrió.</td>
+    </tr>
+    <tr>
+      <td><strong>Silogismo hipotético</strong> (Transitividad)</td>
+      <td>$$\dfrac{\begin{array}{c} p\rightarrow q \\ q\rightarrow r \end{array}}{p\rightarrow r}$$</td>
+      <td>Si <em>p</em> lleva a <em>q</em> y <em>q</em> lleva a <em>r</em>, entonces <em>p</em> lleva a <em>r</em>.</td>
+    </tr>
+    <tr>
+      <td><strong>Silogismo disyuntivo</strong> (Eliminación)</td>
+      <td>$$\dfrac{\begin{array}{c} p\lor q \\ \neg p \end{array}}{q}$$</td>
+      <td>Si tengo dos opciones y descarto una, queda la otra.</td>
+    </tr>
+    <tr>
+      <td><strong>Simplificación</strong></td>
+      <td>$$\dfrac{p\land q}{p}$$</td>
+      <td>Si tengo el todo, tengo cada parte.</td>
+    </tr>
+    <tr>
+      <td><strong>Adición</strong></td>
+      <td>$$\dfrac{p}{p\lor q}$$</td>
+      <td>Si algo es verdad, "eso o cualquier cosa" también.</td>
+    </tr>
+    <tr>
+      <td><strong>Conjunción</strong></td>
+      <td>$$\dfrac{\begin{array}{c} p \\ q \end{array}}{p\land q}$$</td>
+      <td>Puedo unir dos verdades independientes.</td>
+    </tr>
+    <tr>
+      <td><strong>Prueba por casos</strong></td>
+      <td>$$\dfrac{\begin{array}{c} p\lor q \\ p\rightarrow r \\ q\rightarrow r \end{array}}{r}$$</td>
+      <td>Si mis dos opciones llevan al mismo sitio, ese sitio es seguro.</td>
+    </tr>
+    <tr>
+      <td><strong>Resolución</strong></td>
+      <td>$$\dfrac{\begin{array}{c} \neg p\lor r \\ p\lor q \end{array}}{q\lor r}$$</td>
+      <td>Se cancela la variable que aparece afirmada y negada; queda el resto.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 > [!WARNING]
 > **Modus Tollens no es la falacia de afirmar el consecuente.** Ambas parten de $p\rightarrow q$, pero Modus Tollens usa $\neg q$ (niega el efecto) para concluir $\neg p$ — y es **válida**. La falacia usa $q$ (afirma el efecto) para concluir $p$ — y es **inválida**. La diferencia está en si se niega o se afirma el consecuente.
@@ -412,19 +399,14 @@ Los tres ejercicios siguientes se resuelven íntegramente con reglas de inferenc
 
 Demuestre que el siguiente argumento es válido:
 
-$$
-\begin{array}{ll}
-p\rightarrow q & \text{(a)}\\\\
-r\lor s & \text{(b)}\\\\
-\neg s\rightarrow\neg t & \text{(c)}\\\\
-\neg q\lor s & \text{(d)}\\\\
-\neg s & \text{(e)}\\\\
-(\neg p\land r)\rightarrow u & \text{(f)}\\\\
-w\lor t & \text{(g)}\\\\
-\hline
-\therefore\ u\land r
-\end{array}
-$$
+- $p\rightarrow q$ &nbsp; (a)
+- $r\lor s$ &nbsp; (b)
+- $\neg s\rightarrow\neg t$ &nbsp; (c)
+- $\neg q\lor s$ &nbsp; (d)
+- $\neg s$ &nbsp; (e)
+- $(\neg p\land r)\rightarrow u$ &nbsp; (f)
+- $w\lor t$ &nbsp; (g)
+- **Conclusión:** $\therefore\ u\land r$
 
 **Estrategia.** La meta es $u\land r$. Para $u$ necesitamos disparar la premisa (f), cuyo antecedente es $\neg p\land r$ — es decir, hay que conseguir $\neg p$ y $r$ por separado. Tenemos $\neg s$ (e) como palanca inicial: combinada con (d) da $\neg q$, y de ahí con (a) sale $\neg p$; combinada con (b) da $r$.
 
@@ -452,7 +434,7 @@ $$
 | 12 | $u$ | Modus Ponens en 6 y 11 |
 | 13 | $u\land r$ | Conjunción en 12 y 10 |
 
-$$\therefore\ u\land r \quad\text{(el argumento es válido)}$$
+Por lo tanto se obtiene $u\land r$ — **el argumento es válido.**
 
 > [!NOTE]
 > Note que las premisas (c) y (g) nunca se usaron. Esto es normal y perfectamente válido: un argumento puede contener premisas que no hacen falta para llegar a la conclusión. Lo que importa es que exista *un* camino desde las premisas hasta la meta, no que se usen todas.
@@ -461,17 +443,12 @@ $$\therefore\ u\land r \quad\text{(el argumento es válido)}$$
 
 Demuestre que el siguiente argumento es válido:
 
-$$
-\begin{array}{ll}
-(\neg p\lor q)\rightarrow r & \text{(a)}\\\\
-s\lor\neg q & \text{(b)}\\\\
-\neg t & \text{(c)}\\\\
-p\rightarrow t & \text{(d)}\\\\
-(\neg p\land r)\rightarrow\neg s & \text{(e)}\\\\
-\hline
-\therefore\ \neg q
-\end{array}
-$$
+- $(\neg p\lor q)\rightarrow r$ &nbsp; (a)
+- $s\lor\neg q$ &nbsp; (b)
+- $\neg t$ &nbsp; (c)
+- $p\rightarrow t$ &nbsp; (d)
+- $(\neg p\land r)\rightarrow\neg s$ &nbsp; (e)
+- **Conclusión:** $\therefore\ \neg q$
 
 **Estrategia.** La meta es $\neg q$. Si logramos $\neg s$, entonces con (b) por Eliminación sale $\neg q$. Para $\neg s$ hay que disparar (e), cuyo antecedente es $\neg p\land r$. Y $\neg p$ sale de (d) con $\neg t$; con $\neg p$ conseguimos también $r$ a través de (a).
 
@@ -497,7 +474,7 @@ $$
 | 10 | $\neg s$ | Modus Ponens en 5 y 9 |
 | 11 | $\neg q$ | Eliminación en 2 y 10 |
 
-$$\therefore\ \neg q \quad\text{(el argumento es válido)}$$
+Por lo tanto se obtiene $\neg q$ — **el argumento es válido.**
 
 ## Ejercicio 3 — De lenguaje natural a demostración
 
@@ -518,16 +495,11 @@ Verifique su validez mediante una prueba formal.
 
 **Paso 3 — Traducir al lenguaje formal.**
 
-$$
-\begin{array}{ll}
-\neg L\rightarrow C & \text{(a)}\\\\
-C\rightarrow\neg D & \text{(b)}\\\\
-D\lor I & \text{(c)}\\\\
-\neg I & \text{(d)}\\\\
-\hline
-\therefore\ L
-\end{array}
-$$
+- $\neg L\rightarrow C$ &nbsp; (a)
+- $C\rightarrow\neg D$ &nbsp; (b)
+- $D\lor I$ &nbsp; (c)
+- $\neg I$ &nbsp; (d)
+- **Conclusión:** $\therefore\ L$
 
 **Paso 4 — Estrategia y demostración.** La meta es $L$. De (c) y (d) sale $D$; con (b) y $D$, por Modus Tollens, sale $\neg C$; con (a) y $\neg C$, otra vez Modus Tollens, sale $\neg(\neg L)$; y Doble Negación cierra en $L$.
 
@@ -542,7 +514,7 @@ $$
 | 7 | $\neg(\neg L)$ | Modus Tollens en 1 y 6 |
 | 8 | $L$ | Doble negación en 7 |
 
-$$\therefore\ L \quad\text{(el argumento es válido: la ley fue aprobada)}$$
+Por lo tanto se obtiene $L$ — **el argumento es válido: la ley fue aprobada.**
 
 > [!TIP]
 > **Antes de continuar, pregúntese:** en el paso 6, ¿por qué de $C\rightarrow\neg D$ y $D$ se concluye $\neg C$?
@@ -571,15 +543,11 @@ Primero traducimos cada observación a lenguaje formal. Definimos las proposicio
 
 Los cuatro testimonios, más un hecho técnico que el equipo da por sabido (*"un fallo del servicio de pagos siempre se registra como un timeout de pagos"*, es decir $F_p\rightarrow T$), quedan así:
 
-$$
-\begin{array}{lll}
-E\rightarrow T & \text{Ana} & \text{(a)}\\\\
-\neg T & \text{Beto} & \text{(b)}\\\\
-F_p\lor F_c & \text{Carla} & \text{(c)}\\\\
-F_c\rightarrow R & \text{Diego} & \text{(d)}\\\\
-F_p\rightarrow T & \text{(hecho técnico)} & \text{(e)}\\\\
-\end{array}
-$$
+- $E\rightarrow T$ &nbsp; — Ana (a)
+- $\neg T$ &nbsp; — Beto (b)
+- $F_p\lor F_c$ &nbsp; — Carla (c)
+- $F_c\rightarrow R$ &nbsp; — Diego (d)
+- $F_p\rightarrow T$ &nbsp; — hecho técnico (e)
 
 La meta no la fija nadie de antemano: es *descubrir* qué falló. Vamos a dejar que las reglas nos lleven.
 
@@ -602,7 +570,7 @@ La meta no la fija nadie de antemano: es *descubrir* qué falló. Vamos a dejar 
 | 7 | $F_c$ | Eliminación en 3 y 6 |
 | 8 | $R$ | Modus Ponens en 4 y 7 |
 
-$$\therefore\ F_c\land R \quad\text{(falló la caché, y el tiempo de respuesta se disparó)}$$
+Por lo tanto se obtiene $F_c\land R$ — **falló la caché, y el tiempo de respuesta se disparó.**
 
 ## El veredicto
 
