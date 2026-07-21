@@ -170,3 +170,10 @@ A continuación se describe el cronograma del curso por clases.
 5. https://web.stanford.edu/class/archive/ee/ee108b/ee108b.1082/
 6. http://www.ee.ic.ac.uk/pcheung/teaching/ee3_DSD/
 7. https://www.cs.columbia.edu/~sedwards/classes/2011/4840/index.html
+
+
+### Otros
+
+1. https://cursos.virtual.uniandes.edu.co/isis1104/
+2. https://sites.google.com/unal.edu.co/matdiscretas/calculo-integral-01-2022
+3. 

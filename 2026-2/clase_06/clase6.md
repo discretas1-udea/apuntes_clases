@@ -71,10 +71,10 @@ En lógica proposicional, un **argumento** es una secuencia de proposiciones. To
 
 $$
 \begin{array}{l}
-P_1 \\
-P_2 \\
-\vdots \\
-P_n \\
+P_1 \\\\
+P_2 \\\\
+\vdots \\\\
+P_n \\\\
 \hline
 \therefore\ Q
 \end{array}
@@ -98,14 +98,14 @@ El punto sutil es que la validez **no exige que las premisas sean verdaderas en 
 
 $$
 \begin{array}{l}
-\text{Si llueve, la calle se moja.}\\
-\text{Llueve.}\\ \hline
+\text{Si llueve, la calle se moja.}\\\\
+\text{Llueve.}\\\\ \hline
 \therefore\ \text{La calle se moja.}
 \end{array}
 \qquad\qquad
 \begin{array}{l}
-\text{Si la Luna es de queso, hay ratones astronautas.}\\
-\text{La Luna es de queso.}\\ \hline
+\text{Si la Luna es de queso, hay ratones astronautas.}\\\\
+\text{La Luna es de queso.}\\\\ \hline
 \therefore\ \text{Hay ratones astronautas.}
 \end{array}
 $$
@@ -150,8 +150,8 @@ El ejemplo más antiguo y conocido de argumento válido:
 
 $$
 \begin{array}{l}
-\text{Si Sócrates es un hombre, entonces Sócrates es mortal.}\\
-\text{Sócrates es un hombre.}\\ \hline
+\text{Si Sócrates es un hombre, entonces Sócrates es mortal.}\\\\
+\text{Sócrates es un hombre.}\\\\ \hline
 \therefore\ \text{Sócrates es mortal.}
 \end{array}
 $$
@@ -194,8 +194,8 @@ Determine la validez del siguiente argumento:
 
 $$
 \begin{array}{l}
-p\rightarrow(q\lor\neg r) \\
-q\rightarrow(p\land r) \\
+p\rightarrow(q\lor\neg r) \\\\
+q\rightarrow(p\land r) \\\\
 \hline
 \therefore\ p\rightarrow r
 \end{array}
@@ -227,8 +227,8 @@ Un error de razonamiento muy frecuente —y con nombre propio— es **afirmar el
 
 $$
 \begin{array}{l}
-p\rightarrow q \\
-q \\
+p\rightarrow q \\\\
+q \\\\
 \hline
 \therefore\ p
 \end{array}
@@ -281,10 +281,10 @@ En forma estándar, con sus cuatro premisas:
 
 $$
 \begin{array}{ll}
-p & \text{(a)}\\
-p\rightarrow q & \text{(b)}\\
-s\lor r & \text{(c)}\\
-r\rightarrow\neg q & \text{(d)}\\
+p & \text{(a)}\\\\
+p\rightarrow q & \text{(b)}\\\\
+s\lor r & \text{(c)}\\\\
+r\rightarrow\neg q & \text{(d)}\\\\
 \hline
 \therefore\ s\lor t
 \end{array}
@@ -349,8 +349,8 @@ La forma de silogismo más famosa es el **Modus Ponens**, el mismo del argumento
 
 $$
 \begin{array}{ll}
-\text{Si tiene una contraseña vigente, puede iniciar sesión en la red.} & \text{(premisa mayor)}\\
-\text{Tiene una contraseña vigente.} & \text{(premisa menor)}\\ \hline
+\text{Si tiene una contraseña vigente, puede iniciar sesión en la red.} & \text{(premisa mayor)}\\\\
+\text{Tiene una contraseña vigente.} & \text{(premisa menor)}\\\\ \hline
 \therefore\ \text{Puede iniciar sesión en la red.}
 \end{array}
 $$
@@ -414,13 +414,13 @@ Demuestre que el siguiente argumento es válido:
 
 $$
 \begin{array}{ll}
-p\rightarrow q & \text{(a)}\\
-r\lor s & \text{(b)}\\
-\neg s\rightarrow\neg t & \text{(c)}\\
-\neg q\lor s & \text{(d)}\\
-\neg s & \text{(e)}\\
-(\neg p\land r)\rightarrow u & \text{(f)}\\
-w\lor t & \text{(g)}\\
+p\rightarrow q & \text{(a)}\\\\
+r\lor s & \text{(b)}\\\\
+\neg s\rightarrow\neg t & \text{(c)}\\\\
+\neg q\lor s & \text{(d)}\\\\
+\neg s & \text{(e)}\\\\
+(\neg p\land r)\rightarrow u & \text{(f)}\\\\
+w\lor t & \text{(g)}\\\\
 \hline
 \therefore\ u\land r
 \end{array}
@@ -463,11 +463,11 @@ Demuestre que el siguiente argumento es válido:
 
 $$
 \begin{array}{ll}
-(\neg p\lor q)\rightarrow r & \text{(a)}\\
-s\lor\neg q & \text{(b)}\\
-\neg t & \text{(c)}\\
-p\rightarrow t & \text{(d)}\\
-(\neg p\land r)\rightarrow\neg s & \text{(e)}\\
+(\neg p\lor q)\rightarrow r & \text{(a)}\\\\
+s\lor\neg q & \text{(b)}\\\\
+\neg t & \text{(c)}\\\\
+p\rightarrow t & \text{(d)}\\\\
+(\neg p\land r)\rightarrow\neg s & \text{(e)}\\\\
 \hline
 \therefore\ \neg q
 \end{array}
@@ -520,10 +520,10 @@ Verifique su validez mediante una prueba formal.
 
 $$
 \begin{array}{ll}
-\neg L\rightarrow C & \text{(a)}\\
-C\rightarrow\neg D & \text{(b)}\\
-D\lor I & \text{(c)}\\
-\neg I & \text{(d)}\\
+\neg L\rightarrow C & \text{(a)}\\\\
+C\rightarrow\neg D & \text{(b)}\\\\
+D\lor I & \text{(c)}\\\\
+\neg I & \text{(d)}\\\\
 \hline
 \therefore\ L
 \end{array}
@@ -573,11 +573,11 @@ Los cuatro testimonios, más un hecho técnico que el equipo da por sabido (*"un
 
 $$
 \begin{array}{lll}
-E\rightarrow T & \text{Ana} & \text{(a)}\\
-\neg T & \text{Beto} & \text{(b)}\\
-F_p\lor F_c & \text{Carla} & \text{(c)}\\
-F_c\rightarrow R & \text{Diego} & \text{(d)}\\
-F_p\rightarrow T & \text{(hecho técnico)} & \text{(e)}\\
+E\rightarrow T & \text{Ana} & \text{(a)}\\\\
+\neg T & \text{Beto} & \text{(b)}\\\\
+F_p\lor F_c & \text{Carla} & \text{(c)}\\\\
+F_c\rightarrow R & \text{Diego} & \text{(d)}\\\\
+F_p\rightarrow T & \text{(hecho técnico)} & \text{(e)}\\\\
 \end{array}
 $$
 
