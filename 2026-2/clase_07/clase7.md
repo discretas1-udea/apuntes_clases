@@ -93,15 +93,15 @@ El ejemplo anterior no es un accidente: expone tres carencias estructurales de l
 | Limitación | En qué consiste |
 |:---|:---|
 | **No distingue el contenido interno de las proposiciones.** | Trata cada enunciado como un átomo indivisible. No puede razonar sobre los objetos individuales que aparecen dentro de la frase. Con lo que afirma $p$ no hay forma de saber que existe una contradicción entre *"todos funcionan"* y *"`L4` tiene el SO dañado"*, porque la teoría no sabe que `L4` es uno de los computadores de los que habla $p$. |
-| **No expresa generalizaciones ni excepciones.** | No puede decir cosas como *"todos los computadores **excepto** `L4` funcionan"*, ni reglas del tipo *"**si** un computador tiene virus, **entonces** no funciona bien"*. La expresión *"todos… excepto…"* simplemente no es representable. |
+| **No expresa generalizaciones ni excepciones de forma general.** | No puede decir cosas como *"todos los computadores **excepto** `L4` funcionan"*, ni reglas del tipo *"**si** un computador tiene virus, **entonces** no funciona bien"* — al menos no de manera compacta y uniforme. En un universo finito y pequeño, sí podría enumerarse caso por caso con una letra proposicional distinta para cada computador (algo como $q_1 \land q_2 \land \neg q_4 \land \dots$), pero eso no escala: para cien computadores harían falta cien letras sueltas, y ninguna regla general que las conecte. |
 | **No conecta internamente las ideas.** | Como no ve el interior de las frases, no puede establecer relaciones lógicas complejas entre ellas. No hay forma de responder preguntas como *"¿qué computadores pertenecen al laboratorio?"*, *"¿qué significa exactamente 'funcionar correctamente'?"* o *"¿un computador con virus funciona o no?"*. |
 
 > [!IMPORTANT]
-> **Conclusión.** La lógica proposicional es excelente para verdades **globales y simples** (*"llueve"*, *"el sitio está en línea"*). Pero si lo que queremos es modelar un sistema realista —con objetos específicos, propiedades individuales, reglas generales y excepciones— se nos queda corta. Necesitamos otro tipo de lógica: la **lógica de predicados**, también llamada **lógica cuantificacional** o **lógica de primer orden** (*FOL*, por *First-Order Logic*).
+> **Conclusión.** La lógica proposicional es excelente para verdades **globales y simples** (*"llueve"*, *"el sitio está en línea"*). Pero si lo que queremos es modelar un sistema realista —con objetos específicos, propiedades individuales, reglas generales y excepciones— se nos queda corta. Necesitamos otro tipo de lógica: la **lógica de predicados**, también llamada **lógica cuantificacional** por el papel central de los cuantificadores $\forall$ y $\exists$. Ambos nombres se usan en este curso como sinónimos de lo que, en un contexto más formal, se conoce como **lógica de primer orden** (*FOL*, por *First-Order Logic*): lo que presentamos aquí es una introducción a la lógica de primer orden, con cuantificación sobre individuos del universo.
 
 ## I.3 La pista está en la gramática: sujeto y predicado
 
-¿Por dónde empezar a "abrir la caja"? Por algo que usted ya conoce desde la escuela: la estructura de una oración. En cualquier idioma, toda **oración** (un conjunto de palabras que expresa una idea completa y tiene sentido por sí sola) se compone de dos partes:
+¿Por dónde empezar a "abrir la caja"? Por algo que usted ya conoce desde la escuela: la estructura de una oración. Muchas oraciones declarativas —las que afirman algo, que son las que nos interesan aquí— pueden analizarse, para efectos de esta introducción, separando dos partes:
 
 - **Sujeto:** de quién o de qué se habla.
 - **Predicado:** lo que se dice del sujeto.
@@ -164,6 +164,9 @@ Un punto crucial: **el universo lo define quien modela el problema**. No es algo
 | Números enteros | $\{\dots, -2, -1, 0, 1, 2, \dots\}$ |
 
 Elegir bien el universo es la primera decisión de todo modelado: fija de qué objetos se puede hablar y, con ello, qué afirmaciones tienen sentido.
+
+> [!NOTE]
+> **Un adelanto importante.** Cambiar el universo no solo cambia si una afirmación resulta verdadera o falsa (eso ya es bastante) — a veces cambia **la forma misma de la fórmula**: cuántos predicados hacen falta y si se necesita o no un conectivo. Un mismo enunciado en español puede traducirse con una fórmula más simple o más compleja según qué tan amplio se elija el universo. Lo vemos con un ejemplo completo, resuelto de las dos maneras, en el **Ejercicio 4** ("No todo lo que brilla es oro") más adelante — y se repite, con el propio pollo robot, entre el **Expediente Gallinero** y los **Ejercicios propuestos**.
 
 ## II.2 Objeto (individuo o elemento)
 
@@ -296,9 +299,9 @@ $$\{\,x \in D \mid autobot(x)\,\}$$
 
 es decir, el subconjunto de los Transformers que son autobots. Evaluando el predicado en dos objetos concretos:
 
-$$autobot(Optimus) = \textbf{Verdadero} \qquad autobot(Megatron) = \textbf{Falso}$$
+$$autobot(optimus) = \textbf{Verdadero} \qquad autobot(megatron) = \textbf{Falso}$$
 
-Así, $Optimus$ **pertenece** al conjunto de verdad y $Megatron$ **no**.
+Así, $optimus$ **pertenece** al conjunto de verdad y $megatron$ **no**.
 
 > [!TIP]
 > **Compruebe su comprensión.** Sea el universo $U=\{L1,\dots,L8\}$ (los computadores del laboratorio) y el predicado $tieneVirus(x)$. Suponga que solo `L5` y `L7` están infectados. ¿Cuál es el conjunto de verdad de $tieneVirus(x)$?
@@ -347,6 +350,9 @@ Volviendo al ejemplo con el que abrimos la Parte I: *"Todos los computadores del
 $$\forall x\, \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
 
 que se lee *"para todo $x$, si $x$ es un computador del laboratorio, entonces $x$ funciona"*. Y de una afirmación así **sí** podemos deducir, por ejemplo, que si `L1` es un computador del laboratorio, entonces `L1` funciona. Exactamente lo que la lógica proposicional no podía hacer.
+
+> [!NOTE]
+> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ($L1,\dots,L8$) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\, funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
 
 > [!WARNING]
 > **El error más común al cuantificar: emparejar mal el cuantificador y el conectivo.** Hay una regla práctica que evita la mayoría de los errores de traducción:
@@ -413,11 +419,15 @@ Cuando las expresiones se complican, es fácil combinar mal las piezas. Una herr
 La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad** (una vez resueltas sus variables). Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso una vez asignado o cuantificado $x$ (predicado), pero $doble(x)$ es siempre un número (función).
 
 > [!NOTE]
-> **Un vistazo adelante: el "modelo".** En lógica, un **modelo** es una interpretación que asigna significado a los símbolos de un lenguaje lógico y que hace que un conjunto de fórmulas sea verdadero — es una representación de la realidad construida a partir de ciertos elementos y reglas.
+> **Un vistazo adelante: el "modelo" (opcional).** En lógica, un **modelo** es una interpretación que asigna significado a los símbolos de un lenguaje lógico y que hace que un conjunto de fórmulas sea verdadero. Es contenido de profundización, no indispensable para seguir esta clase.
+>
+> <details><summary>Ver la idea completa</summary>
 >
 > <img src="images/modelos.png" alt="Diagrama que separa la sintaxis (fórmulas y reglas de inferencia) de la semántica (modelos)" width="360">
 >
-> En **lógica proposicional**, un modelo simplemente mapea cada símbolo proposicional a un valor de verdad (una fila de la tabla de verdad). En **lógica cuantificacional**, un modelo es más rico: define un universo de objetos y asigna un significado a cada constante, predicado y función. La construcción formal completa de un modelo en lógica de predicados es tema de sesiones posteriores; por ahora basta con la intuición de que *elegir el universo y el significado de los predicados es, precisamente, construir el modelo*.
+> Un modelo es una representación de la realidad construida a partir de ciertos elementos y reglas. En **lógica proposicional**, un modelo simplemente mapea cada símbolo proposicional a un valor de verdad (una fila de la tabla de verdad). En **lógica cuantificacional**, un modelo es más rico: define un universo de objetos y asigna un significado a cada constante, predicado y función. La construcción formal completa de un modelo en lógica de predicados es tema de sesiones posteriores; por ahora basta con la intuición de que *elegir el universo y el significado de los predicados es, precisamente, construir el modelo*.
+>
+> </details>
 
 ---
 
@@ -425,7 +435,7 @@ La distinción más útil de esta tabla es la última fila: una **función** (en
 
 Una de las habilidades centrales de esta rama —y una de las más útiles para un ingeniero— es **traducir** entre el lenguaje natural (cómo hablamos) y el lenguaje formal (cómo escribe la lógica). Es importante en dos direcciones: para dar sentido preciso a conceptos matemáticos nuevos, y para analizar con rigor un problema complicado (por ejemplo, leer un requisito de software y capturar exactamente lo que pide, sin ambigüedad).
 
-<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal" width="420">
+<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal">
 
 Un ejemplo de traducción de lenguaje natural a formal, con Homero: *"Sin tele y sin cerveza, Homero pierde la cabeza"*. Con los predicados $C(x)$: *"$x$ es cerveza"*, $T(y)$: *"$y$ es tele"*, $P(z)$: *"$z$ pierde la cabeza"*, y la constante $h$ (Homero), la frase se formaliza como:
 
@@ -528,9 +538,9 @@ Formalice: *"Albert Einstein era un físico alemán."*
 
 $$P(x) \land A(x)$$
 
-**Paso 3 — Instanciar en el objeto concreto.** Como el sujeto es un individuo específico, reemplazamos la variable por la constante $Einstein$, y la función proposicional se convierte en una **proposición**:
+**Paso 3 — Instanciar en el objeto concreto.** Como el sujeto es un individuo específico, reemplazamos la variable por la constante $einstein$, y la función proposicional se convierte en una **proposición**:
 
-$$P(Einstein) \land A(Einstein)$$
+$$P(einstein) \land A(einstein)$$
 
 que afirma *"Einstein es físico y Einstein es alemán"*. Este ejercicio muestra el segundo camino de la Parte II.6: una función proposicional se vuelve proposición al **asignar un valor** a su variable.
 
@@ -561,6 +571,8 @@ $$\neg\,\forall x\,\bigl(brilla(x) \rightarrow oro(x)\bigr)$$
 que equivale a $\exists x\,\bigl(brilla(x) \land \neg oro(x)\bigr)$: *"existe algo que brilla y no es oro"*.
 
 **Paso 3 — La moraleja.** Las dos formalizaciones son correctas y dicen lo mismo *en el mundo real*, pero **se escriben distinto porque el universo es distinto**. En la primera, "brillar" es una condición de pertenencia al universo; en la segunda, es un predicado que hay que verificar. **Antes de traducir, siempre pregúntese: ¿cuál es mi universo?** Esa decisión determina toda la fórmula.
+
+Guarde esta lección: la va a ver otra vez, con el pollo robot, unas páginas más adelante — entre el **Expediente Gallinero** y los **Ejercicios propuestos** el enunciado *"todos los pollos robot funcionan"* se formaliza dos veces, con dos universos distintos, y da dos fórmulas de distinta forma. Es exactamente este mismo fenómeno.
 
 Este es también un buen momento para volver a la **tabla de verificación de tipos** (Parte IV.2) y confirmar que todo encaja: $brilla$ y $oro$ son **predicados** (operan sobre objetos, producen valores de verdad); $\neg$, $\rightarrow$, $\land$ son **conectivos** (operan sobre proposiciones, producen proposiciones); $\forall$ y $\exists$ son **cuantificadores** (convierten funciones proposicionales en proposiciones). Los tipos calzan.
 
@@ -597,6 +609,8 @@ Volvamos al gallinero con el que abrimos la clase. El ingeniero ya no está atad
 
 > [!NOTE]
 > **Sobre el universo y el predicado $robot$.** Como el universo $U=\{P1,\dots,P8\}$ ya está restringido de entrada a *"los ocho pollos robot del laboratorio"*, un predicado $robot(x)$ que dijera *"$x$ es un pollo robot"* sería verdadero para **todo** el universo — es decir, redundante: no aportaría información. Por eso el diccionario de este Expediente no lo incluye; las fórmulas hablan directamente de $x$ como pollo robot, sin necesidad de decirlo dos veces.
+>
+> Este es el mismo principio del **Ejercicio 4** ("brilla y oro"): el universo elegido determina la forma de la fórmula. Aquí, al cerrar el universo a solo pollos robot, la fórmula se simplifica. Más adelante, en los **Ejercicios propuestos**, el universo del laboratorio se amplía para incluir también otros dispositivos — y ahí sí hace falta recuperar $robot(x)$ y el conectivo $\rightarrow$, porque ya no todo el universo es un pollo robot.
 
 | Predicado | Significado |
 |:---|:---|
@@ -629,7 +643,10 @@ Cuatro afirmaciones que la lógica proposicional no podía ni empezar a escribir
 
 Resuelva los siguientes ejercicios. Las respuestas finales están en el **Solucionario** al final del documento; intente cada uno antes de mirarlas.
 
-**Definiciones para varios ejercicios.** Universo: los pollos robot del laboratorio, $U=\{P1,\dots,P8\}$. Predicados: $robot(x)$, $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"$x$ puede volar"*).
+**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica, que incluye los ocho pollos robot ($P1,\dots,P8$) junto con otros dispositivos de monitoreo (cámaras, sensores fijos, estaciones de carga) que **no** son pollos robot. Predicados: $robot(x)$ (*"$x$ es un pollo robot"*), $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"$x$ puede volar"*).
+
+> [!NOTE]
+> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\, funciona(x)$). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
 
 **P1.** Traduzca a lógica de predicados: *"Todos los pollos robot pueden volar."*
 
@@ -676,12 +693,10 @@ Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir n
 
 Al finalizar este documento, usted debería ser capaz de:
 
-- **Explicar** por qué la lógica proposicional se queda corta para razonar sobre objetos individuales, generalizaciones y excepciones.
-- **Distinguir** con precisión los conceptos de universo, objeto, constante, variable, predicado, función proposicional y conjunto de verdad.
-- **Diferenciar** una función proposicional (sin valor de verdad) de una proposición, e **identificar** los dos mecanismos que convierten la una en la otra (asignar valores o cuantificar).
-- **Traducir** enunciados entre lenguaje natural y lógica de predicados usando las cuatro formas aristotélicas (A, E, I, O), emparejando correctamente $\forall$ con $\rightarrow$ y $\exists$ con $\land$.
-- **Reconocer y evitar** el error de emparejar $\exists$ con $\rightarrow$ (o $\forall$ con $\land$) en las traducciones.
-- **Determinar** el conjunto de verdad de un predicado sobre un dominio dado, y **justificar** por qué el valor de verdad de una proposición cuantificada depende del universo elegido.
+- **Explicar y distinguir** por qué la lógica proposicional se queda corta para razonar sobre objetos individuales, generalizaciones y excepciones, y manejar con precisión el vocabulario básico de la lógica de predicados: universo, objeto, constante, variable, predicado y función proposicional.
+- **Diferenciar** una función proposicional (sin valor de verdad) de una proposición, e **identificar** los dos mecanismos que convierten la una en la otra: asignar valores a sus variables, o cuantificar todas sus variables libres.
+- **Traducir** enunciados entre lenguaje natural y lógica de predicados usando las cuatro formas aristotélicas (A, E, I, O), emparejando correctamente $\forall$ con $\rightarrow$ y $\exists$ con $\land$, y **reconocer y evitar** el error de emparejarlos al revés.
+- **Determinar** el conjunto de verdad de un predicado sobre un dominio dado, y **justificar** cómo la elección del universo afecta tanto el valor de verdad de una proposición cuantificada como la forma misma de la fórmula que la representa.
 
 ## Ficha de bolsillo
 
@@ -711,7 +726,7 @@ Al finalizar este documento, usted debería ser capaz de:
 | **I** | Algún $S$ es $P$ | $\exists x\,(S(x) \land P(x))$ |
 | **O** | Algún $S$ no es $P$ | $\exists x\,(S(x) \land \neg P(x))$ |
 
-**Emparejamiento correcto:** $\forall$ va con $\rightarrow$; $\exists$ va con $\land$. Escribir $\exists x\,(S(x)\rightarrow P(x))$ es casi siempre un error.
+**Emparejamiento correcto (patrón de traducción, no regla de formación):** para traducir *"todo $S$ es $P$"* y *"algún $S$ es $P$"*, $\forall$ va con $\rightarrow$ y $\exists$ va con $\land$. Escribir $\exists x\,(S(x)\rightarrow P(x))$ para *"algún $S$ es $P$"* es casi siempre un error — aunque la fórmula sea sintácticamente válida, dice algo distinto (débil y engañoso, ver Ejercicio 2c). El patrón guía la traducción; no prohíbe que $\forall$ aparezca alguna vez con $\land$ (como en $\forall x\,(P(x)\land Q(x))$, que simplemente afirma otra cosa: que todo el universo cumple ambas propiedades a la vez).
 
 **Negación de cuantificadores:** $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ y $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$.
 
