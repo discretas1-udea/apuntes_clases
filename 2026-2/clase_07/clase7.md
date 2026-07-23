@@ -435,7 +435,7 @@ La distinción más útil de esta tabla es la última fila: una **función** (en
 
 Una de las habilidades centrales de esta rama —y una de las más útiles para un ingeniero— es **traducir** entre el lenguaje natural (cómo hablamos) y el lenguaje formal (cómo escribe la lógica). Es importante en dos direcciones: para dar sentido preciso a conceptos matemáticos nuevos, y para analizar con rigor un problema complicado (por ejemplo, leer un requisito de software y capturar exactamente lo que pide, sin ambigüedad).
 
-<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal" width="420">
+<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal">
 
 Un ejemplo de traducción de lenguaje natural a formal, con Homero: *"Sin tele y sin cerveza, Homero pierde la cabeza"*. Con los predicados $C(x)$: *"x es cerveza"*, $T(y)$: *"y es tele"*, $P(z)$: *"z pierde la cabeza"*, y la constante $h$ (Homero), la frase se formaliza como:
 
@@ -584,30 +584,7 @@ Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y pr
 
 **Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ($mayor21$) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
 
-$$\exists x\ \bigl(\ \underline{\phantom{\text{mayor21}(x)}}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\phantom{\text{mayor21}(x)}}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \rule{2.5cm}{0.5pt}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\rule{2.5cm}{0pt}}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\qquad\quad}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\qquad\quad}\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\ \ \ \ \ \ \ \ \ \ }\ \bigr)$$
-
-$$\exists x\ \bigl(\ \underline{\hspace{2.5cm}}\ \bigr)$$
-
-****
-
 $$\exists x\ \bigl(\rule[-0.2em]{6em}{0.06em}\bigr)$$
-
-
-
-
-
 
 > [!TIP]
 > <details><summary>Ver la respuesta del último paso</summary>
@@ -703,9 +680,9 @@ El ingeniero resolvió casi todo su tablero. Pero al final del día se topó con
 
 > *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
 
-Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x\ \exists y\ (\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
+Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x$ $\exists y\ (\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
 
-Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\ C(x) \land \neg\exists y\ T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x\ \exists y$ **no** significa lo mismo que $\exists y\ \forall x$.
+Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\ C(x)$ $\land\ \neg\exists y\ T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x$ $\exists y$ **no** significa lo mismo que $\exists y$ $\forall x$.
 
 > [!NOTE]
 > **Lo que viene más adelante.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*, incluso combinando varios cuantificadores independientes. Lo que queda para una sesión posterior del curso —no necesariamente la inmediatamente siguiente— es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado.
