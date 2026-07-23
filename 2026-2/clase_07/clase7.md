@@ -460,10 +460,10 @@ Las **cuatro formas aristotélicas** (llamadas A, E, I, O desde la lógica medie
 
 | Forma | Nombre | Enunciado típico | Traducción en lógica de predicados | Emparejamiento clave |
 |:---:|:---|:---|:---:|:---|
-| **A** | Universal afirmativa | *"Todo $S$ es $P$"* | $\forall x\,(S(x) \rightarrow P(x))$ | $\forall$ con $\rightarrow$ |
-| **E** | Universal negativa | *"Ningún $S$ es $P$"* | $\forall x\,(S(x) \rightarrow \neg P(x))$ | $\forall$ con $\rightarrow$ y $\neg$ |
-| **I** | Particular afirmativa | *"Algún $S$ es $P$"* | $\exists x\,(S(x) \land P(x))$ | $\exists$ con $\land$ |
-| **O** | Particular negativa | *"Algún $S$ no es $P$"* | $\exists x\,(S(x) \land \neg P(x))$ | $\exists$ con $\land$ y $\neg$ |
+| **A** | Universal afirmativa | *"Todo $S$ es $P$ "* | $\forall x\,(S(x) \rightarrow P(x))$ | $\forall$ con $\rightarrow$ |
+| **E** | Universal negativa | *"Ningún $S$ es $P$ "* | $\forall x\,(S(x) \rightarrow \neg P(x))$ | $\forall$ con $\rightarrow$ y $\neg$ |
+| **I** | Particular afirmativa | *"Algún $S$ es $P$ "* | $\exists x\,(S(x) \land P(x))$ | $\exists$ con $\land$ |
+| **O** | Particular negativa | *"Algún $S$ no es $P$ "* | $\exists x\,(S(x) \land \neg P(x))$ | $\exists$ con $\land$ y $\neg$ |
 
 Observe el patrón que anticipamos en la Parte III: las dos formas **universales** (A, E) usan $\forall$ con $\rightarrow$; las dos **particulares** (I, O) usan $\exists$ con $\land$.
 
