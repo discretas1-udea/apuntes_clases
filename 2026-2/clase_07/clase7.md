@@ -200,7 +200,7 @@ La distinción entre constante y variable es la misma que en programación:
 - $x$ es una **variable**: no sabemos quién es, puede cambiar. Escribimos $persona(x)$: *"x es una persona"*.
 - $homero$ es una **constante**: se refiere a un individuo específico del universo. Escribimos $persona(homero)$: *"Homero es una persona"*.
 
-En símbolos, decir que la variable $x$ toma valores en el universo $U$ se escribe $x \in U$, o de forma más explícita $\{\,x \mid x \in U\,\}$, que se lee *"los x tales que x pertenece a U"*.
+En símbolos, decir que la variable $x$ toma valores en el universo $U$ se escribe $x \in U$, o de forma más explícita $\{\ x \mid x \in U\ \}$, que se lee *"los x tales que x pertenece a U"*.
 
 ## II.5 Predicado
 
@@ -246,7 +246,7 @@ Una función proposicional se convierte en **proposición** (con valor de verdad
 1. **Asignándole valores** a sus variables (reemplazando la variable por un objeto concreto).
 2. **Cuantificando todas sus variables libres** (lo veremos en la Parte III).
 
-En el segundo camino hay un matiz importante: el cuantificador debe ligar **todas** las variables que quedan libres, no solo alguna. Por ejemplo, con el predicado binario $R(x, y)$, la expresión $\forall x\, R(x, y)$ **todavía no es una proposición**: $x$ quedó ligada por el cuantificador, pero $y$ sigue libre. Solo al ligar también $y$ —con otro cuantificador, o asignándole un valor— se obtiene una proposición completa.
+En el segundo camino hay un matiz importante: el cuantificador debe ligar **todas** las variables que quedan libres, no solo alguna. Por ejemplo, con el predicado binario $R(x, y)$, la expresión $\forall x\ R(x, y)$ **todavía no es una proposición**: $x$ quedó ligada por el cuantificador, pero $y$ sigue libre. Solo al ligar también $y$ —con otro cuantificador, o asignándole un valor— se obtiene una proposición completa.
 
 Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los números enteros.
 
@@ -257,7 +257,7 @@ Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los núm
 | $P(x)$ | Función proposicional (1 variable) — sin valor de verdad |
 | $P(7)$ | Proposición **verdadera** ($7 > 5$) |
 | $P(3)$ | Proposición **falsa** ($3 \not> 5$) |
-| $\forall x\, P(x)$ | Proposición general (con cuantificador) |
+| $\forall x\ P(x)$ | Proposición general (con cuantificador) |
 
 **Ejemplo con tres variables.** Sea $R(x, y, z):\ x + y = z$.
 
@@ -276,10 +276,10 @@ Note el último caso: si fijamos **algunas** variables pero dejamos otras libres
 |:---:|:---:|:---:|:---|
 | $P(x)$ | $x$ | — | Función proposicional |
 | $P(a)$ (con $a$ una constante) | — | — | Proposición |
-| $\forall x\, P(x)$ | — | $x$ | Proposición |
+| $\forall x\ P(x)$ | — | $x$ | Proposición |
 | $R(x, y)$ | $x$, $y$ | — | Función proposicional |
-| $\forall x\, R(x, y)$ | $y$ | $x$ | **Sigue siendo función proposicional** — $y$ no fue alcanzada por ningún cuantificador |
-| $\forall x\, R(x, 3)$ | — | $x$ | Proposición — $x$ quedó ligada por el cuantificador y $y$ fue reemplazada por el valor $3$ |
+| $\forall x\ R(x, y)$ | $y$ | $x$ | **Sigue siendo función proposicional** — $y$ no fue alcanzada por ningún cuantificador |
+| $\forall x\ R(x, 3)$ | — | $x$ | Proposición — $x$ quedó ligada por el cuantificador y $y$ fue reemplazada por el valor $3$ |
 
 > [!NOTE]
 > **Predicado y función proposicional: ¿son lo mismo?** En cursos introductorios, muchos textos usan ambos términos casi como sinónimos, y para efectos prácticos de esta clase puede tratarlos así. La distinción fina es: el **predicado** es la propiedad o relación en sí ($funciona$, $enfermo$), y la **función proposicional** es la expresión que se obtiene al aplicarlo a variables ($funciona(x)$). Formalmente, **predicado** es el término más usado en lógica de primer orden.
@@ -288,14 +288,14 @@ Note el último caso: si fijamos **algunas** variables pero dejamos otras libres
 
 > [!IMPORTANT]
 > El **conjunto de verdad** de un predicado $P(x)$ es el **subconjunto del dominio** $D$ formado por **todos los elementos para los cuales el predicado es verdadero**. Se escribe:
-> $$\{\,x \in D \mid P(x)\text{ es verdadero}\,\}$$
+> $$\{\ x \in D \mid P(x)\text{ es verdadero}\ \}$$
 
 Es la forma de responder *"¿para cuáles objetos se cumple esta propiedad?"*. Un ejemplo con los Transformers: sea $D$ el dominio de todos los Transformers (Autobots y Decepticons) y el predicado $autobot(x):\ x$ *es un autobot*. El conjunto de verdad es:
 
 <img src="images/transformers.png" alt="Los Autobots en acción; el conjunto de verdad de autobot(x) reúne a los que cumplen la propiedad" width="320">
 
 
-$$\{\,x \in D \mid autobot(x)\,\}$$
+$$\{\ x \in D \mid autobot(x)\ \}$$
 
 es decir, el subconjunto de los Transformers que son autobots. Evaluando el predicado en dos objetos concretos:
 
@@ -308,7 +308,7 @@ Así, $optimus$ **pertenece** al conjunto de verdad y $megatron$ **no**.
 >
 > <details><summary>Ver respuesta</summary>
 >
-> El conjunto de verdad es $\{\,x \in U \mid tieneVirus(x)\,\} = \{L5, L7\}$: exactamente los objetos del universo para los cuales el predicado es verdadero. Todos los demás computadores quedan fuera de ese conjunto.
+> El conjunto de verdad es $\{\ x \in U \mid tieneVirus(x)\ \} = \{L5, L7\}$: exactamente los objetos del universo para los cuales el predicado es verdadero. Todos los demás computadores quedan fuera de ese conjunto.
 >
 > </details>
 
@@ -331,11 +331,11 @@ La idea es visual. Partimos de un objeto genérico $x$ y de un predicado, por ej
 
 Ahora aplicamos cada cuantificador sobre una población de caritas:
 
-**Cuantificador existencial — $\exists x\, smiling(x)$** (*"existe al menos una carita que sonríe"*): basta con que **una** cumpla. En la siguiente población, algunas sonríen y otras no — y como **hay al menos una** sonriendo, la proposición es **verdadera**.
+**Cuantificador existencial — $\exists x\ smiling(x)$** (*"existe al menos una carita que sonríe"*): basta con que **una** cumpla. En la siguiente población, algunas sonríen y otras no — y como **hay al menos una** sonriendo, la proposición es **verdadera**.
 
 <img src="images/cuantificador_existencial.png" alt="Población de caritas, algunas sonriendo y otras no; basta una para el existencial" width="360">
 
-**Cuantificador universal — $\forall x\, smiling(x)$** (*"todas las caritas sonríen"*): se exige que **todas** cumplan. En esta otra población, **todas** sonríen, así que la proposición es **verdadera**. (Si una sola no sonriera, sería falsa.)
+**Cuantificador universal — $\forall x\ smiling(x)$** (*"todas las caritas sonríen"*): se exige que **todas** cumplan. En esta otra población, **todas** sonríen, así que la proposición es **verdadera**. (Si una sola no sonriera, sería falsa.)
 
 <img src="images/cuantificador_universal.png" alt="Población de caritas donde todas sonríen; el universal se cumple" width="360">
 
@@ -343,39 +343,39 @@ Ahora aplicamos cada cuantificador sobre una población de caritas:
 
 Este es el punto clave que conecta con la Parte II. Recuerde que $smiling(x)$, por sí sola, es una **función proposicional**: no es verdadera ni falsa hasta que sepamos quién es $x$. Pero al anteponerle un cuantificador, la expresión pasa a hablar de **toda la población de una vez**, y entonces **sí** tiene un valor de verdad definido:
 
-$$\underbrace{smiling(x)}_{\text{función proposicional (sin V/F)}} \qquad\longrightarrow\qquad \underbrace{\forall x\, smiling(x)}_{\text{proposición (V o F)}}$$
+$$\underbrace{smiling(x)}_{\text{función proposicional (sin V/F)}} \qquad\longrightarrow\qquad \underbrace{\forall x\ smiling(x)}_{\text{proposición (V o F)}}$$
 
 Volviendo al ejemplo con el que abrimos la Parte I: *"Todos los computadores del laboratorio están funcionando correctamente"* ya no es una caja cerrada. Ahora la podemos escribir así:
 
-$$\forall x\, \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
+$$\forall x\ \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
 
 que se lee *"para todo x, si x es un computador del laboratorio, entonces x funciona"*. Y de una afirmación así **sí** podemos deducir, por ejemplo, que si `L1` es un computador del laboratorio, entonces `L1` funciona. Exactamente lo que la lógica proposicional no podía hacer.
 
 > [!NOTE]
-> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ($L1,\dots,L8$) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\, funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
+> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ($L1,\dots,L8$) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\ funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
 
 > [!WARNING]
 > **El error más común al cuantificar: emparejar mal el cuantificador y el conectivo.** Hay una regla práctica que evita la mayoría de los errores de traducción:
 > - El cuantificador **universal** $\forall$ se empareja casi siempre con la **implicación** $\rightarrow$.
 > - El cuantificador **existencial** $\exists$ se empareja casi siempre con la **conjunción** $\land$.
 >
-> Es decir, se escribe $\forall x\,(S(x) \rightarrow P(x))$ y $\exists x\,(S(x) \land P(x))$. Escribir $\exists x\,(S(x) \rightarrow P(x))$ es casi siempre un error: por la tabla de verdad de $\rightarrow$, esa expresión se vuelve verdadera de forma "tramposa" apenas exista **un solo** objeto que **no** cumpla $S(x)$ (porque entonces el antecedente es falso y la implicación, verdadera), sin importar nada sobre $P$. En la Parte V veremos esto con las formas aristotélicas.
+> Es decir, se escribe $\forall x\ (S(x) \rightarrow P(x))$ y $\exists x\ (S(x) \land P(x))$. Escribir $\exists x\ (S(x) \rightarrow P(x))$ es casi siempre un error: por la tabla de verdad de $\rightarrow$, esa expresión se vuelve verdadera de forma "tramposa" apenas exista **un solo** objeto que **no** cumpla $S(x)$ (porque entonces el antecedente es falso y la implicación, verdadera), sin importar nada sobre $P$. En la Parte V veremos esto con las formas aristotélicas.
 
 ## III.3 Negar un cuantificador
 
 > [!IMPORTANT]
 > Negar una afirmación cuantificada **cambia el cuantificador**:
-> - $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ — *"no todos cumplen P"* equivale a *"existe al menos uno que no cumple P"*.
-> - $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$ — *"no existe ninguno que cumpla P"* equivale a *"todos incumplen P"*.
+> - $\neg\ \forall x\ P(x) \equiv \exists x\ \neg P(x)$ — *"no todos cumplen P"* equivale a *"existe al menos uno que no cumple P"*.
+> - $\neg\ \exists x\ P(x) \equiv \forall x\ \neg P(x)$ — *"no existe ninguno que cumpla P"* equivale a *"todos incumplen P"*.
 
 La intuición: decir *"no todos los pollos robot funcionan"* no significa que ninguno funcione — significa que **al menos uno** falla. Y decir *"no existe ningún pollo con virus"* sí significa que **todos** están limpios. En ambos casos, la negación "empuja" hacia adentro del cuantificador y lo invierte: $\forall$ se convierte en $\exists$ (o viceversa), y el predicado queda negado.
 
 > [!TIP]
-> **Compruebe su comprensión.** ¿Cuál es la negación de $\forall x\, tieneVirus(x)$ (*"todos los pollos tienen virus"*), simplificada hasta dejarla como un existencial? ¿Qué dice en lenguaje natural?
+> **Compruebe su comprensión.** ¿Cuál es la negación de $\forall x\ tieneVirus(x)$ (*"todos los pollos tienen virus"*), simplificada hasta dejarla como un existencial? ¿Qué dice en lenguaje natural?
 >
 > <details><summary>Ver respuesta</summary>
 >
-> $\neg\,\forall x\, tieneVirus(x) \equiv \exists x\, \neg tieneVirus(x)$: *"existe al menos un pollo robot que no tiene virus"*. Note que negar *"todos"* no da *"ninguno"* — da *"no todos"*, que es más débil.
+> $\neg\ \forall x\ tieneVirus(x) \equiv \exists x\ \neg tieneVirus(x)$: *"existe al menos un pollo robot que no tiene virus"*. Note que negar *"todos"* no da *"ninguno"* — da *"no todos"*, que es más débil.
 >
 > </details>
 
@@ -389,8 +389,8 @@ Los predicados y cuantificadores no viven aislados: se combinan entre sí usando
 
 Un ejemplo. Suponga los predicados:
 
-- $P(x):\ $ *"x es un profesor"*
-- $Q(x):\ $ *"x es un ingeniero"*
+- $P(x):$ *"x es un profesor"*
+- $Q(x):$ *"x es un ingeniero"*
 
 La expresión compuesta *"x es un profesor **y** x es un ingeniero"* se escribe:
 
@@ -435,11 +435,11 @@ La distinción más útil de esta tabla es la última fila: una **función** (en
 
 Una de las habilidades centrales de esta rama —y una de las más útiles para un ingeniero— es **traducir** entre el lenguaje natural (cómo hablamos) y el lenguaje formal (cómo escribe la lógica). Es importante en dos direcciones: para dar sentido preciso a conceptos matemáticos nuevos, y para analizar con rigor un problema complicado (por ejemplo, leer un requisito de software y capturar exactamente lo que pide, sin ambigüedad).
 
-<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal">
+<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal" width="420">
 
 Un ejemplo de traducción de lenguaje natural a formal, con Homero: *"Sin tele y sin cerveza, Homero pierde la cabeza"*. Con los predicados $C(x)$: *"x es cerveza"*, $T(y)$: *"y es tele"*, $P(z)$: *"z pierde la cabeza"*, y la constante $h$ (Homero), la frase se formaliza como:
 
-$$\bigl(\neg\exists x\, C(x) \land \neg\exists y\, T(y)\bigr) \rightarrow P(h)$$
+$$\bigl(\neg\exists x\ C(x) \land \neg\exists y\ T(y)\bigr) \rightarrow P(h)$$
 
 *"Si no existe cerveza y no existe tele, entonces Homero pierde la cabeza"*.
 
@@ -460,15 +460,15 @@ Las **cuatro formas aristotélicas** (llamadas A, E, I, O desde la lógica medie
 
 | Forma | Nombre | Enunciado típico | Traducción en lógica de predicados | Emparejamiento clave |
 |:---:|:---|:---|:---:|:---|
-| **A** | Universal afirmativa | *"Todo S es P"* | $\forall x\,(S(x) \rightarrow P(x))$ | $\forall$ con $\rightarrow$ |
-| **E** | Universal negativa | *"Ningún S es P"* | $\forall x\,(S(x) \rightarrow \neg P(x))$ | $\forall$ con $\rightarrow$ y $\neg$ |
-| **I** | Particular afirmativa | *"Algún S es P"* | $\exists x\,(S(x) \land P(x))$ | $\exists$ con $\land$ |
-| **O** | Particular negativa | *"Algún S no es P"* | $\exists x\,(S(x) \land \neg P(x))$ | $\exists$ con $\land$ y $\neg$ |
+| **A** | Universal afirmativa | *"Todo S es P"* | $\forall x\ (S(x) \rightarrow P(x))$ | $\forall$ con $\rightarrow$ |
+| **E** | Universal negativa | *"Ningún S es P"* | $\forall x\ (S(x) \rightarrow \neg P(x))$ | $\forall$ con $\rightarrow$ y $\neg$ |
+| **I** | Particular afirmativa | *"Algún S es P"* | $\exists x\ (S(x) \land P(x))$ | $\exists$ con $\land$ |
+| **O** | Particular negativa | *"Algún S no es P"* | $\exists x\ (S(x) \land \neg P(x))$ | $\exists$ con $\land$ y $\neg$ |
 
 Observe el patrón que anticipamos en la Parte III: las dos formas **universales** (A, E) usan $\forall$ con $\rightarrow$; las dos **particulares** (I, O) usan $\exists$ con $\land$.
 
 > [!WARNING]
-> **Error común en la forma I.** Para *"Algún S es P"* se tiende a escribir, por error, $\exists x\,(S(x) \rightarrow P(x))$ en lugar de $\exists x\,(S(x) \land P(x))$. Con la implicación $\rightarrow$, la expresión se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto $x$ para el cual $S(x)$ sea **falso** (antecedente falso $\Rightarrow$ implicación verdadera), lo que **no** captura el significado de *"algún S es P"*. La forma correcta con $\exists$ es siempre con $\land$: exige que **exista** un objeto que sea $S$ **y además** sea $P$.
+> **Error común en la forma I.** Para *"Algún S es P"* se tiende a escribir, por error, $\exists x\ (S(x) \rightarrow P(x))$ en lugar de $\exists x\ (S(x) \land P(x))$. Con la implicación $\rightarrow$, la expresión se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto $x$ para el cual $S(x)$ sea **falso** (antecedente falso $\Rightarrow$ implicación verdadera), lo que **no** captura el significado de *"algún S es P"*. La forma correcta con $\exists$ es siempre con $\land$: exige que **exista** un objeto que sea $S$ **y además** sea $P$.
 
 ---
 
@@ -493,14 +493,14 @@ Considere el enunciado:
 
 **Paso 1 — Formalizar el enunciado base.** Definimos el diccionario: $B(x)$: *"x es jugador de baloncesto"*, $A(x)$: *"x es alto"*. El enunciado *"para todo jugador de baloncesto x, x es alto"* tiene la estructura de una **forma A** (universal afirmativa: *"todo B es A"*):
 
-$$\forall x\,\bigl(B(x) \rightarrow A(x)\bigr)$$
+$$\forall x\ \bigl(B(x) \rightarrow A(x)\bigr)$$
 
 **Paso 2 — Comparar cada opción con esa estructura.** Una frase es equivalente si, y solo si, tiene la misma forma lógica. Revisemos:
 
-- **(a), (e), (f)** son tres maneras distintas de decir *"todo jugador de baloncesto es alto"* — todas se formalizan como $\forall x\,(B(x) \rightarrow A(x))$. **Son equivalentes.** ✔
-- **(b)** dice *"algunos jugadores son altos"*: eso es $\exists x\,(B(x) \land A(x))$ (forma I). Afirma menos que el original (el original dice *todos*, no *algunos*). **No equivalente.**
-- **(c)** dice *"algunas personas altas son jugadores"*: $\exists x\,(A(x) \land B(x))$. También es un existencial, no un universal. **No equivalente.**
-- **(d)** dice *"cualquier persona alta es jugador"*: $\forall x\,(A(x) \rightarrow B(x))$. ¡Ojo! Esto **invierte la flecha**: afirma que ser alto implica ser jugador, que es lo contrario de lo que dice el original. **No equivalente.**
+- **(a), (e), (f)** son tres maneras distintas de decir *"todo jugador de baloncesto es alto"* — todas se formalizan como $\forall x\ (B(x) \rightarrow A(x))$. **Son equivalentes.** ✔
+- **(b)** dice *"algunos jugadores son altos"*: eso es $\exists x\ (B(x) \land A(x))$ (forma I). Afirma menos que el original (el original dice *todos*, no *algunos*). **No equivalente.**
+- **(c)** dice *"algunas personas altas son jugadores"*: $\exists x\ (A(x) \land B(x))$. También es un existencial, no un universal. **No equivalente.**
+- **(d)** dice *"cualquier persona alta es jugador"*: $\forall x\ (A(x) \rightarrow B(x))$. ¡Ojo! Esto **invierte la flecha**: afirma que ser alto implica ser jugador, que es lo contrario de lo que dice el original. **No equivalente.**
 
 **Respuesta.** Las formas equivalentes son **(a), (e) y (f)**.
 
@@ -511,20 +511,20 @@ $$\forall x\,\bigl(B(x) \rightarrow A(x)\bigr)$$
 
 Traduzca las siguientes expresiones a lenguaje natural, donde $C(x)$: *"x es un comediante"* y $F(x)$: *"x es gracioso"*, y el dominio son todas las personas.
 
-**(a)** $\forall x\,(C(x) \rightarrow F(x))$
-**(b)** $\forall x\,(C(x) \land F(x))$
-**(c)** $\exists x\,(C(x) \rightarrow F(x))$
-**(d)** $\exists x\,(C(x) \land F(x))$
+**(a)** $\forall x\ (C(x) \rightarrow F(x))$
+**(b)** $\forall x\ (C(x) \land F(x))$
+**(c)** $\exists x\ (C(x) \rightarrow F(x))$
+**(d)** $\exists x\ (C(x) \land F(x))$
 
 **Paso 1 — Leer el cuantificador y el conectivo juntos.** La clave es interpretar el emparejamiento cuantificador–conectivo con cuidado, sobre todo distinguir las formas "sanas" (A e I) de las que producen lecturas raras.
 
-**(a)** $\forall x\,(C(x) \rightarrow F(x))$ — forma A. Se lee: ***"Todo comediante es gracioso"*** (para toda persona, si es comediante entonces es graciosa).
+**(a)** $\forall x\ (C(x) \rightarrow F(x))$ — forma A. Se lee: ***"Todo comediante es gracioso"*** (para toda persona, si es comediante entonces es graciosa).
 
-**(b)** $\forall x\,(C(x) \land F(x))$ — universal con conjunción. Se lee: ***"Todas las personas son comediantes y graciosas"***. Note lo fuerte (y absurdo) de la afirmación: no dice algo sobre los comediantes, sino que **toda persona del universo** es a la vez comediante y graciosa.
+**(b)** $\forall x\ (C(x) \land F(x))$ — universal con conjunción. Se lee: ***"Todas las personas son comediantes y graciosas"***. Note lo fuerte (y absurdo) de la afirmación: no dice algo sobre los comediantes, sino que **toda persona del universo** es a la vez comediante y graciosa.
 
-**(c)** $\exists x\,(C(x) \rightarrow F(x))$ — existencial con implicación. Se lee literalmente: *"Existe una persona tal que, si es comediante, entonces es graciosa"*. Es una afirmación **lógicamente débil**: basta que exista una sola persona que **no** sea comediante para que sea verdadera (antecedente falso). Por eso, como vimos en la advertencia de la Parte V, esta forma casi nunca captura lo que uno quiere decir.
+**(c)** $\exists x\ (C(x) \rightarrow F(x))$ — existencial con implicación. Se lee literalmente: *"Existe una persona tal que, si es comediante, entonces es graciosa"*. Es una afirmación **lógicamente débil**: basta que exista una sola persona que **no** sea comediante para que sea verdadera (antecedente falso). Por eso, como vimos en la advertencia de la Parte V, esta forma casi nunca captura lo que uno quiere decir.
 
-**(d)** $\exists x\,(C(x) \land F(x))$ — forma I. Se lee: ***"Existe (hay) al menos un comediante que es gracioso"***.
+**(d)** $\exists x\ (C(x) \land F(x))$ — forma I. Se lee: ***"Existe (hay) al menos un comediante que es gracioso"***.
 
 **Paso 2 — Contrastar (c) y (d).** Este par ilustra perfectamente la advertencia de la Parte V: para expresar *"hay un comediante gracioso"*, la forma correcta es **(d)** con $\land$, no **(c)** con $\rightarrow$. La (c), aunque sintácticamente válida, dice algo mucho más débil y engañoso.
 
@@ -556,9 +556,9 @@ Este ejercicio enseña una lección profunda: **la formalización correcta depen
 
 **Paso 2 — Traducir.** *"No todo (lo que brilla) es oro"* dice que no es cierto que todos los objetos del universo sean oro:
 
-$$\neg\,\forall x\, oro(x)$$
+$$\neg\ \forall x\ oro(x)$$
 
-Por la regla de negación de cuantificadores, esto equivale a $\exists x\,\neg oro(x)$: *"existe algo (que brilla) que no es oro"*.
+Por la regla de negación de cuantificadores, esto equivale a $\exists x\ \neg oro(x)$: *"existe algo (que brilla) que no es oro"*.
 
 **Interpretación 2 — Universo amplio: $U = \{\text{todas las cosas}\}$.**
 
@@ -566,9 +566,9 @@ Por la regla de negación de cuantificadores, esto equivale a $\exists x\,\neg o
 
 **Paso 2 — Traducir.** Ahora la frase afirma que no es cierto que *todo lo que brilla* sea oro:
 
-$$\neg\,\forall x\,\bigl(brilla(x) \rightarrow oro(x)\bigr)$$
+$$\neg\ \forall x\ \bigl(brilla(x) \rightarrow oro(x)\bigr)$$
 
-que equivale a $\exists x\,\bigl(brilla(x) \land \neg oro(x)\bigr)$: *"existe algo que brilla y no es oro"*.
+que equivale a $\exists x\ \bigl(brilla(x) \land \neg oro(x)\bigr)$: *"existe algo que brilla y no es oro"*.
 
 **Paso 3 — La moraleja.** Las dos formalizaciones son correctas y dicen lo mismo *en el mundo real*, pero **se escriben distinto porque el universo es distinto**. En la primera, "brillar" es una condición de pertenencia al universo; en la segunda, es un predicado que hay que verificar. **Antes de traducir, siempre pregúntese: ¿cuál es mi universo?** Esa decisión determina toda la fórmula.
 
@@ -584,14 +584,14 @@ Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y pr
 
 **Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ($mayor21$) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
 
-$$\exists x\,\bigl(\ \underline{\hphantom{mayor21(x)}}\ \bigr)$$
+$$\exists x\ \bigl(\ \underline{\hphantom{mayor21(x)}}\ \bigr)$$
 
 > [!TIP]
 > <details><summary>Ver la respuesta del último paso</summary>
 >
 > La fórmula completa es:
-> $$\exists x\, \bigl(mayor21(x)\bigr)$$
-> que se lee *"existe al menos una persona x tal que x es mayor de 21 años"*. Aquí no hace falta ningún conectivo porque el universo (*"las personas"*) ya delimita el sujeto y solo se afirma una propiedad. Compare con *"algún estudiante es mayor de 21"*, que **sí** requeriría $\exists x\,(estudiante(x) \land mayor21(x))$ — forma I, con $\land$— porque ahí *"estudiante"* es una restricción adicional dentro de un universo más amplio.
+> $$\exists x\ \bigl(mayor21(x)\bigr)$$
+> que se lee *"existe al menos una persona x tal que x es mayor de 21 años"*. Aquí no hace falta ningún conectivo porque el universo (*"las personas"*) ya delimita el sujeto y solo se afirma una propiedad. Compare con *"algún estudiante es mayor de 21"*, que **sí** requeriría $\exists x\ (estudiante(x) \land mayor21(x))$ — forma I, con $\land$— porque ahí *"estudiante"* es una restricción adicional dentro de un universo más amplio.
 >
 > </details>
 
@@ -620,17 +620,17 @@ Volvamos al gallinero con el que abrimos la clase. El ingeniero ya no está atad
 
 Ahora el ingeniero puede escribir, por fin, la frase con la que soñaba al inicio — la que la lógica proposicional no sabía representar:
 
-$$\forall x\, funciona(x)$$
+$$\forall x\ funciona(x)$$
 
-*"Para todo x (del gallinero), x funciona"* — es decir, *"todos los pollos robot funcionan"*. Y a diferencia de la caja cerrada $p$ del inicio, de esta afirmación **sí** puede deducir información sobre cada pollo: si $\forall x\, funciona(x)$ es verdadera, entonces en particular $funciona(P3)$ también lo es.
+*"Para todo x (del gallinero), x funciona"* — es decir, *"todos los pollos robot funcionan"*. Y a diferencia de la caja cerrada $p$ del inicio, de esta afirmación **sí** puede deducir información sobre cada pollo: si $\forall x\ funciona(x)$ es verdadera, entonces en particular $funciona(P3)$ también lo es.
 
 Con el mismo vocabulario, el ingeniero formaliza el resto de su tablero de monitoreo:
 
 - *"Existe al menos un pollo robot con el firmware infectado"* — como el universo ya son solo pollos robot y no hay ninguna condición adicional que restrinja el sujeto, basta el predicado directo, sin conectivo (el mismo caso del Problema guiado más adelante):
-$$\exists x\, tieneVirus(x)$$
+$$\exists x\ tieneVirus(x)$$
 
 - *"Ningún pollo robot con virus está operativo"* (forma E, con $\rightarrow$ y $\neg$):
-$$\forall x\,\bigl(tieneVirus(x) \rightarrow \neg funciona(x)\bigr)$$
+$$\forall x\ \bigl(tieneVirus(x) \rightarrow \neg funciona(x)\bigr)$$
 
 - *"Ratchet es el técnico del pollo P3"* (predicado binario, con una constante):
 $$tecnico(ratchet, P3)$$
@@ -646,7 +646,7 @@ Resuelva los siguientes ejercicios. Las respuestas finales están en el **Soluci
 **Definiciones para varios ejercicios.** Universo: el laboratorio de robótica, que incluye los ocho pollos robot ($P1,\dots,P8$) junto con otros dispositivos de monitoreo (cámaras, sensores fijos, estaciones de carga) que **no** son pollos robot. Predicados: $robot(x)$ (*"x es un pollo robot"*), $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"x puede volar"*).
 
 > [!NOTE]
-> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\, funciona(x)$). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
+> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\ funciona(x)$). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
 
 **P1.** Traduzca a lógica de predicados: *"Todos los pollos robot pueden volar."*
 
@@ -658,19 +658,19 @@ Resuelva los siguientes ejercicios. Las respuestas finales están en el **Soluci
 
 **P5.** Identifique a qué **forma aristotélica** (A, E, I u O) corresponde cada una de las expresiones de P1 a P4.
 
-**P6.** Escriba la **negación** de la afirmación *"Todos los pollos robot funcionan"* —es decir, $\neg\,\forall x\,(robot(x)\rightarrow funciona(x))$— y simplifíquela hasta dejarla como un existencial (sin el $\neg$ delante del cuantificador). ¿Qué dice en lenguaje natural?
+**P6.** Escriba la **negación** de la afirmación *"Todos los pollos robot funcionan"* —es decir, $\neg\ \forall x\ (robot(x)\rightarrow funciona(x))$— y simplifíquela hasta dejarla como un existencial (sin el $\neg$ delante del cuantificador). ¿Qué dice en lenguaje natural?
 
-**P7.** Sea el predicado $P(x):\ x$ *es mayor que 5*, con universo los números enteros. Clasifique cada expresión como **función proposicional** o **proposición** (y en este último caso, indique si es V o F): (a) $P(x)$; (b) $P(9)$; (c) $P(2)$; (d) $\exists x\, P(x)$.
+**P7.** Sea el predicado $P(x):\ x$ *es mayor que 5*, con universo los números enteros. Clasifique cada expresión como **función proposicional** o **proposición** (y en este último caso, indique si es V o F): (a) $P(x)$; (b) $P(9)$; (c) $P(2)$; (d) $\exists x\ P(x)$.
 
 **P8.** Sea el predicado $R(x, y, z):\ x + y = z$, con universo los enteros. Determine el valor de verdad de: (a) $R(2, 3, 5)$; (b) $R(4, 1, 6)$. Y clasifique: (c) $R(x, 2, z)$ — ¿función proposicional o proposición?
 
-**P9.** Sea el universo los números enteros y el predicado $C(x):\ x^2 \le 4$. Describa por extensión (listando sus elementos) el **conjunto de verdad** $\{\,x \in \mathbb{Z} \mid C(x)\,\}$.
+**P9.** Sea el universo los números enteros y el predicado $C(x):\ x^2 \le 4$. Describa por extensión (listando sus elementos) el **conjunto de verdad** $\{\ x \in \mathbb{Z} \mid C(x)\ \}$.
 
 **P10.** Para la afirmación *"Todos hablan español"* con predicado $H(x):\ x$ *habla español*: proponga **un universo donde sea verdadera** y **un universo donde sea falsa**. (Este ejercicio muestra que el valor de verdad de una proposición cuantificada depende del universo elegido.)
 
-**P11.** Traduzca a **lenguaje natural** la expresión $\exists x\,\bigl(robot(x) \land \neg funciona(x)\bigr)$.
+**P11.** Traduzca a **lenguaje natural** la expresión $\exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$.
 
-**P12.** Un estudiante tradujo *"Algún pollo robot vuela"* como $\exists x\,\bigl(robot(x) \rightarrow vuela(x)\bigr)$. Explique por qué esta traducción es **incorrecta** y escriba la correcta.
+**P12.** Un estudiante tradujo *"Algún pollo robot vuela"* como $\exists x\ \bigl(robot(x) \rightarrow vuela(x)\bigr)$. Explique por qué esta traducción es **incorrecta** y escriba la correcta.
 
 ---
 
@@ -680,9 +680,9 @@ El ingeniero resolvió casi todo su tablero. Pero al final del día se topó con
 
 > *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
 
-Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x\,\exists y\,(\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
+Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x\ \exists y\ (\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
 
-Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\, C(x) \land \neg\exists y\, T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x\,\exists y$ **no** significa lo mismo que $\exists y\,\forall x$.
+Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\ C(x) \land \neg\exists y\ T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x\ \exists y$ **no** significa lo mismo que $\exists y\ \forall x$.
 
 > [!NOTE]
 > **Lo que viene más adelante.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*, incluso combinando varios cuantificadores independientes. Lo que queda para una sesión posterior del curso —no necesariamente la inmediatamente siguiente— es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado.
@@ -712,8 +712,8 @@ Al finalizar este documento, usted debería ser capaz de:
 | Función (matemática) | Operación sobre objetos; produce **otro objeto** | $doble(x),\ suma(x,y)$ |
 | Función proposicional | Expresión con variables libres; aún **no** es proposición | $P(x) \land Q(x)$ |
 | Conjunto de verdad | Subconjunto del dominio donde el predicado es verdadero | $\{x \in D \mid autobot(x)\}$ |
-| Cuantificador universal | *"Para todo x…"* | $\forall x\, funciona(x)$ |
-| Cuantificador existencial | *"Existe al menos un x…"* | $\exists x\, tieneVirus(x)$ |
+| Cuantificador universal | *"Para todo x…"* | $\forall x\ funciona(x)$ |
+| Cuantificador existencial | *"Existe al menos un x…"* | $\exists x\ tieneVirus(x)$ |
 
 **Verificación de tipos:** los **conectivos** operan sobre proposiciones y producen una proposición; los **predicados** operan sobre objetos y producen una proposición; las **funciones** operan sobre objetos y producen un objeto.
 
@@ -721,14 +721,14 @@ Al finalizar este documento, usted debería ser capaz de:
 
 | Forma | Enunciado | Traducción |
 |:---:|:---|:---:|
-| **A** | Todo $S$ es $P$ | $\forall x\,(S(x) \rightarrow P(x))$ |
-| **E** | Ningún $S$ es $P$ | $\forall x\,(S(x) \rightarrow \neg P(x))$ |
-| **I** | Algún $S$ es $P$ | $\exists x\,(S(x) \land P(x))$ |
-| **O** | Algún $S$ no es $P$ | $\exists x\,(S(x) \land \neg P(x))$ |
+| **A** | Todo $S$ es $P$ | $\forall x\ (S(x) \rightarrow P(x))$ |
+| **E** | Ningún $S$ es $P$ | $\forall x\ (S(x) \rightarrow \neg P(x))$ |
+| **I** | Algún $S$ es $P$ | $\exists x\ (S(x) \land P(x))$ |
+| **O** | Algún $S$ no es $P$ | $\exists x\ (S(x) \land \neg P(x))$ |
 
-**Emparejamiento correcto (patrón de traducción, no regla de formación):** para traducir *"todo S es P"* y *"algún S es P"*, $\forall$ va con $\rightarrow$ y $\exists$ va con $\land$. Escribir $\exists x\,(S(x)\rightarrow P(x))$ para *"algún S es P"* es casi siempre un error — aunque la fórmula sea sintácticamente válida, dice algo distinto (débil y engañoso, ver Ejercicio 2c). El patrón guía la traducción; no prohíbe que $\forall$ aparezca alguna vez con $\land$ (como en $\forall x\,(P(x)\land Q(x))$, que simplemente afirma otra cosa: que todo el universo cumple ambas propiedades a la vez).
+**Emparejamiento correcto (patrón de traducción, no regla de formación):** para traducir *"todo S es P"* y *"algún S es P"*, $\forall$ va con $\rightarrow$ y $\exists$ va con $\land$. Escribir $\exists x\ (S(x)\rightarrow P(x))$ para *"algún S es P"* es casi siempre un error — aunque la fórmula sea sintácticamente válida, dice algo distinto (débil y engañoso, ver Ejercicio 2c). El patrón guía la traducción; no prohíbe que $\forall$ aparezca alguna vez con $\land$ (como en $\forall x\ (P(x)\land Q(x))$, que simplemente afirma otra cosa: que todo el universo cumple ambas propiedades a la vez).
 
-**Negación de cuantificadores:** $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ y $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$.
+**Negación de cuantificadores:** $\neg\ \forall x\ P(x) \equiv \exists x\ \neg P(x)$ y $\neg\ \exists x\ P(x) \equiv \forall x\ \neg P(x)$.
 
 ## Referencias y material para profundizar
 
@@ -755,28 +755,28 @@ Al finalizar este documento, usted debería ser capaz de:
 <summary><b>Presione aquí para ver las respuestas</b></summary>
 <br>
 
-**P1.** $\forall x\,\bigl(robot(x) \rightarrow vuela(x)\bigr)$. *"Para todo x, si x es un pollo robot, entonces x vuela."*
+**P1.** $\forall x\ \bigl(robot(x) \rightarrow vuela(x)\bigr)$. *"Para todo x, si x es un pollo robot, entonces x vuela."*
 
-**P2.** $\exists x\,\bigl(robot(x) \land tieneVirus(x)\bigr)$. *"Existe al menos un x que es pollo robot y tiene el firmware infectado."*
+**P2.** $\exists x\ \bigl(robot(x) \land tieneVirus(x)\bigr)$. *"Existe al menos un x que es pollo robot y tiene el firmware infectado."*
 
-**P3.** $\forall x\,\bigl((robot(x) \land tieneVirus(x)) \rightarrow \neg funciona(x)\bigr)$. *"Para todo x, si x es un pollo robot infectado, entonces x no está operativo."*
+**P3.** $\forall x\ \bigl((robot(x) \land tieneVirus(x)) \rightarrow \neg funciona(x)\bigr)$. *"Para todo x, si x es un pollo robot infectado, entonces x no está operativo."*
 
-**P4.** $\exists x\,\bigl(robot(x) \land \neg funciona(x)\bigr)$. Es la **forma O** (particular negativa: *"algún S no es P"*), con $\exists$ y $\land$.
+**P4.** $\exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$. Es la **forma O** (particular negativa: *"algún S no es P"*), con $\exists$ y $\land$.
 
 **P5.** P1 → **forma A** (universal afirmativa). P2 → **forma I** (particular afirmativa). P3 → **forma E** (universal negativa; aquí el sujeto $S$ es "pollo robot infectado"). P4 → **forma O** (particular negativa).
 
-**P6.** $\neg\,\forall x\,(robot(x)\rightarrow funciona(x)) \equiv \exists x\,\bigl(robot(x) \land \neg funciona(x)\bigr)$. En lenguaje natural: *"Existe al menos un pollo robot que no funciona"* (es decir, *"no todos funcionan"*). Note que la negación de una **forma A** produce una **forma O**.
+**P6.** $\neg\ \forall x\ (robot(x)\rightarrow funciona(x)) \equiv \exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$. En lenguaje natural: *"Existe al menos un pollo robot que no funciona"* (es decir, *"no todos funcionan"*). Note que la negación de una **forma A** produce una **forma O**.
 
-**P7.** (a) $P(x)$: **función proposicional** (variable libre). (b) $P(9)$: **proposición verdadera** ($9 > 5$). (c) $P(2)$: **proposición falsa** ($2 \not> 5$). (d) $\exists x\, P(x)$: **proposición verdadera** (existen enteros mayores que 5, p. ej. 6).
+**P7.** (a) $P(x)$: **función proposicional** (variable libre). (b) $P(9)$: **proposición verdadera** ($9 > 5$). (c) $P(2)$: **proposición falsa** ($2 \not> 5$). (d) $\exists x\ P(x)$: **proposición verdadera** (existen enteros mayores que 5, p. ej. 6).
 
 **P8.** (a) $R(2,3,5)$: **verdadera** ($2+3=5$). (b) $R(4,1,6)$: **falsa** ($4+1=5 \neq 6$). (c) $R(x,2,z)$: **función proposicional** (le quedan dos variables libres, $x$ y $z$).
 
-**P9.** $\{\,x \in \mathbb{Z} \mid x^2 \le 4\,\} = \{-2, -1, 0, 1, 2\}$. (Son los enteros cuyo cuadrado no pasa de 4; $(\pm 3)^2 = 9 > 4$ quedan fuera.)
+**P9.** $\{\ x \in \mathbb{Z} \mid x^2 \le 4\ \} = \{-2, -1, 0, 1, 2\}$. (Son los enteros cuyo cuadrado no pasa de 4; $(\pm 3)^2 = 9 > 4$ quedan fuera.)
 
-**P10.** Un ejemplo: la afirmación *"todos hablan español"* es **verdadera** si el universo es *"los habitantes de un pueblo hispanohablante"* (o *"los miembros de una familia colombiana"*), y **falsa** si el universo es *"todos los seres humanos"* (hay millones que no hablan español). La misma fórmula $\forall x\, H(x)$ cambia de valor de verdad según el universo — esa es la lección.
+**P10.** Un ejemplo: la afirmación *"todos hablan español"* es **verdadera** si el universo es *"los habitantes de un pueblo hispanohablante"* (o *"los miembros de una familia colombiana"*), y **falsa** si el universo es *"todos los seres humanos"* (hay millones que no hablan español). La misma fórmula $\forall x\ H(x)$ cambia de valor de verdad según el universo — esa es la lección.
 
 **P11.** *"Existe al menos un pollo robot que no está operativo"* (equivalentemente, *"algún pollo robot está averiado"*).
 
-**P12.** Es incorrecta porque empareja $\exists$ con $\rightarrow$. Con esa forma, la expresión $\exists x\,(robot(x) \rightarrow vuela(x))$ se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto del universo que **no** sea pollo robot (antecedente falso $\Rightarrow$ implicación verdadera), sin que ningún pollo vuele realmente. La traducción correcta usa $\land$ (forma I): $\exists x\,\bigl(robot(x) \land vuela(x)\bigr)$.
+**P12.** Es incorrecta porque empareja $\exists$ con $\rightarrow$. Con esa forma, la expresión $\exists x\ (robot(x) \rightarrow vuela(x))$ se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto del universo que **no** sea pollo robot (antecedente falso $\Rightarrow$ implicación verdadera), sin que ningún pollo vuele realmente. La traducción correcta usa $\land$ (forma I): $\exists x\ \bigl(robot(x) \land vuela(x)\bigr)$.
 
 </details>
