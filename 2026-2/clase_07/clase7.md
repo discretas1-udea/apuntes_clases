@@ -10,7 +10,7 @@
 
 ## Cerrando el caso anterior
 
-En la sesión pasada terminamos cazando un *bug* con reglas de inferencia, y dejamos una promesa escrita al final: hasta ese punto, todos nuestros argumentos hablaban de **proposiciones completas** ($p$: *"falló la caché"*, $q$: *"el sitio está en línea"*). Cada proposición era una caja cerrada: verdadera o falsa, y nada más.
+En la sesión pasada terminamos cazando un *bug* con reglas de inferencia, y dejamos una promesa escrita al final: hasta ese punto, todos nuestros argumentos hablaban de **proposiciones completas** ( $p$: *"falló la caché"*, $q$: *"el sitio está en línea"*). Cada proposición era una caja cerrada: verdadera o falsa, y nada más.
 
 Pero muchísimos razonamientos reales no son así. Hablan de *"todos"* y de *"algunos"*:
 
@@ -93,7 +93,7 @@ El ejemplo anterior no es un accidente: expone tres carencias estructurales de l
 | Limitación | En qué consiste |
 |:---|:---|
 | **No distingue el contenido interno de las proposiciones.** | Trata cada enunciado como un átomo indivisible. No puede razonar sobre los objetos individuales que aparecen dentro de la frase. Con lo que afirma $p$ no hay forma de saber que existe una contradicción entre *"todos funcionan"* y *"`L4` tiene el SO dañado"*, porque la teoría no sabe que `L4` es uno de los computadores de los que habla $p$. |
-| **No expresa generalizaciones ni excepciones de forma general.** | No puede decir cosas como *"todos los computadores **excepto** `L4` funcionan"*, ni reglas del tipo *"**si** un computador tiene virus, **entonces** no funciona bien"* — al menos no de manera compacta y uniforme. En un universo finito y pequeño, sí podría enumerarse caso por caso con una letra proposicional distinta para cada computador (algo como $q_1 \land q_2 \land \neg q_4 \land \dots$), pero eso no escala: para cien computadores harían falta cien letras sueltas, y ninguna regla general que las conecte. |
+| **No expresa generalizaciones ni excepciones de forma general.** | No puede decir cosas como *"todos los computadores **excepto** `L4` funcionan"*, ni reglas del tipo *"**si** un computador tiene virus, **entonces** no funciona bien"* — al menos no de manera compacta y uniforme. En un universo finito y pequeño, sí podría enumerarse caso por caso con una letra proposicional distinta para cada computador (algo como $q_1 \land q_2 \land \neg q_4 \land \dots$ ), pero eso no escala: para cien computadores harían falta cien letras sueltas, y ninguna regla general que las conecte. |
 | **No conecta internamente las ideas.** | Como no ve el interior de las frases, no puede establecer relaciones lógicas complejas entre ellas. No hay forma de responder preguntas como *"¿qué computadores pertenecen al laboratorio?"*, *"¿qué significa exactamente 'funcionar correctamente'?"* o *"¿un computador con virus funciona o no?"*. |
 
 > [!IMPORTANT]
@@ -138,7 +138,7 @@ que se lee *"`L1` está funcionando correctamente"*. La diferencia con $p$ es ab
 >
 > <details><summary>Ver respuesta</summary>
 >
-> En lógica proposicional hacen falta **tres letras distintas** ($p$, $q$, $r$), sin ninguna relación visible entre ellas. En lógica de predicados basta **un solo predicado** $funciona(x)$ aplicado a tres objetos: $funciona(L1)$, $funciona(L2)$, $funciona(L3)$. La estructura común ("…funciona") queda capturada una sola vez. Esa economía es justamente lo que nos permitirá, más adelante, decir "todos funcionan" de un solo golpe.
+> En lógica proposicional hacen falta **tres letras distintas** ( $p$, $q$, $r$ ), sin ninguna relación visible entre ellas. En lógica de predicados basta **un solo predicado** $funciona(x)$ aplicado a tres objetos: $funciona(L1)$, $funciona(L2)$, $funciona(L3)$. La estructura común ("…funciona") queda capturada una sola vez. Esa economía es justamente lo que nos permitirá, más adelante, decir "todos funcionan" de un solo golpe.
 >
 > </details>
 
@@ -229,7 +229,7 @@ $$enfermo(optimus)$$
 
 $$medico(ratchet, optimus)$$
 
-**Predicado ternario.** *"Ratchet le dijo a Optimus que está averiado"* relaciona **tres** cosas: quién habla ($ratchet$), a quién ($optimus$) y qué ($enfermo(optimus)$). Usamos un predicado ternario:
+**Predicado ternario.** *"Ratchet le dijo a Optimus que está averiado"* relaciona **tres** cosas: quién habla ( $ratchet$ ), a quién ( $optimus$ ) y qué ( $enfermo(optimus)$ ). Usamos un predicado ternario:
 
 $$dijo(ratchet,\ optimus,\ enfermo(optimus))$$
 
@@ -239,7 +239,7 @@ $$dijo(ratchet,\ optimus,\ enfermo(optimus))$$
 ## II.6 Función proposicional
 
 > [!IMPORTANT]
-> Una **función proposicional** es una expresión lógica que **contiene variables libres** ($x$, $y$, …) y que **todavía no es una proposición completa** —es decir, todavía no tiene un valor de verdad definido—.
+> Una **función proposicional** es una expresión lógica que **contiene variables libres** ( $x$, $y$, …) y que **todavía no es una proposición completa** —es decir, todavía no tiene un valor de verdad definido—.
 
 Una función proposicional se convierte en **proposición** (con valor de verdad V o F) de dos maneras:
 
@@ -255,8 +255,8 @@ Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los núm
 | Expresión | ¿Qué es? |
 |:---:|:---|
 | $P(x)$ | Función proposicional (1 variable) — sin valor de verdad |
-| $P(7)$ | Proposición **verdadera** ($7 > 5$) |
-| $P(3)$ | Proposición **falsa** ($3 \not> 5$) |
+| $P(7)$ | Proposición **verdadera** ( $7 > 5$ ) |
+| $P(3)$ | Proposición **falsa** ( $3 \not> 5$ ) |
 | $\forall x\ P(x)$ | Proposición general (con cuantificador) |
 
 **Ejemplo con tres variables.** Sea $R(x, y, z):\ x + y = z$.
@@ -264,9 +264,9 @@ Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los núm
 | Expresión | ¿Qué es? |
 |:---:|:---|
 | $R(x, y, z)$ | Función proposicional (3 variables) |
-| $R(2, -1, 5)$ | Proposición **falsa** ($2 + (-1) = 1 \neq 5$) |
-| $R(3, 4, 7)$ | Proposición **verdadera** ($3 + 4 = 7$) |
-| $R(x, 3, z)$ | Función proposicional (2 variables libres: $x$ y $z$) |
+| $R(2, -1, 5)$ | Proposición **falsa** ( $2 + (-1) = 1 \neq 5$ ) |
+| $R(3, 4, 7)$ | Proposición **verdadera** ( $3 + 4 = 7$ ) |
+| $R(x, 3, z)$ | Función proposicional (2 variables libres: $x$ y $z$ ) |
 
 Note el último caso: si fijamos **algunas** variables pero dejamos otras libres, seguimos teniendo una función proposicional (con menos variables), no todavía una proposición.
 
@@ -282,7 +282,7 @@ Note el último caso: si fijamos **algunas** variables pero dejamos otras libres
 | $\forall x\ R(x, 3)$ | — | $x$ | Proposición — $x$ quedó ligada por el cuantificador y $y$ fue reemplazada por el valor $3$ |
 
 > [!NOTE]
-> **Predicado y función proposicional: ¿son lo mismo?** En cursos introductorios, muchos textos usan ambos términos casi como sinónimos, y para efectos prácticos de esta clase puede tratarlos así. La distinción fina es: el **predicado** es la propiedad o relación en sí ($funciona$, $enfermo$), y la **función proposicional** es la expresión que se obtiene al aplicarlo a variables ($funciona(x)$). Formalmente, **predicado** es el término más usado en lógica de primer orden.
+> **Predicado y función proposicional: ¿son lo mismo?** En cursos introductorios, muchos textos usan ambos términos casi como sinónimos, y para efectos prácticos de esta clase puede tratarlos así. La distinción fina es: el **predicado** es la propiedad o relación en sí ( $funciona$, $enfermo$ ), y la **función proposicional** es la expresión que se obtiene al aplicarlo a variables ( $funciona(x)$ ). Formalmente, **predicado** es el término más usado en lógica de primer orden.
 
 ## II.7 Conjunto de verdad
 
@@ -352,7 +352,7 @@ $$\forall x\ \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
 que se lee *"para todo x, si x es un computador del laboratorio, entonces x funciona"*. Y de una afirmación así **sí** podemos deducir, por ejemplo, que si `L1` es un computador del laboratorio, entonces `L1` funciona. Exactamente lo que la lógica proposicional no podía hacer.
 
 > [!NOTE]
-> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ($L1,\dots,L8$) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\ funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
+> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ( $L1,\dots,L8$ ) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\ funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
 
 > [!WARNING]
 > **El error más común al cuantificar: emparejar mal el cuantificador y el conectivo.** Hay una regla práctica que evita la mayoría de los errores de traducción:
@@ -385,7 +385,7 @@ La intuición: decir *"no todos los pollos robot funcionan"* no significa que ni
 
 ## IV.1 Combinar predicados con conectivos
 
-Los predicados y cuantificadores no viven aislados: se combinan entre sí usando los **conectivos lógicos** que ya conoce ($\neg$, $\land$, $\lor$, $\rightarrow$, $\leftrightarrow$) para formar **expresiones compuestas**. Estas permiten construir afirmaciones complejas sobre múltiples objetos, relaciones y condiciones dentro de un mismo razonamiento.
+Los predicados y cuantificadores no viven aislados: se combinan entre sí usando los **conectivos lógicos** que ya conoce ( $\neg$, $\land$, $\lor$, $\rightarrow$, $\leftrightarrow$ ) para formar **expresiones compuestas**. Estas permiten construir afirmaciones complejas sobre múltiples objetos, relaciones y condiciones dentro de un mismo razonamiento.
 
 Un ejemplo. Suponga los predicados:
 
@@ -410,13 +410,13 @@ Cuando las expresiones se complican, es fácil combinar mal las piezas. Una herr
 
 | Elemento | Opera sobre… | Produce…* | Ejemplo |
 |:---|:---|:---|:---|
-| **Conectivos** ($\neg, \land, \lor, \rightarrow, \leftrightarrow$) | Proposiciones | Una proposición | $P \land Q,\ \neg P,\ P \rightarrow Q$ |
-| **Predicados** ($=, <, \dots$) | Objetos | Una proposición | $mayorQue(x, y),\ x = y,\ par(x)$ |
+| **Conectivos** ( $\neg, \land, \lor, \rightarrow, \leftrightarrow$ ) | Proposiciones | Una proposición | $P \land Q,\ \neg P,\ P \rightarrow Q$ |
+| **Predicados** ( $=, <, \dots$ ) | Objetos | Una proposición | $mayorQue(x, y),\ x = y,\ par(x)$ |
 | **Funciones** | Objetos | Un **objeto** | $doble(x),\ padreDe(x),\ suma(x, y)$ |
 
-*\*Estrictamente, esto vale cuando ya no quedan variables libres. Si algún argumento sigue siendo una variable sin asignar ni cuantificar —como en $mayorQue(x, y)$ o en $P(x) \land Q(x)$—, el resultado sigue siendo una **función proposicional** (Parte II.6), no todavía una proposición. La tabla muestra el caso ya instanciado, que es el más simple para fijar la distinción entre predicado y función matemática.*
+*\*Estrictamente, esto vale cuando ya no quedan variables libres. Si algún argumento sigue siendo una variable sin asignar ni cuantificar —como en $mayorQue(x, y)$ o en $P(x) \land Q(x)$ —, el resultado sigue siendo una **función proposicional** (Parte II.6), no todavía una proposición. La tabla muestra el caso ya instanciado, que es el más simple para fijar la distinción entre predicado y función matemática.*
 
-La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad** (una vez resueltas sus variables). Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso una vez asignado o cuantificado $x$ (predicado), pero $doble(x)$ es siempre un número (función).
+La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$ ) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad** (una vez resueltas sus variables). Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso una vez asignado o cuantificado $x$ (predicado), pero $doble(x)$ es siempre un número (función).
 
 > [!NOTE]
 > **Un vistazo adelante: el "modelo" (opcional).** En lógica, un **modelo** es una interpretación que asigna significado a los símbolos de un lenguaje lógico y que hace que un conjunto de fórmulas sea verdadero. Es contenido de profundización, no indispensable para seguir esta clase.
@@ -582,7 +582,7 @@ Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y pr
 
 **Paso 1 — Identificar la estructura.** La palabra *"hay alguien"* señala una afirmación **existencial**: no se habla de todos, sino de que **existe al menos uno**. El cuantificador es $\exists$.
 
-**Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ($mayor21$) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
+**Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ( $mayor21$ ) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
 
 $$\exists x\ \bigl(\rule[-0.2em]{6em}{0.06em}\bigr)$$
 
@@ -591,7 +591,7 @@ $$\exists x\ \bigl(\rule[-0.2em]{6em}{0.06em}\bigr)$$
 >
 > La fórmula completa es:
 > $$\exists x\ \bigl(mayor21(x)\bigr)$$
-> que se lee *"existe al menos una persona x tal que x es mayor de 21 años"*. Aquí no hace falta ningún conectivo porque el universo (*"las personas"*) ya delimita el sujeto y solo se afirma una propiedad. Compare con *"algún estudiante es mayor de 21"*, que **sí** requeriría $\exists x\ (estudiante(x) \land mayor21(x))$ — forma I, con $\land$— porque ahí *"estudiante"* es una restricción adicional dentro de un universo más amplio.
+> que se lee *"existe al menos una persona x tal que x es mayor de 21 años"*. Aquí no hace falta ningún conectivo porque el universo (*"las personas"*) ya delimita el sujeto y solo se afirma una propiedad. Compare con *"algún estudiante es mayor de 21"*, que **sí** requeriría $\exists x\ (estudiante(x) \land mayor21(x))$ — forma I, con $\land$ — porque ahí *"estudiante"* es una restricción adicional dentro de un universo más amplio.
 >
 > </details>
 
@@ -629,7 +629,7 @@ Con el mismo vocabulario, el ingeniero formaliza el resto de su tablero de monit
 - *"Existe al menos un pollo robot con el firmware infectado"* — como el universo ya son solo pollos robot y no hay ninguna condición adicional que restrinja el sujeto, basta el predicado directo, sin conectivo (el mismo caso del Problema guiado más adelante):
 $$\exists x\ tieneVirus(x)$$
 
-- *"Ningún pollo robot con virus está operativo"* (forma E, con $\rightarrow$ y $\neg$):
+- *"Ningún pollo robot con virus está operativo"* (forma E, con $\rightarrow$ y $\neg$ ):
 $$\forall x\ \bigl(tieneVirus(x) \rightarrow \neg funciona(x)\bigr)$$
 
 - *"Ratchet es el técnico del pollo P3"* (predicado binario, con una constante):
@@ -643,10 +643,10 @@ Cuatro afirmaciones que la lógica proposicional no podía ni empezar a escribir
 
 Resuelva los siguientes ejercicios. Las respuestas finales están en el **Solucionario** al final del documento; intente cada uno antes de mirarlas.
 
-**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica, que incluye los ocho pollos robot ($P1,\dots,P8$) junto con otros dispositivos de monitoreo (cámaras, sensores fijos, estaciones de carga) que **no** son pollos robot. Predicados: $robot(x)$ (*"x es un pollo robot"*), $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"x puede volar"*).
+**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica, que incluye los ocho pollos robot ( $P1,\dots,P8$ ) junto con otros dispositivos de monitoreo (cámaras, sensores fijos, estaciones de carga) que **no** son pollos robot. Predicados: $robot(x)$ (*"x es un pollo robot"*), $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"x puede volar"*).
 
 > [!NOTE]
-> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\ funciona(x)$). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
+> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\ funciona(x)$ ). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
 
 **P1.** Traduzca a lógica de predicados: *"Todos los pollos robot pueden volar."*
 
@@ -658,7 +658,7 @@ Resuelva los siguientes ejercicios. Las respuestas finales están en el **Soluci
 
 **P5.** Identifique a qué **forma aristotélica** (A, E, I u O) corresponde cada una de las expresiones de P1 a P4.
 
-**P6.** Escriba la **negación** de la afirmación *"Todos los pollos robot funcionan"* —es decir, $\neg\ \forall x\ (robot(x)\rightarrow funciona(x))$— y simplifíquela hasta dejarla como un existencial (sin el $\neg$ delante del cuantificador). ¿Qué dice en lenguaje natural?
+**P6.** Escriba la **negación** de la afirmación *"Todos los pollos robot funcionan"* —es decir, $\neg\ \forall x\ (robot(x)\rightarrow funciona(x))$ — y simplifíquela hasta dejarla como un existencial (sin el $\neg$ delante del cuantificador). ¿Qué dice en lenguaje natural?
 
 **P7.** Sea el predicado $P(x):\ x$ *es mayor que 5*, con universo los números enteros. Clasifique cada expresión como **función proposicional** o **proposición** (y en este último caso, indique si es V o F): (a) $P(x)$; (b) $P(9)$; (c) $P(2)$; (d) $\exists x\ P(x)$.
 
@@ -680,9 +680,9 @@ El ingeniero resolvió casi todo su tablero. Pero al final del día se topó con
 
 > *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
 
-Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x$ $\exists y\ (\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
+Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x$ $\exists y\ (\dots)$ ), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
 
-Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\ C(x)$ $\land\ \neg\exists y\ T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x$ $\exists y$ **no** significa lo mismo que $\exists y$ $\forall x$.
+Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ( $\neg\exists x\ C(x)$ $\land\ \neg\exists y\ T(y)$ ), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x$ $\exists y$ **no** significa lo mismo que $\exists y$ $\forall x$.
 
 > [!NOTE]
 > **Lo que viene más adelante.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*, incluso combinando varios cuantificadores independientes. Lo que queda para una sesión posterior del curso —no necesariamente la inmediatamente siguiente— es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado.
@@ -767,9 +767,9 @@ Al finalizar este documento, usted debería ser capaz de:
 
 **P6.** $\neg\ \forall x\ (robot(x)\rightarrow funciona(x)) \equiv \exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$. En lenguaje natural: *"Existe al menos un pollo robot que no funciona"* (es decir, *"no todos funcionan"*). Note que la negación de una **forma A** produce una **forma O**.
 
-**P7.** (a) $P(x)$: **función proposicional** (variable libre). (b) $P(9)$: **proposición verdadera** ($9 > 5$). (c) $P(2)$: **proposición falsa** ($2 \not> 5$). (d) $\exists x\ P(x)$: **proposición verdadera** (existen enteros mayores que 5, p. ej. 6).
+**P7.** (a) $P(x)$: **función proposicional** (variable libre). (b) $P(9)$: **proposición verdadera** ( $9 > 5$ ). (c) $P(2)$: **proposición falsa** ( $2 \not> 5$ ). (d) $\exists x\ P(x)$: **proposición verdadera** (existen enteros mayores que 5, p. ej. 6).
 
-**P8.** (a) $R(2,3,5)$: **verdadera** ($2+3=5$). (b) $R(4,1,6)$: **falsa** ($4+1=5 \neq 6$). (c) $R(x,2,z)$: **función proposicional** (le quedan dos variables libres, $x$ y $z$).
+**P8.** (a) $R(2,3,5)$: **verdadera** ( $2+3=5$ ). (b) $R(4,1,6)$: **falsa** ( $4+1=5 \neq 6$ ). (c) $R(x,2,z)$: **función proposicional** (le quedan dos variables libres, $x$ y $z$ ).
 
 **P9.** $\{\ x \in \mathbb{Z} \mid x^2 \le 4\ \} = \{-2, -1, 0, 1, 2\}$. (Son los enteros cuyo cuadrado no pasa de 4; $(\pm 3)^2 = 9 > 4$ quedan fuera.)
 
