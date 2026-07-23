@@ -584,7 +584,7 @@ Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y pr
 
 **Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ($mayor21$) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
 
-$$\exists x\ \bigl(\ \underline{\hphantom{mayor21(x)}}\ \bigr)$$
+$$\exists x\ \bigl(\ \underline{\rule{2.2cm}{0.4pt}}\ \bigr)$$
 
 > [!TIP]
 > <details><summary>Ver la respuesta del último paso</summary>
