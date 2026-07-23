@@ -586,6 +586,39 @@ Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y pr
 
 $$\exists x\ \bigl(\ \underline{\phantom{\text{mayor21}(x)}}\ \bigr)$$
 
+$$\exists x\ \bigl(\ \underline{\phantom{\text{mayor21}(x)}}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \rule{2.5cm}{0.5pt}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\rule{2.5cm}{0pt}}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\qquad\quad}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\qquad\quad}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\ \ \ \ \ \ \ \ \ \ }\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\hspace{2.5cm}}\ \bigr)$$
+
+****
+
+$$\exists x\ \bigl(\ \rule{6em}{0.06em}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \rule{80px}{1px}\ \bigr)$$
+
+$$\exists x\ \bigl(\ \underline{\rule{6em}{0em}}\ \bigr)$$
+
+$$\exists x\ \bigl(\underline{\hspace{2cm}}\bigr)$$
+
+$$\exists x\ \bigl(\rule[-0.2em]{6em}{0.06em}\bigr)$$
+
+$$\exists x\ \bigl(\ \_\_\_\_\_\_\_\_\ \bigr)$$
+
+$$\exists x\ \bigl(\ \boxed{\quad\quad}\ \bigr)$$
+
+
+
+
 > [!TIP]
 > <details><summary>Ver la respuesta del último paso</summary>
 >
