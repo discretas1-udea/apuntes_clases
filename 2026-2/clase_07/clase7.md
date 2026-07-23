@@ -55,7 +55,7 @@ El ingeniero enciende su tablero de monitoreo y ve el estado de su gallinero. Qu
 
 Y a partir de esa frase quisiera poder deducir cosas concretas: si el pollo `P3` está funcionando, si el pollo `P7` tiene un virus, si hay **algún** pollo averiado. Pero con las herramientas de la lógica proposicional, esa frase es una única caja cerrada, una sola letra $p$ — y de una letra no se puede sacar información sobre `P3`, `P7`, ni sobre ninguno de los pollos individualmente.
 
-La pregunta de esta sesión es: **¿qué tipo de lógica necesitamos para poder hablar, con precisión matemática, de todos los pollos, de algunos, y de cada uno por su nombre?** Al final del documento tendremos las herramientas para escribir esa frase de forma que sí podamos razonar con ella — y veremos también dónde esas herramientas todavía se quedan cortas, marcando el camino hacia la próxima clase.
+La pregunta de esta sesión es: **¿qué tipo de lógica necesitamos para poder hablar, con precisión matemática, de todos los pollos, de algunos, y de cada uno por su nombre?** Al final del documento tendremos las herramientas para escribir esa frase de forma que sí podamos razonar con ella — y veremos también dónde esas herramientas todavía se quedan cortas, marcando el camino hacia lo que viene más adelante en el curso.
 
 ---
 
@@ -241,7 +241,9 @@ $$dijo(ratchet,\ optimus,\ enfermo(optimus))$$
 Una función proposicional se convierte en **proposición** (con valor de verdad V o F) de dos maneras:
 
 1. **Asignándole valores** a sus variables (reemplazando la variable por un objeto concreto).
-2. **Aplicándole un cuantificador** (lo veremos en la Parte III).
+2. **Cuantificando todas sus variables libres** (lo veremos en la Parte III).
+
+En el segundo camino hay un matiz importante: el cuantificador debe ligar **todas** las variables que quedan libres, no solo alguna. Por ejemplo, con el predicado binario $R(x, y)$, la expresión $\forall x\, R(x, y)$ **todavía no es una proposición**: $x$ quedó ligada por el cuantificador, pero $y$ sigue libre. Solo al ligar también $y$ —con otro cuantificador, o asignándole un valor— se obtiene una proposición completa.
 
 Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los números enteros.
 
@@ -264,6 +266,17 @@ Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los núm
 | $R(x, 3, z)$ | Función proposicional (2 variables libres: $x$ y $z$) |
 
 Note el último caso: si fijamos **algunas** variables pero dejamos otras libres, seguimos teniendo una función proposicional (con menos variables), no todavía una proposición.
+
+**Variable libre vs. variable ligada.** Una variable está **ligada** cuando un cuantificador la alcanza; está **libre** si ningún cuantificador la menciona. Solo cuando **todas** las variables de la expresión quedan ligadas (o instanciadas) se obtiene una proposición:
+
+| Expresión | Variables libres | Variables ligadas | ¿Qué es? |
+|:---:|:---:|:---:|:---|
+| $P(x)$ | $x$ | — | Función proposicional |
+| $P(a)$ (con $a$ una constante) | — | — | Proposición |
+| $\forall x\, P(x)$ | — | $x$ | Proposición |
+| $R(x, y)$ | $x$, $y$ | — | Función proposicional |
+| $\forall x\, R(x, y)$ | $y$ | $x$ | **Sigue siendo función proposicional** — $y$ no fue alcanzada por ningún cuantificador |
+| $\forall x\, R(x, 3)$ | — | $x$ | Proposición — $x$ quedó ligada por el cuantificador y $y$ fue reemplazada por el valor $3$ |
 
 > [!NOTE]
 > **Predicado y función proposicional: ¿son lo mismo?** En cursos introductorios, muchos textos usan ambos términos casi como sinónimos, y para efectos prácticos de esta clase puede tratarlos así. La distinción fina es: el **predicado** es la propiedad o relación en sí ($funciona$, $enfermo$), y la **función proposicional** es la expresión que se obtiene al aplicarlo a variables ($funciona(x)$). Formalmente, **predicado** es el término más usado en lógica de primer orden.
@@ -331,7 +344,7 @@ $$\underbrace{smiling(x)}_{\text{función proposicional (sin V/F)}} \qquad\longr
 
 Volviendo al ejemplo con el que abrimos la Parte I: *"Todos los computadores del laboratorio están funcionando correctamente"* ya no es una caja cerrada. Ahora la podemos escribir así:
 
-$$\forall x\, \bigl(computador\_LIS(x) \rightarrow funciona(x)\bigr)$$
+$$\forall x\, \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
 
 que se lee *"para todo $x$, si $x$ es un computador del laboratorio, entonces $x$ funciona"*. Y de una afirmación así **sí** podemos deducir, por ejemplo, que si `L1` es un computador del laboratorio, entonces `L1` funciona. Exactamente lo que la lógica proposicional no podía hacer.
 
@@ -341,6 +354,24 @@ que se lee *"para todo $x$, si $x$ es un computador del laboratorio, entonces $x
 > - El cuantificador **existencial** $\exists$ se empareja casi siempre con la **conjunción** $\land$.
 >
 > Es decir, se escribe $\forall x\,(S(x) \rightarrow P(x))$ y $\exists x\,(S(x) \land P(x))$. Escribir $\exists x\,(S(x) \rightarrow P(x))$ es casi siempre un error: por la tabla de verdad de $\rightarrow$, esa expresión se vuelve verdadera de forma "tramposa" apenas exista **un solo** objeto que **no** cumpla $S(x)$ (porque entonces el antecedente es falso y la implicación, verdadera), sin importar nada sobre $P$. En la Parte V veremos esto con las formas aristotélicas.
+
+## III.3 Negar un cuantificador
+
+> [!IMPORTANT]
+> Negar una afirmación cuantificada **cambia el cuantificador**:
+> - $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ — *"no todos cumplen $P$"* equivale a *"existe al menos uno que no cumple $P$"*.
+> - $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$ — *"no existe ninguno que cumpla $P$"* equivale a *"todos incumplen $P$"*.
+
+La intuición: decir *"no todos los pollos robot funcionan"* no significa que ninguno funcione — significa que **al menos uno** falla. Y decir *"no existe ningún pollo con virus"* sí significa que **todos** están limpios. En ambos casos, la negación "empuja" hacia adentro del cuantificador y lo invierte: $\forall$ se convierte en $\exists$ (o viceversa), y el predicado queda negado.
+
+> [!TIP]
+> **Compruebe su comprensión.** ¿Cuál es la negación de $\forall x\, tieneVirus(x)$ (*"todos los pollos tienen virus"*), simplificada hasta dejarla como un existencial? ¿Qué dice en lenguaje natural?
+>
+> <details><summary>Ver respuesta</summary>
+>
+> $\neg\,\forall x\, tieneVirus(x) \equiv \exists x\, \neg tieneVirus(x)$: *"existe al menos un pollo robot que no tiene virus"*. Note que negar *"todos"* no da *"ninguno"* — da *"no todos"*, que es más débil.
+>
+> </details>
 
 ---
 
@@ -371,13 +402,15 @@ que afirma *"CPS es profesor y CPS es ingeniero"*, y ahora sí es verdadera o fa
 
 Cuando las expresiones se complican, es fácil combinar mal las piezas. Una herramienta simple y poderosa para evitarlo es la **tabla de verificación de tipos**: describe, para cada componente lógico, **sobre qué opera** (su entrada) y **qué produce** (su salida).
 
-| Elemento | Opera sobre… | Produce… | Ejemplo |
+| Elemento | Opera sobre… | Produce…* | Ejemplo |
 |:---|:---|:---|:---|
 | **Conectivos** ($\neg, \land, \lor, \rightarrow, \leftrightarrow$) | Proposiciones | Una proposición | $P \land Q,\ \neg P,\ P \rightarrow Q$ |
-| **Predicados** ($=, <, \dots$) | Objetos | Una proposición | $mayor\_que(x, y),\ x = y,\ par(x)$ |
-| **Funciones** | Objetos | Un **objeto** | $doble(x),\ padre\_de(x),\ suma(x, y)$ |
+| **Predicados** ($=, <, \dots$) | Objetos | Una proposición | $mayorQue(x, y),\ x = y,\ par(x)$ |
+| **Funciones** | Objetos | Un **objeto** | $doble(x),\ padreDe(x),\ suma(x, y)$ |
 
-La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad**. Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso (predicado), pero $doble(x)$ es un número (función).
+*\*Estrictamente, esto vale cuando ya no quedan variables libres. Si algún argumento sigue siendo una variable sin asignar ni cuantificar —como en $mayorQue(x, y)$ o en $P(x) \land Q(x)$—, el resultado sigue siendo una **función proposicional** (Parte II.6), no todavía una proposición. La tabla muestra el caso ya instanciado, que es el más simple para fijar la distinción entre predicado y función matemática.*
+
+La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad** (una vez resueltas sus variables). Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso una vez asignado o cuantificado $x$ (predicado), pero $doble(x)$ es siempre un número (función).
 
 > [!NOTE]
 > **Un vistazo adelante: el "modelo".** En lógica, un **modelo** es una interpretación que asigna significado a los símbolos de un lenguaje lógico y que hace que un conjunto de fórmulas sea verdadero — es una representación de la realidad construida a partir de ciertos elementos y reglas.
@@ -562,26 +595,28 @@ Volvamos al gallinero con el que abrimos la clase. El ingeniero ya no está atad
 
 **El diccionario de predicados:**
 
+> [!NOTE]
+> **Sobre el universo y el predicado $robot$.** Como el universo $U=\{P1,\dots,P8\}$ ya está restringido de entrada a *"los ocho pollos robot del laboratorio"*, un predicado $robot(x)$ que dijera *"$x$ es un pollo robot"* sería verdadero para **todo** el universo — es decir, redundante: no aportaría información. Por eso el diccionario de este Expediente no lo incluye; las fórmulas hablan directamente de $x$ como pollo robot, sin necesidad de decirlo dos veces.
+
 | Predicado | Significado |
 |:---|:---|
-| $robot(x)$ | *"$x$ es un pollo robot del laboratorio"* |
 | $funciona(x)$ | *"$x$ está operativo (sin avería)"* |
-| $tiene_virus(x)$ | *"$x$ tiene el firmware infectado"* |
+| $tieneVirus(x)$ | *"$x$ tiene el firmware infectado"* |
 | $tecnico(x, y)$ | *"$x$ es el técnico responsable de $y$"* |
 
 Ahora el ingeniero puede escribir, por fin, la frase con la que soñaba al inicio — la que la lógica proposicional no sabía representar:
 
-$$\forall x\,\bigl(robot(x) \rightarrow funciona(x)\bigr)$$
+$$\forall x\, funciona(x)$$
 
-*"Para todo $x$, si $x$ es un pollo robot del laboratorio, entonces $x$ funciona"* — es decir, *"todos los pollos robot funcionan"*. Y a diferencia de la caja cerrada $p$ del inicio, de esta afirmación **sí** puede deducir información sobre cada pollo: si sabe que $robot(P3)$, entonces obtiene $funciona(P3)$.
+*"Para todo $x$ (del gallinero), $x$ funciona"* — es decir, *"todos los pollos robot funcionan"*. Y a diferencia de la caja cerrada $p$ del inicio, de esta afirmación **sí** puede deducir información sobre cada pollo: si $\forall x\, funciona(x)$ es verdadera, entonces en particular $funciona(P3)$ también lo es.
 
 Con el mismo vocabulario, el ingeniero formaliza el resto de su tablero de monitoreo:
 
-- *"Existe al menos un pollo robot con el firmware infectado"* (forma I, con $\land$):
-$$\exists x\,\bigl(robot(x) \land tieneVirus(x)\bigr)$$
+- *"Existe al menos un pollo robot con el firmware infectado"* — como el universo ya son solo pollos robot y no hay ninguna condición adicional que restrinja el sujeto, basta el predicado directo, sin conectivo (el mismo caso del Problema guiado más adelante):
+$$\exists x\, tieneVirus(x)$$
 
 - *"Ningún pollo robot con virus está operativo"* (forma E, con $\rightarrow$ y $\neg$):
-$$\forall x\,\bigl((robot(x) \land tieneVirus(x)) \rightarrow \neg funciona(x)\bigr)$$
+$$\forall x\,\bigl(tieneVirus(x) \rightarrow \neg funciona(x)\bigr)$$
 
 - *"Ratchet es el técnico del pollo $P3$"* (predicado binario, con una constante):
 $$tecnico(ratchet, P3)$$
@@ -594,7 +629,7 @@ Cuatro afirmaciones que la lógica proposicional no podía ni empezar a escribir
 
 Resuelva los siguientes ejercicios. Las respuestas finales están en el **Solucionario** al final del documento; intente cada uno antes de mirarlas.
 
-**Definiciones para varios ejercicios.** Universo: los pollos robot del laboratorio, $U=\{P1,\dots,P8\}$. Predicados: $robot(x)$, $funciona(x)$, $tiene_virus(x)$, $vuela(x)$ (*"$x$ puede volar"*).
+**Definiciones para varios ejercicios.** Universo: los pollos robot del laboratorio, $U=\{P1,\dots,P8\}$. Predicados: $robot(x)$, $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"$x$ puede volar"*).
 
 **P1.** Traduzca a lógica de predicados: *"Todos los pollos robot pueden volar."*
 
@@ -630,10 +665,10 @@ El ingeniero resolvió casi todo su tablero. Pero al final del día se topó con
 
 Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x\,\exists y\,(\dots)$), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
 
-Con lo visto hoy —un solo cuantificador por afirmación— llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas. Pero el orden y la interacción de **varios** cuantificadores en una misma fórmula —y el hecho, nada obvio, de que $\forall x\,\exists y$ **no** significa lo mismo que $\exists y\,\forall x$— es el tema de la próxima sesión.
+Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ($\neg\exists x\, C(x) \land \neg\exists y\, T(y)$), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x\,\exists y$ **no** significa lo mismo que $\exists y\,\forall x$.
 
 > [!NOTE]
-> **Hacia la próxima sesión.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*. Lo que queda es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado. Ahí es donde seguimos.
+> **Lo que viene más adelante.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*, incluso combinando varios cuantificadores independientes. Lo que queda para una sesión posterior del curso —no necesariamente la inmediatamente siguiente— es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado.
 
 ---
 
@@ -663,7 +698,7 @@ Al finalizar este documento, usted debería ser capaz de:
 | Función proposicional | Expresión con variables libres; aún **no** es proposición | $P(x) \land Q(x)$ |
 | Conjunto de verdad | Subconjunto del dominio donde el predicado es verdadero | $\{x \in D \mid autobot(x)\}$ |
 | Cuantificador universal | *"Para todo $x$…"* | $\forall x\, funciona(x)$ |
-| Cuantificador existencial | *"Existe al menos un $x$…"* | $\exists x\, tiene_virus(x)$ |
+| Cuantificador existencial | *"Existe al menos un $x$…"* | $\exists x\, tieneVirus(x)$ |
 
 **Verificación de tipos:** los **conectivos** operan sobre proposiciones y producen una proposición; los **predicados** operan sobre objetos y producen una proposición; las **funciones** operan sobre objetos y producen un objeto.
 
