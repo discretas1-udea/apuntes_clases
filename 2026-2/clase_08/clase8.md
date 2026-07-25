@@ -14,9 +14,7 @@ La sesión pasada, el ingeniero del gallinero terminó su tablero de monitoreo c
 
 > *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
 
-Dejamos ahí un vacío explícito: sabíamos escribir varios cuantificadores **independientes** en una misma fórmula (como en $\neg\exists x\ C(x) \land \neg\exists y\ T(y)$, donde cada uno abre y cierra su propio alcance sin depender del otro), pero no sabíamos **anidar** cuantificadores — escribir uno *dentro* del alcance de otro, de modo que uno dependa del otro.
-
-**Ese vacío sigue abierto.** La anidación de cuantificadores merece su propia sesión completa — es material denso y se presta a confusiones que no queremos apurar — así que la dejamos para la próxima clase. Lo que sí resolvemos hoy son otras piezas que también faltaban: qué hacer cuando queremos decir que existe **exactamente un** objeto con cierta propiedad, y por qué el valor de verdad de una afirmación cuantificada puede cambiar por completo según el universo que elijamos — algo que ya intuimos en el Ejercicio propuesto P10 de la sesión pasada, pero que hoy formalizamos con una técnica de refutación con nombre propio.
+Dejamos ahí un vacío explícito: sabíamos escribir varios cuantificadores **independientes** en una misma fórmula (como en $\neg\exists x\ C(x) \land \neg\exists y\ T(y)$, donde cada uno abre y cierra su propio alcance sin depender del otro), pero no sabíamos **anidar** cuantificadores — escribir uno *dentro* del alcance de otro. **Ese vacío sigue abierto**: es material denso, se presta a confusiones, y merece su propia sesión completa la próxima clase. Lo que sí resolvemos hoy son otras piezas que también faltaban: qué hacer cuando queremos decir que existe **exactamente un** objeto con cierta propiedad, y por qué el valor de verdad de una afirmación cuantificada puede cambiar por completo según el universo que elijamos — algo que ya intuimos en el Ejercicio propuesto P10 de la sesión pasada, pero que hoy formalizamos con una técnica de refutación con nombre propio.
 
 ---
 
@@ -90,11 +88,14 @@ $$\exists!\ x\ P(x) \quad\equiv\quad \exists x\ \Bigl(P(x) \land \forall y\ \big
 
 que se lee *"existe un x que cumple P, y además cualquier y que también cumpla P es igual a ese mismo x"*.
 
+> [!NOTE]
+> Fíjese bien en esta fórmula: tiene un $\forall y$ **dentro del alcance** de un $\exists x$. Técnicamente, eso ya es un patrón de cuantificadores anidados — el mismo tipo de construcción que dijimos que quedaba pendiente para la próxima clase. Aquí lo usamos de forma puntual y limitada, solo para poder escribir la definición de unicidad; no estamos aprendiendo a anidar cuantificadores en general todavía. La próxima sesión, cuando veamos la anidación como tema central, va a quedar claro por qué esta combinación específica ( $\exists$ por fuera, $\forall$ por dentro, terminando en una igualdad) es segura, y qué otras combinaciones cambian el significado por completo.
+
 **Ejemplo genérico.** Sea el dominio $\mathbb{Z}^+$ (enteros positivos) y el predicado $P(x)$: *"x es par y primo"*. ¿Es verdadera $\exists!\ x\ P(x)$?
 
 $$\underbrace{2}_{\text{par y primo}},\quad \underbrace{4, 6, 8, \dots}_{\text{pares, pero no primos (divisibles entre 2 y otro número)}},\quad \underbrace{3, 5, 7, \dots}_{\text{primos, pero no pares}}$$
 
-El número $2$ cumple $P$: es par y primo. Y es el **único** — cualquier otro número par mayor que $2$ es divisible entre $2$ y entre sí mismo, así que tiene al menos tres divisores y no es primo. Por lo tanto $\exists!\ x\ P(x)$ es **verdadera**, con **testigo** $x=2$ (llamamos *testigo* al objeto concreto que se exhibe para probar una afirmación existencial).
+El número $2$ cumple $P$: es par y primo. Y es el **único**: si $n>2$ es par, entonces $n=2k$ con $k>1$; por lo tanto $2$ es un divisor de $n$ distinto de $1$ y de $n$ mismo, así que $n$ no es primo. Por lo tanto $\exists!\ x\ P(x)$ es **verdadera**, con **testigo** $x=2$ (llamamos *testigo* al objeto concreto que se exhibe para probar una afirmación existencial).
 
 > [!WARNING]
 > Un error común es declarar $\exists!\ x\ P(x)$ verdadera apenas se encuentra **un** testigo, sin comprobar que sea el único. Encontrar un testigo solo resuelve la mitad del trabajo (la existencia); todavía falta revisar el resto del dominio para descartar un segundo testigo. Basta con que aparezca uno más para que $\exists!$ se vuelva falsa — aunque $\exists$ (sin el símbolo de admiración) siga siendo perfectamente verdadera.
@@ -124,7 +125,19 @@ Sea el predicado $P(x)$: *"x < 2"*.
 | $\mathbb{Z}^- = \{\dots, -3, -2, -1\}$ | **V** | **V** | Todo entero negativo es menor que $2$: se cumple para al menos uno y para todos a la vez |
 | $\{3, 4, 5\}$ | **F** | **F** | Ningún elemento del dominio es menor que $2$ |
 
-La lección: **ni el predicado ni la fórmula cambiaron** — lo único que cambió fue el universo, y eso bastó para mover el valor de verdad de ambos cuantificadores de manera independiente. Por eso, cuando el dominio no se especifica en un ejercicio, la traducción está incompleta.
+La lección: **ni el predicado ni la fórmula cambiaron** — lo único que cambió fue el universo, y eso bastó para mover el valor de verdad de ambos cuantificadores. Por eso, cuando el dominio no se especifica en un ejercicio, la traducción está incompleta.
+
+> [!NOTE]
+> Los dos cuantificadores no varían de forma completamente libre. En cualquier dominio **no vacío**, $\forall x\ P(x) \Rightarrow \exists x\ P(x)$: si la propiedad se cumple para todos, en particular se cumple para al menos uno. Por eso, de las cuatro combinaciones posibles de V/F, una nunca ocurre:
+>
+> | $\forall x\ P(x)$ | $\exists x\ P(x)$ | ¿Posible? |
+> |:---:|:---:|:---|
+> | V | V | Sí — como en $\mathbb{Z}^-$ arriba |
+> | F | V | Sí — como en $\mathbb{Z}^+$ arriba |
+> | F | F | Sí — como en $\{3,4,5\}$ arriba |
+> | V | F | **Nunca**, en un dominio no vacío |
+>
+> Esta implicación —y, de hecho, toda la teoría de cuantificadores que estamos construyendo— **asume que el dominio nunca es vacío**. Es la convención estándar en lógica de primer orden y la que usamos en todo el curso; si el dominio fuera vacío, $\forall x\ P(x)$ sería verdadera por vacuidad (no hay ningún elemento que la contradiga) mientras que $\exists x\ P(x)$ sería falsa (no hay ningún testigo), rompiendo la implicación anterior.
 
 ## II.2 El método del contraejemplo, formalizado
 
@@ -139,7 +152,7 @@ Ya usamos esta técnica sin nombrarla en la sesión anterior, al mostrar que $\f
 
 # Parte III — Cuantificadores como Conjunción y Disyunción
 
-## III.1 En un dominio finito, cuantificar es "desenrollar"
+## III.1 En un dominio finito, un cuantificador es una conjunción o disyunción disfrazada
 
 Ya sabemos que $\forall x\ P(x)$ exige que $P$ se cumpla para todos, y $\exists x\ P(x)$ exige que se cumpla para al menos uno. Cuando el dominio es **finito**, esta idea se puede escribir sin ningún cuantificador — reemplazándolo por una larga conjunción o disyunción.
 
@@ -147,7 +160,7 @@ Ya sabemos que $\forall x\ P(x)$ exige que $P$ se cumpla para todos, y $\exists 
 > Si el dominio finito es $U=\{x_1, x_2, \dots, x_n\}$, entonces:
 > $$\forall x\ P(x) \;\equiv\; P(x_1) \land P(x_2) \land \cdots \land P(x_n)$$
 > $$\exists x\ P(x) \;\equiv\; P(x_1) \lor P(x_2) \lor \cdots \lor P(x_n)$$
-> Esta equivalencia **no** se puede aplicar en dominios infinitos — ahí no hay forma de escribir la conjunción o disyunción completa.
+> Esta equivalencia **no** se puede aplicar en dominios infinitos dentro de la lógica de primer orden clásica que estudiamos aquí — ahí no existe una fórmula finita que tenga un término por cada elemento del dominio.
 
 **Ejemplo.** Sea el dominio $U=\{Martin, Nelson, Bart\}$ y el predicado $aprobo(x)$: *"x aprobó"*.
 
@@ -176,17 +189,24 @@ $$\begin{aligned}
 \neg\ \exists x\ P(x) &\equiv \forall x\ \neg P(x)
 \end{aligned}$$
 
-Estas dos equivalencias se conocen como las **leyes de De Morgan para cuantificadores**, por su parecido con las leyes de De Morgan de lógica proposicional ( $\neg(p\land q)\equiv\neg p\lor\neg q$ ). Y, en efecto, se pueden **derivar** aplicando solamente la regla de la doble negación y la regla básica de negación, sin agregar nada nuevo.
+Estas dos equivalencias se conocen como las **leyes de De Morgan para cuantificadores**, por su parecido con las leyes de De Morgan de lógica proposicional ( $\neg(p\land q)\equiv\neg p\lor\neg q$ ). No hace falta memorizarlas sueltas: se pueden **justificar** con herramientas que ya tenemos.
 
-**Derivación.** Partimos de una afirmación universal cualquiera, $\forall x\ funciona(x)$, y le aplicamos doble negación (que no cambia nada, $\neg\neg p \equiv p$ ):
+**Justificación en un dominio finito.** Retomemos la Parte III: en un dominio finito $U=\{x_1,\dots,x_n\}$, $\forall x\ P(x) \equiv P(x_1)\land\cdots\land P(x_n)$. Neguemos ambos lados y apliquemos De Morgan proposicional (ya conocido de Clase 6, aplicado dos términos a la vez tantas veces como haga falta):
 
 $$\begin{aligned}
-\forall x\ funciona(x) &\equiv \neg\neg\bigl(\forall x\ funciona(x)\bigr) \\
-&\equiv \neg\bigl(\neg\ \forall x\ funciona(x)\bigr) \\
-&\equiv \neg\ \exists x\ \neg funciona(x)
+\neg\bigl(\forall x\ P(x)\bigr) &\equiv \neg\bigl(P(x_1)\land P(x_2)\land\cdots\land P(x_n)\bigr) \\
+&\equiv \neg P(x_1)\lor\neg P(x_2)\lor\cdots\lor\neg P(x_n)
 \end{aligned}$$
 
-El último paso usa exactamente la regla básica que ya conocíamos ( $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ ) aplicada adentro del paréntesis. El resultado dice algo revelador: *"todos los computadores funcionan"* es exactamente lo mismo que decir *"no existe ninguno que no funcione"* — la misma idea, expresada con el cuantificador contrario.
+Y esa disyunción es, otra vez por la Parte III (aplicada ahora al predicado $\neg P$ ), exactamente $\exists x\ \neg P(x)$:
+
+$$\neg\bigl(\forall x\ P(x)\bigr) \;\equiv\; \exists x\ \neg P(x)$$
+
+Esta vez sí es una derivación genuina: parte de la equivalencia entre $\forall$ y una conjunción (ya establecida en la Parte III) y de De Morgan proposicional (ya conocido) — en ningún momento se usó la propia regla que se quería obtener.
+
+**¿Y en un dominio infinito?** Ahí no hay una conjunción finita que expandir, así que el argumento anterior no aplica directamente. Pero la equivalencia sigue siendo válida por una razón semántica, directamente desde el significado de los cuantificadores: $\neg\bigl(\forall x\ P(x)\bigr)$ es verdadera exactamente cuando $\forall x\ P(x)$ es falsa, es decir, cuando **no** es cierto que *todo* elemento cumpla $P$ — lo cual, por la propia definición de "para todo", significa que hay al menos un elemento que no lo cumple. Eso es, precisamente, $\exists x\ \neg P(x)$.
+
+El resultado dice algo revelador: *"todos los computadores funcionan"* es exactamente lo mismo que decir *"no existe ninguno que no funcione"* — la misma idea, expresada con el cuantificador contrario.
 
 > [!WARNING]
 > El error más común al negar una afirmación cuantificada es cambiar **solo el cuantificador** y olvidar negar el predicado interno. $\neg\bigl(\forall x\ funciona(x)\bigr)$ **no** es $\exists x\ funciona(x)$ — eso diría que sigue habiendo un computador que funciona, lo cual no niega nada. La negación correcta es $\exists x\ \neg funciona(x)$: tiene que haber uno que **no** funcione. Cambiar el cuantificador sin negar adentro es el paso a medias más frecuente en este tema — revise siempre que el $\neg$ haya quedado pegado al predicado, no perdido en el camino.
@@ -389,6 +409,9 @@ Sea el dominio de discurso un conjunto de objetos, con $F(x)$: *"x es un cachiva
 
 $$\forall x\ \bigl((F(x)\land S(x)) \rightarrow T(x)\bigr)$$
 
+> [!NOTE]
+> **Una honestidad necesaria.** La frase *"si algún cachivache es un aparato raro, entonces también es una cosa"*, leída de forma completamente literal en español, admite cierta ambigüedad: alguien podría entenderla como *"existe un cachivache que es aparato raro, y ese en particular es una cosa"* (una lectura existencial), en vez de la lectura universal que acabamos de usar. En la práctica, el contexto de la frase completa —una regla general, no la descripción de un caso puntual— deja claro que la lectura universal es la que se busca, y es también la que produce una traducción útil (una regla, no la afirmación de un solo caso). Pero vale la pena quedarse con la idea: el lenguaje natural rara vez es matemáticamente inequívoco, y frente a una frase ambigua, conviene preguntarse explícitamente qué información aportaría cada lectura antes de formalizar.
+
 ## Ejercicio 15 — El silogismo de los leones de Lewis Carroll
 
 Traduzca a lógica de predicados: *"Todos los leones son feroces"*, *"Algunos leones no toman café"*, *"Algunas criaturas feroces no toman café"*.
@@ -447,7 +470,23 @@ La pregunta del jefe — *"¿hay un pollo que actúe como líder de sincronizaci
 
 $$\exists!\ x\ lider(x)$$
 
-El ingeniero revisa su sistema: en efecto, exactamente el pollo `P1` está configurado como emisor de la señal de sincronización, y los demás solo la reciben. La afirmación es verdadera, con testigo `P1`.
+El ingeniero revisa la tabla de configuración de la bandada:
+
+| Pollo | ¿Emite señal de sincronización? |
+|:---:|:---:|
+| `P1` | Sí |
+| `P2` | No |
+| `P3` | No |
+| `P4` | No |
+| `P5` | No |
+| `P6` | No |
+| `P7` | No |
+| `P8` | No |
+
+**Verifique usted mismo, antes de seguir leyendo:** ¿se cumple la existencia ( $\exists x\ lider(x)$ )? ¿se cumple la unicidad (ningún otro pollo además de `P1`)? Con esta tabla, ambas se comprueban en una sola pasada, exactamente como en el Ejercicio 1 de esta sesión. Como se cumplen las dos, $\exists!\ x\ lider(x)$ es verdadera, con testigo `P1`.
+
+> [!NOTE]
+> Este mismo patrón —garantizar que existe **exactamente un** responsable de algo— tiene nombre en sistemas reales: se llama **elección de líder** (*leader election*), y es el problema que resuelven algoritmos como Raft o Paxos en sistemas distribuidos. La misma idea, aplicada a datos en vez de a procesos, es lo que impone una restricción `UNIQUE` en una base de datos: garantizar por diseño que a lo sumo un registro cumple cierta condición.
 
 ---
 
@@ -475,7 +514,7 @@ Resuelva los siguientes ejercicios. Las respuestas finales están en el **Soluci
 
 **P9.** Traduzca: *"Ningún pollo robot sin batería está operativo"*, e identifique la forma aristotélica correspondiente.
 
-**P10.** Sea el predicado $S(x,y)$: *"x supervisa a y"*, dominio los pollos robot. Traduzca *"hay un pollo que se supervisa a sí mismo"* usando un cuantificador existencial y una igualdad.
+**P10.** Sea el predicado $S(x,y)$: *"x supervisa a y"*, dominio los pollos robot. Traduzca *"hay un pollo que se supervisa a sí mismo"* usando un cuantificador existencial y repitiendo la misma variable en ambas posiciones del predicado.
 
 ---
 
@@ -489,6 +528,17 @@ Con eso, el ingeniero envía su reporte — pero todavía le debe a su jefe la r
 
 ---
 
+## Errores frecuentes — repaso rápido
+
+| Error | Por qué está mal | Dónde se explica |
+|:---|:---|:---|
+| Confundir $\exists$ con $\exists!$ | Encontrar un testigo no descarta que exista un segundo | Parte I |
+| Negar solo el cuantificador, dejando el predicado sin negar | $\neg\forall x\ funciona(x)$ **no** es $\exists x\ funciona(x)$ | Parte IV |
+| Suponer que $\forall$ y $\exists$ varían "libremente" | En dominio no vacío, $\forall x\ P(x)\Rightarrow\exists x\ P(x)$ siempre | Parte II |
+| Leer "algún X que sea Y, entonces Z" como existencial | La estructura "si...entonces" suele ser universal, aunque contenga "algún" | Ejercicio 14 |
+
+---
+
 ## Resultados de aprendizaje
 
 Al finalizar este documento, usted debería ser capaz de:
@@ -496,7 +546,7 @@ Al finalizar este documento, usted debería ser capaz de:
 - **Distinguir** el cuantificador de unicidad ( $\exists!$ ) del cuantificador existencial ( $\exists$ ), y **expresar** el primero como una combinación del segundo con el cuantificador universal y la igualdad.
 - **Determinar** el valor de verdad de una proposición cuantificada sobre distintos dominios, y **aplicar** el método del contraejemplo para refutar afirmaciones universales con el mínimo trabajo posible.
 - **Convertir** entre cuantificadores y conjunciones/disyunciones extendidas cuando el dominio es finito, y **explicar** por qué esa conversión no es posible en dominios infinitos.
-- **Derivar** las leyes de De Morgan para cuantificadores a partir de la doble negación, en vez de memorizarlas como una regla aislada.
+- **Justificar** las leyes de De Morgan para cuantificadores mediante su relación con conjunciones/disyunciones finitas y mediante su interpretación semántica, en vez de memorizarlas como una regla aislada.
 
 ## Ficha de bolsillo
 
@@ -536,7 +586,7 @@ Al finalizar este documento, usted debería ser capaz de:
 
 **P1.** Falsa. En $\{1,\dots,19\}$ hay **dos** múltiplos de $7$: el propio $7$ y $14$. La existencia se cumple, pero falla la unicidad — hay más de un testigo, así que $\exists!\ x\ Q(x)$ es falsa. (Si el dominio fuera "menor que $10$ ", el único testigo sería $7$ y la respuesta sí sería verdadera — la unicidad es sensible al tamaño exacto del dominio.)
 
-**P2.** Un ejemplo: universo = "los miembros de la delegación diplomática británica" (verdadera); universo = "todos los seres humanos" (falsa, la mayoría no habla inglés).
+**P2.** Un ejemplo: universo estipulado explícitamente, $U=\{a,b,c\}$, donde se declara por definición del conjunto que las tres personas hablan inglés (verdadera, por construcción); universo = todos los seres humanos (falsa — la mayoría no habla inglés).
 
 **P3.** Contraejemplo: $x=-2$, pues $(-2)^3=-8$ y $-8\geq -2$ es falso (también sirve $x=0.5$: $0.125\geq 0.5$ es falso). Dominio finito donde sí es verdadera: $\{0,1\}$, pues $0^3=0\geq 0$ y $1^3=1\geq 1$.
 
