@@ -26,7 +26,9 @@ Reconocimiento rápido de conceptos. Un concepto por ítem.
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>No se puede deducir. $p$ es una única proposición atómica — una "caja cerrada" — y la lógica proposicional no ve su contenido interno; no "sabe" que srv3 es uno de los servidores de los que habla $p$. No hay ninguna relación lógica formal entre $p$ y una afirmación sobre srv3 en particular.</details>
+<details><summary>Ver respuesta final</summary>No se puede deducir. $p$ es una única proposición atómica — una "caja cerrada" — y la lógica proposicional no ve su contenido interno; no "sabe" que srv3 es uno de los servidores de los que habla $p$. No hay ninguna relación lógica formal entre $p$ y una afirmación sobre srv3 en particular.
+
+En lógica de predicados sí sería posible: si se modela como $\forall x\,(servidor(x) \rightarrow responde(x))$ y $srv3$ es una constante del universo con $servidor(srv3)$ verdadero, la propia definición del cuantificador universal — que la propiedad vale para **todos** los objetos del universo, sin excepción — ya garantiza $responde(srv3)$. Esa es, precisamente, la limitación de la Parte I que motiva pasar de proposiciones a predicados.</details>
 
 ---
 
@@ -170,7 +172,7 @@ Ya no basta una sola idea: hay que combinar herramientas de varias secciones.
 
 ---
 
-**Ítem 13.** Niegue la proposición $\forall x\,\bigl(seguro(x) \land actualizado(x)\bigr)$, dejando el resultado como un existencial (sin el $\neg$ delante del cuantificador).
+**Ítem 13.** Niegue la proposición $\forall x\,\bigl(seguro(x) \land actualizado(x)\bigr)$, dejando el resultado como un existencial (sin el $\neg$ delante del cuantificador). No es necesario simplificar más allá de este paso — el manejo de negaciones se retoma con más profundidad en la próxima clase.
 
 > ✍️ *Antes de ver la respuesta: escriba la negación.*
 >
@@ -178,7 +180,9 @@ Ya no basta una sola idea: hay que combinar herramientas de varias secciones.
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\exists x\,\neg\bigl(seguro(x) \land actualizado(x)\bigr)$, aplicando la ley de negación de cuantificadores $\neg\,\forall x\,P(x) \equiv \exists x\,\neg P(x)$.</details>
+<details><summary>Ver respuesta final</summary>$\exists x\,\neg\bigl(seguro(x) \land actualizado(x)\bigr)$, aplicando la ley de negación de cuantificadores $\neg\,\forall x\,P(x) \equiv \exists x\,\neg P(x)$.
+
+*Nota: la próxima clase retoma este tipo de negaciones con más profundidad.*</details>
 
 ---
 
@@ -198,7 +202,7 @@ Ya no basta una sola idea: hay que combinar herramientas de varias secciones.
 
 Un caso aplicado. La historia es solo el envoltorio: se resuelve con las herramientas formales de la clase.
 
-El universo son los miembros disponibles del equipo, $U = \{ironman, capitan, thor, viuda, hulk, ojo\}$, con los predicados:
+El universo son los miembros del equipo, $U = \{ironman, capitan, thor, viuda, hulk, ojo\}$ — pertenecer a $U$ no implica estar disponible; eso lo decide el predicado $disponible(x)$, según la tabla de hechos. Los predicados son:
 
 | Predicado | Significado |
 |:---|:---|
@@ -281,7 +285,7 @@ Marque, con honestidad, cómo le fue en cada bloque. Use tanto si acertó como e
 | **I** | Algún $S$ es $P$ | $\exists x\,(S(x) \land P(x))$ |
 | **O** | Algún $S$ no es $P$ | $\exists x\,(S(x) \land \neg P(x))$ |
 
-**Emparejamiento correcto:** $\forall$ va con $\rightarrow$; $\exists$ va con $\land$. Escribir $\exists x\,(S(x)\rightarrow P(x))$ es casi siempre un error.
+**Emparejamiento correcto (al traducir "Todo $S$ es $P$" / "Algún $S$ es $P$"):** $\forall$ va casi siempre con $\rightarrow$; $\exists$ va casi siempre con $\land$. No es una ley sintáctica de la lógica de predicados en general — es el patrón que evita la lectura "tramposa" al traducir estas formas. Escribir $\exists x\,(S(x)\rightarrow P(x))$ es casi siempre un error.
 
 **Negación de cuantificadores:** $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ y $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$.
 

@@ -37,7 +37,7 @@ $\forall x\,\bigl(seguro(x) \land actualizado(x)\bigr)$ → negar.
 
 1. Aplicar la ley de negación de cuantificadores: $\neg\,\forall x\,P(x) \equiv \exists x\,\neg P(x)$, con $P(x) = seguro(x)\land actualizado(x)$.
 2. Resultado: $\exists x\,\neg\bigl(seguro(x) \land actualizado(x)\bigr)$.
-3. Nota: el curso **no** pide distribuir la negación sobre $\land$ (eso sería De Morgan, Clase 05) — se decidió excluir el entrenamiento cruzado en esta autoevaluación, así que la respuesta se detiene aquí deliberadamente.
+3. Nota: el estudiante **no** debe distribuir la negación sobre $\land$ aquí. No es por exclusión de entrenamiento cruzado — es que el manejo de este tipo de negaciones se profundiza en la próxima clase (nunca se enseñó como contenido pasado). Si un estudiante entrega la versión distribuida $\exists x\,\bigl(\neg seguro(x) \lor \neg actualizado(x)\bigr)$ por su cuenta, es correcto y adelantado — no debe penalizarse, solo confirmar que el paso intermedio (negación de cuantificador) esté bien.
 
 ### Ítem 14
 
