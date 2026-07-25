@@ -61,23 +61,17 @@ El cuantificador existencial $\exists x\ P(x)$ solo garantiza que **hay al menos
 
 Antes de formalizarlo, compare los tres cuantificadores que ya conoce (o casi) sobre la **misma** población de caritas y el mismo predicado $smiling(x)$: *"x sonríe"*.
 
-<table>
-<tr>
-<th>∃ — al menos una</th>
-<th>∀ — todas</th>
-<th>∃! — exactamente una (nuevo hoy)</th>
-</tr>
-<tr>
-<td><img src="images/exists.png" alt="Grupo de caritas donde solo una sonríe y las demás no; alcanza con esa para que el existencial sea verdadero" width="220"></td>
-<td><img src="images/for-all.png" alt="Grupo de caritas donde todas sonríen; se necesita esto para que el universal sea verdadero" width="220"></td>
-<td><img src="images/only-one.png" alt="Grupo de caritas donde exactamente una sonríe; el cuantificador de unicidad es verdadero" width="220"></td>
-</tr>
-<tr>
-<td>Basta con que <b>una</b> sonría — no importa cuántas más frunzan el ceño.</td>
-<td>Se exige que <b>todas</b> sonrían — una sola que no sonría lo arruina.</td>
-<td>Se exige que sonría <b>una, y ninguna más</b> — ni cero, ni dos o más.</td>
-</tr>
-</table>
+**∃ — al menos una.** Basta con que una sonría — no importa cuántas más frunzan el ceño.
+
+<img src="images/exists.png" alt="Grupo de caritas donde solo una sonríe y las demás no; alcanza con esa para que el existencial sea verdadero" width="220">
+
+**∀ — todas.** Se exige que todas sonrían — una sola que no sonría lo arruina.
+
+<img src="images/for-all.png" alt="Grupo de caritas donde todas sonríen; se necesita esto para que el universal sea verdadero" width="220">
+
+**∃! — exactamente una (nuevo hoy).** Se exige que sonría una, y ninguna más — ni cero, ni dos o más.
+
+<img src="images/only-one.png" alt="Grupo de caritas donde exactamente una sonríe; el cuantificador de unicidad es verdadero" width="220">
 
 Fíjese que en el dibujo de $\exists!$ la población es, de hecho, la misma que la de $\exists$ (una sola sonríe): ahí $\exists x\ smiling(x)$ y $\exists!\ x\ smiling(x)$ son **ambas** verdaderas a la vez — no son cuantificadores que compitan, sino que $\exists!$ simplemente exige más que $\exists$.
 
