@@ -96,6 +96,9 @@ $$\underbrace{2}_{\text{par y primo}},\quad \underbrace{4, 6, 8, \dots}_{\text{p
 
 El número $2$ cumple $P$: es par y primo. Y es el **único** — cualquier otro número par mayor que $2$ es divisible entre $2$ y entre sí mismo, así que tiene al menos tres divisores y no es primo. Por lo tanto $\exists!\ x\ P(x)$ es **verdadera**, con **testigo** $x=2$ (llamamos *testigo* al objeto concreto que se exhibe para probar una afirmación existencial).
 
+> [!WARNING]
+> Un error común es declarar $\exists!\ x\ P(x)$ verdadera apenas se encuentra **un** testigo, sin comprobar que sea el único. Encontrar un testigo solo resuelve la mitad del trabajo (la existencia); todavía falta revisar el resto del dominio para descartar un segundo testigo. Basta con que aparezca uno más para que $\exists!$ se vuelva falsa — aunque $\exists$ (sin el símbolo de admiración) siga siendo perfectamente verdadera.
+
 > [!TIP]
 > **Compruebe su comprensión.** Sea el dominio $\{1,2,3,4,5\}$ y $Q(x)$: *"x es múltiplo de 3"*. ¿Es verdadera $\exists!\ x\ Q(x)$?
 >
@@ -184,6 +187,9 @@ $$\begin{aligned}
 \end{aligned}$$
 
 El último paso usa exactamente la regla básica que ya conocíamos ( $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ ) aplicada adentro del paréntesis. El resultado dice algo revelador: *"todos los computadores funcionan"* es exactamente lo mismo que decir *"no existe ninguno que no funcione"* — la misma idea, expresada con el cuantificador contrario.
+
+> [!WARNING]
+> El error más común al negar una afirmación cuantificada es cambiar **solo el cuantificador** y olvidar negar el predicado interno. $\neg\bigl(\forall x\ funciona(x)\bigr)$ **no** es $\exists x\ funciona(x)$ — eso diría que sigue habiendo un computador que funciona, lo cual no niega nada. La negación correcta es $\exists x\ \neg funciona(x)$: tiene que haber uno que **no** funcione. Cambiar el cuantificador sin negar adentro es el paso a medias más frecuente en este tema — revise siempre que el $\neg$ haya quedado pegado al predicado, no perdido en el camino.
 
 > [!TIP]
 > **Antes de continuar, pregúntese.** ¿Cuáles son los dos pasos mecánicos para negar una afirmación cuantificada, sin importar qué tan complicado sea el predicado interno?
@@ -517,7 +523,7 @@ Al finalizar este documento, usted debería ser capaz de:
 ### Material web
 
 - **MIT — *Mathematics for Computer Science* (Lehman, Leighton, Meyer)**: [people.csail.mit.edu/meyer/mcs.pdf](https://people.csail.mit.edu/meyer/mcs.pdf). En inglés. La sección 3.6 ("Predicate Formulas") es un buen adelanto de la próxima sesión (cuantificadores anidados), si quiere ir preparándose.
-- **Stanford CS103 — *Guide to Logic Translations***: [web.stanford.edu/class/archive/cs/cs103/cs103.1232](https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/). En inglés. Checklist práctico para traducir a lógica de primer orden.
+- **Stanford CS103 — *Guide to Logic Translations***: [web.stanford.edu/class/cs103/guide_to_translation](https://web.stanford.edu/class/cs103/guide_to_translation). En inglés. Checklist práctico para traducir a lógica de primer orden.
 
 > [!NOTE]
 > Si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento es suficiente.
