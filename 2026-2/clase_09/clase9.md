@@ -53,6 +53,9 @@ Eso es todo lo que se necesita. Este documento no depende de conexión a interne
 
 Al igual que $\neg$ tiene mayor precedencia que $\land$, $\lor$, $\rightarrow$ y $\leftrightarrow$, los cuantificadores $\forall$ y $\exists$ también tienen **mayor precedencia que todos los conectivos lógicos**: sin paréntesis, un cuantificador gobierna solo el predicado atómico que tiene inmediatamente al lado, no todo lo que sigue en la línea.
 
+> [!NOTE]
+> Esta regla no es una convención arbitraria — es consecuencia directa de cómo se construye una fórmula bien formada: $\forall x\ \phi$ toma como argumento **una única** subfórmula $\phi$ ya construida — el átomo más cercano, o lo que quede encerrado en paréntesis — nunca una secuencia libre de símbolos sueltos. Por eso $\forall x\ P(x)\lor Q(x)$ solo puede analizarse como $(\forall x\ P(x))\lor Q(x)$: gramaticalmente no hay otra forma de que $\forall x$ tome como argumento algo que no sea la subfórmula inmediata.
+
 > [!WARNING]
 > Considere la cadena de símbolos $\forall x\ P(x) \lor Q(x)$, sin paréntesis. Por precedencia, esto se lee como $\bigl(\forall x\ P(x)\bigr) \lor Q(x)$ — el $\forall x$ solo alcanza a $P(x)$. Pero fíjese en el problema: en esa lectura, la $x$ dentro de $Q(x)$ queda **fuera** del alcance de cualquier cuantificador — es una variable libre, sin dueño. Una fórmula con una variable libre no es una proposición cerrada (no tiene, por sí sola, un valor de verdad fijo). Esto no es un defecto del sistema: es la razón por la que, en la práctica, **nunca se escribe un cuantificador seguido de un conectivo sin paréntesis** — si la intención era que la $x$ de $Q(x)$ también estuviera ligada, la forma correcta es $\forall x\ \bigl(P(x) \lor Q(x)\bigr)$, una fórmula completamente distinta (y esta vez sí, correctamente formada).
 
@@ -131,7 +134,7 @@ $$\forall x\ \exists y\ sigue(x,y) \text{ es verdadera, pero } \exists y\ \foral
 5. **El dominio debe quedar explícito** — de qué conjunto provienen las variables cuantificadas.
 
 > [!WARNING]
-> **Error frecuente 1 — reutilizar la variable.** $\forall x\ \exists x\ marca(x,x)$ ( una persona $x$ que marca como favorita una página $x$ ) reutiliza $x$ en el segundo cuantificador: la $x$ del $\exists$ "sombrea" (captura) la del $\forall$ — dentro de su alcance, toda referencia a $x$ pertenece al $\exists$, no al $\forall$ externo. El significado queda técnicamente definido, pero ya es imposible referirse por separado a la $x$ del cuantificador externo, y a simple vista no queda claro cuál es cuál. **Corrección**: $\forall x\ \exists y\ marca(x,y)$ — cada cuantificador con su propia variable, sin ese riesgo de lectura.
+> **Error frecuente 1 — reutilizar la variable.** $\forall x\ \exists x\ marca(x,x)$ ( una persona $x$ que marca como favorita una página $x$ ) reutiliza $x$ en el segundo cuantificador: la $x$ del $\exists$ "sombrea" (captura) la del $\forall$ — dentro de su alcance, toda referencia a $x$ pertenece al $\exists$, no al $\forall$ externo. De hecho, el $\forall x$ externo queda *vacuo*: todo lo que sigue ( $\exists x\ marca(x,x)$ ) ya no contiene ninguna $x$ libre sobre la que ese $\forall x$ pueda actuar — todas quedaron capturadas por el $\exists$. La fórmula termina significando exactamente lo mismo que $\exists x\ marca(x,x)$ solo, con un $\forall x$ inútil al frente. El significado queda técnicamente definido, pero a simple vista no queda claro cuál es cuál. **Corrección**: $\forall x\ \exists y\ marca(x,y)$ — cada cuantificador con su propia variable, sin ese riesgo de lectura.
 
 > [!WARNING]
 > **Error frecuente 2 — invertir el orden sin darse cuenta.** Traducir *"cada persona tiene un plato favorito"* como $\exists y\ \forall x\ favorito(x,y)$ dice, en realidad, *"hay (al menos) un plato que es favorito de todos"* — una afirmación mucho más fuerte y probablemente falsa. La traducción correcta es $\forall x\ \exists y\ favorito(x,y)$: cada quien con el suyo, no necesariamente el mismo.
@@ -204,6 +207,18 @@ No repetimos la demostración aquí; si necesita repasar por qué son válidas (
 > Y si una fórmula $Q$ **no contiene** la variable cuantificada $x$:
 > $$\forall x\ \bigl(P(x) \land Q\bigr) \quad\equiv\quad \forall x\ P(x) \land Q \qquad\qquad \exists x\ \bigl(P(x) \lor Q\bigr) \quad\equiv\quad \exists x\ P(x) \lor Q$$
 
+**Justificación en un dominio finito.** Igual que en Clase 8, no se memorizan sueltas — se derivan. Sea $U=\lbrace x_1,\dots,x_n\rbrace$. Por la equivalencia entre $\forall$ y una conjunción extendida (Clase 8, Parte III):
+
+$$\forall x\ (P(x)\land Q(x)) \equiv \bigl(P(x_1)\land Q(x_1)\bigr)\land\cdots\land\bigl(P(x_n)\land Q(x_n)\bigr)$$
+
+Reagrupando por conmutatividad y asociatividad de $\land$ (Clase 6):
+
+$$\equiv \bigl(P(x_1)\land\cdots\land P(x_n)\bigr)\land\bigl(Q(x_1)\land\cdots\land Q(x_n)\bigr) \equiv \forall x\ P(x)\land\forall x\ Q(x)$$
+
+La misma reagrupación, cambiando $\land$ por $\lor$, prueba la versión de $\exists$.
+
+**¿Y en un dominio infinito?** Igual que con la negación de cuantificadores, la equivalencia sigue siendo válida por la razón semántica directa: decir que $P(x)\land Q(x)$ se cumple para todo $x$ es exactamente lo mismo que decir que $P(x)$ se cumple para todo $x$ y, por separado, que $Q(x)$ se cumple para todo $x$ — no hay forma de que una de las dos falle en algún elemento sin que la conjunción también falle ahí mismo.
+
 Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — cada cuantificador con el conectivo de su propia "familia" (recuerde de la Parte III que $\forall$ ya venía emparejado con $\rightarrow$ y $\exists$ con $\land$ en las formas aristotélicas; aquí el emparejamiento es distinto — $\forall$ con $\land$, $\exists$ con $\lor$ — así que no lo confunda con aquel).
 
 ## IV.4 Cuidado — cuándo NO se puede distribuir
@@ -221,7 +236,7 @@ Para la primera fórmula: $par(1)\lor impar(1)$ es verdadero (impar), y $par(2)\
 Para la segunda fórmula, con el mismo dominio y predicados: $\exists x\ (par(x)\land impar(x))$ pregunta si *algún* entero es par y impar **a la vez** — nunca ocurre, así que es **falsa**. Pero $\exists x\ par(x)$ es verdadera ( $2$ ) y $\exists x\ impar(x)$ es verdadera ( $1$ ), así que $\exists x\ par(x) \land \exists x\ impar(x)$ es **verdadera**. Falsa $\neq$ verdadera: tampoco son equivalentes.
 
 > [!NOTE]
-> **Para quien quiera ir más allá — Forma Normal Prenex.** Toda fórmula de lógica de predicados se puede reescribir en una forma equivalente donde *todos* los cuantificadores quedan al frente, seguidos de una fórmula sin cuantificadores — por ejemplo, $\forall x\ (P(x)\rightarrow\exists y\ Q(x,y))$ se puede reescribir como $\forall x\ \exists y\ (P(x)\rightarrow Q(x,y))$. Esa forma se llama **Forma Normal Prenex**, y es la que usan por dentro los demostradores automáticos de teoremas y algunos compiladores. No es necesaria para este curso — se menciona aquí solo como referencia, por si quiere profundizar (Rosen, ejercicios de la sección 1.4-1.5, o cualquier texto de lógica computacional).
+> **Para quien quiera ir más allá — Forma Normal Prenex.** Toda fórmula de lógica de predicados se puede reescribir en una forma equivalente donde *todos* los cuantificadores quedan al frente, seguidos de una fórmula sin cuantificadores — por ejemplo, $\forall x\ (P(x)\rightarrow\exists y\ Q(x,y))$ se puede reescribir como $\forall x\ \exists y\ (P(x)\rightarrow Q(x,y))$. Esa forma se llama **Forma Normal Prenex**, y es la que usan por dentro los demostradores automáticos de teoremas y los motores de resolución de restricciones (SAT/SMT solvers). No es necesaria para este curso — se menciona aquí solo como referencia, por si quiere profundizar (Rosen, ejercicios de la sección 1.4-1.5, o cualquier texto de lógica computacional).
 
 ---
 
@@ -425,6 +440,9 @@ El ingeniero se da cuenta de que la pregunta del jefe en realidad son **tres** p
 | ¿Hay (al menos) un técnico común a los ocho? | $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
 | ¿Hay **exactamente un** técnico común a los ocho? | $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
 
+> [!NOTE]
+> **Dos formas de escribir lo mismo.** Aquí se usa $\forall x\in U_{pollo}$ porque el ingeniero ya tiene dos universos separados y con nombre. Cuando en cambio se trabaja con un solo dominio grande y se filtra con un predicado (como en el Ejercicio 13 o en P3/P8, donde se usa $\forall x\ (robot(x)\rightarrow\dots)$ ), ambas notaciones dicen exactamente lo mismo: $\forall x\in U_{pollo}\ \phi(x)$ es solo una forma abreviada de escribir $\forall x\ (pollo(x)\rightarrow\phi(x))$ sobre un dominio único que incluya a los pollos. Se usa una u otra según si conviene más nombrar los universos por separado o filtrarlos con un predicado — no son reglas distintas.
+
 El ingeniero revisa la bitácora de asignaciones:
 
 | Pollo | Técnico asignado |
@@ -502,6 +520,7 @@ Con esto, el gallinero queda completamente formalizado: sabemos hablar de todos,
 | Reutilizar el mismo nombre de variable en dos cuantificadores anidados | El cuantificador más interno sombrea al externo — significado definido, pero imposible de leer con claridad | Parte II |
 | Distribuir $\forall$ sobre $\lor$ (o $\exists$ sobre $\land$ ) como si fuera $\land$/$\lor$ respectivamente | No es una equivalencia válida en general — existen contraejemplos | Parte IV |
 | Confundir "existen y y z que cumplen P, y además y=z" con unicidad genuina | No descarta un tercer candidato distinto; solo repite el mismo nombre | Ejercicio 9 |
+| Asumir que "x tiene [amigos, hijos, técnicos] que cumplen tal condición" excluye el caso de que $x$ no tenga ninguno | Un $\forall y\ \forall z\ (\dots\rightarrow\dots)$ es verdadero por vacuidad si nunca hay un $y$ que dispare la condición | Ejercicio 7 |
 
 ---
 
