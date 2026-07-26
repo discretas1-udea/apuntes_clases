@@ -27,7 +27,7 @@ Imagine que visita una fábrica de microchips y el guía le dice: *"Hay una pers
 1. **Hay una sola persona** que supervisa, ella sola, cada detalle del proceso.
 2. **Para cada detalle** del proceso hay alguien que lo supervisa — pero podrían ser personas distintas para detalles distintos.
 
-Con lenguaje natural, el guía sabe cuál de las dos quiso decir; usted, escuchándolo, podría quedarse con la duda. Esa ambigüedad — *decidir el orden en que se combinan "para todo" y "existe"* — no es un problema exclusivo del lenguaje cotidiano. En ingeniería de software ha causado fallas costosas y bien documentadas: la sonda *Mars Climate Orbiter* (1999) se destruyó al entrar a la atmósfera de Marte porque dos equipos asumieron sistemas de unidades distintos sin que los requerimientos lo aclararan; el cohete *Ariane 5* (vuelo 501, 1996) explotó 37 segundos después del despegue por un desbordamiento numérico en software reutilizado sin revalidar sus supuestos; y el sistema de inventario de Hershey's (1999) falló en plena temporada alta por requerimientos ambiguos entre dos módulos que debían comunicarse. En los tres casos, alguien leyó una especificación de una manera cuando el sistema necesitaba la otra. Hoy construimos las herramientas para que esa ambigüedad, al menos en lógica formal, deje de ser posible.
+Con lenguaje natural, el guía sabe cuál de las dos quiso decir; usted, escuchándolo, podría quedarse con la duda. Esa clase de ambigüedad — una especificación que admite más de una lectura razonable — no es un problema exclusivo del lenguaje cotidiano, y en ingeniería de software ha costado caro más de una vez: la sonda *Mars Climate Orbiter* (1999) se destruyó al entrar a la atmósfera de Marte porque dos equipos asumieron sistemas de unidades distintos sin que los requerimientos lo aclararan; el cohete *Ariane 5* (vuelo 501, 1996) explotó 37 segundos después del despegue por un desbordamiento numérico en software reutilizado sin revalidar sus supuestos; y el sistema de inventario de Hershey's (1999) falló en plena temporada alta por requerimientos ambiguos entre dos módulos que debían comunicarse. Ninguno de los tres fue, específicamente, un error de orden de cuantificadores — pero los tres comparten la misma raíz: alguien leyó una especificación de una manera cuando el sistema necesitaba la otra. El orden de "para todo" y "existe" es, precisamente, uno de los lugares donde esa clase de ambigüedad aparece en lógica formal — y hoy construimos las herramientas para que ahí, al menos, deje de ser posible.
 
 ---
 
@@ -83,6 +83,13 @@ El alcance de $\forall x$ es *todo* el paréntesis grande (incluyendo el $\exist
 >
 > </details>
 
+## I.3 Ocurrencias libres y ligadas — nombrando lo que ya vimos
+
+> [!IMPORTANT]
+> Una **ocurrencia** de una variable es **ligada** si está dentro del alcance de un cuantificador que la introduce; si no, es **libre**. En $\forall x\ (estudiante(x)\rightarrow\exists y\ (libro(y)\land lee(x,y)))$, las tres ocurrencias de $x$ y las dos de $y$ son ligadas — no queda ninguna suelta. En el ejemplo mal formado de la advertencia anterior, $\forall x\ P(x)\lor Q(x)$, la $x$ dentro de $Q(x)$ es exactamente una ocurrencia **libre**: por eso la fórmula no es una proposición cerrada.
+
+Esta distinción importa para algo concreto: **sustituir una variable por un objeto específico solo tiene sentido en sus ocurrencias libres** — una ocurrencia ligada ya está "hablando de todos" o "de alguno", no de un objeto en particular, así que no hay nada que sustituir ahí. Esta idea de sustitución es la base formal de las reglas de inferencia cuantificacional (instanciación y generalización) que veremos más adelante en el curso; por ahora basta con reconocer libre vs. ligada a simple vista.
+
 ---
 
 # Parte II — Cuantificadores Anidados: el Orden Importa
@@ -96,7 +103,7 @@ Compare estas dos fórmulas, con dominio de personas y $sigue(x,y)$: *"x sigue a
 
 $$\forall x\ \exists y\ sigue(x,y) \qquad\text{vs.}\qquad \exists y\ \forall x\ sigue(x,y)$$
 
-La primera dice *"cada persona sigue a alguien"* — cada quien puede seguir a alguien distinto. La segunda dice *"hay una cuenta a la que todos siguen"* — una sola cuenta, universalmente seguida. Son afirmaciones con contenido claramente distinto, y no es difícil construir una situación donde una es verdadera y la otra falsa.
+La primera dice *"cada persona sigue a alguien"* — el testigo puede **depender de quién sea $x$**: Ana podría seguir a Beto, y Beto a alguien completamente distinto; no hace falta que sea la misma cuenta para todos. La segunda dice *"hay (al menos) una cuenta a la que todos siguen"* — una cuenta común, la misma para cada persona del dominio; podría haber una sola, o incluso más de una, pero el enunciado solo exige que exista al menos esa. Son afirmaciones con contenido claramente distinto, y no es difícil construir una situación donde una es verdadera y la otra falsa.
 
 **Ejemplo concreto.** Sea el dominio $U=\lbrace Ana, Beto, Carla\rbrace$ y la relación $sigue(x,y)$ dada por: Ana sigue a Beto, Beto sigue a Carla, Carla sigue a Ana (un ciclo, sin repeticiones).
 
@@ -118,16 +125,16 @@ $$\forall x\ \exists y\ sigue(x,y) \text{ es verdadera, pero } \exists y\ \foral
 ## II.2 Cinco reglas para trabajar con cuantificadores anidados
 
 1. **El orden importa** cuando se mezclan $\forall$ y $\exists$ — cambiarlo puede cambiar el valor de verdad.
-2. **Cada cuantificador usa su propia variable.** Reutilizar el mismo nombre en dos cuantificadores del mismo contexto genera ambigüedad sobre a cuál pertenece cada aparición.
-3. **El alcance se extiende hasta el final de la subfórmula**, salvo que haya paréntesis que lo delimiten (Parte I).
+2. **Cada cuantificador usa su propia variable.** Reutilizar el mismo nombre en dos cuantificadores anidados no deja la fórmula sin significado — el cuantificador más interno "sombrea" (captura) al externo, y el significado técnico queda perfectamente definido — pero es una fuente segura de errores de lectura. Evítelo siempre.
+3. **El alcance sigue siempre una de dos reglas, nunca "hasta donde parezca":** sin paréntesis, es solo el átomo inmediato (Parte I.1); con paréntesis, es exactamente la subfórmula que encierran (Parte I.2) — nunca algo intermedio o ambiguo.
 4. **Use paréntesis siempre que haya duda** sobre qué parte pertenece a qué cuantificador.
 5. **El dominio debe quedar explícito** — de qué conjunto provienen las variables cuantificadas.
 
 > [!WARNING]
-> **Error frecuente 1 — reutilizar la variable.** $\forall x\ \exists x\ marca(x,x)$ ( una persona $x$ que marca como favorita una página $x$ ) reutiliza $x$ en el segundo cuantificador: la $x$ del $\exists$ "captura" la del $\forall$, y ya no queda claro cuál es cuál. **Corrección**: $\forall x\ \exists y\ marca(x,y)$ — cada cuantificador con su propia variable.
+> **Error frecuente 1 — reutilizar la variable.** $\forall x\ \exists x\ marca(x,x)$ ( una persona $x$ que marca como favorita una página $x$ ) reutiliza $x$ en el segundo cuantificador: la $x$ del $\exists$ "sombrea" (captura) la del $\forall$ — dentro de su alcance, toda referencia a $x$ pertenece al $\exists$, no al $\forall$ externo. El significado queda técnicamente definido, pero ya es imposible referirse por separado a la $x$ del cuantificador externo, y a simple vista no queda claro cuál es cuál. **Corrección**: $\forall x\ \exists y\ marca(x,y)$ — cada cuantificador con su propia variable, sin ese riesgo de lectura.
 
 > [!WARNING]
-> **Error frecuente 2 — invertir el orden sin darse cuenta.** Traducir *"cada persona tiene un plato favorito"* como $\exists y\ \forall x\ favorito(x,y)$ dice, en realidad, *"hay un plato que es el favorito de todos"* — una afirmación mucho más fuerte y probablemente falsa. La traducción correcta es $\forall x\ \exists y\ favorito(x,y)$: cada quien con el suyo.
+> **Error frecuente 2 — invertir el orden sin darse cuenta.** Traducir *"cada persona tiene un plato favorito"* como $\exists y\ \forall x\ favorito(x,y)$ dice, en realidad, *"hay (al menos) un plato que es favorito de todos"* — una afirmación mucho más fuerte y probablemente falsa. La traducción correcta es $\forall x\ \exists y\ favorito(x,y)$: cada quien con el suyo, no necesariamente el mismo.
 
 ## II.3 Traducción paso a paso: "cada persona sigue a alguien más"
 
@@ -151,6 +158,8 @@ $$\forall x\ \Bigl(persona(x) \rightarrow \exists y\ \bigl(persona(y) \land x\ne
 > any(all(P(x, y) for x in dominio) for y in dominio)
 > ```
 > Fíjese que invertir cuál `for` queda "afuera" y cuál "adentro" es exactamente invertir el orden de los cuantificadores — el mismo cambio de significado, ahora en código.
+>
+> **Advertencia.** Esta analogía es literal solo cuando el dominio es finito y enumerable, como una lista de nombres o los ocho pollos del gallinero. Casi todos los ejercicios de hoy trabajan sobre $\mathbb{R}$, un dominio infinito — ahí no hay ningún `for` que termine de recorrerlo, y el valor de verdad se determina matemáticamente (con testigos y contraejemplos), no ejecutando código. La lógica de primer orden no es un algoritmo; `all()`/`any()` son una ayuda para la intuición, no una definición.
 
 ---
 
@@ -195,7 +204,7 @@ No repetimos la demostración aquí; si necesita repasar por qué son válidas (
 > Y si una fórmula $Q$ **no contiene** la variable cuantificada $x$:
 > $$\forall x\ \bigl(P(x) \land Q\bigr) \quad\equiv\quad \forall x\ P(x) \land Q \qquad\qquad \exists x\ \bigl(P(x) \lor Q\bigr) \quad\equiv\quad \exists x\ P(x) \lor Q$$
 
-Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — el mismo emparejamiento "natural" que ya conocemos de las formas aristotélicas ( $\forall$ con $\rightarrow$, $\exists$ con $\land$ ) reaparece aquí bajo otra forma.
+Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — cada cuantificador con el conectivo de su propia "familia" (recuerde de la Parte III que $\forall$ ya venía emparejado con $\rightarrow$ y $\exists$ con $\land$ en las formas aristotélicas; aquí el emparejamiento es distinto — $\forall$ con $\land$, $\exists$ con $\lor$ — así que no lo confunda con aquel).
 
 ## IV.4 Cuidado — cuándo NO se puede distribuir
 
@@ -210,6 +219,9 @@ Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ dis
 Para la primera fórmula: $par(1)\lor impar(1)$ es verdadero (impar), y $par(2)\lor impar(2)$ es verdadero (par) — así que $\forall x\ (par(x)\lor impar(x))$ es **verdadera** (todo entero es par o impar). Pero $\forall x\ par(x)$ es falsa ( $1$ no es par ), y $\forall x\ impar(x)$ es falsa ( $2$ no es impar ) — así que $\forall x\ par(x) \lor \forall x\ impar(x)$ es **falsa**. Verdadera $\neq$ falsa: no son equivalentes.
 
 Para la segunda fórmula, con el mismo dominio y predicados: $\exists x\ (par(x)\land impar(x))$ pregunta si *algún* entero es par y impar **a la vez** — nunca ocurre, así que es **falsa**. Pero $\exists x\ par(x)$ es verdadera ( $2$ ) y $\exists x\ impar(x)$ es verdadera ( $1$ ), así que $\exists x\ par(x) \land \exists x\ impar(x)$ es **verdadera**. Falsa $\neq$ verdadera: tampoco son equivalentes.
+
+> [!NOTE]
+> **Para quien quiera ir más allá — Forma Normal Prenex.** Toda fórmula de lógica de predicados se puede reescribir en una forma equivalente donde *todos* los cuantificadores quedan al frente, seguidos de una fórmula sin cuantificadores — por ejemplo, $\forall x\ (P(x)\rightarrow\exists y\ Q(x,y))$ se puede reescribir como $\forall x\ \exists y\ (P(x)\rightarrow Q(x,y))$. Esa forma se llama **Forma Normal Prenex**, y es la que usan por dentro los demostradores automáticos de teoremas y algunos compiladores. No es necesaria para este curso — se menciona aquí solo como referencia, por si quiere profundizar (Rosen, ejercicios de la sección 1.4-1.5, o cualquier texto de lógica computacional).
 
 ---
 
@@ -302,15 +314,21 @@ Mismo dominio y $F(x,y)$ del Ejercicio 6, agregando una tercera variable $z$. Tr
 
 **Paso 3 — Reescribir en lenguaje natural fluido.** *"Hay un estudiante cuyos amigos no son amigos entre sí."*
 
+> [!NOTE]
+> **Un caso límite que vale la pena notar.** Si $x$ no tiene ningún amigo, la fórmula $\forall y\ \forall z\ (\dots\rightarrow\dots)$ es **verdadera por vacuidad** — no hay ningún par de amigos de $x$ que pueda violar la condición, así que la implicación nunca se pone a prueba. Un estudiante sin amigos técnicamente satisface *"tiene amigos que no son amigos entre sí"*, aunque la lectura intuitiva de la frase sugiera lo contrario. Para excluir ese caso habría que agregar $\exists y\ \exists z\ (F(x,y)\land F(x,z)\land y\neq z)$ como condición adicional — exigir que existan al menos dos amigos distintos.
+
 ## Ejercicio 8 — De lenguaje natural a lógica, con condición implícita
 
 Traduzca: *"Si una persona es mujer y es madre, entonces esa persona es la madre de alguien."* Dominio: todas las personas.
 
-**Paso 1 — Definir predicados.** $mujer(x)$: *"x es mujer"*; $progenitora(x)$: *"x es madre de alguien (padre o madre en sentido de parentesco)"*; $madreDe(x,y)$: *"x es madre de y"*.
+**Paso 1 — Definir predicados, con cuidado de no repetir la conclusión en la premisa.** $mujer(x)$: *"x es mujer"*; $esMadre(x)$: *"x tiene registrado el estado civil/parental de madre"* (aquí se trata como un dato atómico dado, sin descomponerlo todavía en "es madre de alguien en particular"); $madreDe(x,y)$: *"x es madre de y"*.
+
+> [!NOTE]
+> Si $esMadre(x)$ se hubiera definido directamente como "x es madre de alguien", la traducción sería casi tautológica: el antecedente ya contendría la conclusión, y la implicación no diría nada nuevo. Por eso aquí $esMadre(x)$ se trata como una etiqueta atómica independiente (un dato dado, no derivado) — así la implicación sí aporta algo real: pasa de una etiqueta general a la existencia concreta de al menos un hijo o hija.
 
 **Paso 2 — Identificar la estructura: "si... entonces" es forma A, con un existencial en el consecuente.**
 
-$$\forall x\ \Bigl(mujer(x)\land progenitora(x) \rightarrow \exists y\ madreDe(x,y)\Bigr)$$
+$$\forall x\ \Bigl(mujer(x)\land esMadre(x) \rightarrow \exists y\ madreDe(x,y)\Bigr)$$
 
 ## Ejercicio 9 — Unicidad anidada: "todos tienen un único mejor amigo"
 
@@ -399,6 +417,14 @@ $$\exists x\ \Bigl(mujer(x) \land \forall y\ \bigl(aerolinea(y) \rightarrow volo
 
 Volvamos al ingeniero y a la pregunta pendiente del jefe. Universo de pollos: $U_{pollo}=\lbrace P1,\dots,P8\rbrace$ (ya conocido). Se agrega ahora el universo de técnicos: $U_{tec}=\lbrace T1,T2,T3\rbrace$, y el predicado $tecnico(y,x)$: *"el técnico y da mantenimiento al pollo x"*.
 
+El ingeniero se da cuenta de que la pregunta del jefe en realidad son **tres** preguntas distintas, no una:
+
+| Pregunta | Fórmula |
+|:---|:---|
+| ¿Cada pollo tiene su técnico? | $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$ |
+| ¿Hay (al menos) un técnico común a los ocho? | $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
+| ¿Hay **exactamente un** técnico común a los ocho? | $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
+
 El ingeniero revisa la bitácora de asignaciones:
 
 | Pollo | Técnico asignado |
@@ -412,11 +438,16 @@ El ingeniero revisa la bitácora de asignaciones:
 | `P7` | `T1` |
 | `P8` | `T2` |
 
-**Verifique $\forall x\ \exists y\ tecnico(y,x)$** — "¿cada pollo tiene su técnico?": recorriendo la tabla, cada uno de los ocho pollos tiene exactamente una fila con un técnico asignado. **Verdadera.**
+**Pregunta 1 — $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$**: recorriendo la tabla, cada uno de los ocho pollos tiene exactamente una fila con un técnico asignado — el testigo $y$ depende de $x$ (a `P1` le sirve `T1`; a `P3` le sirve `T2`). **Verdadera.**
 
-**Verifique $\exists y\ \forall x\ tecnico(y,x)$** — "¿hay un técnico único para los ocho?": `T1` solo cubre a `P1`, `P2`, `P7`; `T2` solo cubre a `P3`, `P4`, `P8`; `T3` solo cubre a `P5`, `P6`. Ningún técnico aparece en las ocho filas. **Falsa.**
+**Pregunta 2 — $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$**: `T1` solo cubre a `P1`, `P2`, `P7`; `T2` solo cubre a `P3`, `P4`, `P8`; `T3` solo cubre a `P5`, `P6`. Ningún técnico aparece en las ocho filas. **Falsa.**
 
-$$\forall x\ \exists y\ tecnico(y,x) \text{ es verdadera}, \qquad \exists y\ \forall x\ tecnico(y,x) \text{ es falsa.}$$
+**Pregunta 3 — $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$**: como la Pregunta 2 ya es falsa —no existe *ningún* técnico común, ni uno solo— la unicidad no tiene nada que evaluar: si no hay ni un testigo, mucho menos hay exactamente un testigo. **Falsa**, por la misma razón que la Pregunta 2, un paso más exigente.
+
+> [!NOTE]
+> **Para ver la Pregunta 2 y la Pregunta 3 divergir de verdad**, imagine una bitácora distinta: que tanto `T1` como un cuarto técnico de respaldo, `T4`, estuvieran *cada uno* certificados para los ocho pollos. En ese escenario hipotético, $\exists y\ \forall x\ tecnico(y,x)$ sería **verdadera** (`T1` es testigo), pero $\exists!\ y\ \forall x\ tecnico(y,x)$ seguiría siendo **falsa** — porque `T4` es un *segundo* testigo que también cumple, y la unicidad exige descartarlo. Existencia solo pide encontrar uno; unicidad pide, además, comprobar que no hay un segundo.
+
+$$\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x) \text{ es verdadera}, \qquad \exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x) \text{ es falsa.}$$
 
 El ingeniero ya puede responder con total precisión — y sin ambigüedad de fábrica de microchips.
 
@@ -456,7 +487,7 @@ El ingeniero completa su respuesta al jefe:
 
 > **Sobre el líder de sincronización** (respondido en Clase 8): hay uno y solo uno, `P1`.
 >
-> **Sobre el técnico:** *"El gallinero no tiene un único técnico responsable de los ocho pollos — el mantenimiento está distribuido entre tres personas. Lo que sí es cierto es que cada pollo, individualmente, tiene su técnico asignado; ninguno queda sin responsable."* En símbolos: $\forall x\ \exists y\ tecnico(y,x)$ es verdadera; $\exists y\ \forall x\ tecnico(y,x)$ es falsa.
+> **Sobre el técnico:** *"El gallinero no tiene un técnico común a los ocho pollos — el mantenimiento está distribuido entre tres personas. Lo que sí es cierto es que cada pollo, individualmente, tiene su técnico asignado; ninguno queda sin responsable."* En símbolos: $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$ es verdadera; $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ es falsa.
 
 Con esto, el gallinero queda completamente formalizado: sabemos hablar de todos, de algunos, de exactamente uno, y ahora también de cómo se relacionan varios objetos entre sí incluso cuando un cuantificador depende de otro. Lo que sigue en el curso es usar estas mismas herramientas — universo, predicados, cuantificadores, anidamiento — no solo para *traducir* argumentos, sino para **demostrar** su validez con reglas de inferencia formales, extendiendo a la lógica de predicados el mismo trabajo que ya hicimos con lógica proposicional en el Bug de la Polilla (Clase 6).
 
@@ -468,7 +499,7 @@ Con esto, el gallinero queda completamente formalizado: sabemos hablar de todos,
 |:---|:---|:---|
 | Escribir un cuantificador seguido de un conectivo sin paréntesis | Deja variables libres fuera del alcance pretendido | Parte I |
 | Asumir que $\forall x\exists y\ P(x,y)$ y $\exists y\forall x\ P(x,y)$ dicen lo mismo | El orden cambia el significado cuando se mezclan $\forall$ y $\exists$ | Parte II |
-| Reutilizar el mismo nombre de variable en dos cuantificadores anidados | Ambigüedad sobre a cuál cuantificador pertenece cada aparición | Parte II |
+| Reutilizar el mismo nombre de variable en dos cuantificadores anidados | El cuantificador más interno sombrea al externo — significado definido, pero imposible de leer con claridad | Parte II |
 | Distribuir $\forall$ sobre $\lor$ (o $\exists$ sobre $\land$ ) como si fuera $\land$/$\lor$ respectivamente | No es una equivalencia válida en general — existen contraejemplos | Parte IV |
 | Confundir "existen y y z que cumplen P, y además y=z" con unicidad genuina | No descarta un tercer candidato distinto; solo repite el mismo nombre | Ejercicio 9 |
 
@@ -479,6 +510,7 @@ Con esto, el gallinero queda completamente formalizado: sabemos hablar de todos,
 Al finalizar este documento, usted debería ser capaz de:
 
 - **Determinar** el alcance de un cuantificador en una fórmula con o sin paréntesis, y **explicar** por qué un cuantificador seguido de un conectivo sin paréntesis puede dejar variables libres.
+- **Reconocer** una ocurrencia libre de una ligada, y explicar por qué la sustitución solo tiene sentido en las libres.
 - **Traducir y evaluar** cuantificadores anidados, **reconociendo** que el orden de $\forall$ y $\exists$ cambia el significado (y a menudo el valor de verdad) de la expresión, salvo cuando ambos cuantificadores son del mismo tipo.
 - **Aplicar** un método sistemático de cinco pasos para traducir enunciados de lenguaje natural con dos o más cuantificadores a lógica de predicados.
 - **Aplicar y refutar** las leyes de distribución de cuantificadores sobre $\land$ y $\lor$, construyendo contraejemplos concretos cuando la distribución no es válida.
@@ -488,8 +520,9 @@ Al finalizar este documento, usted debería ser capaz de:
 
 | Concepto | Símbolo / fórmula | Lectura |
 |:---|:---|:---|
-| Alcance | La subfórmula que sigue al cuantificador, delimitada por paréntesis (o hasta el final si no hay) | "Hasta dónde llega" el cuantificador |
-| Orden importa (tipos mixtos) | $\forall x\exists y\ P(x,y) \not\equiv \exists y\forall x\ P(x,y)$ | "Cada uno el suyo" vs. "uno para todos" |
+| Alcance | La subfórmula que sigue al cuantificador, delimitada por paréntesis (o el átomo inmediato si no hay) | "Hasta dónde llega" el cuantificador |
+| Libre vs. ligada | Ligada: dentro del alcance de su cuantificador. Libre: fuera de cualquier alcance | Solo se sustituye lo libre |
+| Orden importa (tipos mixtos) | $\forall x\exists y\ P(x,y) \not\equiv \exists y\forall x\ P(x,y)$ | "Cada uno el suyo" vs. "al menos uno, común a todos" |
 | Orden no importa (mismo tipo) | $\forall x\forall y\ P \equiv \forall y\forall x\ P$ ; $\exists x\exists y\ P\equiv\exists y\exists x\ P$ | Se puede reordenar libremente |
 | Distribución válida | $\forall x(P\land Q)\equiv\forall xP\land\forall xQ$ ; $\exists x(P\lor Q)\equiv\exists xP\lor\exists xQ$ | $\forall$ con $\land$, $\exists$ con $\lor$ |
 | Distribución inválida | $\forall x(P\lor Q)\not\equiv\forall xP\lor\forall xQ$ ; $\exists x(P\land Q)\not\equiv\exists xP\land\exists xQ$ | Requiere contraejemplo, no demostración |
@@ -526,7 +559,7 @@ Al finalizar este documento, usted debería ser capaz de:
 
 **P2.** *"Existe un robot tal que toda batería es compatible con él"* — un robot universalmente compatible con cualquier batería del inventario.
 
-**P3.** *"Todo pollo tiene al menos un tornillo que le pertenece"*: $\forall x\ (robot(x)\rightarrow\exists y\ (tornillo(y)\land pertenece(y,x)))$ — corresponde a $\forall\exists$ (cada uno el suyo). *"Hay un único tornillo compartido por todos"*: $\exists y\ \forall x\ (robot(x)\rightarrow(tornillo(y)\land pertenece(y,x)))$ — corresponde a $\exists\forall$ (uno para todos), y es la lectura mucho más fuerte y, en la práctica, poco plausible.
+**P3.** *"Todo pollo tiene al menos un tornillo que le pertenece"*: $\forall x\ (robot(x)\rightarrow\exists y\ (tornillo(y)\land pertenece(y,x)))$ — corresponde a $\forall\exists$ (cada uno el suyo). *"Hay un único tornillo compartido por todos"*: $\exists!\ y\ \forall x\ (robot(x)\rightarrow(tornillo(y)\land pertenece(y,x)))$ — el $\exists!$ es imprescindible aquí: sin él, la fórmula solo diría que existe *al menos* un tornillo así, no que sea el único. Es una lectura todavía más fuerte que $\exists\forall$ solo, y en la práctica poco plausible.
 
 **P4.** Con $D=\lbrace 1,2,3\rbrace$ y $P(x,y)$: $x<y$: $\forall x\forall y\ P(x,y)$ es **falsa** (por ejemplo $1<1$ es falso). $\forall x\exists y\ P(x,y)$ es **falsa**: para $x=3$ no existe ningún $y\in D$ con $3<y$. $\exists x\forall y\ P(x,y)$ es **falsa** por la misma razón que la anterior (ningún $x$ es menor que todos, incluyéndose a sí mismo). $\exists x\exists y\ P(x,y)$ es **verdadera**: por ejemplo $1<2$.
 
@@ -542,6 +575,6 @@ $$\neg\bigl(\forall x\ \exists y\ P(x,y)\bigr) \equiv \exists x\ \neg\bigl(\exis
 
 **P9.** $\forall x\forall y\exists z\ (x\cdot y=z)$: para cualquier par $(x,y)$, el testigo $z=x\cdot y$ existe en $\mathbb{R}$ (clausura del producto). **Verdadera.** $\exists z\forall x\forall y\ (x\cdot y=z)$: ningún $z$ fijo es el producto de *todo* par — por ejemplo $2\cdot3=6$ pero $2\cdot4=8$. **Falsa.**
 
-**P10.** Tendría que existir un único técnico, digamos `T1`, que apareciera asignado a los ocho pollos a la vez en la bitácora — es decir, que la columna "Técnico asignado" mostrara `T1` en las ocho filas, sin excepción. Basta con que **un solo** pollo tenga un técnico distinto para que $\exists y\ \forall x\ tecnico(y,x)$ vuelva a ser falsa — la misma fragilidad que ya vimos en el método del contraejemplo de Clase 8.
+**P10.** Tendría que existir (al menos) un técnico, digamos `T1`, que apareciera asignado a los ocho pollos a la vez en la bitácora — es decir, que la columna "Técnico asignado" mostrara `T1` en las ocho filas, sin excepción. (Note que esto solo haría verdadera la Pregunta 2 del Gallinero, $\exists y\ \forall x\ tecnico(y,x)$ — no dice nada todavía sobre si sería el *único* que cumple; para eso haría falta además que ningún otro técnico cubriera también los ocho.) Basta con que **un solo** pollo tenga un técnico distinto para que $\exists y\ \forall x\ tecnico(y,x)$ vuelva a ser falsa — la misma fragilidad que ya vimos en el método del contraejemplo de Clase 8.
 
 </details>
