@@ -73,7 +73,7 @@ Indique el alcance de $\forall x$ en cada una, y diga cuál de las dos deja una 
 <details><summary>Ver respuesta final</summary>(a) El alcance de $\forall x$ es solo $inscrito(x)$ — la $x$ dentro de $activo(x)$ queda libre; la fórmula no es una proposición cerrada. (b) El alcance es todo el paréntesis; ambas ocurrencias de $x$ son ligadas.</details>
 
 **Ítem 5**
-Sea $U=\{D1,D2,D3\}$ (tres dispositivos IoT) y $sincroniza(x,y)$: "el dispositivo x sincroniza sus datos con el dispositivo y". Según los registros: $D1$ sincroniza con $D2$; $D2$ sincroniza con $D3$; $D3$ sincroniza con $D1$. Evalúe $\forall x\ \exists y\ sincroniza(x,y)$ y $\exists y\ \forall x\ sincroniza(x,y)$.
+Sea $U=\{D1,D2,D3,D4\}$ (cuatro dispositivos IoT) y $sincroniza(x,y)$: "el dispositivo x sincroniza sus datos con el dispositivo y". Según los registros: $D1$ sincroniza con $D2$; $D2$ sincroniza con $D3$; $D3$ sincroniza con $D3$ (consigo mismo); $D4$ sincroniza con $D3$. Evalúe $\forall x\ \exists y\ sincroniza(x,y)$ y $\exists y\ \forall x\ sincroniza(x,y)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -81,7 +81,7 @@ Sea $U=\{D1,D2,D3\}$ (tres dispositivos IoT) y $sincroniza(x,y)$: "el dispositiv
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ sincroniza(x,y)$ es **verdadera** (cada dispositivo sincroniza con alguno, testigo distinto por dispositivo). $\exists y\ \forall x\ sincroniza(x,y)$ es **falsa** (ningún dispositivo recibe sincronización de los tres a la vez).</details>
+<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ sincroniza(x,y)$ es **verdadera** (los cuatro tienen testigo: $D1{\to}D2$, $D2{\to}D3$, $D3{\to}D3$, $D4{\to}D3$). $\exists y\ \forall x\ sincroniza(x,y)$ es **falsa**: pruebe $y=D3$ — funciona para $D2,D3,D4$ pero $D1$ no sincroniza con $D3$ (solo con $D2$); ningún otro $y$ hace mejor. Ningún dispositivo es testigo común a los cuatro.</details>
 
 **Ítem 6**
 Al traducir "cada empleado tiene un supervisor" (con $supervisa(y,x)$: "y supervisa a x"), alguien escribió $\exists y\ \forall x\ supervisa(y,x)$. Identifique cuál de los dos errores frecuentes de la Parte II.2 se cometió, y corrija la traducción.
@@ -143,7 +143,7 @@ Sea $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, y $reporta(x,y)$: "el s
 <details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ reporta(x,y)$ es **verdadera** (cada sensor reporta a alguno). $\exists y\ \forall x\ reporta(x,y)$ es **falsa** ($V1$ solo cubre $S1,S2$; $V2$ solo cubre $S3$; ningún servidor recibe de los tres).</details>
 
 **Ítem 11**
-Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$. (a) Identifique qué tipo de ambigüedad de la Parte V afecta a esta fórmula, apoyándose en la Parte I. (b) Reescríbala con paréntesis para que exprese "para todo estudiante, si entregó el carnet o pagó la multa, entonces puede retirar un libro".
+Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$. (a) Usando la regla de precedencia de la Parte I.1, explique exactamente hasta dónde llega el alcance de $\forall x$ tal como está escrita la fórmula, y qué ocurrencias de $x$ quedan libres como consecuencia. (b) Reescríbala con paréntesis para que exprese "para todo estudiante, si entregó el carnet o pagó la multa, entonces puede retirar un libro".
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -151,10 +151,10 @@ Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMul
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(a) Ambigüedad de alcance: sin paréntesis, $\forall x$ solo gobierna $entregoCarnet(x)$ (Parte I.1); las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedarían libres. (b) $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.</details>
+<details><summary>Ver respuesta final</summary>(a) Por precedencia (Parte I.1), sin paréntesis $\forall x$ gobierna únicamente el átomo inmediato, $entregoCarnet(x)$ — no toda la línea. La fórmula se lee como $\bigl((\forall x\ entregoCarnet(x)) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)$, y las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedan fuera de ese alcance — libres (Parte I.3). (b) $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.</details>
 
 **Ítem 12**
-Dominio: los estudiantes becados de este semestre (ya filtrado). Traduzca "todos son responsables y puntuales" como $\forall x\ (responsable(x)\land puntual(x))$, y luego aplique la Parte IV.3 para separarla en dos cuantificaciones independientes unidas por $\land$.
+Dominio: los estudiantes becados de este semestre. Sea $responsable(x)$ el predicado de siempre, y $vigente$ una proposición **sin variable** que dice "el programa de becas está vigente este semestre". Traduzca "todos los becados son responsables, y además el programa está vigente" como $\forall x\ (responsable(x)\land vigente)$, y aplique la cláusula **extendida** de la Parte IV.3 (la que aplica cuando $Q$ no contiene la variable cuantificada) para simplificarla.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -162,7 +162,7 @@ Dominio: los estudiantes becados de este semestre (ya filtrado). Traduzca "todos
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ (responsable(x)\land puntual(x)) \equiv \forall x\ responsable(x) \land \forall x\ puntual(x)$.</details>
+<details><summary>Ver respuesta final</summary>Como $vigente$ no contiene la variable $x$, aplica la cláusula extendida de IV.3: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x) \land vigente$ — el cuantificador "no tiene nada que hacer" sobre $vigente$, así que sale del alcance sin cambiar el significado.</details>
 
 **Ítem 13**
 Dominio: los proyectos de un semillero de investigación, $colaboraCon(x,y)$: "x colabora con y". Traduzca, incluyendo una condición de distinción (como en la Parte II.3): "existe un proyecto cuyos colaboradores no colaboran entre sí". Luego explique bajo qué condición esta fórmula resultaría verdadera por vacuidad.
@@ -193,7 +193,7 @@ Dominio de personas y de contactos. $primerContacto(x,y)$: "y es el contacto que
 <details><summary>Ver respuesta final</summary>Solución 1: $\forall x\ \exists!\ y\ primerContacto(x,y)$. Solución 2: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.</details>
 
 **Ítem 15**
-Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$. La tabla de asignación es: $Mesa1\to MeseroA$, $Mesa2\to MeseroB$, $Mesa3\to MeseroA$ (cada mesa aparece con exactamente un mesero en la tabla). Evalúe $\forall x\ \exists!\ y\ atiende(y,x)$, verificando existencia y unicidad para cada una de las tres mesas.
+Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$, y $atiende(y,x)$: "el mesero y atendió la mesa x en algún momento del turno". La bitácora del turno (puede haber más de un registro por mesa, no es una asignación fija) muestra: $MeseroA$ atendió $Mesa1$; $MeseroA$ atendió $Mesa2$; $MeseroB$ atendió $Mesa2$; $MeseroA$ atendió $Mesa3$. Evalúe $\forall x\ \exists!\ y\ atiende(y,x)$, verificando existencia y unicidad mesa por mesa.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -201,7 +201,7 @@ Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$. La tabl
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>**Verdadera.** Cada mesa tiene existencia (aparece con un mesero asignado) y unicidad (aparece una sola vez en la tabla, con un solo mesero): $Mesa1$ con $MeseroA$ únicamente, $Mesa2$ con $MeseroB$ únicamente, $Mesa3$ con $MeseroA$ únicamente. Como se cumple para las tres mesas, $\forall x\ \exists!\ y\ atiende(y,x)$ es verdadera.</details>
+<details><summary>Ver respuesta final</summary>**Falsa.** $Mesa1$: existencia ($MeseroA$) y unicidad, se cumple $\exists!$. $Mesa2$: existencia sí, pero **unicidad falla** — tanto $MeseroA$ como $MeseroB$ la atendieron, dos testigos distintos. $Mesa3$: existencia y unicidad, se cumple $\exists!$. Como $Mesa2$ rompe la unicidad, $\exists!\ y\ atiende(y,x)$ ya no se cumple para todo $x$, así que $\forall x\ \exists!\ y\ atiende(y,x)$ es falsa — testigo del fallo: $Mesa2$, con $MeseroA$ y $MeseroB$ como los dos testigos que rompen la unicidad.</details>
 
 **Ítem 16**
 Niegue $\forall x\ \exists y\ \bigl(reporta(x,y)\land activo(y)\bigr)$ hasta que el $\neg$ quede pegado directamente a cada predicado atómico, aplicando la negación cuantificacional (Clase 8) dos veces y la ley de De Morgan (Clase 6) una vez.
@@ -253,7 +253,7 @@ La bitácora de asignaciones del día es: $C1\to R1$, $C2\to R1$, $C3\to R2$, $C
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ asignado(y,x)$ es **verdadera** (los cuatro clientes tienen repartidor). $\exists y\ \forall x\ asignado(y,x)$ es **falsa** ($R1$ cubre a $C1,C2,C4$ pero no a $C3$; $R2$ solo cubre a $C3$). Negando la falsa: $\neg\exists y\ \forall x\ asignado(y,x) \equiv \forall y\ \exists x\ \neg asignado(y,x)$ — "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor".</details>
+<details><summary>Ver respuesta final</summary>$\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$ es **verdadera** (los cuatro clientes tienen repartidor). $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$ es **falsa** ($R1$ cubre a $C1,C2,C4$ pero no a $C3$; $R2$ solo cubre a $C3$). Negando la falsa: $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$ — "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor".</details>
 
 > [!NOTE]
 > **Moraleja.** La diferencia entre "cada cliente resuelto" y "un solo repartidor que resuelve todo" no es un tecnicismo — es exactamente la diferencia entre un servicio que funciona (aunque repartido entre varios) y uno que dependería de una sola persona disponible siempre.

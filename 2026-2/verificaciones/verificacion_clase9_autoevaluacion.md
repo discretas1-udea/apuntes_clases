@@ -31,10 +31,11 @@
 4. Clasificación (Parte V): es ambigüedad **de alcance** — no queda claro qué parte de la fórmula domina el cuantificador.
 5. Corrección con paréntesis: $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.
 
-**Ítem 12.** Distribución de $\forall$ sobre $\land$ (Parte IV.3), dominio ya filtrado (becados).
-1. Traducción directa (dominio ya restringido, sin necesidad de implicación — nota "dos formas de escribir lo mismo" del Expediente Gallinero): $\forall x\ (responsable(x)\land puntual(x))$.
-2. Aplicar IV.3 directamente: $\forall x\ (P(x)\land Q(x)) \equiv \forall x\ P(x)\land\forall x\ Q(x)$, con $P=responsable$, $Q=puntual$.
-3. Conclusión: $\forall x\ responsable(x) \land \forall x\ puntual(x)$.
+**Ítem 12.** Cláusula **extendida** de IV.3 (Q sin la variable cuantificada) — deliberadamente distinta del Ítem 7, que ya cubre la cláusula básica ($\forall x(P\land Q(x))$ con ambos predicados dependientes de $x$).
+1. $vigente$ es una proposición atómica sin ocurrencia de $x$ — no es $vigente(x)$, es una constante proposicional.
+2. La cláusula extendida de IV.3 dice exactamente: $\forall x\ (P(x)\land Q) \equiv \forall x\ P(x)\land Q$ cuando $Q$ no contiene $x$.
+3. Sustituyendo $P=responsable$, $Q=vigente$: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x)\land vigente$.
+4. Intuición de por qué es válido: $vigente$ no cambia según qué $x$ se elija, así que "sacarla" del alcance del cuantificador no pierde ni agrega información — el cuantificador nunca tenía nada que hacer sobre ella.
 
 **Ítem 13.** Traducción con condición de distinción + nota de vacuidad (paralelo a Ejercicio 7).
 1. Predicados: $colaboraCon(x,y)$, dominio de proyectos.
@@ -51,11 +52,12 @@
 2. Solución 2 — expandiendo $\exists!$ (Clase 8, Parte I.2) dentro del alcance de $\forall x$ de hoy: se agrega $\forall z\ (z\neq y \rightarrow \neg primerContacto(x,z))$ dentro del alcance del $\exists y$.
 3. Conclusión: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.
 
-**Ítem 15.** $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$, $U_{mesero}=\{MeseroA,MeseroB\}$, tabla funcional (una fila por mesa).
-1. $Mesa1$: existencia — $atiende(MeseroA,Mesa1)=V$. Unicidad — ningún otro mesero aparece asignado a $Mesa1$ en la tabla.
-2. $Mesa2$: existencia — $atiende(MeseroB,Mesa2)=V$. Unicidad — ídem, solo $MeseroB$.
-3. $Mesa3$: existencia — $atiende(MeseroA,Mesa3)=V$. Unicidad — ídem, solo $MeseroA$ (que $MeseroA$ también atienda $Mesa1$ no afecta la unicidad *por mesa*, que se evalúa mesa por mesa).
-4. Como $\exists!\ y\ atiende(y,x)$ se cumple para las tres mesas, $\forall x\ \exists!\ y\ atiende(y,x)$ es **V**.
+**Ítem 15.** $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$, $U_{mesero}=\{MeseroA,MeseroB\}$, bitácora de turno con registros múltiples posibles (no una tabla funcional pre-filtrada) — rediseñado tras auditoría externa para que la unicidad pueda fallar genuinamente y no sea trivial por construcción.
+1. Registros: $atiende(MeseroA,Mesa1)$, $atiende(MeseroA,Mesa2)$, $atiende(MeseroB,Mesa2)$, $atiende(MeseroA,Mesa3)$.
+2. $Mesa1$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa1$. $\exists!$ se cumple.
+3. $Mesa2$: existencia — $MeseroA$ (o $MeseroB$). Unicidad — **falla**: hay dos registros distintos, $MeseroA$ y $MeseroB$, ambos atendieron $Mesa2$. Formalmente, se refuta $\forall y\bigl(atiende(y,Mesa2)\rightarrow y=MeseroA\bigr)$ con el contraejemplo $y=MeseroB$. $\exists!$ **no** se cumple para $Mesa2$.
+4. $Mesa3$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa3$. $\exists!$ se cumple.
+5. Como $\exists!\ y\ atiende(y,x)$ falla al menos en $Mesa2$, el universal $\forall x\ \exists!\ y\ atiende(y,x)$ es **F** — basta un contraejemplo de $x$ para refutar un $\forall$ (el mismo principio del método del contraejemplo de Clase 8, aplicado aquí a una fórmula con $\exists!$ anidado).
 
 **Ítem 16.** Negación de $\forall x\ \exists y\ (reporta(x,y)\land activo(y))$.
 1. Negar $\forall x$ (Clase 8): $\neg\forall x\ \exists y(\dots) \equiv \exists x\ \neg\exists y(\dots)$.
@@ -78,10 +80,10 @@
 2. "Hay un repartidor que cubre a todos": $\exists$ exterior con testigo fijo para todo $x$ → $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$.
 3. Diferencia (núcleo de la Parte II): la primera permite un repartidor distinto por cliente; la segunda exige uno solo, común a todos — afirmación estrictamente más fuerte.
 
-**Ítem 19.** Evaluación con tabla $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$, y negación.
-1. $\forall x\exists y\ asignado(y,x)$: cada cliente tiene fila con repartidor ($C1,C2,C4\to R1$; $C3\to R2$). **V.**
-2. $\exists y\forall x\ asignado(y,x)$: probar $y=R1$ — falla en $C3$. Probar $y=R2$ — falla en $C1,C2,C4$. Ningún $y$ cubre los cuatro. **F.**
-3. Negar la fórmula falsa (Clase 8, dos pasos): $\neg\exists y\forall x\ asignado(y,x) \equiv \forall y\ \neg\forall x\ asignado(y,x) \equiv \forall y\ \exists x\ \neg asignado(y,x)$.
+**Ítem 19.** Evaluación con tabla $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$, y negación. Notación uniformada con el Ítem 18 (explícita sobre $U_{cliente}$ y $U_{repartidor}$).
+1. $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$: cada cliente tiene fila con repartidor ($C1,C2,C4\to R1$; $C3\to R2$). **V.**
+2. $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$: probar $y=R1$ — falla en $C3$. Probar $y=R2$ — falla en $C1,C2,C4$. Ningún $y$ cubre los cuatro. **F.**
+3. Negar la fórmula falsa (Clase 8, dos pasos): $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \neg\forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$.
 4. Lectura: "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor" — cierto para ambos repartidores del caso ($R1$ falla con $C3$; $R2$ falla con $C1,C2,C4$).
 
 ---
