@@ -128,12 +128,15 @@ Estas reglas ya fueron derivadas y verificadas con tablas de verdad en Clase 6 �
 
 Estas equivalencias ya fueron demostradas por completo — con derivación formal y contraejemplos — en [Clase 9](clase9.md), Parte IV. Aquí solo la tabla de referencia; no se repite la demostración.
 
+> [!WARNING]
+> **Corrección aplicada.** La fila de distributividad de $\forall$ sobre $\lor$ en un solo sentido va en la dirección $\forall x\ P(x)\lor\forall x\ Q(x)\rightarrow\forall x\ (P(x)\lor Q(x))$ — la dirección inversa **no** es válida (mismo contraejemplo par/impar de la Parte IV.4 de Clase 9: dominio $\{1,2\}$ hace verdadero el antecedente $\forall x(par(x)\lor impar(x))$ pero falso el consecuente $\forall x\ par(x)\lor\forall x\ impar(x)$ ). *Nota para el profesor: esta misma dirección, invertida, aparece también en la tabla de Clase 9 — requiere la misma corrección allá.*
+
 | Nombre | Equivalencia |
 |:---|:---|
 | De Morgan cuántico | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ &nbsp;&nbsp; $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ |
 | Distributividad de $\forall$ sobre $\land$ | $\forall x\ (P(x)\land Q(x))\equiv \forall x\ P(x)\land\forall x\ Q(x)$ |
 | Distributividad de $\exists$ sobre $\lor$ | $\exists x\ (P(x)\lor Q(x))\equiv \exists x\ P(x)\lor\exists x\ Q(x)$ |
-| $\forall$ sobre $\lor$ (un solo sentido) | $\forall x\ (P(x)\lor Q(x))\rightarrow \forall x\ P(x)\lor\forall x\ Q(x)$ |
+| $\forall$ sobre $\lor$ (un solo sentido) | $\forall x\ P(x)\lor\forall x\ Q(x)\rightarrow \forall x\ (P(x)\lor Q(x))$ |
 | $\exists$ sobre $\land$ (un solo sentido) | $\exists x\ (P(x)\land Q(x))\rightarrow \exists x\ P(x)\land\exists x\ Q(x)$ |
 | Intercambio de cuantificadores del mismo tipo | $\forall x\forall y\ P(x,y)\equiv\forall y\forall x\ P(x,y)$ &nbsp;&nbsp; $\exists x\exists y\ P(x,y)\equiv\exists y\exists x\ P(x,y)$ |
 | No conmutatividad entre tipos distintos | $\forall x\exists y\ P(x,y)\not\equiv\exists y\forall x\ P(x,y)$ |
@@ -198,7 +201,7 @@ $$\begin{aligned}&\forall x\ C(x) &&\text{Todos los perros son cariñosos}\\ \hl
 > **Restricción fundamental**: $c$ debe ser genuinamente arbitrario — no puede depender de una premisa o suposición previa sobre un valor particular. Esta regla se usa a menudo, de forma implícita, en demostraciones matemáticas (*"sea x un elemento cualquiera de..."*).
 
 > [!WARNING]
-> **Aquí es exactamente donde Beto se equivoca.** $c_1=p_1,\dots,c_{15}=p_{15}$ no son arbitrarios: son quince objetos *específicos*, elegidos de antemano por el equipo como muestra de prueba. De $\text{válido}(p_1),\dots,\text{válido}(p_{15})$ **no** se puede aplicar UG para concluir $\forall x\ \text{válido}(x)$ — eso exigiría demostrar la propiedad para un pedido genérico, sin usar ningún dato específico de $p_1,\dots,p_{15}$. Quince instancias particulares, sin importar cuántas más se agreguen, siguen siendo instancias particulares.
+> **Aquí es exactamente donde Beto se equivoca.** $c_1=p_1,\dots,c_{15}=p_{15}$ no son arbitrarios: son quince objetos *específicos*, elegidos de antemano por el equipo como muestra de prueba. De $\text{válido}(p_1),\dots,\text{válido}(p_{15})$ **no** se puede aplicar UG para concluir $\forall x\ \text{válido}(x)$ — eso exigiría demostrar la propiedad para un pedido genérico, sin usar ningún dato específico de $p_1,\dots,p_{15}$. Quince instancias particulares, sin importar cuántas más se agreguen, siguen siendo instancias particulares — y menos aún cuando, como aquí, el universo de "todos los pedidos que el sistema podría recibir" ni siquiera es una lista cerrada que se pueda agotar probando. (La situación sería distinta si el dominio fuera finito y realmente se probaran **todos** sus elementos, uno por uno — eso sí constituye una verificación exhaustiva válida; lo que falla es dar por probado un dominio abierto con una muestra parcial de él.)
 
 ## V.3 Instanciación existencial (EI)
 
@@ -211,12 +214,15 @@ $$\begin{aligned}&\forall x\ C(x) &&\text{Todos los perros son cariñosos}\\ \hl
 
 $$\begin{aligned}&\exists x\ N(x) &&\text{Hay alguien que sacó 5.0 en el curso}\\ \hline &\therefore N(a)\ \text{para algún}\ a &&\text{Llamemos } a \text{ a ese alguien — por ejemplo, Bart}\end{aligned}$$
 
+> [!NOTE]
+> **El nombre que se elige debe ser nuevo.** Cuando la demostración ya trae otro objeto nombrado (de una premisa anterior, o de otra instanciación previa), el testigo que EI introduce no puede reutilizar ese mismo nombre — necesita uno genuinamente nuevo, sobre el que la demostración no haya asumido nada todavía. Reutilizar sin más un nombre ya conocido mezclaría, sin querer, las propiedades del testigo nuevo con las del objeto anterior.
+
 ## V.4 Generalización existencial (EG)
 
 > [!IMPORTANT]
 > Permite pasar de una afirmación particular $P(c)$ a una existencial $\exists x\ P(x)$.
 >
-> $$P(c)\ \text{para un}\ c\ \text{cualquiera}\ \therefore\ \exists x\ P(x)$$
+> $$P(c)\ \text{para un}\ c\ \text{dado}\ \therefore\ \exists x\ P(x)$$
 >
 > **Restricción fundamental**: si se conoce que alguien (o algo) específico cumple una propiedad, se puede afirmar que existe al menos uno que la cumple — a diferencia de UG, aquí **no** hace falta que $c$ sea arbitrario; basta con que sea real.
 
@@ -353,8 +359,8 @@ $$\begin{aligned}&N(\text{Bart}) &&\text{Bart sacó 5.0 en la clase}\\ \hline &\
 
 **Enunciado.** Dominio $\mathbb{Z}$. Premisas: (a) *"Para cada x, si x es par, entonces x+4 es par"*; (b) *"Para cada x, si x es par, entonces x no es impar"*; (c) *"2 es un número par"*. Conclusión: *"2+4 no es un número impar"*.
 
-> [!NOTE]
-> **Nota para el profesor — verificar contra el original.** La premisa (b), tal como aparece en el PDF fuente, está transcrita como *"si x es par, entonces x no es un número par"* — lo cual, tomada literalmente junto con la premisa (c), produce una contradicción directa ( $par(2)$ y $\neg par(2)$ a la vez ) y no permite demostrar la conclusión pedida con las reglas de este curso. La lectura que sí produce exactamente la conclusión enunciada — y que se usa aquí — es *"si x es par, entonces x no es impar"*. Por favor confirme si esto corresponde a un error de transcripción del PDF antes de publicar esta versión a los estudiantes.
+> [!WARNING]
+> **Cuidado conceptual — premisas que se contradicen entre sí.** Si la premisa (b) se leyera *"si x es par, entonces x no es par"*, junto con la premisa (c) ( $par(2)$ ) produciría de inmediato $par(2)$ y $\neg par(2)$ a la vez — una contradicción, de la cual ninguna de las reglas de este curso permite concluir nada útil. Un conjunto de premisas consistente es requisito para que una demostración tenga sentido; por eso la lectura correcta de (b), y la que se usa aquí, es *"si x es par, entonces x no es impar"* — la única que efectivamente permite llegar a la conclusión pedida sin contradicción.
 
 **Paso 1 — Predicados.** $par(x)$: *"x es par"*; $impar(x)$: *"x es impar"*.
 
@@ -466,6 +472,9 @@ $$\begin{aligned}&N(\text{Bart}) &&\text{Bart sacó 5.0 en la clase}\\ \hline &\
 | 12 | $T(a)\lor Q(a)\lor M(a)$ | Adición en 11 |
 | 13 | $\exists x\ \bigl(T(x)\lor Q(x)\lor M(x)\bigr)$ | Generalización existencial en 12 |
 
+> [!NOTE]
+> **Una ruta más corta, si ya domina la doble negación.** Los pasos 6-7 pasan por el Contrarrecíproco antes de aplicar Implicación, para hacer explícito el cambio de forma. Quien ya maneje con soltura $\neg(\neg P)\equiv P$ puede aplicar Implicación directamente sobre el paso 6 ( $\neg T(a)\rightarrow\neg R(a)$ ), obteniendo $\neg\neg T(a)\lor\neg R(a)$, que por Doble negación es $T(a)\lor\neg R(a)$ — el mismo resultado del paso 9, en un paso menos. Ambas rutas son igualmente válidas; aquí se deja la más explícita.
+
 ---
 
 # 🐛 Expediente Depuración — El lote que "pasó todos los tests"
@@ -518,6 +527,11 @@ $$\begin{aligned}&1.\ \ mayorDeEdad(\text{Camilo}) &&\text{Premisa}\\ &2.\ \ \fo
 
 **P10.** Dadas las premisas *"Todo microservicio con más de 500 líneas necesita revisión de arquitectura"* y *"El microservicio de pagos no necesita revisión de arquitectura"*, formalice ambas y demuestre que *"el microservicio de pagos no tiene más de 500 líneas"*.
 
+**P11.** El siguiente argumento es **inválido**. Identifique cuál paso viola una restricción de la Parte V y explique por qué:
+$$\begin{aligned}&1.\ \ \exists x\ falla(x) &&\text{Premisa}\\ &2.\ \ falla(\text{srv-01}) &&\text{"Instanciación existencial" en 1}\\ &3.\ \ \exists x\ (falla(x)\land x\neq\text{srv-01}) &&\text{Premisa}\\ &4.\ \ falla(\text{srv-01})\land \text{srv-01}\neq\text{srv-01} &&\text{"Instanciación existencial" en 3}\end{aligned}$$
+
+**P12.** Dadas las premisas *"Existe un servidor del clúster con latencia por encima del umbral"* y *"Todo servidor con latencia por encima del umbral es removido del balanceador de carga"*, demuestre que *"existe un servidor removido del balanceador de carga"*.
+
 ---
 
 ## Veredicto — El equipo cierra el caso
@@ -541,6 +555,7 @@ Con esto, el equipo tiene ya el repertorio completo de traducción, evaluación 
 | Aplicar Instanciación Universal antes de resolver una premisa existencial cuando ambas comparten variable | El testigo de la existencial debe fijarse primero (EI); las universales se instancian después, en ese mismo testigo | Ejemplo 3, Ejercicios 6, 7, 9 |
 | Suponer que EG necesita un objeto "arbitrario" como UG | EG solo pide que el objeto sea real y cumpla la propiedad, sin ninguna restricción de arbitrariedad | Parte V.4 |
 | Tratar una disyunción de tres o más términos como si Silogismo disyuntivo se aplicara de una sola vez | Hay que reagrupar (asociatividad) y aplicar la regla un par a la vez | Ejercicio 4 |
+| Reutilizar, al aplicar Instanciación Existencial, un nombre ya usado antes en la misma demostración | El testigo de una nueva existencial debe ser una constante nueva — reutilizar una ya conocida puede mezclar propiedades de dos objetos distintos, o incluso producir una contradicción | Parte V.3, Ejercicio P11 |
 
 ---
 
@@ -588,7 +603,7 @@ Al finalizar este documento, usted debería ser capaz de:
 <summary><b>Presione aquí para ver las respuestas</b></summary>
 <br>
 
-**P1.** Forma **E**: $\forall x\ \Bigl(\bigl(servidor(x)\land\neg tieneSSL(x)\bigr)\rightarrow\neg aceptaSeguras(x)\Bigr)$.
+**P1.** Forma **E**: $\forall x\ \Bigl(\bigl(servidor(x)\land\neg tieneSSL(x)\bigr)\rightarrow\neg aceptaSeguras(x)\Bigr)$. El sujeto $S(x)$ de la forma E no es un predicado simple aquí, sino el compuesto $servidor(x)\land\neg tieneSSL(x)$ — "servidor sin SSL" — y $P(x)$ es $aceptaSeguras(x)$; el patrón $\forall x\ (S(x)\rightarrow\neg P(x))$ se mantiene idéntico, solo que $S(x)$ mismo es una conjunción.
 
 **P2.** Forma **O**: $\exists x\ \bigl(modulo(x)\land\neg tienePruebas(x)\bigr)$.
 
@@ -607,5 +622,9 @@ Al finalizar este documento, usted debería ser capaz de:
 **P9.** Dos aplicaciones de EI sobre la misma fórmula $\exists x\ P(x)$ no garantizan dos testigos *distintos*: la regla solo asegura que existe *algún* $c$ con $P(c)$, y nada impide que ambas aplicaciones "encuentren" el mismo objeto — para garantizar dos testigos distintos hace falta una premisa adicional que lo exija explícitamente (por ejemplo, $\exists x\exists y\ (P(x)\land P(y)\land x\neq y)$ ), no dos usos sueltos de EI.
 
 **P10.** Con $M(x)$: *"x es un microservicio con más de 500 líneas"*, $R(x)$: *"x necesita revisión de arquitectura"*: $\forall x\ (M(x)\rightarrow R(x))$ — Premisa; $M(\text{pagos})\rightarrow R(\text{pagos})$ — UI; $\neg R(\text{pagos})$ — Premisa; $\neg M(\text{pagos})$ — Modus Tollens.
+
+**P11.** El paso 4 es inválido: `srv-01` ya fue fijado como testigo en el paso 2 (por EI sobre la premisa 1) — no es un nombre nuevo. La premisa 3 pide un testigo *distinto* de `srv-01`, así que instanciar la existencial de 3 reutilizando exactamente ese mismo nombre produce la contradicción `srv-01`$\neq$`srv-01`, que es falsa por definición. El testigo de la premisa 3 debía ser una constante nueva (por ejemplo `srv-02`), no la ya usada en 2.
+
+**P12.** Con $C(x)$: *"x es un servidor del clúster"*, $L(x)$: *"x tiene latencia por encima del umbral"*, $R(x)$: *"x es removido del balanceador de carga"*: $\exists x\ (C(x)\land L(x))$ — Premisa; $C(a)\land L(a)$ — EI; $C(a)$, $L(a)$ — Simplificación; $\forall x\ (L(x)\rightarrow R(x))$ — Premisa; $L(a)\rightarrow R(a)$ — UI; $R(a)$ — Modus Ponens; $C(a)\land R(a)$ — Conjunción; $\exists x\ (C(x)\land R(x))$ — Generalización existencial.
 
 </details>
