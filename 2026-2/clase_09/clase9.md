@@ -89,7 +89,7 @@ El alcance de $\forall x$ es *todo* el paréntesis grande (incluyendo el $\exist
 ## I.3 Ocurrencias libres y ligadas — nombrando lo que ya vimos
 
 > [!IMPORTANT]
-> Una **ocurrencia** de una variable es **ligada** si está dentro del alcance de un cuantificador que la introduce; si no, es **libre**. En $\forall x\ (estudiante(x)\rightarrow\exists y\ (libro(y)\land lee(x,y)))$, las tres ocurrencias de $x$ y las dos de $y$ son ligadas — no queda ninguna suelta. En el ejemplo mal formado de la advertencia anterior, $\forall x\ P(x)\lor Q(x)$, la $x$ dentro de $Q(x)$ es exactamente una ocurrencia **libre**: por eso la fórmula no es una proposición cerrada.
+> Una **ocurrencia** de una variable es **ligada** si está dentro del alcance de un cuantificador que la introduce; si no, es **libre**. En $\forall x\ (estudiante(x)\rightarrow\exists y\ (libro(y)\land lee(x,y)))$, todas las ocurrencias de $x$ y de $y$ son ligadas — no queda ninguna suelta. En el ejemplo mal formado de la advertencia anterior, $\forall x\ P(x)\lor Q(x)$, la $x$ dentro de $Q(x)$ es exactamente una ocurrencia **libre**: por eso la fórmula no es una proposición cerrada.
 
 Esta distinción importa para algo concreto: **sustituir una variable por un objeto específico solo tiene sentido en sus ocurrencias libres** — una ocurrencia ligada ya está "hablando de todos" o "de alguno", no de un objeto en particular, así que no hay nada que sustituir ahí. Esta idea de sustitución es la base formal de las reglas de inferencia cuantificacional (instanciación y generalización) que veremos más adelante en el curso; por ahora basta con reconocer libre vs. ligada a simple vista.
 
@@ -225,7 +225,7 @@ La misma reagrupación, cambiando $\land$ por $\lor$, prueba la versión de $\ex
 
 Como cada lado implica al otro, son equivalentes — y este argumento nunca usó que el dominio fuera finito, así que vale igual para $\mathbb{R}$, $\mathbb{Z}$, o cualquier otro dominio infinito.
 
-Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — cada cuantificador con el conectivo de su propia "familia" (recuerde de la Parte III que $\forall$ ya venía emparejado con $\rightarrow$ y $\exists$ con $\land$ en las formas aristotélicas; aquí el emparejamiento es distinto — $\forall$ con $\land$, $\exists$ con $\lor$ — así que no lo confunda con aquel).
+Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — cada cuantificador con el conectivo de su propia "familia" (recuerde de Clase 7 que $\forall$ ya venía emparejado con $\rightarrow$ y $\exists$ con $\land$ en las formas aristotélicas; aquí el emparejamiento es distinto — $\forall$ con $\land$, $\exists$ con $\lor$ — así que no lo confunda con aquel).
 
 ## IV.4 Cuidado — cuándo NO se puede distribuir
 
@@ -469,7 +469,7 @@ El ingeniero revisa la bitácora de asignaciones:
 **Pregunta 3 — $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$**: como la Pregunta 2 ya es falsa —no existe *ningún* técnico común, ni uno solo— la unicidad no tiene nada que evaluar: si no hay ni un testigo, mucho menos hay exactamente un testigo. **Falsa**, por la misma razón que la Pregunta 2, un paso más exigente.
 
 > [!NOTE]
-> **Para ver la Pregunta 2 y la Pregunta 3 divergir de verdad**, imagine una bitácora distinta: que tanto `T1` como un cuarto técnico de respaldo, `T4`, estuvieran *cada uno* certificados para los ocho pollos. En ese escenario hipotético, $\exists y\ \forall x\ tecnico(y,x)$ sería **verdadera** (`T1` es testigo), pero $\exists!\ y\ \forall x\ tecnico(y,x)$ seguiría siendo **falsa** — porque `T4` es un *segundo* testigo que también cumple, y la unicidad exige descartarlo. Existencia solo pide encontrar uno; unicidad pide, además, comprobar que no hay un segundo.
+> **Para ver la Pregunta 2 y la Pregunta 3 divergir de verdad**, imagine una bitácora distinta: que tanto `T1` como `T2` estuvieran *cada uno*, por separado, certificados para los ocho pollos (en vez de que `T2` cubra solo a `P3`, `P4`, `P8`). En ese escenario hipotético, $\exists y\ \forall x\ tecnico(y,x)$ sería **verdadera** (`T1` es testigo), pero $\exists!\ y\ \forall x\ tecnico(y,x)$ seguiría siendo **falsa** — porque `T2` es un *segundo* testigo que también cumple, y la unicidad exige descartarlo. Existencia solo pide encontrar uno; unicidad pide, además, comprobar que no hay un segundo.
 
 $$\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x) \text{ es verdadera}, \qquad \exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x) \text{ es falsa.}$$
 
