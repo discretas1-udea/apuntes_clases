@@ -129,7 +129,7 @@ Estas reglas ya fueron derivadas y verificadas con tablas de verdad en Clase 6 �
 Estas equivalencias ya fueron demostradas por completo — con derivación formal y contraejemplos — en [Clase 9](clase9.md), Parte IV. Aquí solo la tabla de referencia; no se repite la demostración.
 
 > [!WARNING]
-> **Corrección aplicada.** La fila de distributividad de $\forall$ sobre $\lor$ en un solo sentido va en la dirección $\forall x\ P(x)\lor\forall x\ Q(x)\rightarrow\forall x\ (P(x)\lor Q(x))$ — la dirección inversa **no** es válida (mismo contraejemplo par/impar de la Parte IV.4 de Clase 9: dominio $\{1,2\}$ hace verdadero el antecedente $\forall x(par(x)\lor impar(x))$ pero falso el consecuente $\forall x\ par(x)\lor\forall x\ impar(x)$ ). *Nota para el profesor: esta misma dirección, invertida, aparece también en la tabla de Clase 9 — requiere la misma corrección allá.*
+> **Corrección aplicada.** La fila de distributividad de $\forall$ sobre $\lor$ en un solo sentido va en la dirección $\forall x\ P(x)\lor\forall x\ Q(x)\rightarrow\forall x\ (P(x)\lor Q(x))$ — la dirección inversa **no** es válida (mismo contraejemplo par/impar de la Parte IV.4 de Clase 9: dominio $\{1,2\}$ hace verdadero el antecedente $\forall x(par(x)\lor impar(x))$ pero falso el consecuente $\forall x\ par(x)\lor\forall x\ impar(x)$ ). Este error venía del PDF fuente de esta sesión — verificado que **Clase 9 no lo tiene**: esa página ya refuta correctamente, con $\not\equiv$ y contraejemplo, la versión de equivalencia plena, y nunca afirma una implicación de un solo sentido en la dirección inválida.
 
 | Nombre | Equivalencia |
 |:---|:---|
