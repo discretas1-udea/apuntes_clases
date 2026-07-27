@@ -1,24 +1,16 @@
----
-layout: default
-title: Autoevaluación Clase 06 - Validez de Argumentos
-parent: Lógica Proposicional
-nav_order: 61
-math: mathjax
----
-
 ![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-# 📝 Autoevaluación — Validez de Argumentos e Inferencia
+# 📝 Autoevaluación — De Proposiciones a Predicados
 
-*Práctica de la Clase 06 · Matemáticas Discretas 1 · Universidad de Antioquia*
-*[Volver a las notas de clase](clase6.md)*
+*Práctica de la Clase 07 · Matemáticas Discretas 1 · Universidad de Antioquia*
+*[Volver a las notas de clase](clase7.md)*
 
 ---
 
-Esta autoevaluación es para practicar **a mano**, como cuando estudia de un libro. Cada ítem incluye un espacio para escribir su intento y declarar su nivel de confianza *antes* de ver la respuesta. La respuesta que se revela es **solo el resultado final** — el desarrollo completo lo debe construir usted; esa construcción es justamente lo que se evalúa en un parcial.
+Esta autoevaluación es para practicar **a mano**, como cuando estudia de un libro. Cada ítem incluye un espacio para escribir su intento y declarar su nivel de confianza *antes* de ver la respuesta. La respuesta que se revela es **solo el resultado final** — el desarrollo completo lo debe construir usted.
 
 > [!TIP]
-> **Cómo aprovechar esta práctica.** Resuelva cada ítem completo antes de desplegar la respuesta. Si su resultado coincide, verifique igual que su *procedimiento* fue correcto (una respuesta correcta por un camino equivocado no sirve en el parcial). Si no coincide, no mire el desarrollo de inmediato: vuelva a intentarlo.
+> **Cómo aprovechar esta práctica.** Resuelva cada ítem completo antes de desplegar la respuesta. Si su resultado coincide, verifique igual que su *razonamiento* fue correcto — sobre todo el emparejamiento cuantificador–conectivo, que es el error más común de este tema. Si no coincide, no mire la respuesta de inmediato: vuelva a intentarlo.
 
 ---
 
@@ -26,61 +18,53 @@ Esta autoevaluación es para practicar **a mano**, como cuando estudia de un lib
 
 Reconocimiento rápido de conceptos. Un concepto por ítem.
 
-**Ítem 1.** Clasifique cada enunciado como una afirmación sobre **verdad** (de una proposición) o sobre **validez** (de un argumento):
+**Ítem 1.** El técnico afirma una sola proposición: $p:$ *"Todos los servidores del clúster responden correctamente"*. Con base **únicamente** en $p$, ¿se puede deducir que *"el servidor srv3 responde correctamente"*? Explique en una frase por qué sí o por qué no.
 
-- (i) *"Medellín es la capital de Colombia."*
-- (ii) *"De las premisas se sigue necesariamente la conclusión."*
-- (iii) *"El argumento tiene la forma del Modus Ponens."*
-
-> ✍️ *Antes de ver la respuesta: escriba aquí su clasificación de (i), (ii) y (iii).*
+> ✍️ *Antes de ver la respuesta: escriba su explicación.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(i) Verdad — (ii) Validez — (iii) Validez.</details>
+<details><summary>Ver respuesta final</summary>No se puede deducir. $p$ es una única proposición atómica — una "caja cerrada" — y la lógica proposicional no ve su contenido interno; no "sabe" que srv3 es uno de los servidores de los que habla $p$. No hay ninguna relación lógica formal entre $p$ y una afirmación sobre srv3 en particular.
+
+En lógica de predicados sí sería posible: si se modela como $\forall x\,(servidor(x) \rightarrow responde(x))$ y $srv3$ es una constante del universo con $servidor(srv3)$ verdadero, la propia definición del cuantificador universal — que la propiedad vale para **todos** los objetos del universo, sin excepción — ya garantiza $responde(srv3)$. Esa es, precisamente, la limitación de la Parte I que motiva pasar de proposiciones a predicados.</details>
 
 ---
 
-**Ítem 2.** En el siguiente argumento, identifique cuáles enunciados son premisas y cuál es la conclusión:
+**Ítem 2.** Sea el universo los procesos activos del sistema, $U = \{proc1, proc2, \dots, proc6\}$, y el predicado $activo(x)$. Clasifique cada elemento: (i) el conjunto $U$; (ii) el símbolo $x$ en $activo(x)$; (iii) $proc3$.
 
-> *"Dado que el proceso no terminó, y considerando que si un proceso no termina el sistema queda bloqueado, se sigue que el sistema quedó bloqueado."*
-
-> ✍️ *Antes de ver la respuesta: marque premisas y conclusión.*
+> ✍️ *Antes de ver la respuesta: clasifique (i), (ii) y (iii).*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Premisas: "el proceso no terminó" y "si un proceso no termina, el sistema queda bloqueado". Conclusión (marcada por *se sigue que*): "el sistema quedó bloqueado".</details>
+<details><summary>Ver respuesta final</summary>(i) Universo / dominio del discurso. (ii) Variable (representa a cualquier objeto del dominio). (iii) Constante (nombra a un objeto específico y fijo del universo).</details>
 
 ---
 
-**Ítem 3.** Nombre la regla de inferencia que corresponde a cada esquema:
+**Ítem 3.** Clasifique la aridad (unitario, binario o ternario) de cada predicado: (a) $primo(x)$; (b) $conectado(x, y)$; (c) $envio(x, y, z)$.
 
-- (i) $\ p\rightarrow q,\ \ \neg q\ \vdash\ \neg p$
-- (ii) $\ p\land q\ \vdash\ p$
-- (iii) $\ p\lor q,\ \ \neg p\ \vdash\ q$
-
-> ✍️ *Antes de ver la respuesta: escriba el nombre de cada regla.*
+> ✍️ *Antes de ver la respuesta: clasifique los tres.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(i) Modus Tollens — (ii) Simplificación — (iii) Silogismo disyuntivo (Eliminación).</details>
+<details><summary>Ver respuesta final</summary>(a) Unitario — propiedad de un objeto. (b) Binario — relación entre dos objetos. (c) Ternario — relación entre tres objetos.</details>
 
 ---
 
-**Ítem 4.** Escriba el argumento $\ p\rightarrow q,\ \ p\ \vdash\ q\ $ en sus otras dos notaciones (estándar vertical y condicional).
+**Ítem 4.** En el enunciado *"Existe al menos un sensor sin batería"*, ¿qué cuantificador corresponde? Escriba cómo se lee el símbolo.
 
-> ✍️ *Antes de ver la respuesta: escriba las dos notaciones.*
+> ✍️ *Antes de ver la respuesta: identifique el cuantificador y su lectura.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Estándar: las dos premisas $p\rightarrow q$ y $p$ una sobre otra, línea, y $\therefore\ q$. Condicional: $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$.</details>
+<details><summary>Ver respuesta final</summary>Cuantificador existencial, $\exists x$. Se lee "existe al menos un $x$ tal que…".</details>
 
 ---
 
@@ -88,214 +72,180 @@ Reconocimiento rápido de conceptos. Un concepto por ítem.
 
 Un paso de método por ítem.
 
-**Ítem 5.** Determine, con una tabla de verdad, si es válido: $\ p\rightarrow q,\ \ p\ \vdash\ q$.
+**Ítem 5.** Sea el predicado $Q(x):\ x$ *es primo*, con universo los enteros positivos. Clasifique cada expresión como **función proposicional** o **proposición** (y en este último caso, indique V o F): (a) $Q(x)$; (b) $Q(7)$; (c) $Q(9)$; (d) $\exists x\, Q(x)$.
 
-> ✍️ *Antes de ver la respuesta: construya la tabla e identifique los renglones críticos.*
+> ✍️ *Antes de ver la respuesta: clasifique las cuatro.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido (es Modus Ponens). El único renglón crítico es $p=1,q=1$, y allí la conclusión es verdadera.</details>
+<details><summary>Ver respuesta final</summary>(a) Función proposicional (variable libre). (b) Proposición verdadera (7 es primo). (c) Proposición falsa (9 = 3×3). (d) Proposición verdadera (existen enteros positivos primos).</details>
 
 ---
 
-**Ítem 6.** Determine, con una tabla de verdad, si el siguiente argumento es válido o es una falacia. Si es falacia, indique el renglón crítico que lo prueba: $\ p\rightarrow q,\ \ \neg p\ \vdash\ \neg q$.
+**Ítem 6.** Sea el universo $U = \{1, 2, \dots, 10\}$ y el predicado $primo(x)$. Determine por extensión el conjunto de verdad $\{\,x \in U \mid primo(x)\,\}$.
 
-> ✍️ *Antes de ver la respuesta: construya la tabla.*
+> ✍️ *Antes de ver la respuesta: liste los elementos.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>No válido — falacia de <em>negar el antecedente</em>. Renglón crítico que lo prueba: $p=0,\ q=1$ (premisas $p\rightarrow q=1$ y $\neg p=1$ verdaderas, pero conclusión $\neg q=0$ falsa).</details>
+<details><summary>Ver respuesta final</summary>$\{2, 3, 5, 7\}$.</details>
 
 ---
 
-**Ítem 7.** Derive la conclusión: $\ p\rightarrow q,\ \ p\ \vdash\ q$. (Escriba la tabla Afirmación–Razón.)
+**Ítem 7.** Traduzca a lógica de predicados: *"Todo estudiante matriculado tiene un usuario activo."* Defina primero su diccionario de predicados.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación.*
+> ✍️ *Antes de ver la respuesta: defina predicados y traduzca.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$q$, por Modus Ponens sobre las dos premisas.</details>
+<details><summary>Ver respuesta final</summary>Con $matriculado(x)$: "$x$ está matriculado" y $activo(x)$: "$x$ tiene usuario activo": $\forall x\,\bigl(matriculado(x) \rightarrow activo(x)\bigr)$ — forma A.</details>
 
 ---
 
-**Ítem 8.** Derive: $\ p\rightarrow q,\ \ \neg q\ \vdash\ \neg p$.
+**Ítem 8.** Traduzca a lógica de predicados: *"Algún proceso está bloqueado."*
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación.*
+> ✍️ *Antes de ver la respuesta: defina predicados y traduzca.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\neg p$, por Modus Tollens sobre las dos premisas.</details>
+<details><summary>Ver respuesta final</summary>Con $proceso(x)$ y $bloqueado(x)$: $\exists x\,\bigl(proceso(x) \land bloqueado(x)\bigr)$ — forma I.</details>
 
 ---
 
-**Ítem 9.** Derive: $\ p\lor q,\ \ \neg p\ \vdash\ q$.
+**Ítem 9.** (a) Sea $P(x):\ x$ *es un servidor* y $R(x):\ x$ *está en producción*. Escriba la expresión compuesta para *"$x$ es un servidor y está en producción"*, y evalúela para la constante $srvA$. (b) Clasifique en una tabla de verificación de tipos los siguientes símbolos, indicando sobre qué operan y qué producen: $\neg$, $par(x)$, $doble(x)$.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación.*
+> ✍️ *Antes de ver la respuesta: resuelva (a) y (b).*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$q$, por Silogismo disyuntivo (Eliminación) sobre las dos premisas.</details>
+<details><summary>Ver respuesta final</summary>(a) $P(x) \land R(x)$ (función proposicional); instanciada: $P(srvA) \land R(srvA)$, ya es una proposición (V o F). (b) $\neg$: conectivo, opera sobre proposiciones, produce una proposición. $par(x)$: predicado, opera sobre objetos, produce una proposición (V/F). $doble(x)$: función, opera sobre objetos, produce un objeto.</details>
 
 ---
 
 ## Serie 2 — Aplicación combinada
 
-Cadenas de varios pasos. Aquí ya no basta una sola regla: hay que encadenar.
+Ya no basta una sola idea: hay que combinar herramientas de varias secciones.
 
-**Ítem 10.** Demuestre que es válido: $\ p\rightarrow q,\ \ q\rightarrow r,\ \ r\rightarrow s,\ \ p\ \vdash\ s$.
+**Ítem 10.** Traduzca a lógica de predicados: *"Ningún archivo corrupto se puede abrir."*
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación completa.*
+> ✍️ *Antes de ver la respuesta: defina predicados y traduzca.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido. Se obtiene $s$ encadenando tres Modus Ponens (o dos Silogismos hipotéticos y un Modus Ponens final).</details>
+<details><summary>Ver respuesta final</summary>Con $corrupto(x)$ y $abrible(x)$: $\forall x\,\bigl(corrupto(x) \rightarrow \neg abrible(x)\bigr)$ — forma E.</details>
 
 ---
 
-**Ítem 11.** Demuestre que es válido: $\ p\lor q,\ \ p\rightarrow r,\ \ q\rightarrow s,\ \ \neg r\ \vdash\ s$.
+**Ítem 11.** Dada la fórmula $\exists x\,\bigl(becado(x) \land destacado(x)\bigr)$, identifique su forma aristotélica y justifique por qué el emparejamiento cuantificador–conectivo es el correcto.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación completa.*
+> ✍️ *Antes de ver la respuesta: identifique la forma y justifique.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido. Conclusión $s$: de $p\rightarrow r$ y $\neg r$ sale $\neg p$ (Modus Tollens); con $p\lor q$ sale $q$ (Eliminación); con $q\rightarrow s$ sale $s$ (Modus Ponens).</details>
+<details><summary>Ver respuesta final</summary>Forma I (particular afirmativa). El emparejamiento correcto es $\exists$ con $\land$: exige que exista un objeto que cumpla **ambas** propiedades a la vez. Con $\rightarrow$ en su lugar, la fórmula se volvería verdadera de forma trivial apenas existiera un solo objeto que no fuera becado.</details>
 
 ---
 
-**Ítem 12.** Demuestre que es válido, usando una **ley de equivalencia de la Clase 5** en algún paso: $\ \neg(p\lor q),\ \ r\rightarrow p\ \vdash\ \neg r$.
+**Ítem 12.** Un estudiante tradujo *"Algún sensor está dañado"* como $\exists x\,\bigl(sensor(x) \rightarrow danado(x)\bigr)$. Explique por qué es incorrecta y escriba la traducción correcta.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación completa.*
+> ✍️ *Antes de ver la respuesta: explique el error y corrija.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido. De $\neg(p\lor q)$, por De Morgan, sale $\neg p\land\neg q$; por Simplificación, $\neg p$; con $r\rightarrow p$ y $\neg p$, por Modus Tollens, se concluye $\neg r$.</details>
+<details><summary>Ver respuesta final</summary>Es incorrecta porque empareja $\exists$ con $\rightarrow$: la fórmula se vuelve verdadera de forma trivial en cuanto exista un solo objeto del universo que **no** sea sensor (antecedente falso ⟹ implicación verdadera), sin que ningún sensor esté realmente dañado. Correcta: $\exists x\,\bigl(sensor(x) \land danado(x)\bigr)$.</details>
 
 ---
 
-**Ítem 13.** Demuestre que es válido: $\ (p\land q)\rightarrow r,\ \ \neg r,\ \ p\ \vdash\ \neg q$.
+**Ítem 13.** Niegue la proposición $\forall x\,\bigl(seguro(x) \land actualizado(x)\bigr)$, dejando el resultado como un existencial (sin el $\neg$ delante del cuantificador). No es necesario simplificar más allá de este paso — el manejo de negaciones se retoma con más profundidad en la próxima clase.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación completa.*
+> ✍️ *Antes de ver la respuesta: escriba la negación.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido. De $(p\land q)\rightarrow r$ y $\neg r$, por Modus Tollens, sale $\neg(p\land q)$; por De Morgan, $\neg p\lor\neg q$; con $p$ (es decir $\neg(\neg p)$), por Eliminación, se concluye $\neg q$.</details>
+<details><summary>Ver respuesta final</summary>$\exists x\,\neg\bigl(seguro(x) \land actualizado(x)\bigr)$, aplicando la ley de negación de cuantificadores $\neg\,\forall x\,P(x) \equiv \exists x\,\neg P(x)$.
+
+*Nota: la próxima clase retoma este tipo de negaciones con más profundidad.*</details>
 
 ---
 
-**Ítem 14.** Traduzca a lenguaje formal y demuestre la validez:
+**Ítem 14.** La afirmación *"Todos manejan bien bajo presión"*, con predicado $manejaPresion(x)$, ¿es verdadera o falsa? Proponga **un universo donde sea verdadera** y **un universo donde sea falsa**.
 
-> *"Si el backup se ejecutó, los datos están a salvo. Los datos no están a salvo. O el backup se ejecutó o se activó el modo de solo lectura. Si se activó el modo de solo lectura, se notificó al administrador. Por lo tanto, se notificó al administrador."*
-
-> ✍️ *Antes de ver la respuesta: defina proposiciones, formalice y demuestre.*
+> ✍️ *Antes de ver la respuesta: proponga los dos universos.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Con $b$: el backup se ejecutó; $d$: los datos están a salvo; $m$: se activó el modo solo lectura; $n$: se notificó al administrador. Formal: $b\rightarrow d,\ \neg d,\ b\lor m,\ m\rightarrow n\ \vdash\ n$. Válido: de $b\rightarrow d$ y $\neg d$ sale $\neg b$ (Modus Tollens); con $b\lor m$ sale $m$ (Eliminación); con $m\rightarrow n$ sale $n$ (Modus Ponens).</details>
+<details><summary>Ver respuesta final</summary>Depende del universo elegido — no tiene un único valor de verdad. Por ejemplo: verdadera si $U = $ "el equipo de bomberos de una estación" (entrenados para eso); falsa si $U = $ "todos los seres humanos" (muchos no manejan bien la presión). La misma fórmula $\forall x\, manejaPresion(x)$ cambia de valor según el universo.</details>
 
 ---
 
-## Serie 3 — Entrenamiento cruzado
+## 🦸 Reto Final — La misión de los Vengadores
 
-Estos ítems conectan la Clase 06 con temas anteriores del curso.
+Un caso aplicado. La historia es solo el envoltorio: se resuelve con las herramientas formales de la clase.
 
-**Ítem 15.** *(Puente con Clase 03 — traducción y forma simbólica.)* Traduzca el siguiente argumento a forma simbólica estándar (defina las proposiciones), y demuestre su validez:
+El universo son los miembros del equipo, $U = \{ironman, capitan, thor, viuda, hulk, ojo\}$ — pertenecer a $U$ no implica estar disponible; eso lo decide el predicado $disponible(x)$, según la tabla de hechos. Los predicados son:
 
-> *"Si el usuario inicia sesión, se crea un token. Si se crea un token, se registra en la auditoría. El usuario inició sesión. Por lo tanto, se registra en la auditoría."*
+| Predicado | Significado |
+|:---|:---|
+| $tienePoderes(x)$ | "$x$ tiene poderes sobrehumanos (no solo tecnología)" |
+| $esHumano(x)$ | "$x$ es completamente humano" |
+| $disponible(x)$ | "$x$ está disponible para la misión" |
 
-> ✍️ *Antes de ver la respuesta: formalice y demuestre.*
+Y la siguiente tabla de hechos conocidos:
+
+| Vengador | tienePoderes | esHumano | disponible |
+|:---|:---:|:---:|:---:|
+| $thor$ | V | F | V |
+| $hulk$ | V | F | F |
+| $ironman$ | F | V | V |
+| $capitan$ | F | V | V |
+| $viuda$ | F | V | V |
+| $ojo$ | F | V | F |
+
+**Ítem 15.** Traduzca las siguientes tres afirmaciones e identifique la forma aristotélica de cada una:
+
+- (a) *"Todo Vengador disponible tiene poderes sobrehumanos."*
+- (b) *"Ningún Vengador completamente humano tiene poderes sobrehumanos."*
+- (c) *"Algún Vengador disponible tiene poderes sobrehumanos."*
+
+> ✍️ *Antes de ver la respuesta: traduzca las tres y clasifique su forma.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Con $s$: inicia sesión; $t$: se crea token; $a$: se registra en auditoría. Formal: $s\rightarrow t,\ t\rightarrow a,\ s\ \vdash\ a$. Válido: $t$ por Modus Ponens (de $s\rightarrow t$ y $s$), luego $a$ por Modus Ponens (de $t\rightarrow a$ y $t$). También sirve Silogismo hipotético para obtener $s\rightarrow a$ y luego Modus Ponens.</details>
+<details><summary>Ver respuesta final</summary>(a) $\forall x\,\bigl(disponible(x) \rightarrow tienePoderes(x)\bigr)$ — forma A. (b) $\forall x\,\bigl(esHumano(x) \rightarrow \neg tienePoderes(x)\bigr)$ — forma E. (c) $\exists x\,\bigl(disponible(x) \land tienePoderes(x)\bigr)$ — forma I.</details>
 
 ---
 
-**Ítem 16.** *(Puente con Clase 05 — leyes de equivalencia dentro de una derivación.)* La premisa $\neg p\lor q$ no es directamente un condicional. Use la ley que la convierte en uno y demuestre: $\ \neg p\lor q,\ \ p\ \vdash\ q$.
+**Ítem 16.** Usando la tabla de hechos: (a) evalúe $tienePoderes(hulk) \land disponible(hulk)$. (b) Determine el conjunto de verdad de $tienePoderes(x)$ sobre $U$. (c) Niegue la afirmación (a) del Ítem 15 y, con la tabla de hechos, determine si esa negación es verdadera o falsa.
 
-> ✍️ *Antes de ver la respuesta: escriba la derivación completa.*
+> ✍️ *Antes de ver la respuesta: resuelva (a), (b) y (c).*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Válido. Por la ley de Implicación, $\neg p\lor q\equiv p\rightarrow q$. Con $p\rightarrow q$ y $p$, por Modus Ponens, se concluye $q$.</details>
-
----
-
-**Ítem 17.** *(Puente con Clase 03 — tautología y el criterio de validez.)* Se afirma que "un argumento es válido si y solo si su forma condicional es una tautología". Para el argumento $\ p\rightarrow q,\ \ p\ \vdash\ q$, escriba su forma condicional y clasifíquela como tautología, contradicción o contingencia. ¿Qué dice esto sobre la validez del argumento?
-
-> ✍️ *Antes de ver la respuesta: escriba la condicional y clasifíquela.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>La forma condicional es $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$, que es una <strong>tautología</strong> (verdadera en las cuatro filas). Como la condicional es tautología, el argumento es válido — es precisamente el criterio de la Clase 06.</details>
-
----
-
-## 🐛 Reto Final — Depuración en producción
-
-Dos casos aplicados de cacería de errores. La historia es solo el envoltorio: cada uno se resuelve con las herramientas formales de la clase. Formalice, demuestre y responda.
-
-**Ítem 18.** Un equipo investiga por qué una página no carga. Confirman en los *logs*:
-
-- *"Si el CDN respondió, la página cargó."*
-- *"La página no cargó."*
-- *"O respondió el CDN o se sirvió desde el origen."*
-- *"Si se sirvió desde el origen, se registró una petición al servidor central."*
-- *"Si se registró una petición al servidor central, aumentó la latencia."*
-
-¿Qué se puede concluir con certeza sobre la latencia? Formalice y demuestre.
-
-> ✍️ *Antes de ver la respuesta: defina proposiciones, formalice y demuestre.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Con $c$: el CDN respondió; $g$: la página cargó; $o$: se sirvió desde el origen; $s$: se registró petición al servidor central; $l$: aumentó la latencia. Formal: $c\rightarrow g,\ \neg g,\ c\lor o,\ o\rightarrow s,\ s\rightarrow l\ \vdash\ l$. Conclusión: <strong>aumentó la latencia</strong> ($l$). Cadena: $\neg c$ (Modus Tollens de $c\rightarrow g,\ \neg g$); $o$ (Eliminación de $c\lor o,\ \neg c$); $s$ (Modus Ponens de $o\rightarrow s,\ o$); $l$ (Modus Ponens de $s\rightarrow l,\ s$).</details>
-
----
-
-**Ítem 19.** Otro incidente. Se sabe:
-
-- *"El despliegue se completó."*
-- *"Si el despliegue se completó, la versión nueva quedó activa."*
-- *"O se limpió la caché o falló el healthcheck."*
-- *"Si falló el healthcheck, la versión nueva no quedó activa."*
-
-¿Se puede concluir que se limpió la caché? Formalice y demuestre.
-
-> ✍️ *Antes de ver la respuesta: defina proposiciones, formalice y demuestre.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Con $d$: el despliegue se completó; $v$: la versión nueva quedó activa; $c$: se limpió la caché; $h$: falló el healthcheck. Formal: $d,\ d\rightarrow v,\ c\lor h,\ h\rightarrow\neg v\ \vdash\ c$. Sí: <strong>se limpió la caché</strong> ($c$). Cadena: $v$ (Modus Ponens de $d,\ d\rightarrow v$); $\neg h$ (Modus Tollens de $h\rightarrow\neg v$ y $v$, ya que $v=\neg(\neg v)$); $c$ (Eliminación de $c\lor h,\ \neg h$).</details>
+<details><summary>Ver respuesta final</summary>(a) F (V ∧ F = F, porque hulk no está disponible). (b) $\{thor, hulk\}$. (c) $\exists x\,\bigl(disponible(x) \land \neg tienePoderes(x)\bigr)$; es **verdadera**, porque $ironman$ cumple $disponible(ironman)=V$ y $tienePoderes(ironman)=F$. (Esto confirma que la afirmación original del Ítem 15(a) es falsa.)</details>
 
 ---
 
@@ -303,39 +253,42 @@ Dos casos aplicados de cacería de errores. La historia es solo el envoltorio: c
 
 Marque, con honestidad, cómo le fue en cada bloque. Use tanto si acertó como el nivel de confianza que declaró antes de ver cada respuesta — la combinación revela dónde estudiar.
 
-| Bloque | Lo resolví sin dificultad | Dudé pero llegué | Necesito repasar | Tema de la Clase 06 a repasar |
+| Bloque | Lo resolví sin dificultad | Dudé pero llegué | Necesito repasar | Tema de la Clase 07 a repasar |
 |:---|:---:|:---:|:---:|:---|
-| Calentamiento | ☐ | ☐ | ☐ | Verdad vs. validez, notaciones, nombres de reglas (Parte I, III.3) |
-| Serie 1 | ☐ | ☐ | ☐ | Tablas de verdad y reglas de un paso (Parte II, III.3) |
-| Serie 2 | ☐ | ☐ | ☐ | Encadenar reglas; derivaciones largas (Ejercicios resueltos) |
-| Serie 3 | ☐ | ☐ | ☐ | Traducción, leyes de Clase 5 en derivaciones, criterio tautología↔validez |
-| Reto Final | ☐ | ☐ | ☐ | Formalizar un caso y demostrar de punta a punta |
+| Calentamiento | ☐ | ☐ | ☐ | Universo, objeto, variable, constante, cuantificadores (Partes I–III.1) |
+| Serie 1 | ☐ | ☐ | ☐ | Función proposicional vs. proposición, conjunto de verdad, traducción básica, verificación de tipos (Partes II, IV) |
+| Serie 2 | ☐ | ☐ | ☐ | Emparejamiento cuantificador–conectivo, negación de cuantificadores, dependencia del universo (Partes III.2, V.2) |
+| Reto Final | ☐ | ☐ | ☐ | Modelar un caso completo: traducir, evaluar y negar sobre un mismo universo |
 
 > [!TIP]
-> **Señal de alerta útil.** Si en algún ítem declaró confianza **Alta** pero la respuesta no coincidió, ese es el punto más importante para repasar: no es que no sepa el tema, es que cree saberlo y no es así — el tipo de error que más cuesta en un parcial.
+> **Señal de alerta útil.** Si en algún ítem declaró confianza **Alta** pero la respuesta no coincidió, ese es el punto más importante para repasar — sobre todo si fue en el emparejamiento $\forall$–$\rightarrow$ / $\exists$–$\land$, que es el error más frecuente de este tema.
 
 ## 📌 Hoja de fórmulas y conceptos clave
 
-**Criterio de validez**: un argumento es válido $\iff$ su forma condicional $(P_1\land\cdots\land P_n)\rightarrow Q$ es una **tautología** $\iff$ en todo **renglón crítico** (premisas todas en 1) la conclusión es 1.
+| Concepto | Qué es | Ejemplo |
+|:---|:---|:---|
+| Universo / Dominio | Conjunto de todos los objetos sobre los que se razona | $\{proc1, \dots, proc6\}$ |
+| Constante | Símbolo que nombra un objeto específico | $ironman,\ thor$ |
+| Variable | Símbolo que representa cualquier objeto del dominio | $x,\ y,\ z$ |
+| Predicado | Propiedad o relación; produce V o F | $activo(x),\ tecnico(x,y)$ |
+| Función proposicional | Expresión con variables libres; aún no es proposición | $P(x) \land Q(x)$ |
+| Conjunto de verdad | Subconjunto del dominio donde el predicado es verdadero | $\{x \in D \mid primo(x)\}$ |
 
-**Las 9 reglas de inferencia**:
+**Verificación de tipos:** los **conectivos** operan sobre proposiciones y producen una proposición; los **predicados** operan sobre objetos y producen una proposición; las **funciones** operan sobre objetos y producen un objeto.
 
-| Regla | De… | …se obtiene |
-|:---|:---:|:---:|
-| Modus Ponens | $p\rightarrow q,\ p$ | $q$ |
-| Modus Tollens | $p\rightarrow q,\ \neg q$ | $\neg p$ |
-| Silogismo hipotético | $p\rightarrow q,\ q\rightarrow r$ | $p\rightarrow r$ |
-| Silogismo disyuntivo (Eliminación) | $p\lor q,\ \neg p$ | $q$ |
-| Simplificación | $p\land q$ | $p$ |
-| Adición | $p$ | $p\lor q$ |
-| Conjunción | $p,\ q$ | $p\land q$ |
-| Prueba por casos | $p\lor q,\ p\rightarrow r,\ q\rightarrow r$ | $r$ |
-| Resolución | $\neg p\lor r,\ p\lor q$ | $q\lor r$ |
+**Las cuatro formas aristotélicas:**
 
-**Dos falacias (NO son reglas)**: afirmar el consecuente ($p\rightarrow q,\ q\not\vdash p$) y negar el antecedente ($p\rightarrow q,\ \neg p\not\vdash\neg q$).
+| Forma | Enunciado | Traducción |
+|:---:|:---|:---:|
+| **A** | Todo $S$ es $P$ | $\forall x\,(S(x) \rightarrow P(x))$ |
+| **E** | Ningún $S$ es $P$ | $\forall x\,(S(x) \rightarrow \neg P(x))$ |
+| **I** | Algún $S$ es $P$ | $\exists x\,(S(x) \land P(x))$ |
+| **O** | Algún $S$ no es $P$ | $\exists x\,(S(x) \land \neg P(x))$ |
 
-**Leyes de Clase 5 útiles en derivaciones**: Implicación ($p\rightarrow q\equiv\neg p\lor q$), De Morgan, Doble negación, Contrarrecíproco — se usan como pasos intermedios para dejar las premisas en una forma sobre la que sí opera una regla de inferencia.
+**Emparejamiento correcto (al traducir "Todo $S$ es $P$" / "Algún $S$ es $P$"):** $\forall$ va casi siempre con $\rightarrow$; $\exists$ va casi siempre con $\land$. No es una ley sintáctica de la lógica de predicados en general — es el patrón que evita la lectura "tramposa" al traducir estas formas. Escribir $\exists x\,(S(x)\rightarrow P(x))$ es casi siempre un error.
+
+**Negación de cuantificadores:** $\neg\,\forall x\, P(x) \equiv \exists x\, \neg P(x)$ y $\neg\,\exists x\, P(x) \equiv \forall x\, \neg P(x)$.
 
 ---
 
-*[Volver a las notas de clase](clase6.md)*
+*[Volver a las notas de clase](clase7.md)*

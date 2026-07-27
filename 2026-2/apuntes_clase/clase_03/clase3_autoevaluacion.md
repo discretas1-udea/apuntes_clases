@@ -1,139 +1,22 @@
 ![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-# Autoevaluación — Tablas de Verdad
-### Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional
+# 🧭 Autoevaluación — El Caso del Broche de Zafiro
+### Equivalencia Lógica, Leyes de De Morgan, Variantes del Condicional y Condiciones de Necesidad y Suficiencia
 
-*Complemento de práctica de: [El Incidente del Discovery One — El Veredicto (Tablas de Verdad)](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase3/)*
-
-*Universidad de Antioquia · Ingeniería de Sistemas*
-
----
-
-## Calentamiento
-
-**Ítem 1**
-
-¿Cuántas filas requiere la tabla de verdad de una expresión con 5 variables distintas?
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>32 filas ($2^5$).</details>
-
-**Ítem 2**
-
-En una tabla de verdad de 4 variables (16 filas), siguiendo el patrón sistemático de distribución de valores, ¿cada cuántas filas alterna la **tercera** variable?
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Cada 2 filas ($2^{4-3}=2^1=2$).</details>
-
-**Ítem 3**
-
-Dada la fila $p=F,\ q=V,\ r=F$ de una tabla de verdad de tres variables, escríbala usando la convención binaria de ingeniería empleada en este curso.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>0, 1, 0.</details>
-
-**Ítem 4**
-
-Según la definición de tabla de verdad, ¿qué representa específicamente la **columna final** de la tabla?
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>El valor de verdad resultante de la expresión completa, para cada una de las combinaciones posibles de valores de sus variables.</details>
+*Autoevaluación — Matemáticas Discretas 1 · Universidad de Antioquia · Ingeniería de Sistemas*
+*Documento de la clase: [clase4_caso_broche_zafiro.md](clase4_caso_broche_zafiro.md)*
 
 ---
 
-## Serie 1 — Repeticiones básicas
-
-*Construcción de tablas de verdad completas (Protocolo de 6 pasos), 1-2 variables.*
-
-**Ítem 5**
-
-Construya la tabla de verdad de $p \rightarrow \neg q$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado (para $p,q = VV, VF, FV, FF$): 0, 1, 1, 1.</details>
-
-**Ítem 6**
-
-Construya la tabla de verdad de $p \lor (\neg p \land q)$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado: 1, 1, 1, 0.</details>
-
-**Ítem 7**
-
-Construya la tabla de verdad de $\neg(p \leftrightarrow q)$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado: 0, 1, 1, 0.</details>
-
-**Ítem 8**
-
-Construya la tabla de verdad de $(p \oplus q) \land p$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado: 0, 1, 0, 0.</details>
-
-**Ítem 9**
-
-Construya la tabla de verdad de $\neg p \lor (p \land q)$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado: 1, 0, 1, 1.</details>
+> [!NOTE]
+> **Cómo usar este documento**: cada ítem tiene un espacio para que escriba su intento completo **antes** de revelar la respuesta, y una escala de confianza. No omita ese paso — es la parte que realmente entrena la memoria, no un adorno. Las respuestas reveladas muestran **solo el resultado final**, como el apéndice de un libro; si necesita repasar el procedimiento paso a paso, vuelva a los Ejercicios resueltos de la clase.
 
 ---
 
-## Serie 2 — Aplicación combinada
+# Calentamiento
 
-*Tablas de 3 variables, clasificación de proposiciones y detección de errores típicos.*
-
-**Ítem 10**
-
-Construya la tabla de verdad de $(P \lor Q) \rightarrow R$.
+**Ítem C1**
+Según la definición de equivalencia lógica (Parte I.1), ¿qué debe cumplir la proposición $p\leftrightarrow q$ para poder afirmar que $p$ y $q$ son equivalentes?
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -141,27 +24,10 @@ Construya la tabla de verdad de $(P \lor Q) \rightarrow R$.
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Columna resultado (para $P,Q,R = VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF$): 1, 0, 1, 0, 1, 0, 1, 1.</details>
+<details><summary>Ver respuesta final</summary>Debe ser una tautología (verdadera para toda combinación de valores de $p$ y $q$).</details>
 
-**Ítem 11**
-
-Construya la tabla de verdad de $\neg(P \land Q) \lor R$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Columna resultado: 1, 0, 1, 1, 1, 1, 1, 1.</details>
-
-**Ítem 12**
-
-Clasifique $(p\rightarrow q) \lor (q\rightarrow p)$ como tautología, contradicción o contingencia, y justifique con base en su tabla de verdad.
-
-- [ ] Tautología
-- [ ] Contradicción
-- [ ] Contingencia
+**Ítem C2**
+Dado el condicional "Si el archivo está corrupto, entonces la descarga falla" ($c\rightarrow f$), escriba únicamente su **recíproco**.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -169,15 +35,10 @@ Clasifique $(p\rightarrow q) \lor (q\rightarrow p)$ como tautología, contradicc
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Tautología. La columna final es 1 en las 4 filas, porque siempre al menos uno de los dos condicionales es verdadero, sin importar $p$ y $q$.</details>
+<details><summary>Ver respuesta final</summary>$f\rightarrow c$ ("Si la descarga falla, entonces el archivo está corrupto").</details>
 
-**Ítem 13**
-
-Clasifique $(p\land q)\rightarrow r$ como tautología, contradicción o contingencia, y justifique con base en su tabla de verdad.
-
-- [ ] Tautología
-- [ ] Contradicción
-- [ ] Contingencia
+**Ítem C3**
+Clasifique: *"Ser ciudadano es necesario para votar."*
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -185,11 +46,10 @@ Clasifique $(p\land q)\rightarrow r$ como tautología, contradicción o continge
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Contingencia. La columna final combina 1 y 0: es 0 únicamente cuando $p=V, q=V, r=F$, y 1 en las otras siete filas.</details>
+<details><summary>Ver respuesta final</summary>Necesaria, no suficiente (ser ciudadano no garantiza votar — también hace falta estar registrado, ser mayor de edad, etc.).</details>
 
-**Ítem 14**
-
-Un estudiante afirma que la tabla de verdad de $\neg(p\land q)$ es idéntica a la de $\neg p \land q$, y por eso construyó una sola tabla para representar ambas expresiones. Construya ambas tablas y determine si el estudiante está en lo correcto.
+**Ítem C4**
+Identifique el conector lógico principal de: *"El backup se ejecuta a menos que el disco esté lleno."*
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -197,32 +57,25 @@ Un estudiante afirma que la tabla de verdad de $\neg(p\land q)$ es idéntica a l
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>No está en lo correcto. $\neg(p\land q)$ produce la columna 0,1,1,1, mientras que $\neg p\land q$ produce la columna 0,0,1,0 — son distintas. Es exactamente el error de alcance de la negación advertido en la sección de errores típicos.</details>
+<details><summary>Ver respuesta final</summary>Disyunción (el patrón "a menos que" se traduce como $\lor$, o de forma equivalente como condicional — Parte IV.1).</details>
 
-> [!TIP]
-> **Antes de resolver el siguiente ítem**: en los Ejercicios resueltos de la clase se mostró que una subexpresión que **siempre** es falsa (como $Q\land\neg Q$) puede garantizar el resultado final de una expresión más grande, sin necesidad de conocer el valor de las demás variables. El siguiente ítem le pide aplicar ese mismo razonamiento, **sin construir la tabla completa**.
+**Ítem C5**
+Según la tabla de referencia de la Parte V, ¿qué ley del álgebra de proposiciones afirma que $p\land(p\lor q)\equiv p$?
 
-**Ítem 15**
-
-Sin construir la tabla completa, explique por qué $q \land (t \land \neg t)$ tiene que ser una contradicción, sin importar el valor de $q$.
-
-> ✍️ *Antes de ver la respuesta: escriba aquí su explicación, aunque no esté seguro.*
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$t\land\neg t$ es siempre falso (es la misma estructura que $P\land\neg P$). Una conjunción con un valor siempre falso es siempre falsa, sin importar qué valor tome $q$ — por eso toda la expresión es una contradicción.</details>
+<details><summary>Ver respuesta final</summary>Ley de Absorción.</details>
 
 ---
 
-## Serie 3 — Entrenamiento cruzado
+# Serie 1 — Repeticiones básicas
 
-*Mezcla con [Clase 2 — Proposición, Lenguaje Formal, Axiomas de Verdad y Jerarquía de Operadores](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase2/), secciones 1.1-1.2 (traducción de lenguaje natural a fórmula). Cada ítem retoma ese proceso de traducción y lo extiende con la herramienta nueva de esta sesión: en vez de evaluar un solo caso, se construye la tabla de verdad completa.*
-
-**Ítem 16**
-
-"El motor se apaga si la temperatura supera el límite y el sistema no está en mantenimiento." Formalice la condición ($t$: la temperatura supera el límite; $m$: el sistema está en mantenimiento) y construya la tabla de verdad completa.
+**Ítem S1.1**
+Demuestre, con tabla de verdad, que $\neg(p\lor\neg q)\equiv\neg p\land q$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -230,23 +83,10 @@ Sin construir la tabla completa, explique por qué $q \land (t \land \neg t)$ ti
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Fórmula: $t\land\neg m$. Columna resultado (para $t,m = VV, VF, FV, FF$): 0, 1, 0, 0.</details>
+<details><summary>Ver respuesta final</summary>Son equivalentes. Ambas columnas dan $(0,0,1,0)$ para $(p,q)=(1,1),(1,0),(0,1),(0,0)$.</details>
 
-**Ítem 17**
-
-"No es cierto que el escudo esté desactivado o la energía esté baja." Formalice la condición ($d$: el escudo está desactivado; $e$: la energía está baja) y construya la tabla de verdad completa.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Fórmula: $\neg(d\lor e)$. Columna resultado: 0, 0, 0, 1.</details>
-
-**Ítem 18**
-
-"El acceso se concede si y solo si el usuario está autorizado y no hay alerta activa." Formalice la condición ($g$: se concede el acceso; $u$: el usuario está autorizado; $a$: hay alerta activa) y construya la tabla de verdad completa.
+**Ítem S1.2**
+Dado "Si el motor arranca, entonces la batería está cargada" ($m\rightarrow b$), escriba el recíproco, el contrarrecíproco y el contrario, e indique cuál es lógicamente equivalente al original.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -254,247 +94,268 @@ Sin construir la tabla completa, explique por qué $q \land (t \land \neg t)$ ti
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Fórmula: $g \leftrightarrow (u\land\neg a)$. Columna resultado (para $g,u,a = VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF$): 0, 1, 0, 0, 1, 0, 1, 1.</details>
+<details><summary>Ver respuesta final</summary>Recíproco: $b\rightarrow m$. Contrarrecíproco: $\neg b\rightarrow\neg m$. Contrario: $\neg m\rightarrow\neg b$. El equivalente al original es el <strong>contrarrecíproco</strong>.</details>
+
+**Ítem S1.3**
+Clasifique: *"Tener más de 10 años de experiencia es suficiente para ser promovido a director."*
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Suficiente, no necesaria (el enunciado no cierra la puerta a otras vías de promoción, por ejemplo desempeño excepcional).</details>
+
+**Ítem S1.4**
+Aplique la prueba del contraejemplo: $p$: "el número es múltiplo de 15", $q$: "el número es múltiplo de 3". ¿Es $p$ suficiente para $q$? ¿Es necesaria?
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Suficiente (todo múltiplo de 15 es múltiplo de 3, no existe contraejemplo). No necesaria (contraejemplo: 6 es múltiplo de 3 pero no de 15).</details>
+
+**Ítem S1.5**
+Aplique la receta de "a menos que": *"No podré terminar el proyecto a tiempo, a menos que trabaje el fin de semana."*
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Sea $p$: "termino el proyecto a tiempo", $s$: "trabajo el fin de semana". Resultado: $p\rightarrow s$ ("Si termino el proyecto a tiempo, entonces trabajé el fin de semana").</details>
 
 ---
 
-## Reto Final — Expediente Stark: Protocolo de Despliegue
+# Serie 2 — Aplicación combinada
 
-*Caso aplicado — la narrativa (J.A.R.V.I.S.) es un envoltorio nuevo del enunciado; la resolución es puramente formal, con las mismas herramientas del resto del bloque.*
+**Ítem S2.1**
+"El préstamo se aprueba si el solicitante tiene historial crediticio limpio y garantía suficiente." Traduzca la proposición y clasifique si "tener historial limpio y garantía suficiente" es necesaria, suficiente o ambas para "el préstamo se aprueba".
 
-**Ítem 19**
-
-J.A.R.V.I.S. debe decidir si activa el protocolo de despliegue automático de la armadura Mark. El protocolo se activa si **se detecta una amenaza confirmada y no hay anulación manual del piloto**, o si **el nivel de energía del reactor arc cae por debajo del mínimo crítico**.
-
-Variables: $a$ = se detecta una amenaza confirmada; $m$ = hay anulación manual del piloto; $e$ = la energía cae por debajo del mínimo crítico.
-
-Resuelva, en orden:
-
-1. **Formalice** la condición de activación del protocolo.
-2. **Construya la tabla de verdad completa** y clasifique el resultado (tautología, contradicción o contingencia).
-3. Un compañero de equipo asegura que esta condición es una **tautología**, porque "siempre hay alguna forma de que se cumpla: o hay amenaza sin anulación, o se acaba la energía, así que en algún momento siempre se activa". Usando una **fila específica** de la tabla que usted construyó en el paso 2, muestre por qué esa afirmación es incorrecta.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano (los tres pasos) y escriba aquí su resultado final, aunque no esté seguro.*
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
 > _______________________
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>
+<details><summary>Ver respuesta final</summary>Traducción: $(h\land g)\rightarrow a$. Clasificación: suficiente, no necesaria (podría haber otras vías de aprobación no mencionadas).</details>
 
-**1.** Fórmula: $(a\land\neg m)\lor e$
+**Ítem S2.2**
+"El estudiante puede presentar el examen final solo si aprobó los talleres." Traduzca la proposición y escriba su contrarrecíproco.
 
-**2.** Columna resultado (para $a,m,e = VVV, VVF, VFV, VFF, FVV, FVF, FFV, FFF$): 1, 0, 1, 1, 1, 0, 1, 0. Clasificación: **Contingencia** (combina 1 y 0).
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
 
-**3.** Contraejemplo: fila $a=F, m=F, e=F$ → resultado 0. Sin amenaza y con energía normal, el protocolo no se activa sin importar $m$ — eso refuta que sea tautología.
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-</details>
+<details><summary>Ver respuesta final</summary>Traducción: $p\rightarrow q$ ($p$: presenta el examen final; $q$: aprobó los talleres). Contrarrecíproco: $\neg q\rightarrow\neg p$ ("Si no aprobó los talleres, entonces no puede presentar el examen final").</details>
+
+**Ítem S2.3**
+Demuestre, mediante cadena algebraica (no tabla), que $q\rightarrow p$ es equivalente a $\neg p\rightarrow\neg q$.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$q\rightarrow p \equiv \neg q\lor p \equiv p\lor\neg q \equiv \neg(\neg p)\lor\neg q \equiv \neg p\rightarrow\neg q$ (definición, conmutativa, doble negación, definición inversa).</details>
+
+**Ítem S2.4**
+Dada la expresión $\neg t\rightarrow\neg r$ con $t$: "el termostato detecta temperatura alta" y $r$: "se activa el ventilador": (a) tradúzcala a lenguaje natural; (b) si esta expresión fuera una variante del condicional original $t\rightarrow r$, ¿de cuál variante se trata, y es equivalente al original?
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>(a) "Si el termostato no detecta temperatura alta, entonces el ventilador no se activa." (b) Es el <strong>contrario</strong> de $t\rightarrow r$ — <strong>no</strong> es equivalente al original (el contrario es equivalente al recíproco, no al original).</details>
+
+**Ítem S2.5**
+Traduzca: *"No es cierto que el pedido esté completo y haya sido pagado."* Luego aplique la Ley de Morgan correspondiente para reescribir la expresión sin la negación externa.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Traducción: $\neg(p\land g)$ ($p$: pedido completo; $g$: ha sido pagado). Por Morgan: $\neg p\lor\neg g$.</details>
+
+---
+
+# Serie 3 — Entrenamiento cruzado
+
+> [!NOTE]
+> Esta serie mezcla el contenido de esta clase con dos sesiones anteriores: **Clase 2** (*Proposición, Lenguaje Formal, Axiomas de Verdad y Jerarquía de Operadores*) y **Clase 3** (*Tablas de Verdad*).
+
+**Ítem S3.1** *(Clase 3 + Clase 4)*
+Usando el Protocolo de 6 pasos de la sesión de Tablas de Verdad, construya la tabla completa para verificar si $\neg(p\rightarrow q)$ es equivalente a $p\land\neg q$. Clasifique la columna del bicondicional entre ambas expresiones como tautología, contradicción o contingencia.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Son equivalentes ($\neg(p\rightarrow q)\equiv p\land\neg q$). La columna del bicondicional es siempre 1 → <strong>tautología</strong>, confirmando la equivalencia.</details>
+
+**Ítem S3.2** *(Clase 2 + Clase 4)*
+Si $(A\land B)\rightarrow\neg C$ es falsa, determine los valores de $A$, $B$ y $C$. Luego clasifique si $A\land B$ es condición necesaria o suficiente para $\neg C$ en esta regla.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Para que $(A\land B)\rightarrow\neg C$ sea falsa, se necesita $A\land B=V$ y $\neg C=F$: por lo tanto $A=V$, $B=V$, $C=V$. $A\land B$ es <strong>suficiente</strong> para $\neg C$ (por la estructura del condicional).</details>
+
+**Ítem S3.3** *(Clase 2 + Clase 4)*
+Aplique la "regla de oro" del condicional (Clase 2) para determinar si "Si $2+2=5$, entonces hoy es lunes" es verdadera o falsa. Luego escriba su contrarrecíproco y verifique que tiene el mismo valor de verdad.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Verdadera (antecedente falso, $2+2\neq5$, hace verdadero al condicional sin importar el consecuente). Contrarrecíproco: "Si hoy no es lunes, entonces $2+2\neq5$" — también verdadero, porque su consecuente ($2+2\neq5$) es siempre verdadero.</details>
+
+**Ítem S3.4** *(Clase 3 + Clase 4)*
+Traduzca: *"El sistema falla si y solo si no es cierto que el sistema no falla."* Luego construya su tabla de verdad y clasifíquela como tautología, contradicción o contingencia.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Traducción: $f\leftrightarrow\neg(\neg f)$, que equivale a $f\leftrightarrow f$. Es <strong>tautología</strong> (toda proposición es equivalente a sí misma, sin importar su valor).</details>
+
+---
+
+# Reto Final — Bletchley Park, 1941
+
+> [!NOTE]
+> **Contexto histórico (hechos verificados, no ficción)**: durante la Segunda Guerra Mundial, los analistas de Bletchley Park (Reino Unido) trabajaron para descifrar los mensajes cifrados por la máquina alemana Enigma. Alan Turing diseñó el *Bombe*, una máquina que descartaba configuraciones de rotores **por contradicción lógica**, no por fuerza bruta. Dos elementos reales de ese método son la base de este reto: (1) una propiedad mecánica del Enigma — nunca cifraba una letra en sí misma —, y (2) el uso de *cribs*, fragmentos de texto plano que los analistas sospechaban que aparecían en un mensaje (por ejemplo, partes meteorológicos con formato fijo). Este reto no atribuye diálogo ni palabras a ninguna persona real; formaliza, con las herramientas de esta clase, el tipo de razonamiento que documentan las fuentes históricas.
+
+**Ítem RF1**
+La propiedad histórica del Enigma —nunca cifra una letra en sí misma— puede formalizarse así: sea $V$: "la configuración de rotores es correcta", y $A$: "hay autocifrado (una letra coincide consigo misma) en alguna posición". La regla es $V\rightarrow\neg A$. Un analista prueba una configuración candidata y observa que **sí** hay autocifrado en una posición ($A$ es verdadero). Usando el contrarrecíproco de la regla, determine si la configuración puede ser correcta.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Contrarrecíproco de $V\rightarrow\neg A$: $A\rightarrow\neg V$. Como $A$ es verdadero, se concluye $\neg V$: la configuración <strong>no puede ser correcta</strong> — se descarta. (Así es, históricamente, como el Bombe eliminaba configuraciones.)</details>
+
+**Ítem RF2**
+Dos analistas revisan el mismo mensaje interceptado. Analista 1 propone: *"El mensaje comienza con un parte meteorológico y termina con la firma estándar"* ($m\land f$). Analista 2, con evidencia adicional, concluye: *"El mensaje no comienza con un parte meteorológico, o no termina con la firma estándar"* ($\neg m\lor\neg f$). Usando las Leyes de Morgan, determine si ambas conclusiones pueden ser ciertas al mismo tiempo.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>No pueden ser ciertas al mismo tiempo: por la primera Ley de Morgan, $\neg(m\land f)\equiv\neg m\lor\neg f$. La conclusión del Analista 2 es exactamente la negación de la del Analista 1 — son contradictorias, no complementarias. Se necesita evidencia adicional para determinar cuál es correcta.</details>
 
 ---
 
 ## Cierre — Autodiagnóstico
 
-Para cada serie, cuente cuántos ítems resolvió con cada nivel de confianza declarado y cuántos coincidieron con la respuesta final revelada.
+Antes de continuar con la próxima clase, complete esta tabla contando cuántos ítems marcó en cada nivel de confianza, por serie:
 
-| Serie | Ítems totales | Confianza Alta (cant.) | Confianza Media (cant.) | Confianza Baja (cant.) | Aciertos totales |
-|---|:---:|:---:|:---:|:---:|:---:|
-| Calentamiento | 4 | | | | |
-| Serie 1 | 5 | | | | |
-| Serie 2 | 6 | | | | |
-| Serie 3 | 3 | | | | |
-| Reto Final | 1 | | | | |
+| Serie | Ítems en Alto | Ítems en Medio | Ítems en Bajo |
+|---|:---:|:---:|:---:|
+| Calentamiento (5) | ___ | ___ | ___ |
+| Serie 1 (5) | ___ | ___ | ___ |
+| Serie 2 (5) | ___ | ___ | ___ |
+| Serie 3 (4) | ___ | ___ | ___ |
+| Reto Final (2) | ___ | ___ | ___ |
 
-> [!IMPORTANT]
-> El dato más importante de esta tabla no es el conteo de aciertos, sino el cruce entre confianza declarada y resultado real. Preste especial atención a:
-> - **Confianza Alta + respuesta incorrecta**: es la señal más importante de esta autoevaluación — indica un vacío conceptual que usted no percibía como tal. Repase esa subsección antes de seguir.
-> - **Confianza Baja + respuesta correcta**: indica que domina el contenido más de lo que cree; con práctica, debería ganar seguridad ahí.
-> - Si varios ítems de Confianza Alta + incorrecto se concentraron en una sola serie, priorice repasar esa serie específica antes del parcial.
+> [!TIP]
+> **Regla de repaso**: si alguna serie tiene 2 o más ítems marcados en "Bajo", repase esa subsección de `clase4_caso_broche_zafiro.md` (o, si es la Serie 3, la clase anterior correspondiente) antes de avanzar. Un ítem correcto con confianza "Bajo" es una alerta tan importante como un ítem incorrecto — indica que acertó sin estar seguro de por qué, lo cual no es sostenible en un parcial.
 
 ---
 
 ## Hoja de fórmulas y conceptos clave
 
-**Protocolo de 6 pasos**: identificar variables → calcular filas ($2^n$) → construir columnas de variables → agregar columnas auxiliares → evaluar respetando jerarquía → validar.
+*(Reutiliza y complementa la Ficha de bolsillo de `clase4_caso_broche_zafiro.md`; se agregan las referencias de Clase 2 y Clase 3 usadas en la Serie 3.)*
 
-**Convención binaria**: $1 = V$, $0 = F$ (igual que `True`/`False` en Python).
+**Equivalencia**: $p\equiv q$ si $p\leftrightarrow q$ es tautología. Herramienta clave: $p\rightarrow q\equiv\neg p\lor q$.
 
-**Errores típicos**: filas $\neq 2^n$; patrón de alternancia mal distribuido; confundir $\neg(p\land q)$ con $\neg p\land q$; confundir $\lor$ con $\oplus$.
+**Morgan**: $\neg(p\land q)\equiv\neg p\lor\neg q$ · $\neg(p\lor q)\equiv\neg p\land\neg q$ (siempre invierte el conector).
 
-**Clasificación**: columna final toda $V$ → Tautología. Toda $F$ → Contradicción. Mezcla de $V$ y $F$ → Contingencia.
+**Variantes del condicional**: Original $p\to q$ ≡ Contrarrecíproco $\neg q\to\neg p$. Recíproco $q\to p$ ≡ Contrario $\neg p\to\neg q$. **Nunca** original ≡ recíproco.
 
-**Complemento — de Clase 2 (para la Serie 3):**
+**Necesidad/Suficiencia**: $p$ suficiente para $q$ ⟺ $p\to q$ verdadero. $p$ necesaria para $q$ ⟺ $q\to p$ verdadero. Ambas ⟺ $p\leftrightarrow q$. Prueba del contraejemplo: busque $p$V/$q$F para refutar suficiencia; $q$V/$p$F para refutar necesidad.
 
-| Operador | Símbolo | Regla de oro |
-|---|:---:|---|
-| Negación | $\neg p$ | Invierte el valor. |
-| Conjunción | $p\land q$ | Basta una falsedad para que todo sea $F$. |
-| Disyunción | $p\lor q$ | Basta una verdad para que todo sea $V$. |
-| Disyunción exclusiva | $p\oplus q$ | Valores diferentes dan $V$. |
-| Condicional | $p\rightarrow q$ | Solo es $F$ cuando $V\rightarrow F$. |
-| Bicondicional | $p\leftrightarrow q$ | $V$ cuando ambos coinciden. |
+**Receta "a menos que"**: lo que sigue a "a menos que" → consecuente. El resto de la oración, negado → antecedente.
 
-**Jerarquía** (de mayor a menor prioridad): $\neg \;>\; \land \;>\; \lor \;>\; \oplus \;>\; \rightarrow \;>\; \leftrightarrow$
+**— De Clase 2 —** Regla de oro del condicional: $p\to q$ solo es falso cuando $p=V$ y $q=F$. Jerarquía (mayor a menor prioridad): $\neg > \land > \lor > \oplus > \rightarrow > \leftrightarrow$ ($\land,\lor,\oplus$ asocian a la izquierda; $\rightarrow,\leftrightarrow$ a la derecha).
 
-**Proceso de traducción, 3 pasos**: identificar conectores → definir variables → ensamblar fórmula.
+**— De Clase 3 —** Protocolo de 6 pasos: variables → filas ($2^n$) → columnas → columnas auxiliares → evaluar → validar. Clasificación: columna final toda $V$ → tautología; toda $F$ → contradicción; mezcla → contingencia.
 
 ---
 
 ## Solucionario completo
 
 <details>
-<summary><b>Ver solucionario — Calentamiento</b></summary>
+<summary><b>Calentamiento — Ver todas las respuestas</b></summary>
 
-**Ítem 1.** $n=5 \Rightarrow N=2^5=32$ filas.
-
-**Ítem 2.** La variable en la posición $i$ (de $n$) alterna cada $2^{n-i}$ filas. Para la tercera variable de 4: $2^{4-3}=2^1=2$ filas.
-
-**Ítem 3.** $p=F \to 0$, $q=V\to 1$, $r=F\to 0$. Fila: 0, 1, 0.
-
-**Ítem 4.** La columna final registra, fila por fila, el valor de verdad que resulta de evaluar la expresión completa para esa combinación específica de valores de las variables.
+- **C1**: $p\leftrightarrow q$ debe ser una tautología.
+- **C2**: $f\rightarrow c$.
+- **C3**: Necesaria, no suficiente.
+- **C4**: Disyunción.
+- **C5**: Ley de Absorción.
 
 </details>
 
 <details>
-<summary><b>Ver solucionario — Serie 1</b></summary>
+<summary><b>Serie 1 — Ver todas las respuestas</b></summary>
 
-**Ítem 5.** $p\rightarrow\neg q$:
-
-$$
-\begin{aligned}
-&p=V,q=V:\ \neg q=F,\ V\rightarrow F=\mathbf{0}\\
-&p=V,q=F:\ \neg q=V,\ V\rightarrow V=\mathbf{1}\\
-&p=F,q=V:\ \neg q=F,\ F\rightarrow F=\mathbf{1}\\
-&p=F,q=F:\ \neg q=V,\ F\rightarrow V=\mathbf{1}
-\end{aligned}
-$$
-
-**Ítem 6.** $p\lor(\neg p\land q)$:
-
-$$
-\begin{aligned}
-&VV:\ \neg p=F,\ \neg p\land q=F,\ p\lor F=\mathbf{1}\\
-&VF:\ \neg p=F,\ \neg p\land q=F,\ p\lor F=\mathbf{1}\\
-&FV:\ \neg p=V,\ \neg p\land q=V,\ p\lor V=\mathbf{1}\\
-&FF:\ \neg p=V,\ \neg p\land q=F,\ p\lor F=\mathbf{0}
-\end{aligned}
-$$
-
-**Ítem 7.** $\neg(p\leftrightarrow q)$: $p\leftrightarrow q = V,F,F,V$ (para VV,VF,FV,FF); al negar: $\mathbf{0,1,1,0}$.
-
-**Ítem 8.** $(p\oplus q)\land p$:
-
-$$
-\begin{aligned}
-&VV:\ p\oplus q=F,\ F\land V=\mathbf{0}\\
-&VF:\ p\oplus q=V,\ V\land V=\mathbf{1}\\
-&FV:\ p\oplus q=V,\ V\land F=\mathbf{0}\\
-&FF:\ p\oplus q=F,\ F\land F=\mathbf{0}
-\end{aligned}
-$$
-
-**Ítem 9.** $\neg p\lor(p\land q)$:
-
-$$
-\begin{aligned}
-&VV:\ \neg p=F,\ p\land q=V,\ F\lor V=\mathbf{1}\\
-&VF:\ \neg p=F,\ p\land q=F,\ F\lor F=\mathbf{0}\\
-&FV:\ \neg p=V,\ p\land q=F,\ V\lor F=\mathbf{1}\\
-&FF:\ \neg p=V,\ p\land q=F,\ V\lor F=\mathbf{1}
-\end{aligned}
-$$
+- **S1.1**: Equivalentes — ambas columnas $(0,0,1,0)$.
+- **S1.2**: Recíproco $b\to m$; Contrarrecíproco $\neg b\to\neg m$; Contrario $\neg m\to\neg b$; equivalente al original: el contrarrecíproco.
+- **S1.3**: Suficiente, no necesaria.
+- **S1.4**: Suficiente (sin contraejemplo); no necesaria (contraejemplo: 6).
+- **S1.5**: $p\rightarrow s$.
 
 </details>
 
 <details>
-<summary><b>Ver solucionario — Serie 2</b></summary>
+<summary><b>Serie 2 — Ver todas las respuestas</b></summary>
 
-**Ítem 10.** $(P\lor Q)\rightarrow R$, evaluado en las 8 filas ($P,Q,R$ de VVV a FFF): $P\lor Q$ es 1 en todas menos las dos últimas filas ($P=Q=F$); el condicional resulta: $\mathbf{1,0,1,0,1,0,1,1}$.
-
-**Ítem 11.** $\neg(P\land Q)\lor R$: $P\land Q$ solo es 1 en las dos primeras filas; su negación es 0 ahí y 1 en el resto; al unir con $\lor R$: $\mathbf{1,0,1,1,1,1,1,1}$.
-
-**Ítem 12.** $(p\rightarrow q)\lor(q\rightarrow p)$:
-
-$$
-\begin{aligned}
-&VV:\ (V\rightarrow V)\lor(V\rightarrow V)=1\lor1=\mathbf{1}\\
-&VF:\ (V\rightarrow F)\lor(F\rightarrow V)=0\lor1=\mathbf{1}\\
-&FV:\ (F\rightarrow V)\lor(V\rightarrow F)=1\lor0=\mathbf{1}\\
-&FF:\ (F\rightarrow F)\lor(F\rightarrow F)=1\lor1=\mathbf{1}
-\end{aligned}
-$$
-
-Columna final: 1,1,1,1 → **Tautología**.
-
-**Ítem 13.** $(p\land q)\rightarrow r$, en las 8 filas: solo es falso cuando $p\land q=V$ y $r=F$ (fila $VVF$); en el resto es verdadero: $\mathbf{1,0,1,1,1,1,1,1}$ → **Contingencia**.
-
-**Ítem 14.** $\neg(p\land q)$: $p\land q=V,F,F,F \Rightarrow \neg(p\land q)=0,1,1,1$. $\neg p\land q$: $\neg p=F,F,V,V$; $\neg p\land q = F\land V, F\land F, V\land V, V\land F = 0,0,1,0$. Las columnas (0,1,1,1) y (0,0,1,0) son distintas — el estudiante está equivocado.
-
-**Ítem 15.** $t\land\neg t$ es la misma estructura que $P\land\neg P$ (Ejercicio resuelto 1 de la clase), que ya se demostró siempre falsa. Una conjunción $q\land F$ es siempre $F$, sin importar el valor de $q$, porque basta una falsedad para que toda la conjunción sea falsa (regla de oro de $\land$). Por eso $q\land(t\land\neg t)$ es contradicción para cualquier $q$.
+- **S2.1**: $(h\land g)\rightarrow a$; suficiente, no necesaria.
+- **S2.2**: $p\rightarrow q$; contrarrecíproco $\neg q\rightarrow\neg p$.
+- **S2.3**: $q\to p \equiv \neg q\lor p \equiv p\lor\neg q \equiv \neg(\neg p)\lor\neg q \equiv \neg p\to\neg q$.
+- **S2.4**: (a) "Si el termostato no detecta temperatura alta, entonces el ventilador no se activa." (b) Contrario; no equivalente al original.
+- **S2.5**: $\neg(p\land g)$; por Morgan, $\neg p\lor\neg g$.
 
 </details>
 
 <details>
-<summary><b>Ver solucionario — Serie 3</b></summary>
+<summary><b>Serie 3 — Ver todas las respuestas</b></summary>
 
-**Ítem 16.** Traducción: "se apaga" depende de "temperatura supera el límite" ($t$) y "no está en mantenimiento" ($\neg m$), unidos por "y" → $t\land\neg m$.
-
-$$
-\begin{aligned}
-&VV:\ \neg m=F,\ t\land\neg m=\mathbf{0}\\
-&VF:\ \neg m=V,\ t\land\neg m=\mathbf{1}\\
-&FV:\ \neg m=F,\ t\land\neg m=\mathbf{0}\\
-&FF:\ \neg m=V,\ t\land\neg m=\mathbf{0}
-\end{aligned}
-$$
-
-**Ítem 17.** "No es cierto que... o..." → negación aplicada a toda la disyunción: $\neg(d\lor e)$.
-
-$$
-\begin{aligned}
-&VV:\ d\lor e=1,\ \neg=\mathbf{0}\\
-&VF:\ d\lor e=1,\ \neg=\mathbf{0}\\
-&FV:\ d\lor e=1,\ \neg=\mathbf{0}\\
-&FF:\ d\lor e=0,\ \neg=\mathbf{1}
-\end{aligned}
-$$
-
-**Ítem 18.** "Se concede si y solo si..." → bicondicional entre $g$ y la conjunción $(u\land\neg a)$: $g\leftrightarrow(u\land\neg a)$.
-
-$$
-\begin{aligned}
-&VVV:\ \neg a=F,\ u\land\neg a=F,\ g\leftrightarrow F=V\leftrightarrow F=\mathbf{0}\\
-&VVF:\ \neg a=V,\ u\land\neg a=V,\ g\leftrightarrow V=V\leftrightarrow V=\mathbf{1}\\
-&VFV:\ \neg a=F,\ u\land\neg a=F,\ V\leftrightarrow F=\mathbf{0}\\
-&VFF:\ \neg a=V,\ u\land\neg a=F,\ V\leftrightarrow F=\mathbf{0}\\
-&FVV:\ \neg a=F,\ u\land\neg a=F,\ F\leftrightarrow F=\mathbf{1}\\
-&FVF:\ \neg a=V,\ u\land\neg a=V,\ F\leftrightarrow V=\mathbf{0}\\
-&FFV:\ \neg a=F,\ u\land\neg a=F,\ F\leftrightarrow F=\mathbf{1}\\
-&FFF:\ \neg a=V,\ u\land\neg a=F,\ F\leftrightarrow F=\mathbf{1}
-\end{aligned}
-$$
+- **S3.1**: Equivalentes; columna del bicondicional es tautología.
+- **S3.2**: $A=V$, $B=V$, $C=V$; $A\land B$ es suficiente para $\neg C$.
+- **S3.3**: Ambas verdaderas (antecedente falso en la original; consecuente siempre verdadero en el contrarrecíproco).
+- **S3.4**: $f\leftrightarrow\neg(\neg f)$; tautología.
 
 </details>
 
 <details>
-<summary><b>Ver solucionario — Reto Final</b></summary>
+<summary><b>Reto Final — Ver todas las respuestas</b></summary>
 
-**Paso 1 — Formalizar.** "Se activa si $a$ y no $m$, o si $e$" → $(a\land\neg m)\lor e$.
-
-**Paso 2 — Tabla completa.**
-
-| $a$ | $m$ | $e$ | $\neg m$ | $a\land\neg m$ | $(a\land\neg m)\lor e$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| V | V | V | F | F | **1** |
-| V | V | F | F | F | **0** |
-| V | F | V | V | V | **1** |
-| V | F | F | V | V | **1** |
-| F | V | V | F | F | **1** |
-| F | V | F | F | F | **0** |
-| F | F | V | F | F | **1** |
-| F | F | F | F | F | **0** |
-
-La columna final combina 1 y 0 (cinco unos, tres ceros) → **Contingencia**.
-
-**Paso 3 — Refutar la tautología.** La fila $a=F, m=F, e=F$ da resultado **0**: sin amenaza confirmada y con energía por encima del mínimo crítico, el protocolo no se activa, sin importar el valor de $m$. Esa fila por sí sola refuta la afirmación de que la expresión es siempre verdadera. (Las filas $a=V,m=V,e=F$ y $a=F,m=V,e=F$ también sirven como contraejemplo válido.)
+- **RF1**: Por el contrarrecíproco $A\rightarrow\neg V$, y $A$=verdadero, se concluye $\neg V$ — la configuración se descarta.
+- **RF2**: No pueden ser ciertas ambas — son negación exacta la una de la otra (primera Ley de Morgan).
 
 </details>

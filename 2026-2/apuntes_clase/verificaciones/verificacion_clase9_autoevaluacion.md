@@ -1,91 +1,144 @@
-# Verificación (uso exclusivo del profesor) — `clase9_autoevaluacion.md`
+# Verificación — Autoevaluación Clase 10 (uso exclusivo del profesor)
 
-*No compartir con estudiantes. Contiene el desarrollo completo de los ítems de Serie 2 en adelante, para permitir una revisión rápida (5-6 líneas por ítem) en vez de resolver cada uno desde cero.*
-
-> [!IMPORTANT]
-> `clase9.md` todavía no enseña un formato de inferencia formal (Afirmación-Razón) para lógica cuantificacional — ese formato se enseñó en Clase 6 para lógica proposicional. Aquí se usa, en su lugar, una justificación **paso a paso** equivalente, como lo permite el prompt maestro (Sección 5, punto 7).
-
-> [!NOTE]
-> **Alcance.** Este archivo cubre únicamente los Ítems 9 a 19 (Serie 2, Serie 3 — Entrenamiento cruzado, Reto Final), por diseño: los Ítems 1-8 (Calentamiento y Serie 1) son de concepto único y se verifican por inspección directa contra `clase9.md`, sin necesitar desarrollo adicional.
+*Este archivo no se comparte con los estudiantes. Contiene el desarrollo completo, en formato Afirmación-Razón (o su equivalente paso a paso), de los ítems de Serie 2 en adelante de `clase10_autoevaluacion.md`. Los ítems de Calentamiento y Serie 1 no requieren este nivel de detalle — su verificación es directa a partir de la respuesta final ya mostrada en el archivo del estudiante.*
 
 ---
 
 ## Serie 2
 
-**Ítem 9.** Traducción con método de 5 pasos (Parte III).
-1. Dominio: personas (clientes) y productos.
-2. Palabra clave "todo cliente" → $\forall x$; "al menos un producto" → $\exists y$.
-3. Sujeto: $cliente(x)$; relación: $comprado(x,y)$, restringida a productos en oferta con $oferta(y)$.
-4. Forma A en el exterior (implicación), forma I en el interior (conjunción) — mismo patrón de Clase 7 aplicado dos veces.
-5. Conclusión: $\forall x\ \bigl(cliente(x) \rightarrow \exists y\ (producto(y)\land oferta(y)\land comprado(x,y))\bigr)$.
+### Ítem 10 — Soporte y Kubernetes
 
-**Ítem 10.** $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, tabla $S1\to V1$, $S2\to V1$, $S3\to V2$.
-1. $\forall x\exists y\ reporta(x,y)$: $S1$→testigo $V1$ ✓; $S2$→testigo $V1$ ✓; $S3$→testigo $V2$ ✓. Los tres sensores tienen testigo. **V.**
-2. $\exists y\forall x\ reporta(x,y)$: probar $y=V1$ — falla en $S3$ ($S3$ no reporta a $V1$). Probar $y=V2$ — falla en $S1$ y $S2$. Ningún $y$ sirve para los tres. **F.**
-3. Conclusión: mismo patrón que Ana/Beto/Carla (Parte II.1) — testigo dependiente de $x$ sí existe, testigo único para todos no.
+Premisas: $\exists x\ \bigl(soporte(x)\land dominaK8s(x)\bigr)$ ; $\forall x\ \bigl(dominaK8s(x)\rightarrow resuelveNivel3(x)\bigr)$.
 
-**Ítem 11.** Letrero mal formalizado, $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$.
-1. Por precedencia (Parte I.1), $\forall x$ solo alcanza al átomo inmediato: $entregoCarnet(x)$.
-2. La fórmula completa se lee como $\bigl((\forall x\ entregoCarnet(x)) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)$.
-3. En esa lectura, las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedan fuera de cualquier alcance — libres (Parte I.3) — exactamente el caso de la Advertencia de Parte I.1.
-4. Clasificación (Parte V): es ambigüedad **de alcance** — no queda claro qué parte de la fórmula domina el cuantificador.
-5. Corrección con paréntesis: $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $\exists x\ \bigl(soporte(x)\land dominaK8s(x)\bigr)$ | Premisa a |
+| 2 | $soporte(a)\land dominaK8s(a)$ | Instanciación existencial en 1 |
+| 3 | $soporte(a)$ | Simplificación en 2 |
+| 4 | $dominaK8s(a)$ | Simplificación en 2 |
+| 5 | $\forall x\ \bigl(dominaK8s(x)\rightarrow resuelveNivel3(x)\bigr)$ | Premisa b |
+| 6 | $dominaK8s(a)\rightarrow resuelveNivel3(a)$ | Instanciación universal en 5 |
+| 7 | $resuelveNivel3(a)$ | Modus Ponens 4, 6 |
+| 8 | $soporte(a)\land resuelveNivel3(a)$ | Conjunción 3, 7 |
+| 9 | $\exists x\ \bigl(soporte(x)\land resuelveNivel3(x)\bigr)$ | Generalización existencial en 8 |
 
-**Ítem 12.** Cláusula **extendida** de IV.3 (Q sin la variable cuantificada) — deliberadamente distinta del Ítem 7, que ya cubre la cláusula básica ($\forall x(P\land Q(x))$ con ambos predicados dependientes de $x$).
-1. $vigente$ es una proposición atómica sin ocurrencia de $x$ — no es $vigente(x)$, es una constante proposicional.
-2. La cláusula extendida de IV.3 dice exactamente: $\forall x\ (P(x)\land Q) \equiv \forall x\ P(x)\land Q$ cuando $Q$ no contiene $x$.
-3. Sustituyendo $P=responsable$, $Q=vigente$: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x)\land vigente$.
-4. Intuición de por qué es válido: $vigente$ no cambia según qué $x$ se elija, así que "sacarla" del alcance del cuantificador no pierde ni agrega información — el cuantificador nunca tenía nada que hacer sobre ella.
+### Ítem 11 — Paquete $p_7$
 
-**Ítem 13.** Traducción con condición de distinción + nota de vacuidad (paralelo a Ejercicio 7).
-1. Predicados: $colaboraCon(x,y)$, dominio de proyectos.
-2. Estructura: $\exists x$ (existe un proyecto) $\forall y\forall z$ (para cualesquiera dos colaboradores) con antecedente $colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z$ y consecuente $\neg colaboraCon(y,z)$.
-3. Fórmula: $\exists x\ \forall y\ \forall z\ \bigl(colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z \rightarrow \neg colaboraCon(y,z)\bigr)$.
-4. Vacuidad: si $x$ no tiene dos colaboradores distintos que satisfagan el antecedente, la implicación nunca se pone a prueba — verdadera por vacuidad, igual que en el Ejercicio 7.
+Premisas: $\forall x\ \bigl(llega(x)\lor pierde(x)\lor retransmite(x)\bigr)$ ; $\neg pierde(p_7)$ ; $\neg retransmite(p_7)$.
 
----
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $\forall x\ \bigl(llega(x)\lor pierde(x)\lor retransmite(x)\bigr)$ | Premisa a |
+| 2 | $llega(p_7)\lor pierde(p_7)\lor retransmite(p_7)$ | Instanciación universal en 1 |
+| 3 | $\neg pierde(p_7)$ | Premisa b |
+| 4 | $\neg retransmite(p_7)$ | Premisa c |
+| 5 | $\bigl(llega(p_7)\lor pierde(p_7)\bigr)\lor retransmite(p_7)$ | Asociatividad en 2 |
+| 6 | $llega(p_7)\lor pierde(p_7)$ | Silogismo disyuntivo 5, 4 |
+| 7 | $llega(p_7)$ | Silogismo disyuntivo 6, 3 |
 
-## Serie 3 — Entrenamiento cruzado
+### Ítem 12 — Error: testigo1 generalizado con UG
 
-**Ítem 14.** Unicidad anidada (Clase 8 + hoy), paralelo a Ejercicio 9.
-1. Solución 1 — con $\exists!$: $\forall x\ \exists!\ y\ primerContacto(x,y)$.
-2. Solución 2 — expandiendo $\exists!$ (Clase 8, Parte I.2) dentro del alcance de $\forall x$ de hoy: se agrega $\forall z\ (z\neq y \rightarrow \neg primerContacto(x,z))$ dentro del alcance del $\exists y$.
-3. Conclusión: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.
+Diagnóstico para el estudiante: el paso 3 (`∴ ∀x sospechoso(x)` justificado como "Generalización universal en 2") es inválido. $testigo1$ no es un objeto arbitrario — es el testigo que la propia Instanciación existencial del paso 2 introdujo para satisfacer $\exists x\ sospechoso(x)$. Es un error distinto al de Beto (Parte V.2, instancias elegidas de una muestra) y al del Ítem 7 (objeto ya nombrado en una premisa): aquí el objeto no viene de una muestra ni de una premisa previa, sino que es la propia regla EI la que lo produjo — y por construcción, ese testigo solo se sabe que cumple $sospechoso$, no que sea "cualquiera". Aplicar UG sobre él generalizaría indebidamente una propiedad que solo se garantizó para ese caso particular.
 
-**Ítem 15.** $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$, $U_{mesero}=\{MeseroA,MeseroB\}$, bitácora de turno con registros múltiples posibles (no una tabla funcional pre-filtrada) — rediseñado tras auditoría externa para que la unicidad pueda fallar genuinamente y no sea trivial por construcción.
-1. Registros: $atiende(MeseroA,Mesa1)$, $atiende(MeseroA,Mesa2)$, $atiende(MeseroB,Mesa2)$, $atiende(MeseroA,Mesa3)$.
-2. $Mesa1$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa1$. $\exists!$ se cumple.
-3. $Mesa2$: existencia — $MeseroA$ (o $MeseroB$). Unicidad — **falla**: hay dos registros distintos, $MeseroA$ y $MeseroB$, ambos atendieron $Mesa2$. Formalmente, se refuta $\forall y\bigl(atiende(y,Mesa2)\rightarrow y=MeseroA\bigr)$ con el contraejemplo $y=MeseroB$. $\exists!$ **no** se cumple para $Mesa2$.
-4. $Mesa3$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa3$. $\exists!$ se cumple.
-5. Como $\exists!\ y\ atiende(y,x)$ falla al menos en $Mesa2$, el universal $\forall x\ \exists!\ y\ atiende(y,x)$ es **F** — basta un contraejemplo de $x$ para refutar un $\forall$ (el mismo principio del método del contraejemplo de Clase 8, aplicado aquí a una fórmula con $\exists!$ anidado).
+### Ítem 13 — Servidores: activo, mantenimiento, certificado, alerta
 
-**Ítem 16.** Negación de $\forall x\ \exists y\ (reporta(x,y)\land activo(y))$.
-1. Negar $\forall x$ (Clase 8): $\neg\forall x\ \exists y(\dots) \equiv \exists x\ \neg\exists y(\dots)$.
-2. Negar $\exists y$ (Clase 8): $\exists x\ \forall y\ \neg(reporta(x,y)\land activo(y))$.
-3. De Morgan proposicional (Clase 6) sobre lo interno: $\neg(reporta\land activo)\equiv\neg reporta\lor\neg activo$.
-4. Conclusión: $\exists x\ \forall y\ \bigl(\neg reporta(x,y)\lor\neg activo(y)\bigr)$.
+Premisas: (a) $\forall x\ \bigl(activo(x)\lor mantenimiento(x)\bigr)$ ; (b) $\forall x\ \bigl(\neg certificado(x)\rightarrow\neg activo(x)\bigr)$ ; (c) $\exists x\ \bigl(\neg mantenimiento(x)\lor alerta(x)\bigr)$.
 
-**Ítem 17.** Negación de $\exists x\ \forall y\ (disponible(x,y)\lor enMantenimiento(x,y))$.
-1. Negar $\exists x$ (Clase 8): $\neg\exists x\ \forall y(\dots) \equiv \forall x\ \neg\forall y(\dots)$.
-2. Negar $\forall y$ (Clase 8): $\forall x\ \exists y\ \neg(disponible(x,y)\lor enMantenimiento(x,y))$.
-3. De Morgan proposicional (Clase 6) sobre lo interno: $\neg(disponible\lor enMantenimiento)\equiv\neg disponible\land\neg enMantenimiento$.
-4. Conclusión: $\forall x\ \exists y\ \bigl(\neg disponible(x,y)\land\neg enMantenimiento(x,y)\bigr)$.
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $\exists x\ \bigl(\neg mantenimiento(x)\lor alerta(x)\bigr)$ | Premisa c |
+| 2 | $\neg mantenimiento(a)\lor alerta(a)$ | Instanciación existencial en 1 |
+| 3 | $\forall x\ \bigl(activo(x)\lor mantenimiento(x)\bigr)$ | Premisa a |
+| 4 | $activo(a)\lor mantenimiento(a)$ | Instanciación universal en 3 |
+| 5 | $mantenimiento(a)\lor activo(a)$ | Conmutatividad en 4 |
+| 6 | $activo(a)\lor alerta(a)$ | Resolución 5, 2 |
+| 7 | $\forall x\ \bigl(\neg certificado(x)\rightarrow\neg activo(x)\bigr)$ | Premisa b |
+| 8 | $\neg certificado(a)\rightarrow\neg activo(a)$ | Instanciación universal en 7 |
+| 9 | $activo(a)\rightarrow certificado(a)$ | Contrarrecíproco en 8 |
+| 10 | $\neg activo(a)\lor certificado(a)$ | Implicación en 9 |
+| 11 | $alerta(a)\lor certificado(a)$ | Resolución 6, 10 |
+| 12 | $certificado(a)\lor alerta(a)$ | Conmutatividad en 11 |
+| 13 | $\exists x\ \bigl(certificado(x)\lor alerta(x)\bigr)$ | Generalización existencial en 12 |
 
----
+> [!NOTE]
+> Versión más corta que el Ejercicio 9 de `clase10.md` (sin el paso de Adición final) — apropiada para Serie 2, dejando la cadena de resolución completa de cuatro predicados como techo ya alcanzado en la propia clase.
 
-## Reto Final — La ruta del domiciliario
+### Ítem 14 — Conceptual: por qué EI antes que UI
 
-**Ítem 18.** Formalización comparativa, sin tabla todavía.
-1. "Cada cliente tiene un repartidor asignado": $\forall$ exterior con testigo dependiente de $x$ → $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$.
-2. "Hay un repartidor que cubre a todos": $\exists$ exterior con testigo fijo para todo $x$ → $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$.
-3. Diferencia (núcleo de la Parte II): la primera permite un repartidor distinto por cliente; la segunda exige uno solo, común a todos — afirmación estrictamente más fuerte.
-
-**Ítem 19.** Evaluación con tabla $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$, y negación. Notación uniformada con el Ítem 18 (explícita sobre $U_{cliente}$ y $U_{repartidor}$).
-1. $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$: cada cliente tiene fila con repartidor ($C1,C2,C4\to R1$; $C3\to R2$). **V.**
-2. $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$: probar $y=R1$ — falla en $C3$. Probar $y=R2$ — falla en $C1,C2,C4$. Ningún $y$ cubre los cuatro. **F.**
-3. Negar la fórmula falsa (Clase 8, dos pasos): $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \neg\forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$.
-4. Lectura: "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor" — cierto para ambos repartidores del caso ($R1$ falla con $C3$; $R2$ falla con $C1,C2,C4$).
+Respuesta modelo (para calibrar la corrección del estudiante, no como único fraseo aceptable): el testigo de una existencial debe fijarse primero como una constante concreta (EI); solo después de tener ese testigo fijo tiene sentido instanciar las premisas universales exactamente en ese mismo objeto (UI), lo que permite combinarlas con reglas proposicionales sobre un único objeto compartido. Instanciar primero la universal produciría un objeto genérico sin conexión garantizada con el testigo existencial, y las premisas no podrían combinarse.
 
 ---
 
-*Fin del bloque de verificación. 11 ítems desarrollados en total: Serie 2 (Ítems 9-13, 5 ítems), Serie 3 — Cruzada (Ítems 14-17, 4 ítems), Reto Final (Ítems 18-19, 2 ítems).*
+## Serie 3
+
+### Ítem 15 — $\neg(\neg p\land q)$
+
+$$\neg(\neg p\land q)\ \underset{\text{Leyes de Morgan}}{\equiv}\ \neg(\neg p)\lor\neg q\ \underset{\text{Doble negación}}{\equiv}\ p\lor\neg q$$
+
+### Ítem 16 — $p\lor q,\ \neg p,\ q\rightarrow r\ \therefore r$
+
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $p\lor q$ | Premisa |
+| 2 | $\neg p$ | Premisa |
+| 3 | $q$ | Silogismo disyuntivo 1, 2 |
+| 4 | $q\rightarrow r$ | Premisa |
+| 5 | $r$ | Modus Ponens 3, 4 |
+
+### Ítem 17 — $\neg\exists x\ (seguro(x)\land estable(x))$
+
+$$\neg\exists x\ \bigl(seguro(x)\land estable(x)\bigr)\ \underset{\text{De Morgan cuántico}}{\equiv}\ \forall x\ \neg\bigl(seguro(x)\land estable(x)\bigr)\ \underset{\text{Leyes de Morgan}}{\equiv}\ \forall x\ \bigl(\neg seguro(x)\lor\neg estable(x)\bigr)$$
+
+### Ítem 18 — Integración: disponibilidad y atención (Marco)
+
+Premisas: (a) $\neg\exists x\ \neg disponible(x)$ ; (b) $\forall x\ \bigl(disponible(x)\rightarrow puedeAtender(x)\bigr)$.
+
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $\neg\exists x\ \neg disponible(x)$ | Premisa a |
+| 2 | $\forall x\ \neg\neg disponible(x)$ | De Morgan cuántico en 1 |
+| 3 | $\forall x\ disponible(x)$ | Doble negación en 2 |
+| 4 | $disponible(\text{Marco})$ | Instanciación universal en 3 |
+| 5 | $\forall x\ \bigl(disponible(x)\rightarrow puedeAtender(x)\bigr)$ | Premisa b |
+| 6 | $disponible(\text{Marco})\rightarrow puedeAtender(\text{Marco})$ | Instanciación universal en 5 |
+| 7 | $puedeAtender(\text{Marco})$ | Modus Ponens 4, 6 |
+
+> [!NOTE]
+> Este es el ítem de "integración real" pedido en la Fase 3: el primer paso viene de Parte III (De Morgan cuántico), el segundo de Parte II (Doble negación), y el resto de Parte V (UI × 2, MP) — exactamente la combinación que la Serie 3 debía ejercitar, no solo repasar las dos partes por separado.
+
+---
+
+## Reto Final — El Enigma del Bosque Blorpiter
+
+Predicados: $grifomorso(x)$, $maullaDeNoche(x)$, $luminiscente(x)$, $temeNiebla(x)$, $enBosque(x)$. Dominio: todos los seres imaginarios del mundo de la historia.
+
+Premisas:
+- (a) $\forall x\ \Bigl(\bigl(grifomorso(x)\land maullaDeNoche(x)\bigr)\rightarrow luminiscente(x)\Bigr)$
+- (b) $\forall x\ \bigl(luminiscente(x)\rightarrow\neg temeNiebla(x)\bigr)$
+- (c) $\exists x\ \bigl(grifomorso(x)\land maullaDeNoche(x)\land enBosque(x)\bigr)$
+
+Conclusión: $\exists x\ \bigl(enBosque(x)\land\neg temeNiebla(x)\bigr)$
+
+| # | Afirmación | Razón |
+|:---:|:---|:---|
+| 1 | $\exists x\ \bigl(grifomorso(x)\land maullaDeNoche(x)\land enBosque(x)\bigr)$ | Premisa c |
+| 2 | $grifomorso(a)\land maullaDeNoche(a)\land enBosque(a)$ | Instanciación existencial en 1 |
+| 3 | $grifomorso(a)\land maullaDeNoche(a)$ | Simplificación en 2 |
+| 4 | $enBosque(a)$ | Simplificación en 2 |
+| 5 | $\forall x\ \Bigl(\bigl(grifomorso(x)\land maullaDeNoche(x)\bigr)\rightarrow luminiscente(x)\Bigr)$ | Premisa a |
+| 6 | $\bigl(grifomorso(a)\land maullaDeNoche(a)\bigr)\rightarrow luminiscente(a)$ | Instanciación universal en 5 |
+| 7 | $luminiscente(a)$ | Modus Ponens 3, 6 |
+| 8 | $\forall x\ \bigl(luminiscente(x)\rightarrow\neg temeNiebla(x)\bigr)$ | Premisa b |
+| 9 | $luminiscente(a)\rightarrow\neg temeNiebla(a)$ | Instanciación universal en 8 |
+| 10 | $\neg temeNiebla(a)$ | Modus Ponens 7, 9 |
+| 11 | $enBosque(a)\land\neg temeNiebla(a)$ | Conjunción 4, 10 |
+| 12 | $\exists x\ \bigl(enBosque(x)\land\neg temeNiebla(x)\bigr)$ | Generalización existencial en 11 |
+
+> [!NOTE]
+> Consistencia universo-predicado verificada: el dominio de trabajo es "todos los seres imaginarios del mundo de la historia" (abierto); $enBosque(x)$ y $grifomorso(x)$ son predicados sobre ese dominio, no criterios de pertenencia al dominio mismo — no hay conflación entre el conjunto de trabajo y las propiedades evaluadas.
+
+---
+
+## Nota sobre el patrón de solucionario usado
+
+Este bloque siguió el patrón de respuesta dentro de cada ítem (Sección 6.1 del prompt maestro) en vez de un Solucionario consolidado al final del archivo del estudiante — mismo patrón que `clase6_autoevaluacion.md`. Este archivo de verificación es, por tanto, el único lugar donde vive el desarrollo completo paso a paso.

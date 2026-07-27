@@ -1,165 +1,87 @@
-# 🔒 Bloque de verificación — clase6_autoevaluacion.md
-### Solo para el profesor — NO entregar al estudiante
+# Verificación — Autoevaluación Clase 07 (uso exclusivo del profesor)
 
-*Desarrollo completo en formato Afirmación–Razón de los ítems de Serie 2 en adelante (cadenas de 3+ pasos). El archivo del estudiante solo muestra la respuesta final de cada uno. Todos los ítems fueron verificados por evaluación exhaustiva de la tabla de verdad (validez global y validez de cada paso intermedio en los renglones críticos).*
+*No incluir en el archivo del estudiante. Cubre Serie 2 en adelante, per checklist del prompt maestro de autoevaluación.*
 
----
-
-## Serie 2
-
-**Ítem 10.** $\ p\rightarrow q,\ q\rightarrow r,\ r\rightarrow s,\ p\ \vdash\ s$
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $p\rightarrow q$ | Premisa |
-| 2 | $q\rightarrow r$ | Premisa |
-| 3 | $r\rightarrow s$ | Premisa |
-| 4 | $p$ | Premisa |
-| 5 | $q$ | Modus Ponens en 1 y 4 |
-| 6 | $r$ | Modus Ponens en 2 y 5 |
-| 7 | $s$ | Modus Ponens en 3 y 6 |
-
-*(Alternativa: 5' $p\rightarrow r$ Silog. hipotético 1,2; 6' $p\rightarrow s$ Silog. hipotético 5',3; 7' $s$ Modus Ponens 6',4.)*
+**Nota de adaptación:** el formato Afirmación–Razón del prompt maestro está diseñado para cadenas de inferencia proposicional (Clase 06). La Clase 07 no enseña todavía inferencia con cuantificadores — solo traducción, negación y evaluación —, así que aquí el desarrollo se presenta como justificación paso a paso en vez de tabla Afirmación–Razón numerada. Esto permite la misma revisión rápida sin inventar un formalismo que el curso aún no cubre.
 
 ---
 
-**Ítem 11.** $\ p\lor q,\ p\rightarrow r,\ q\rightarrow s,\ \neg r\ \vdash\ s$
+### Ítem 10
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $p\lor q$ | Premisa |
-| 2 | $p\rightarrow r$ | Premisa |
-| 3 | $q\rightarrow s$ | Premisa |
-| 4 | $\neg r$ | Premisa |
-| 5 | $\neg p$ | Modus Tollens en 2 y 4 |
-| 6 | $q$ | Eliminación en 1 y 5 |
-| 7 | $s$ | Modus Ponens en 3 y 6 |
+*"Ningún archivo corrupto se puede abrir."*
 
----
+1. Estructura: forma E ("Ningún $S$ es $P$").
+2. Diccionario: $corrupto(x)$, $abrible(x)$.
+3. Plantilla E: $\forall x\,(S(x) \rightarrow \neg P(x))$.
+4. Resultado: $\forall x\,\bigl(corrupto(x) \rightarrow \neg abrible(x)\bigr)$.
 
-**Ítem 12.** $\ \neg(p\lor q),\ r\rightarrow p\ \vdash\ \neg r$ *(usa ley de equivalencia)*
+### Ítem 11
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $\neg(p\lor q)$ | Premisa |
-| 2 | $r\rightarrow p$ | Premisa |
-| 3 | $\neg p\land\neg q$ | De Morgan en 1 |
-| 4 | $\neg p$ | Simplificación en 3 |
-| 5 | $\neg r$ | Modus Tollens en 2 y 4 |
+$\exists x\,\bigl(becado(x) \land destacado(x)\bigr)$
 
----
+1. Cuantificador $\exists$ + conectivo $\land$ → coincide con la plantilla de la forma I.
+2. Verificación de la regla de oro: $\exists$ con $\rightarrow$ produciría verdad trivial (basta un objeto no becado); $\exists$ con $\land$ exige que ambas propiedades se cumplan en el mismo objeto — es lo que pide "algún $S$ es $P$".
+3. Conclusión: forma I, emparejamiento correcto.
 
-**Ítem 13.** $\ (p\land q)\rightarrow r,\ \neg r,\ p\ \vdash\ \neg q$
+### Ítem 12
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $(p\land q)\rightarrow r$ | Premisa |
-| 2 | $\neg r$ | Premisa |
-| 3 | $p$ | Premisa |
-| 4 | $\neg(p\land q)$ | Modus Tollens en 1 y 2 |
-| 5 | $\neg p\lor\neg q$ | De Morgan en 4 |
-| 6 | $\neg q$ | Eliminación en 5 y 3 (con $p\equiv\neg(\neg p)$) |
+$\exists x\,\bigl(sensor(x) \rightarrow danado(x)\bigr)$ — traducción del estudiante.
 
-*Nota sobre el paso 6:* la Eliminación (silogismo disyuntivo) sobre $\neg p\lor\neg q$ requiere descartar $\neg p$; como se tiene $p$, es decir $\neg(\neg p)$, se descarta el primer disyunto y queda $\neg q$.
+1. Detectar el patrón: $\exists$ con $\rightarrow$ → señal de alerta (Parte III.2 / V.2).
+2. Contraejemplo de por qué falla: si existe **un solo** objeto del universo que no sea sensor, el antecedente $sensor(x)$ es falso para ese objeto, la implicación es verdadera, y toda la fórmula existencial ya es verdadera — sin que ningún sensor esté dañado.
+3. Corrección: reemplazar $\rightarrow$ por $\land$ → $\exists x\,\bigl(sensor(x) \land danado(x)\bigr)$ (forma I).
 
----
+### Ítem 13
 
-**Ítem 14.** *(lenguaje natural)* $\ b\rightarrow d,\ \neg d,\ b\lor m,\ m\rightarrow n\ \vdash\ n$
+$\forall x\,\bigl(seguro(x) \land actualizado(x)\bigr)$ → negar.
 
-Proposiciones: $b$ = el backup se ejecutó; $d$ = los datos están a salvo; $m$ = se activó el modo solo lectura; $n$ = se notificó al administrador.
+1. Aplicar la ley de negación de cuantificadores: $\neg\,\forall x\,P(x) \equiv \exists x\,\neg P(x)$, con $P(x) = seguro(x)\land actualizado(x)$.
+2. Resultado: $\exists x\,\neg\bigl(seguro(x) \land actualizado(x)\bigr)$.
+3. Nota: el estudiante **no** debe distribuir la negación sobre $\land$ aquí. No es por exclusión de entrenamiento cruzado — es que el manejo de este tipo de negaciones se profundiza en la próxima clase (nunca se enseñó como contenido pasado). Si un estudiante entrega la versión distribuida $\exists x\,\bigl(\neg seguro(x) \lor \neg actualizado(x)\bigr)$ por su cuenta, es correcto y adelantado — no debe penalizarse, solo confirmar que el paso intermedio (negación de cuantificador) esté bien.
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $b\rightarrow d$ | Premisa |
-| 2 | $\neg d$ | Premisa |
-| 3 | $b\lor m$ | Premisa |
-| 4 | $m\rightarrow n$ | Premisa |
-| 5 | $\neg b$ | Modus Tollens en 1 y 2 |
-| 6 | $m$ | Eliminación en 3 y 5 |
-| 7 | $n$ | Modus Ponens en 4 y 6 |
+### Ítem 14
+
+Respuesta abierta — cualquier par de universos donde $manejaPresion(x)$ cambie de valor de verdad es válido. Verificar que el estudiante:
+- Proponga un universo "restringido" plausible donde sea verdadera (ej. un grupo entrenado para ello).
+- Proponga un universo "amplio" donde sea falsa (ej. toda la población general).
+- Articule que el cambio se debe **al universo**, no a la fórmula.
 
 ---
 
-## Serie 3
+### Ítem 15 — Reto Final (traducción)
 
-**Ítem 15.** *(traducción)* $\ s\rightarrow t,\ t\rightarrow a,\ s\ \vdash\ a$
+Tabla de hechos del enunciado (para referencia rápida al calificar el Ítem 16):
 
-Proposiciones: $s$ = el usuario inicia sesión; $t$ = se crea un token; $a$ = se registra en auditoría.
+| | thor | hulk | ironman | capitan | viuda | ojo |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| tienePoderes | V | V | F | F | F | F |
+| esHumano | F | F | V | V | V | V |
+| disponible | V | F | V | V | V | F |
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $s\rightarrow t$ | Premisa |
-| 2 | $t\rightarrow a$ | Premisa |
-| 3 | $s$ | Premisa |
-| 4 | $t$ | Modus Ponens en 1 y 3 |
-| 5 | $a$ | Modus Ponens en 2 y 4 |
+**(a)** "Todo Vengador disponible tiene poderes sobrehumanos" → forma A → $\forall x\,(disponible(x)\rightarrow tienePoderes(x))$.
 
----
+**(b)** "Ningún Vengador completamente humano tiene poderes sobrehumanos" → forma E → $\forall x\,(esHumano(x)\rightarrow \neg tienePoderes(x))$.
 
-**Ítem 16.** *(ley de equivalencia)* $\ \neg p\lor q,\ p\ \vdash\ q$
+**(c)** "Algún Vengador disponible tiene poderes sobrehumanos" → forma I → $\exists x\,(disponible(x)\land tienePoderes(x))$.
 
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $\neg p\lor q$ | Premisa |
-| 2 | $p$ | Premisa |
-| 3 | $p\rightarrow q$ | Implicación en 1 |
-| 4 | $q$ | Modus Ponens en 3 y 2 |
+### Ítem 16 — Reto Final (evaluación y negación)
 
-*(Alternativa sin convertir: Eliminación directa sobre $\neg p\lor q$ descartando $\neg p$ con $p$ → $q$.)*
+**(a)** $tienePoderes(hulk)=V$, $disponible(hulk)=F$ → $V\land F = F$.
 
----
+**(b)** Recorrer la columna tienePoderes de la tabla: verdadero solo en $thor$ y $hulk$ → conjunto de verdad $=\{thor, hulk\}$.
 
-**Ítem 17.** *(tautología ↔ validez)* Argumento $\ p\rightarrow q,\ p\ \vdash\ q$.
-
-Forma condicional: $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$.
-
-| $p$ | $q$ | $p\rightarrow q$ | $(p\rightarrow q)\land p$ | $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$ |
-|:-:|:-:|:-:|:-:|:-:|
-| 0 | 0 | 1 | 0 | 1 |
-| 0 | 1 | 1 | 0 | 1 |
-| 1 | 0 | 0 | 0 | 1 |
-| 1 | 1 | 1 | 1 | 1 |
-
-Columna final toda en 1 → **tautología** → argumento **válido**. Clasificación pedida: tautología.
+**(c)** Negación de 15(a): $\exists x\,(disponible(x)\land\neg tienePoderes(x))$.
+ Evaluación con la tabla: se busca un objeto con $disponible=V$ y $tienePoderes=F$. Hay **tres** testigos válidos: $ironman$, $capitan$ y $viuda$ (todos con disponible=V, tienePoderes=F). Con al menos uno ya alcanza para la negación → **verdadera**.
+ Consecuencia lógica: como la negación de 15(a) es verdadera, 15(a) misma es **falsa** — el estudiante puede mencionar esto como verificación cruzada, aunque no se pide explícitamente.
 
 ---
 
-## Reto Final
+## Checklist de verificación aplicado a este bloque
 
-**Ítem 18.** $\ c\rightarrow g,\ \neg g,\ c\lor o,\ o\rightarrow s,\ s\rightarrow l\ \vdash\ l$
-
-Proposiciones: $c$ = el CDN respondió; $g$ = la página cargó; $o$ = se sirvió desde el origen; $s$ = se registró petición al servidor central; $l$ = aumentó la latencia.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $c\rightarrow g$ | Premisa |
-| 2 | $\neg g$ | Premisa |
-| 3 | $c\lor o$ | Premisa |
-| 4 | $o\rightarrow s$ | Premisa |
-| 5 | $s\rightarrow l$ | Premisa |
-| 6 | $\neg c$ | Modus Tollens en 1 y 2 |
-| 7 | $o$ | Eliminación en 3 y 6 |
-| 8 | $s$ | Modus Ponens en 4 y 7 |
-| 9 | $l$ | Modus Ponens en 5 y 8 |
-
----
-
-**Ítem 19.** $\ d,\ d\rightarrow v,\ c\lor h,\ h\rightarrow\neg v\ \vdash\ c$
-
-Proposiciones: $d$ = el despliegue se completó; $v$ = la versión nueva quedó activa; $c$ = se limpió la caché; $h$ = falló el healthcheck.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $d$ | Premisa |
-| 2 | $d\rightarrow v$ | Premisa |
-| 3 | $c\lor h$ | Premisa |
-| 4 | $h\rightarrow\neg v$ | Premisa |
-| 5 | $v$ | Modus Ponens en 2 y 1 |
-| 6 | $\neg h$ | Modus Tollens en 4 y 5 (con $v\equiv\neg(\neg v)$) |
-| 7 | $c$ | Eliminación en 3 y 6 |
-
-*Nota sobre el paso 6:* Modus Tollens sobre $h\rightarrow\neg v$ requiere la negación del consecuente $\neg v$, es decir $\neg(\neg v)=v$, que se tiene del paso 5. Se concluye $\neg h$.
-
----
-
-*Fin del bloque de verificación. Todos los ítems: validez global confirmada y cada conclusión intermedia verificada verdadera en todos los renglones críticos.*
+- [x] Cobertura: los 9 bloques temáticos de `clase7.md` (I–V.2) tienen al menos un ítem trazable.
+- [x] Ningún ítem repite los "Ejercicios resueltos" ni los "Ejercicios propuestos" de `clase7.md`.
+- [x] Terminología idéntica a `clase7.md` (formas A/E/I/O, "conjunto de verdad", "función proposicional").
+- [x] Cero escapes `\_` y cero guiones bajos crudos en modo matemático (verificado con búsqueda de texto).
+- [x] Registro formal (usted) en todo el documento del estudiante.
+- [x] Reto Final: caso aplicado (Avengers, por decisión explícita del profesor) — narrativa ausente en Calentamiento a Serie 2.
+- [x] Serie 3 (entrenamiento cruzado) omitida por decisión explícita — estructura Calentamiento → Serie 1 → Serie 2 → Reto Final.

@@ -1,9 +1,9 @@
-# Autoevaluación — Clase 8: Unicidad, Dependencia del Dominio y Negación Cuantificacional
+# Autoevaluación — Clase 9: Cuantificadores Anidados, Alcance y Equivalencias
 
 *Matemáticas Discretas 1 · Módulo 2: Lógica Cuantificacional (Lógica de Predicados)*
 *Universidad de Antioquia · Ingeniería de Sistemas*
 
-**[Volver a Clase 8](clase8.md)**
+**[Volver a Clase 9](clase9.md)**
 
 ---
 
@@ -12,14 +12,14 @@
 Cada ítem sigue el mismo patrón: primero resuelva el procedimiento completo a mano y escriba su resultado, luego declare qué tan seguro está, y solo después revele la respuesta final (sin desarrollo, como el apéndice de un libro de texto). No se salte el paso de intento — es la parte que realmente entrena.
 
 > [!NOTE]
-> Este bloque **no repite** ningún ejercicio ya resuelto o propuesto en `clase8.md` (Ejercicios 1-15, el Problema guiado, el Expediente Gallinero, ni P1-P10). Todos los ítems son práctica nueva sobre los mismos conceptos.
+> Este bloque **no repite** ningún ejercicio ya resuelto o propuesto en `clase9.md` (Ejercicios 1-13, las Preguntas 1-3 del Expediente Gallinero, ni P1-P10). Todos los ítems son práctica nueva sobre los mismos conceptos, con dominios y predicados distintos a los ya usados.
 
 ---
 
 ## Calentamiento
 
 **Ítem 1**
-Dada la afirmación "Hay exactamente un servidor caído en la red", ¿cuál cuantificador es el adecuado para formalizarla: $\exists$, $\forall$, o $\exists!$? Justifique en una frase.
+En la fórmula $\exists x\ \bigl(P(x) \land R(x,y)\bigr)$, clasifique cada ocurrencia de $x$ y de $y$ como libre o ligada.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -27,10 +27,10 @@ Dada la afirmación "Hay exactamente un servidor caído en la red", ¿cuál cuan
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\exists!$ — la afirmación exige existencia **y** unicidad, no solo "al menos uno".</details>
+<details><summary>Ver respuesta final</summary>Las dos ocurrencias de $x$ (en $P(x)$ y en $R(x,y)$) son ligadas — ambas están dentro del alcance de $\exists x$. La ocurrencia de $y$ en $R(x,y)$ es libre — ningún cuantificador la introduce.</details>
 
 **Ítem 2**
-Sin resolver todavía ningún ejemplo concreto, enuncie los dos pasos mecánicos que debe aplicar para negar $\forall x\ Q(x)$.
+Sin resolver ningún ejemplo numérico: enuncie la condición exacta que deben cumplir dos fórmulas cuantificadas $S$ y $T$ para poder afirmar $S\equiv T$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -38,10 +38,10 @@ Sin resolver todavía ningún ejemplo concreto, enuncie los dos pasos mecánicos
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(1) Cambiar el cuantificador ($\forall\to\exists$); (2) negar la proposición interna ($Q\to\neg Q$), simplificando dobles negaciones si aparecen.</details>
+<details><summary>Ver respuesta final</summary>Deben tener el mismo valor de verdad para cualquier predicado que se sustituya en ellas y para cualquier dominio del discurso que se elija — no basta con que coincidan en un solo ejemplo.</details>
 
 **Ítem 3**
-Según la tabla de combinaciones posibles de la Parte II, ¿es posible que $\forall x\ P(x)$ sea verdadera y $\exists x\ P(x)$ sea falsa, en un dominio no vacío? Responda solo V (posible) o F (nunca posible).
+Aplique la regla de negación de cuantificadores (repaso de Clase 8) a $\neg\ \exists x\ tieneVirus(x)$, sin evaluar ningún dominio concreto.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -49,25 +49,20 @@ Según la tabla de combinaciones posibles de la Parte II, ¿es posible que $\for
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>F — nunca es posible en un dominio no vacío, porque $\forall x\ P(x)\Rightarrow\exists x\ P(x)$.</details>
-
-**Ítem 4**
-En un dominio finito, ¿el cuantificador $\forall$ se comporta como una conjunción gigante o como una disyunción gigante? ¿Y el $\exists$?
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>$\forall$ se comporta como una conjunción ($\land$) gigante; $\exists$ se comporta como una disyunción ($\lor$) gigante.</details>
+<details><summary>Ver respuesta final</summary>$\forall x\ \neg tieneVirus(x)$.</details>
 
 ---
 
 ## Serie 1 — Repeticiones básicas
 
-**Ítem 5**
-Sea el dominio $D=\{10,11,12,\dots,20\}$ y $R(x)$: "x es múltiplo de 9". ¿Es verdadera $\exists!\ x\ R(x)$? Justifique verificando existencia y unicidad.
+**Ítem 4**
+Considere estas dos fórmulas sobre el mismo dominio de estudiantes, con $inscrito(x)$ y $activo(x)$:
+
+(a) $\forall x\ inscrito(x)\rightarrow activo(x)$ (sin paréntesis)
+
+(b) $\forall x\ \bigl(inscrito(x) \rightarrow activo(x)\bigr)$ (con paréntesis)
+
+Indique el alcance de $\forall x$ en cada una, y diga cuál de las dos deja una ocurrencia libre de $x$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -75,10 +70,21 @@ Sea el dominio $D=\{10,11,12,\dots,20\}$ y $R(x)$: "x es múltiplo de 9". ¿Es v
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Verdadera. Testigo único: $x=18$ (el único múltiplo de 9 en el rango).</details>
+<details><summary>Ver respuesta final</summary>(a) El alcance de $\forall x$ es solo $inscrito(x)$ — la $x$ dentro de $activo(x)$ queda libre; la fórmula no es una proposición cerrada. (b) El alcance es todo el paréntesis; ambas ocurrencias de $x$ son ligadas.</details>
+
+**Ítem 5**
+Sea $U=\{D1,D2,D3,D4\}$ (cuatro dispositivos IoT) y $sincroniza(x,y)$: "el dispositivo x sincroniza sus datos con el dispositivo y". Según los registros: $D1$ sincroniza con $D2$; $D2$ sincroniza con $D3$; $D3$ sincroniza con $D3$ (consigo mismo); $D4$ sincroniza con $D3$. Evalúe $\forall x\ \exists y\ sincroniza(x,y)$ y $\exists y\ \forall x\ sincroniza(x,y)$.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ sincroniza(x,y)$ es **verdadera** (los cuatro tienen testigo: $D1{\to}D2$, $D2{\to}D3$, $D3{\to}D3$, $D4{\to}D3$). $\exists y\ \forall x\ sincroniza(x,y)$ es **falsa**: pruebe $y=D3$ — funciona para $D2,D3,D4$ pero $D1$ no sincroniza con $D3$ (solo con $D2$); ningún otro $y$ hace mejor. Ningún dispositivo es testigo común a los cuatro.</details>
 
 **Ítem 6**
-Proponga un contraejemplo que demuestre que $\forall x\in\mathbb{R},\ 2x\geq x+1$ es falsa.
+Al traducir "cada empleado tiene un supervisor" (con $supervisa(y,x)$: "y supervisa a x"), alguien escribió $\exists y\ \forall x\ supervisa(y,x)$. Identifique cuál de los dos errores frecuentes de la Parte II.2 se cometió, y corrija la traducción.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -86,10 +92,10 @@ Proponga un contraejemplo que demuestre que $\forall x\in\mathbb{R},\ 2x\geq x+1
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$x_0=0$ (o cualquier $x<1$): $2(0)=0$ y $0+1=1$; $0\geq 1$ es falso.</details>
+<details><summary>Ver respuesta final</summary>Error frecuente 2 — invertir el orden sin darse cuenta: la traducción dada dice "hay un supervisor común a todos los empleados", una afirmación mucho más fuerte. Corrección: $\forall x\ \exists y\ supervisa(y,x)$ — cada empleado con el suyo, no necesariamente el mismo.</details>
 
 **Ítem 7**
-Sea el dominio $U=\{S1,S2,S3,S4\}$ (cuatro servidores) y el predicado $disponible(x)$: "x está disponible". Escriba $\forall x\ disponible(x)$ y $\exists x\ disponible(x)$ como conjunción y disyunción, respectivamente, sin usar cuantificadores.
+Sea el dominio $\{-1,2,3\}$, $P(x)$: "x es positivo", $Q(x)$: "x es entero". Verifique, evaluando ambos lados por separado, si $\forall x\ (P(x)\land Q(x)) \equiv \forall x\ P(x) \land \forall x\ Q(x)$ se cumple en este caso.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -97,10 +103,10 @@ Sea el dominio $U=\{S1,S2,S3,S4\}$ (cuatro servidores) y el predicado $disponibl
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ disponible(x) \equiv disponible(S1)\land disponible(S2)\land disponible(S3)\land disponible(S4)$. $\exists x\ disponible(x) \equiv disponible(S1)\lor disponible(S2)\lor disponible(S3)\lor disponible(S4)$.</details>
+<details><summary>Ver respuesta final</summary>Izquierda: en $x=-1$, $P(-1)\land Q(-1) = F\land V = F$, así que $\forall x(P(x)\land Q(x))$ es **falsa**. Derecha: $\forall x\ P(x)$ es falsa (falla en $-1$), $\forall x\ Q(x)$ es verdadera; $F\land V=$ **falsa**. Ambos lados coinciden en falso — la equivalencia se cumple también en este caso.</details>
 
 **Ítem 8**
-Niegue $\forall x\ \bigl(H(x) \rightarrow \neg K(x)\bigr)$, simplificando hasta que el $\neg$ quede pegado directamente al predicado.
+Proponga usted mismo(a) un contraejemplo (dominio y predicados propios, distintos a los usados en `clase9.md`) que muestre que $\forall x\ (P(x)\lor Q(x)) \not\equiv \forall x\ P(x) \lor \forall x\ Q(x)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -108,25 +114,14 @@ Niegue $\forall x\ \bigl(H(x) \rightarrow \neg K(x)\bigr)$, simplificando hasta 
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\exists x\ \bigl(H(x) \land K(x)\bigr)$.</details>
-
-**Ítem 9**
-En el laboratorio de robótica ampliado (el mismo dominio de `clase8.md`), enuncie la negación de "Todo dispositivo del laboratorio tiene batería", usando el predicado $bateria(x)$, y tradúzcala de vuelta a lenguaje natural.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>$\neg\bigl(\forall x\ bateria(x)\bigr) \equiv \exists x\ \neg bateria(x)$ — "existe al menos un dispositivo del laboratorio que no tiene batería".</details>
+<details><summary>Ver respuesta final</summary>Respuesta de referencia (otras propuestas válidas también son correctas): dominio $\{6,7\}$, $P(x)$: "x es divisible entre 2", $Q(x)$: "x es divisible entre 7". $P(6)\lor Q(6)=V$, $P(7)\lor Q(7)=V$, así que $\forall x(P(x)\lor Q(x))$ es verdadera. Pero $\forall x\ P(x)$ es falsa (falla en 7) y $\forall x\ Q(x)$ es falsa (falla en 6), así que $\forall xP(x)\lor\forall xQ(x)$ es falsa. Verdadera $\neq$ falsa: no son equivalentes.</details>
 
 ---
 
 ## Serie 2 — Aplicación combinada
 
-**Ítem 10**
-Sea el dominio $U=\{E1,E2,E3,E4,E5\}$ (cinco estudiantes) y el predicado $perfecto(x)$: "x obtuvo la nota máxima en el examen". La tabla de resultados muestra: $E1$: no, $E2$: sí, $E3$: no, $E4$: no, $E5$: no. Determine si $\exists!\ x\ perfecto(x)$ es verdadera, verificando explícitamente existencia y unicidad.
+**Ítem 9**
+Traduzca, usando el método de 5 pasos de la Parte III: "Todo cliente de la tienda ha comprado al menos un producto en oferta." Use $cliente(x)$, $producto(y)$, $oferta(y)$ y $comprado(x,y)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -134,10 +129,21 @@ Sea el dominio $U=\{E1,E2,E3,E4,E5\}$ (cinco estudiantes) y el predicado $perfec
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Verdadera. Existencia: $E2$ cumple. Unicidad: ningún otro estudiante cumple. Testigo: $E2$.</details>
+<details><summary>Ver respuesta final</summary>$\forall x\ \Bigl(cliente(x) \rightarrow \exists y\ \bigl(producto(y)\land oferta(y)\land comprado(x,y)\bigr)\Bigr)$.</details>
+
+**Ítem 10**
+Sea $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, y $reporta(x,y)$: "el sensor x reporta datos al servidor y". Según la tabla de configuración: $S1\to V1$, $S2\to V1$, $S3\to V2$. Evalúe $\forall x\ \exists y\ reporta(x,y)$ y $\exists y\ \forall x\ reporta(x,y)$.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ reporta(x,y)$ es **verdadera** (cada sensor reporta a alguno). $\exists y\ \forall x\ reporta(x,y)$ es **falsa** ($V1$ solo cubre $S1,S2$; $V2$ solo cubre $S3$; ningún servidor recibe de los tres).</details>
 
 **Ítem 11**
-Niegue el enunciado "Algún estudiante que tomó Lógica y Representación I reprobó el examen de admisión a prácticas", mostrando la traducción, la aplicación de las leyes de De Morgan cuantificacionales, y el reconocimiento final como una implicación universal.
+Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$. (a) Usando la regla de precedencia de la Parte I.1, explique exactamente hasta dónde llega el alcance de $\forall x$ tal como está escrita la fórmula, y qué ocurrencias de $x$ quedan libres como consecuencia. (b) Reescríbala con paréntesis para que exprese "para todo estudiante, si entregó el carnet o pagó la multa, entonces puede retirar un libro".
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -145,10 +151,10 @@ Niegue el enunciado "Algún estudiante que tomó Lógica y Representación I rep
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Traducción: $\exists x(R(x)\land F(x))$. Negación: $\forall x(R(x)\rightarrow\neg F(x))$ — "todo estudiante que tomó Lógica y Representación I no reprobó el examen de admisión a prácticas".</details>
+<details><summary>Ver respuesta final</summary>(a) Por precedencia (Parte I.1), sin paréntesis $\forall x$ gobierna únicamente el átomo inmediato, $entregoCarnet(x)$ — no toda la línea. La fórmula se lee como $\bigl((\forall x\ entregoCarnet(x)) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)$, y las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedan fuera de ese alcance — libres (Parte I.3). (b) $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.</details>
 
 **Ítem 12**
-Sea $P(x)$: "$x^2 \leq 9$". Determine el valor de verdad de $\forall x\ P(x)$ en el dominio $\{-3,-2,-1,0,1,2,3\}$ y en el dominio $\mathbb{Z}$. Explique el cambio.
+Dominio: los estudiantes becados de este semestre. Sea $responsable(x)$ el predicado de siempre, y $vigente$ una proposición **sin variable** que dice "el programa de becas está vigente este semestre". Traduzca "todos los becados son responsables, y además el programa está vigente" como $\forall x\ (responsable(x)\land vigente)$, y aplique la cláusula **extendida** de la Parte IV.3 (la que aplica cuando $Q$ no contiene la variable cuantificada) para simplificarla.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -156,10 +162,10 @@ Sea $P(x)$: "$x^2 \leq 9$". Determine el valor de verdad de $\forall x\ P(x)$ en
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>En $\{-3,\dots,3\}$: verdadera (los siete elementos cumplen). En $\mathbb{Z}$: falsa (contraejemplo $x=4$: $16\leq 9$ es falso). El predicado no cambió — el dominio infinito reintroduce elementos que el dominio finito había excluido.</details>
+<details><summary>Ver respuesta final</summary>Como $vigente$ no contiene la variable $x$, aplica la cláusula extendida de IV.3: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x) \land vigente$ — el cuantificador "no tiene nada que hacer" sobre $vigente$, así que sale del alcance sin cambiar el significado.</details>
 
 **Ítem 13**
-Sea el dominio $\{1,2,\dots,15\}$ y $Q(x)$: "x es múltiplo de 4". Determine si $\exists!\ x\ Q(x)$ es verdadera o falsa. Si es falsa, exhiba explícitamente dos testigos distintos que rompan la unicidad.
+Dominio: los proyectos de un semillero de investigación, $colaboraCon(x,y)$: "x colabora con y". Traduzca, incluyendo una condición de distinción (como en la Parte II.3): "existe un proyecto cuyos colaboradores no colaboran entre sí". Luego explique bajo qué condición esta fórmula resultaría verdadera por vacuidad.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -167,10 +173,16 @@ Sea el dominio $\{1,2,\dots,15\}$ y $Q(x)$: "x es múltiplo de 4". Determine si 
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Falsa. Hay tres testigos (4, 8, 12); basta exhibir dos, por ejemplo $4$ y $8$, para romper la unicidad.</details>
+<details><summary>Ver respuesta final</summary>$\exists x\ \forall y\ \forall z\ \bigl(colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z \rightarrow \neg colaboraCon(y,z)\bigr)$. Si el proyecto $x$ no tiene dos colaboradores distintos que cumplan a la vez $colaboraCon(x,y)$ y $colaboraCon(x,z)$, el antecedente nunca se satisface y la implicación es verdadera por vacuidad.</details>
+
+---
+
+## Serie 3 — Entrenamiento cruzado
+
+*Mezcla con Clase 8 (unicidad anidada) y Clase 6 (De Morgan proposicional combinado con la negación cuantificacional).*
 
 **Ítem 14**
-Sea el dominio $U=\{a,b\}$ y $R(x)$: "x cumple la política de seguridad". Escriba $\forall x\ R(x)$ como conjunción, niegue esa conjunción aplicando De Morgan proposicional (Clase 6), y verifique que el resultado coincide con $\exists x\ \neg R(x)$.
+Dominio de personas y de contactos. $primerContacto(x,y)$: "y es el contacto que primero le responde a x". Formalice "cada persona tiene un único contacto que le responde primero" usando $\exists!$ anidado dentro de $\forall x$ (Solución 1, Clase 8 + hoy), y luego escriba la versión expandida (Solución 2) sin usar el símbolo $\exists!$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -178,17 +190,10 @@ Sea el dominio $U=\{a,b\}$ y $R(x)$: "x cumple la política de seguridad". Escri
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ R(x)\equiv R(a)\land R(b)$. Negación: $\neg R(a)\lor\neg R(b)$. Esto coincide exactamente con $\exists x\ \neg R(x)$ aplicado al predicado $\neg R$.</details>
-
----
-
-## Serie 3 — Integración
-
-> [!NOTE]
-> Esta serie **no mezcla temas de sesiones anteriores** (no hay entrenamiento cruzado): por decisión explícita, se convirtió en una serie de **Integración** que combina 3 o más conceptos de la propia `clase8.md` en un mismo ítem.
+<details><summary>Ver respuesta final</summary>Solución 1: $\forall x\ \exists!\ y\ primerContacto(x,y)$. Solución 2: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.</details>
 
 **Ítem 15**
-Sea el dominio $U=\{L1,L2,L3\}$ (tres enlaces de red) y el predicado $activo(x)$: "el enlace x está activo". (a) Traduzca "todos los enlaces están activos" a cuantificadores. (b) Exprésela como conjunción sin cuantificadores. (c) Niegue la fórmula original aplicando De Morgan cuantificacional, y verifique que su resultado equivale a negar la conjunción del punto (b) con De Morgan proposicional.
+Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$, y $atiende(y,x)$: "el mesero y atendió la mesa x en algún momento del turno". La bitácora del turno (puede haber más de un registro por mesa, no es una asignación fija) muestra: $MeseroA$ atendió $Mesa1$; $MeseroA$ atendió $Mesa2$; $MeseroB$ atendió $Mesa2$; $MeseroA$ atendió $Mesa3$. Evalúe $\forall x\ \exists!\ y\ atiende(y,x)$, verificando existencia y unicidad mesa por mesa.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -196,10 +201,10 @@ Sea el dominio $U=\{L1,L2,L3\}$ (tres enlaces de red) y el predicado $activo(x)$
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(a) $\forall x\ activo(x)$. (b) $activo(L1)\land activo(L2)\land activo(L3)$. (c) $\exists x\ \neg activo(x)$, que coincide con $\neg activo(L1)\lor\neg activo(L2)\lor\neg activo(L3)$ obtenido al negar (b).</details>
+<details><summary>Ver respuesta final</summary>**Falsa.** $Mesa1$: existencia ($MeseroA$) y unicidad, se cumple $\exists!$. $Mesa2$: existencia sí, pero **unicidad falla** — tanto $MeseroA$ como $MeseroB$ la atendieron, dos testigos distintos. $Mesa3$: existencia y unicidad, se cumple $\exists!$. Como $Mesa2$ rompe la unicidad, $\exists!\ y\ atiende(y,x)$ ya no se cumple para todo $x$, así que $\forall x\ \exists!\ y\ atiende(y,x)$ es falsa — testigo del fallo: $Mesa2$, con $MeseroA$ y $MeseroB$ como los dos testigos que rompen la unicidad.</details>
 
 **Ítem 16**
-Sea el dominio $\{5,6,7,8,9\}$ y $P(x)$: "x es mayor que 5". Determine el valor de verdad de $\forall x\ P(x)$ y $\exists x\ P(x)$. ¿Su resultado es consistente con que nunca puede darse $\forall$ verdadera y $\exists$ falsa? Adicionalmente, determine si $\exists!\ x\ P(x)$ es verdadera o falsa.
+Niegue $\forall x\ \exists y\ \bigl(reporta(x,y)\land activo(y)\bigr)$ hasta que el $\neg$ quede pegado directamente a cada predicado atómico, aplicando la negación cuantificacional (Clase 8) dos veces y la ley de De Morgan (Clase 6) una vez.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -207,10 +212,10 @@ Sea el dominio $\{5,6,7,8,9\}$ y $P(x)$: "x es mayor que 5". Determine el valor 
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ P(x)$ es falsa (5 no es mayor que 5). $\exists x\ P(x)$ es verdadera (6,7,8,9 lo cumplen). La combinación (F,V) sí es posible, es consistente. $\exists!\ x\ P(x)$ es falsa: hay cuatro testigos, falla la unicidad.</details>
+<details><summary>Ver respuesta final</summary>$\exists x\ \forall y\ \bigl(\neg reporta(x,y)\lor\neg activo(y)\bigr)$.</details>
 
 **Ítem 17**
-Traduzca "Todo sensor de temperatura defectuoso genera una alerta falsa", identificando la forma aristotélica correspondiente. Luego niegue la fórmula obtenida, y traduzca la negación de vuelta a lenguaje natural.
+Niegue $\exists x\ \forall y\ \bigl(disponible(x,y)\lor enMantenimiento(x,y)\bigr)$ hasta que el $\neg$ quede pegado directamente a cada predicado atómico, aplicando la negación cuantificacional (Clase 8) dos veces y la ley de De Morgan (Clase 6) una vez.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -218,76 +223,18 @@ Traduzca "Todo sensor de temperatura defectuoso genera una alerta falsa", identi
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Forma A: $\forall x\ (D(x)\rightarrow F(x))$. Negación: $\exists x\ (D(x)\land\neg F(x))$ — "existe un sensor de temperatura defectuoso que no genera una alerta falsa".</details>
-
-**Ítem 18**
-Sea $P(x)$: "$x^2 \leq 4$". (a) Encuentre un contraejemplo en $\mathbb{R}$ que refute $\forall x\in\mathbb{R}\ P(x)$. (b) Proponga un dominio finito de al menos cuatro elementos donde $\forall x\ P(x)$ sea verdadera, y escríbala como conjunción sin cuantificadores.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>(a) $x_0=3$: $9\leq 4$ es falso (sirve cualquier $|x|>2$). (b) Dominio $\{-2,-1,0,1,2\}$: $P(-2)\land P(-1)\land P(0)\land P(1)\land P(2)$, los cinco términos son verdaderos.</details>
-
-**Ítem 19 — Depuración**
-Considere el enunciado "Hay un único administrador con acceso root al servidor". Se proponen tres formalizaciones; solo una es correcta. Para cada una, explique por qué es correcta o cuál es el error exacto que contiene.
-
-(A) $\exists x\ \bigl(admin(x)\land root(x)\bigr)$
-
-(B) $\exists x\Bigl(admin(x)\land root(x)\land\forall y\bigl((admin(y)\land root(y))\rightarrow y=x\bigr)\Bigr)$
-
-(C) $\forall x\ \bigl(admin(x)\rightarrow root(x)\bigr)$
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>(A) Incorrecta — solo garantiza existencia, no unicidad; es exactamente el error de la Parte I (confundir $\exists$ con $\exists!$). (B) Correcta — es la expansión de $\exists!\ x\ (admin(x)\land root(x))$ según la Parte I.2. (C) Incorrecta — es una forma A (todo administrador tiene root), una afirmación distinta: no dice nada sobre unicidad ni exige que exista alguno.</details>
-
-**Ítem 20 — Construcción de dominios**
-Proponga dos dominios distintos, cada uno con al menos 3 elementos, y un predicado $V(x)$ de su elección, tales que: en el primer dominio se cumplan simultáneamente $\forall x\ V(x)$ y $\exists x\ V(x)$ (ambas verdaderas); en el segundo dominio $\exists x\ V(x)$ sea verdadera pero $\forall x\ V(x)$ sea falsa. Justifique cada dominio con la tabla de combinaciones de la Parte II.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Respuesta de referencia (otras propuestas válidas también son correctas, si cumplen las condiciones pedidas): Dominio 1 $=\{2,4,6\}$, $V(x)$: "x es par" — los tres son pares, así que $\forall$ y $\exists$ son ambas V. Dominio 2 $=\{2,3,5\}$, mismo $V(x)$ — solo el 2 es par: $\exists$ es V (testigo 2), pero $\forall$ es F (falla en 3 y 5).</details>
-
-**Ítem 21 — Integración con Ingeniería de Software**
-Un sistema de reservas de salas exige que, para cada franja horaria, $\exists!\ x\ reservada(x)$ (dominio: las salas del edificio). Explique qué garantiza esta política. Luego explique qué consecuencia operacional concreta tendría relajarla a $\exists x\ reservada(x)$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>$\exists!$ garantiza que exactamente una sala queda reservada por franja: ni cero (siempre hay un lugar asignado) ni más de una (sin conflicto simultáneo). Relajar a $\exists x\ reservada(x)$ permitiría que dos o más salas quedaran reservadas a la vez para la misma franja sin garantizar cuál es la vigente — dos equipos podrían terminar disputándose la sala física el día del evento.</details>
+<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ \bigl(\neg disponible(x,y)\land\neg enMantenimiento(x,y)\bigr)$.</details>
 
 ---
 
-## 🐺 Reto Final — El Pastorcito Mentiroso
+## 🛵 Reto Final — La ruta del domiciliario
 
-*Este bloque aplica — no explica — los conceptos ya vistos. La narrativa es solo el envoltorio del enunciado; se resuelve exclusivamente con herramientas formales de `clase8.md`. No se exige anidar cuantificadores (tema pendiente para la próxima clase).*
+*Este bloque aplica — no explica — los conceptos ya vistos. La narrativa es solo el envoltorio del enunciado; se resuelve exclusivamente con herramientas formales de `clase9.md`. Es un hilo nuevo, distinto al Expediente Gallinero (que quedó completamente cerrado en esta clase).*
 
-El pastorcito gritó "¡Lobo!" dos veces sin que fuera cierto, y los cinco aldeanos del pueblo — $U=\{A1,A2,A3,A4,A5\}$ — corrieron ambas veces a ayudar. A la tercera, el lobo apareció de verdad. Esta vez, la tabla de quién acudió fue distinta:
+Un domiciliario reparte pedidos en un barrio. Universo de clientes $U_{cliente}=\{C1,C2,C3,C4\}$ y universo de repartidores $U_{repartidor}=\{R1,R2\}$. Predicado $asignado(y,x)$: "el repartidor y tiene asignada la entrega al cliente x".
 
-| Aldeano | ¿Acudió a la alarma real? |
-|:---:|:---:|
-| A1 | No |
-| A2 | No |
-| A3 | No |
-| A4 | Sí |
-| A5 | No |
-
-**Ítem 22**
-*(Unicidad)* Sea $acudio(x)$: "x acudió a la alarma real". Con la tabla anterior, determine si $\exists!\ x\ acudio(x)$ es verdadera, verificando existencia y unicidad.
+**Ítem 18**
+Formalice y contraste las dos afirmaciones siguientes (sin evaluar todavía ninguna tabla): "cada cliente tiene un repartidor asignado" y "hay un repartidor que cubre a todos los clientes". Explique en una frase la diferencia de significado entre ambas.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -295,21 +242,10 @@ El pastorcito gritó "¡Lobo!" dos veces sin que fuera cierto, y los cinco aldea
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Verdadera. Existencia: A4 acudió. Unicidad: ningún otro aldeano acudió. Testigo: A4.</details>
+<details><summary>Ver respuesta final</summary>"Cada cliente tiene un repartidor asignado": $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$ — el testigo puede depender del cliente. "Hay un repartidor que cubre a todos los clientes": $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$ — un mismo repartidor, común a todos. La primera exige un responsable por cliente (posiblemente distintos); la segunda exige uno solo que cubra a todos a la vez, una afirmación mucho más fuerte.</details>
 
-**Ítem 23**
-*(Dependencia del dominio)* El pueblo se divide en dos barrios: Barrio Alto $=\{A1,A4\}$ y Barrio Bajo $=\{A2,A3,A5\}$. Usando la misma tabla del Ítem 22, evalúe $\exists x\ acudio(x)$ tomando como universo solo el Barrio Alto, y luego solo el Barrio Bajo. ¿Cambia el valor de verdad de la misma fórmula según el barrio? Explique por qué, apoyándose en la Parte II.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Barrio Alto: verdadera (testigo A4). Barrio Bajo: falsa (ninguno de A2, A3, A5 acudió). El predicado y sus valores por aldeano no cambiaron — lo que cambió fue el universo sobre el que se cuantifica, exactamente la lección de la Parte II.</details>
-
-**Ítem 24**
-*(Construcción — modificación mínima)* El jefe del pueblo quiere que, en la próxima alarma, deje de cumplirse $\exists!\ x\ acudio(x)$. Retomando la tabla del Ítem 22, modifique el valor de un **solo** aldeano para lograrlo. Indique cuál aldeano cambia, a qué valor, y explique en una frase por qué ese cambio mínimo basta.
+**Ítem 19**
+La bitácora de asignaciones del día es: $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$. Evalúe las dos fórmulas del Ítem 18 con esta tabla. Luego, tome la que resulte falsa y niéguela hasta dejar el $\neg$ pegado a $asignado$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -317,10 +253,10 @@ El pastorcito gritó "¡Lobo!" dos veces sin que fuera cierto, y los cinco aldea
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Basta cambiar cualquier otro aldeano (por ejemplo, $A1$) de "No" a "Sí". Con ese cambio, tanto $A1$ como $A4$ cumplen $acudio(x)$: aparece un segundo testigo, la existencia se sigue cumpliendo, pero la unicidad se rompe — $\exists!\ x\ acudio(x)$ pasa de V a F.</details>
+<details><summary>Ver respuesta final</summary>$\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$ es **verdadera** (los cuatro clientes tienen repartidor). $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$ es **falsa** ($R1$ cubre a $C1,C2,C4$ pero no a $C3$; $R2$ solo cubre a $C3$). Negando la falsa: $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$ — "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor".</details>
 
 > [!NOTE]
-> **Moraleja.** Solo un aldeano de cinco le creyó a tiempo la última vez — una soledad que el propio $\exists!$ deja ver con precisión. Y si alguien pregunta "¿acudió alguien?", la respuesta correcta depende por completo de a qué barrio se le pregunte: la credibilidad perdida no se reparte de manera uniforme.
+> **Moraleja.** La diferencia entre "cada cliente resuelto" y "un solo repartidor que resuelve todo" no es un tecnicismo — es exactamente la diferencia entre un servicio que funciona (aunque repartido entre varios) y uno que dependería de una sola persona disponible siempre.
 
 ---
 
@@ -330,11 +266,11 @@ No cuente solo aciertos ni solo confianza: para cada ítem, compare su respuesta
 
 | Bloque | Ítems | Correcto + Confianza Alta | Correcto + Confianza Media/Baja | Incorrecto + Confianza Media/Baja | Incorrecto + Confianza Alta (¡atención!) | Repasar |
 |:---|:---:|:---:|:---:|:---:|:---:|:---|
-| Calentamiento | 4 | ___ | ___ | ___ | ___ | Partes I-IV (repaso general) |
-| Serie 1 | 5 | ___ | ___ | ___ | ___ | Partes I.2, II.2, III.1, IV.1 |
-| Serie 2 | 5 | ___ | ___ | ___ | ___ | Partes I, II.1, III.1, IV.1 |
-| Serie 3 — Integración | 7 | ___ | ___ | ___ | ___ | Partes I, II, III, IV combinadas |
-| Reto Final | 3 | ___ | ___ | ___ | ___ | Parte I (unicidad), Parte II (dominio) |
+| Calentamiento | 3 | ___ | ___ | ___ | ___ | Partes I.3, IV.1, IV.2 |
+| Serie 1 | 5 | ___ | ___ | ___ | ___ | Partes I.1, I.2, II.1, II.2, IV.3, IV.4 |
+| Serie 2 | 5 | ___ | ___ | ___ | ___ | Partes III, II.1, V, IV.3, II.3 |
+| Serie 3 — Cruzada | 4 | ___ | ___ | ___ | ___ | Clase 8 (unicidad anidada), Clase 6 (De Morgan) + IV.2 |
+| Reto Final | 2 | ___ | ___ | ___ | ___ | Parte II (orden de cuantificadores) |
 
 ---
 
@@ -342,12 +278,15 @@ No cuente solo aciertos ni solo confianza: para cada ítem, compare su respuesta
 
 | Concepto | Símbolo / fórmula | Lectura |
 |:---|:---|:---|
-| Unicidad | $\exists!\ x\ P(x) \equiv \exists x\bigl(P(x)\land\forall y(P(y)\rightarrow y=x)\bigr)$ | "Existe exactamente un x que cumple P" |
-| Método del contraejemplo | Encontrar $x_0$ tal que $P(x_0)$ es falso | Refuta $\forall x\ P(x)$ con un solo caso |
-| $\forall$ como $\land$ (dominio finito) | $\forall x\ P(x) \equiv P(x_1)\land\cdots\land P(x_n)$ | Todos a la vez |
-| $\exists$ como $\lor$ (dominio finito) | $\exists x\ P(x) \equiv P(x_1)\lor\cdots\lor P(x_n)$ | Al menos uno |
-| Negación de cuantificadores | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ ; $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ | Cambia el cuantificador, niega el interior |
-| Combinación imposible | $\forall x\ P(x)=V$ y $\exists x\ P(x)=F$ **nunca ocurre** (dominio no vacío) | $\forall x\ P(x)\Rightarrow\exists x\ P(x)$ |
+| Alcance | La subfórmula que sigue al cuantificador, delimitada por paréntesis (o el átomo inmediato si no hay) | "Hasta dónde llega" el cuantificador |
+| Libre vs. ligada | Ligada: dentro del alcance de su cuantificador. Libre: fuera de cualquier alcance | Solo se sustituye lo libre |
+| Orden importa (tipos mixtos) | $\forall x\exists y\ P(x,y) \not\equiv \exists y\forall x\ P(x,y)$ | "Cada uno el suyo" vs. "al menos uno, común a todos" |
+| Orden no importa (mismo tipo) | $\forall x\forall y\ P \equiv \forall y\forall x\ P$ ; $\exists x\exists y\ P\equiv\exists y\exists x\ P$ | Se puede reordenar libremente |
+| Distribución válida | $\forall x(P\land Q)\equiv\forall xP\land\forall xQ$ ; $\exists x(P\lor Q)\equiv\exists xP\lor\exists xQ$ | $\forall$ con $\land$, $\exists$ con $\lor$ |
+| Distribución inválida | $\forall x(P\lor Q)\not\equiv\forall xP\lor\forall xQ$ ; $\exists x(P\land Q)\not\equiv\exists xP\land\exists xQ$ | Requiere contraejemplo, no demostración |
+| Tres ambigüedades | Sintáctica / de alcance / semántica | Agrupación / orden de cuantificadores / interpretación del mundo |
+| Unicidad anidada (Clase 8 + hoy) | $\forall x\ \exists!\ y\ P(x,y)$ | "Cada x tiene exactamente un y" |
+| Negación anidada + De Morgan (Clase 6 + Clase 8) | $\neg\forall x\exists y(P\land Q)\equiv\exists x\forall y(\neg P\lor\neg Q)$ | Negar cada cuantificador, luego De Morgan proposicional sobre lo interno |
 
 > [!NOTE]
-> Este documento sigue el patrón de respuesta-dentro-de-cada-ítem (intento + confianza + respuesta final) en vez de un solucionario consolidado al final, siguiendo la variación ya aprobada como plantilla en `clase7_autoevaluacion.md`.
+> Este documento sigue el patrón de respuesta-dentro-de-cada-ítem (intento + confianza + respuesta final), la misma variación ya aprobada como plantilla desde `clase7_autoevaluacion.md`.

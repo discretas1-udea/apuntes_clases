@@ -1,659 +1,691 @@
 ![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-# 🐛 El Bug de la Polilla — Cazando Errores con Lógica
-### Validez de Argumentos: Tablas de Verdad, Silogismo y Reglas de Inferencia (Enfoque Axiomático)
+# 🐔 Expediente Gallinero — El Pollo Robot que rompió la lógica proposicional
+### De proposiciones a predicados: Universo, Variables, Constantes, Predicados, Funciones Proposicionales, Cuantificadores, Conjunto de Verdad y Traducción Lenguaje Natural ↔ Formal
 
-*Notas de clase — Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional*
+*Notas de clase — Matemáticas Discretas 1 · Módulo 2: Lógica Cuantificacional (Lógica de Predicados)*
 *Universidad de Antioquia · Ingeniería de Sistemas*
 
 ---
 
 ## Cerrando el caso anterior
 
-En la sesión pasada dejamos a Sherlock Holmes con una ecuación en la mano —$\neg(L\land F)\rightarrow\neg R$— pero sin forma de decidir entre dos testimonios que se contradecían. *"Eso no es álgebra de proposiciones"*, concluyó, *"es validez de argumentos."*
+En la sesión pasada terminamos cazando un *bug* con reglas de inferencia, y dejamos una promesa escrita al final: hasta ese punto, todos nuestros argumentos hablaban de **proposiciones completas** ( $p$: *"falló la caché"*, $q$: *"el sitio está en línea"*). Cada proposición era una caja cerrada: verdadera o falsa, y nada más.
 
-Las herramientas de esta sesión le habrían dado el cierre en pocas líneas. Con la declaración del Sr. Finch confirmando que sí tuvo acceso a la llave **y** se ausentó del salón ($L\land F$), y aplicando un solo paso de razonamiento —el que en esta clase llamaremos *Modus Tollens*— Holmes descarta a Whitmore y señala a Finch sin margen de duda. El caso queda cerrado.
+Pero muchísimos razonamientos reales no son así. Hablan de *"todos"* y de *"algunos"*:
 
-Pero lo que hizo Holmes por *intuición entrenada*, nosotros vamos a hacerlo por *método*. Y para presentar ese método, conviene mirar a alguien que convirtió la cacería de una pista escurridiza en una disciplina de ingeniería.
+- *"**Todo** usuario autenticado tiene permisos."*
+- *"**Existe** al menos un registro corrupto en la base de datos."*
+- *"**Ningún** proceso zombi responde a la señal de apagado."*
+
+Para frases como estas, la lógica proposicional se queda corta — y prometimos que ahí seguiríamos. Esta es esa sesión. Vamos a abrir las cajas cerradas: a mirar *de qué* o *de quién* habla cada proposición, y a poder decir cosas sobre **poblaciones enteras** de objetos, no solo sobre hechos sueltos.
+
+Y para presentar esa idea, esta vez no arrancamos con un detective ni con una polilla, sino con un pollo. Un pollo muy particular.
+
+---
+
+## Contexto: el Pollo Robot
+
+Imagine una granja de investigación donde un ingeniero construye y mantiene **pollos robot**: aves mecánicas, cada una con su número de serie, su sensor, su batería y su firmware. Algunos funcionan a la perfección; otros tienen un tornillo suelto, una batería agotada o un virus en el firmware. El ingeniero necesita razonar sobre su gallinero: *"¿**todos** los pollos robot están operativos?"*, *"¿**existe** alguno con el firmware infectado?"*, *"¿**cuáles** necesitan mantenimiento?"*.
+
+Fíjese que ninguna de esas preguntas se puede responder tratando *"el gallinero funciona"* como una sola caja cerrada. Necesitamos hablar de **cada pollo**, de sus **propiedades**, y de **cuántos** de ellos cumplen cada condición. Ese es, exactamente, el salto que da esta clase — y el pollo robot será nuestro hilo conductor para aplicarlo.
+
+> [!NOTE]
+> **De dónde viene la idea.** El "pollo robot" está inspirado en la serie de animación *Robot Chicken* (Adult Swim), y en particular en el sketch **"Cut Down in His Optimus Prime"** del episodio *"Junk in the Trunk"* (temporada 1, episodio 1): [ver en YouTube](https://www.youtube.com/watch?v=j9kzZfb-UfI). Es contenido de humor para público adulto; aquí solo tomamos prestada la imagen del *pollo robot* como vehículo para aprender lógica de predicados — nada de la trama de la serie es necesario para estudiar este documento.
+
+---
 
 ## Antes de comenzar — lo que ya debería saber
 
-Este documento aplica directamente las herramientas de las sesiones anteriores. Antes de continuar, verifique que puede hacer lo siguiente:
+Esta sesión **abre un módulo nuevo**. No es la continuación técnica de un tema anterior, sino un salto conceptual: pasamos de la lógica proposicional a la lógica de predicados. Por eso los prerrequisitos son pocos y generales. Antes de continuar, verifique que puede:
 
-- Construir e interpretar la **tabla de verdad** de una expresión con cualquier número de variables.
-- Clasificar una proposición como **tautología**, **contradicción** o **contingencia**.
-- Aplicar la **Implicación** ($p\rightarrow q\equiv\neg p\lor q$), las **Leyes de De Morgan** y el **Contrarrecíproco** ($p\rightarrow q\equiv\neg q\rightarrow\neg p$) — se usan de forma directa en las demostraciones de esta sesión.
+- Reconocer qué es una **proposición**: un enunciado que es verdadero o falso, pero no ambos.
+- Usar los **conectivos lógicos** $\neg$ (no), $\land$ (y), $\lor$ (o), $\rightarrow$ (si… entonces), $\leftrightarrow$ (si y solo si).
+- Interpretar el valor de verdad de una expresión compuesta con esos conectivos.
 
-Si alguno de estos puntos no le resulta claro, repáselo en las sesiones anteriores ([Clase 5](clase5.md) y previas) antes de continuar. Este documento no depende de conexión a internet para poder estudiarlo — todo lo necesario está aquí.
-
----
-
-## Contexto: Grace Hopper y la primera "polilla"
-
-<img src="images/grace-hopper.jpg" alt="Grace Hopper, contralmirante de la Marina de EE. UU. y pionera de la computación" width="260" align="right" style="margin-left: 1rem;">
-
-En 1947, un equipo de la Universidad de Harvard trabajaba en el **Mark II**, una computadora electromecánica gigantesca hecha de relés y cables. En algún momento la máquina empezó a arrojar errores consistentes. Tras revisar el hardware pieza por pieza, el equipo encontró la causa entre los contactos del **Relé #70, Panel F**: una polilla atrapada. La retiraron, la pegaron con cinta en la bitácora del laboratorio y anotaron al lado:
-
-> *"First actual case of bug being found."*
-> (Primer caso real de un *bug* encontrado.)
-
-<img src="images/first-bug.jpg" alt="Página de la bitácora del Mark II de 1947 con la polilla pegada y la anotación 'First actual case of bug being found'" width="420">
-
-Entre quienes trabajaban en ese equipo estaba **Grace Hopper**, matemática y luego contralmirante de la Marina de los Estados Unidos, una de las mentes más influyentes de la computación temprana: fue pionera de los **compiladores** (los programas que traducen código a lenguaje de máquina) y del lenguaje **COBOL**, y ayudó a popularizar los términos *bug* y *debugging* que usted usará el resto de su carrera.
-
-> [!NOTE]
-> **Nota histórica honesta.** La anécdota de la polilla es real y esa bitácora se conserva hoy en el Smithsonian. Sin embargo, el término *bug* ("bicho", en el sentido de fallo técnico) ya se usaba antes en ingeniería —se le atribuye incluso a Thomas Edison—, y hay cierto debate sobre quién exactamente halló la polilla ese día. Lo tomamos como lo que es: una buena historia, no un dato absoluto. Lo que sí es indiscutible es el método.
-
-Lo importante para nosotros no es la polilla. Es *cómo* se encontró: no adivinando, sino **aislando la causa de forma sistemática**, descartando lo que no podía ser hasta que solo quedó una posibilidad. Ese es exactamente el razonamiento que esta clase convierte en matemática.
+Eso es todo lo que se necesita de las clases anteriores. Si algo de esto no le resulta claro, repáselo en las primeras sesiones del curso ([Clase 6](clase6.md) y previas) antes de continuar. Este documento no depende de conexión a internet para estudiarlo: todo lo necesario está aquí.
 
 ---
 
-## El caso — un bug que nadie logra reproducir
+## El caso — un gallinero que la lógica proposicional no sabe describir
 
-Un equipo pequeño mantiene una aplicación en producción. Desde hace días, un error aparece de forma intermitente y nadie logra ponerse de acuerdo sobre su causa. En la reunión de depuración, cada integrante aporta una observación que ha confirmado revisando los registros (*logs*) del sistema:
+El ingeniero enciende su tablero de monitoreo y ve el estado de su gallinero. Quiere afirmar, con una sola frase, algo tan simple como:
 
-- **Ana:** *"Si el error aparece, entonces el servicio de pagos registró un tiempo de espera agotado (timeout)."*
-- **Beto:** *"En los logs no hay ningún timeout del servicio de pagos."*
-- **Carla:** *"O bien falló el servicio de pagos, o bien falló la caché — el monitoreo confirma que uno de los dos falló."*
-- **Diego:** *"Si falló la caché, entonces el tiempo de respuesta se disparó por encima de un segundo."*
+> *"Todos los pollos robot del laboratorio están funcionando correctamente."*
 
-Cada afirmación, por separado, es un hecho verificado. La pregunta del equipo es: **con estos hechos, ¿qué podemos concluir con certeza sobre la causa?** ¿Se puede *demostrar* dónde está el problema, o cada quien está adivinando?
+Y a partir de esa frase quisiera poder deducir cosas concretas: si el pollo `P3` está funcionando, si el pollo `P7` tiene un virus, si hay **algún** pollo averiado. Pero con las herramientas de la lógica proposicional, esa frase es una única caja cerrada, una sola letra $p$ — y de una letra no se puede sacar información sobre `P3`, `P7`, ni sobre ninguno de los pollos individualmente.
 
-Al final de esta sesión volveremos a esta reunión y cerraremos el caso — no por votación ni por corazonada, sino con una deducción que cualquiera del equipo pueda verificar paso a paso.
+La pregunta de esta sesión es: **¿qué tipo de lógica necesitamos para poder hablar, con precisión matemática, de todos los pollos, de algunos, y de cada uno por su nombre?** Al final del documento tendremos las herramientas para escribir esa frase de forma que sí podamos razonar con ella — y veremos también dónde esas herramientas todavía se quedan cortas, marcando el camino hacia lo que viene más adelante en el curso.
 
 ---
 
-# Parte I — ¿Qué es un Argumento y cuándo es Válido?
+# Parte I — Por qué la Lógica Proposicional se queda corta
 
-## I.1 Argumentos: premisas y conclusión
+## I.1 Un ejemplo que lo deja todo en evidencia
 
-En lógica proposicional, un **argumento** es una secuencia de proposiciones. Todas, excepto la última, se llaman **premisas**; la última se llama **conclusión**. Lo escribimos poniendo las premisas sobre una línea y la conclusión debajo:
+Considere el laboratorio de sistemas con ocho computadores, etiquetados de `L1` a `L8`. El técnico afirma un solo hecho global:
 
-$$
-\begin{array}{c}
-P_1 \\
-P_2 \\
-\vdots \\
-P_n \\
-\hline
-\therefore\ Q
-\end{array}
-$$
+> *"Todos los computadores del laboratorio están funcionando correctamente."*
 
-Las premisas $P_1,P_2,\dots,P_n$ son los hechos o suposiciones de partida; la conclusión $Q$ es lo que se pretende deducir de ellos. La barra horizontal se lee *"por lo tanto"* ($\therefore$).
+<img src="images/computadores_limitaciones.png" alt="Ocho computadores etiquetados L1 a L8; algunos marcados con visto bueno y otros señalados en rojo" width="440">
 
-La **forma** del argumento es su estructura lógica: el esqueleto que conecta las premisas con la conclusión, independientemente de sobre qué traten. Como veremos enseguida, la validez es una propiedad de esa forma, no del contenido.
+En lógica proposicional, esa frase es una única proposición. Le ponemos una letra:
 
-## I.2 Verdad no es lo mismo que Validez
+$$p:\ \text{«Todos los computadores del laboratorio están funcionando correctamente.»}$$
 
-En el lenguaje cotidiano usamos *verdadero* y *válido* casi como sinónimos. En lógica son cosas distintas, y confundirlas es una de las principales fuentes de error al razonar.
+Ahora bien, con **base únicamente en esa proposición $p$**, el técnico quisiera concluir afirmaciones sobre computadores concretos:
 
-- La **verdad** es una propiedad de una **proposición**. Depende del contexto: una proposición es verdadera si lo que afirma coincide con los hechos. *"Medellín está en Colombia"* es verdadera; *"Medellín está en Brasil"* es falsa.
-- La **validez** es una propiedad de un **argumento**. Depende solo de su **forma**, no de si sus proposiciones son verdaderas en el mundo real.
+- *"El computador `L1` está funcionando correctamente."*
+- *"El computador `L4` tiene el sistema operativo dañado."*
+- *"El computador `L5` tiene un virus."*
+- *"El computador `L7` no tiene teclado."*
 
-> [!IMPORTANT]
-> Un argumento es **válido** si, y solo si, es imposible que su conclusión sea falsa cuando todas sus premisas son verdaderas. Es decir: siempre que las premisas se cumplan, la conclusión está obligada a cumplirse.
+El problema es demoledor: **ninguna de estas conclusiones se puede deducir de $p$**. Y no porque sean falsas, sino porque la lógica proposicional *no tiene forma de conectarlas con $p$*. Para ella, cada una de esas cuatro frases es otra caja cerrada, otra letra distinta:
 
-El punto sutil es que la validez **no exige que las premisas sean verdaderas en la realidad**. Exige que la estructura sea correcta. Compare estos dos argumentos, que tienen **la misma forma**:
+$$q:\ \text{«}L1\text{ funciona»},\quad r:\ \text{«}L4\text{ tiene el SO dañado»},\quad s:\ \text{«}L5\text{ tiene virus»},\quad t:\ \text{«}L7\text{ no tiene teclado».}$$
 
-$$
-\begin{array}{l}
-\text{Si llueve, la calle se moja.} \\
-\text{Llueve.} \\
-\hline
-\therefore\ \text{La calle se moja.}
-\end{array}
-\qquad\qquad
-\begin{array}{l}
-\text{Si la Luna es de queso, hay ratones astronautas.} \\
-\text{La Luna es de queso.} \\
-\hline
-\therefore\ \text{Hay ratones astronautas.}
-\end{array}
-$$
+Entre $p$ y $q$ no hay ninguna relación lógica que la teoría pueda ver. La proposición $p$ ni siquiera "sabe" que `L1` es uno de los computadores de los que habla. Son cinco letras sueltas, sin puentes entre ellas.
 
-Ambos tienen exactamente la forma $p\rightarrow q$; $p$; por lo tanto $q$, y ambos son **válidos**. En el segundo, las premisas son un disparate — pero eso no lo hace inválido. La validez solo garantiza que *si aceptáramos* las premisas, la conclusión sería inevitable.
+## I.2 Las tres limitaciones, en concreto
 
-> [!TIP]
-> **Validez** no significa que lo que dice el argumento sea verdad en la vida real. Significa que, si aceptamos las premisas (aunque sean absurdas), la conclusión se sigue por obligación. La lógica se ocupa de la **forma del razonamiento**, no de verificar hechos.
+El ejemplo anterior no es un accidente: expone tres carencias estructurales de la lógica proposicional. La siguiente tabla las resume.
 
-## I.3 Tres formas de escribir el mismo argumento
-
-A lo largo del curso usaremos tres notaciones equivalentes para representar un argumento. Conviene reconocer las tres, porque las usaremos según el contexto (demostración manual, enunciado compacto o validación por tabla).
-
-| Forma | Representación | ¿Cuándo se usa? |
-|:---|:---:|:---|
-| **Estándar (barra)** | $\dfrac{p\rightarrow q \quad p}{q}$ | Para demostraciones paso a paso. |
-| **Horizontal (secuente)** | $p\rightarrow q,\ p\ \vdash\ q$ | Para enunciar un problema de forma compacta. El símbolo $\vdash$ se lee *"se deduce"*. |
-| **Condicional (gran implicación)** | $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$ | Para validar con **tabla de verdad**. |
-
-La forma condicional es clave: convierte todo el argumento en **una sola proposición**. La conjunción de todas las premisas se pone como antecedente, y la conclusión como consecuente:
-
-$$(P_1\land P_2\land\cdots\land P_n)\rightarrow Q$$
-
-Y aquí está el puente con lo que ya sabe: **el argumento es válido si, y solo si, esta proposición es una tautología**. Validar un argumento se reduce a comprobar una tautología — algo que ya domina desde la Clase 3.
-
-## I.4 Identificar premisas y conclusión en lenguaje natural
-
-No siempre es evidente cuál es la conclusión de un argumento escrito en palabras. Ciertos adverbios y conectores actúan como señales:
-
-| Indican **premisa** | Indican **conclusión** |
+| Limitación | En qué consiste |
 |:---|:---|
-| Puesto que, dado que, ya que | Por lo tanto, por consiguiente |
-| Como, porque, considerando | Se sigue que, se infiere que |
-| Si, siempre que, toda vez que | Luego, en consecuencia, se deduce que |
-
-Regla práctica: la conclusión suele ir después de un conector del tipo *"por lo tanto"*, y las premisas son todo lo demás que la sostiene.
-
-## I.5 Un ejemplo clásico: el argumento de Sócrates
-
-El ejemplo más antiguo y conocido de argumento válido:
-
-$$
-\begin{array}{l}
-\text{Si Sócrates es hombre, entonces es mortal.} \\
-\text{Sócrates es hombre.} \\
-\hline
-\therefore\ \text{Sócrates es mortal.}
-\end{array}
-$$
-
-Definiendo $p$: *"Sócrates es un hombre"* y $q$: *"Sócrates es mortal"*, la forma es:
-
-$$p\rightarrow q,\quad p\quad\vdash\quad q$$
-
-Esta forma —afirmar el antecedente de un condicional para obtener el consecuente— es tan común y tan segura que tiene nombre propio: **Modus Ponens**. La veremos formalizada en la Parte III, junto con las demás reglas de inferencia.
-
----
-
-# Parte II — Validación por Tablas de Verdad (Enfoque basado en Modelos)
-
-El primer método para decidir si un argumento es válido es directo y mecánico: **construir la tabla de verdad** de su forma condicional y revisar todos los escenarios posibles. Lo llamamos *enfoque basado en modelos* porque examina, uno por uno, todos los "mundos posibles" (todas las combinaciones de valores de verdad).
-
-> [!NOTE]
-> En las tablas de verdad de esta sesión usaremos la codificación **1 = Verdadero** y **0 = Falso**, igual que en las clases anteriores.
-
-## II.1 El concepto clave: renglón crítico
-
-No todas las filas de la tabla importan por igual. La validez se decide observando solo un tipo especial de fila:
+| **No distingue el contenido interno de las proposiciones.** | Trata cada enunciado como un átomo indivisible. No puede razonar sobre los objetos individuales que aparecen dentro de la frase. Con lo que afirma $p$ no hay forma de saber que existe una contradicción entre *"todos funcionan"* y *"`L4` tiene el SO dañado"*, porque la teoría no sabe que `L4` es uno de los computadores de los que habla $p$. |
+| **No expresa generalizaciones ni excepciones de forma general.** | No puede decir cosas como *"todos los computadores **excepto** `L4` funcionan"*, ni reglas del tipo *"**si** un computador tiene virus, **entonces** no funciona bien"* — al menos no de manera compacta y uniforme. En un universo finito y pequeño, sí podría enumerarse caso por caso con una letra proposicional distinta para cada computador (algo como $q_1 \land q_2 \land \neg q_4 \land \dots$ ), pero eso no escala: para cien computadores harían falta cien letras sueltas, y ninguna regla general que las conecte. |
+| **No conecta internamente las ideas.** | Como no ve el interior de las frases, no puede establecer relaciones lógicas complejas entre ellas. No hay forma de responder preguntas como *"¿qué computadores pertenecen al laboratorio?"*, *"¿qué significa exactamente 'funcionar correctamente'?"* o *"¿un computador con virus funciona o no?"*. |
 
 > [!IMPORTANT]
-> Un **renglón crítico** es una fila en la que **todas las premisas son verdaderas** a la vez. El argumento es:
-> - **Válido** si en *todos* los renglones críticos la conclusión también es verdadera.
-> - **No válido** si existe *al menos un* renglón crítico donde la conclusión es falsa.
+> **Conclusión.** La lógica proposicional es excelente para verdades **globales y simples** (*"llueve"*, *"el sitio está en línea"*). Pero si lo que queremos es modelar un sistema realista —con objetos específicos, propiedades individuales, reglas generales y excepciones— se nos queda corta. Necesitamos otro tipo de lógica: la **lógica de predicados**, también llamada **lógica cuantificacional** por el papel central de los cuantificadores $\forall$ y $\exists$. Ambos nombres se usan en este curso como sinónimos de lo que, en un contexto más formal, se conoce como **lógica de primer orden** (*FOL*, por *First-Order Logic*): lo que presentamos aquí es una introducción a la lógica de primer orden, con cuantificación sobre individuos del universo.
 
-Un solo renglón crítico con conclusión falsa basta para tumbar el argumento: es el contraejemplo que muestra que las premisas pueden cumplirse sin obligar a la conclusión.
+## I.3 La pista está en la gramática: sujeto y predicado
 
-## II.2 Procedimiento
+¿Por dónde empezar a "abrir la caja"? Por algo que usted ya conoce desde la escuela: la estructura de una oración. Muchas oraciones declarativas —las que afirman algo, que son las que nos interesan aquí— pueden analizarse, para efectos de esta introducción, separando dos partes:
 
-1. **Identifique** las premisas y la conclusión de la forma del argumento.
-2. **Construya** la tabla de verdad con una columna por cada premisa y una para la conclusión.
-3. **Localice** los renglones críticos (todas las premisas en 1) e inspeccione la conclusión en ellos.
+- **Sujeto:** de quién o de qué se habla.
+- **Predicado:** lo que se dice del sujeto.
 
-## II.3 Ejemplo ilustrativo: un argumento no válido
+<img src="images/cumputador_bueno.png" alt="Computador L1 con un visto bueno verde" width="150">
 
-Determine la validez del siguiente argumento:
+Tome la frase del computador `L1`:
 
-$$
-\begin{array}{c}
-p\rightarrow(q\lor\neg r) \\
-q\rightarrow(p\land r) \\
-\hline
-\therefore\ p\rightarrow r
-\end{array}
-$$
+$$\underbrace{\text{El computador }L1}_{\textbf{Sujeto}}\ \underbrace{\text{está funcionando correctamente}}_{\textbf{Predicado}}$$
 
-**Premisas:** $p\rightarrow(q\lor\neg r)$ y $q\rightarrow(p\land r)$. **Conclusión:** $p\rightarrow r$.
+O esta otra, con un perro:
 
-| $p$ | $q$ | $r$ | $q\lor\neg r$ | $p\land r$ | $p\rightarrow(q\lor\neg r)$ | $q\rightarrow(p\land r)$ | $p\rightarrow r$ | ¿Crítico? |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 0 | 0 | 0 | 1 | 0 | 1 | 1 | 1 | ✔ (concl. V) |
-| 0 | 0 | 1 | 0 | 0 | 1 | 1 | 1 | ✔ (concl. V) |
-| 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | — |
-| 0 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | — |
-| **1** | **0** | **0** | **1** | **0** | **1** | **1** | **0** | **✔ (concl. F)** |
-| 1 | 0 | 1 | 0 | 1 | 0 | 1 | 1 | — |
-| 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | — |
-| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | ✔ (concl. V) |
+<img src="images/perro_bart.png" alt="Ilustración de un perro" width="120">
 
-En la fila $p=1,\ q=0,\ r=0$ las dos premisas valen 1 (es un renglón crítico) pero la conclusión $p\rightarrow r$ vale 0. Ese único contraejemplo es suficiente: **el argumento es no válido.**
+$$\underbrace{\text{El perro de Bart}}_{\textbf{Sujeto}}\ \underbrace{\text{se llama Ayudante de Santa}}_{\textbf{Predicado}}$$
 
-> [!WARNING]
-> **No confunda "premisas falsas en la vida real" con "argumento no válido".** Que un argumento sea no válido *no* depende de que sus premisas sean falsas — depende de que exista un escenario (un renglón crítico) donde las premisas se cumplan pero la conclusión falle. La invalidez es un defecto de **forma**, detectable con la tabla, no una opinión sobre el contenido.
+## I.4 El salto: separar el sujeto del predicado
 
-## II.4 La falacia de afirmar el consecuente
+Aquí está la idea central de todo el módulo. En **lógica proposicional**, teniendo en cuenta que la unidad fundamental es la proposición, toda la frase *"El computador `L1` está funcionando correctamente"* se comprime en una sola letra $p$. Solo interesa si es verdadera o falsa; no interesa qué son "computador" ni "funcionando".
 
-Un error de razonamiento muy frecuente —y con nombre propio— es **afirmar el consecuente**. Tiene esta forma:
+En **lógica de predicados** hacemos algo distinto: **separamos el sujeto del predicado y los modelamos por separado**.
 
-$$
-\begin{array}{c}
-p\rightarrow q \\
-q \\
-\hline
-\therefore\ p
-\end{array}
-$$
+- El **sujeto** se representa como un **objeto** o **individuo**: aquí, `L1`.
+- El **predicado** se representa como una **propiedad** o **relación**: aquí, *"…está funcionando correctamente"*, que escribimos $funciona(x)$.
 
-Parece razonable ("si estudio, apruebo; aprobé; luego estudié"), pero es **no válida**. La tabla lo revela:
+Al unir el predicado con el objeto concreto, obtenemos:
 
-| $p$ | $q$ | $p\rightarrow q$ | $q$ | $p$ (concl.) | ¿Crítico? |
-|:-:|:-:|:-:|:-:|:-:|:-:|
-| 0 | 0 | 1 | 0 | 0 | — |
-| **0** | **1** | **1** | **1** | **0** | **✔ (concl. F)** |
-| 1 | 0 | 0 | 0 | 1 | — |
-| 1 | 1 | 1 | 1 | 1 | ✔ (concl. V) |
+$$funciona(L1)$$
 
-En la fila $p=0,\ q=1$ ambas premisas son verdaderas pero la conclusión es falsa. Intuitivamente: uno pudo aprobar por muchas otras causas (el examen estaba fácil, hizo trampa, tuvo suerte). Ver el resultado ($q$) no permite deducir una única causa ($p$).
+que se lee *"`L1` está funcionando correctamente"*. La diferencia con $p$ es abismal: ahora la expresión **contiene** al objeto `L1` explícitamente. Podemos hablar de $funciona(L2)$, $funciona(L7)$, o de $funciona(x)$ para un computador cualquiera $x$. Acabamos de abrir la caja.
 
 > [!TIP]
-> **Antes de continuar, pregúntese:** ¿en qué se diferencia la forma válida (Modus Ponens: $p\rightarrow q,\ p\vdash q$) de esta falacia ($p\rightarrow q,\ q\vdash p$)?
+> **Compruebe su comprensión.** En lógica proposicional, ¿cuántas letras distintas hacen falta para representar *"`L1` funciona"*, *"`L2` funciona"* y *"`L3` funciona"*? ¿Y en lógica de predicados, con el predicado $funciona(x)$?
 >
 > <details><summary>Ver respuesta</summary>
 >
-> En Modus Ponens se afirma el **antecedente** ($p$) para obtener el consecuente ($q$) — y eso es válido. En la falacia se afirma el **consecuente** ($q$) para intentar recuperar el antecedente ($p$) — y eso no se puede: un mismo efecto puede tener muchas causas. La dirección de la flecha $\rightarrow$ solo garantiza el paso de causa a efecto, no de efecto a causa.
->
-> </details>
-
-## II.5 El problema de este método: la escalabilidad
-
-Las tablas de verdad son **infalibles**: revisan todos los escenarios. Pero tienen un defecto práctico grave. Con $n$ variables proposicionales, la tabla tiene $2^n$ filas:
-
-| Variables ($n$) | Filas ($2^n$) |
-|:-:|:-:|
-| 3 | 8 |
-| 5 | 32 |
-| 10 | 1 024 |
-| 20 | 1 048 576 |
-
-Para más de 5 o 6 variables, construir la tabla completa a mano es impráctico. Necesitamos un método que no dependa de revisar todos los mundos posibles, sino que **construya una cadena corta de pasos justificados**. Ese es el enfoque axiomático de la Parte III — pero antes, veamos un ejemplo que resuelve el *mismo* argumento por *ambos* métodos, para comparar.
-
----
-
-# 📘 Ejercicio resuelto — El mismo argumento, dos métodos
-
-Este ejercicio resuelve un mismo argumento de dos formas distintas. El objetivo es que vea, con sus propios ojos, que el enfoque por tablas y el enfoque axiomático llegan **a la misma conclusión** — y por qué el segundo es preferible cuando hay muchas variables.
-
-**Argumento (forma condicional):**
-
-$$\bigl[\,p\land(p\rightarrow q)\land(s\lor r)\land(r\rightarrow\neg q)\,\bigr]\rightarrow(s\lor t)$$
-
-En forma estándar, con sus cuatro premisas:
-
-$$
-\begin{array}{rl}
-p & \text{(a)} \\
-p\rightarrow q & \text{(b)} \\
-s\lor r & \text{(c)} \\
-r\rightarrow\neg q & \text{(d)} \\
-\hline
-\therefore\ s\lor t &
-\end{array}
-$$
-
-## Método 1 — Tabla de verdad (fuerza bruta)
-
-Hay $n=5$ variables ($p,q,r,s,t$), así que la tabla completa tiene $2^5=32$ filas. En vez de reproducirla entera, aplicamos lo que ya sabemos: solo importan los **renglones críticos** (donde las cuatro premisas valen 1 simultáneamente).
-
-Analizando las premisas: para que $p$ (a) y $p\rightarrow q$ (b) sean ambas verdaderas, se necesita $p=1$ y $q=1$. Con $q=1$, la premisa (d) $r\rightarrow\neg q$ se vuelve $r\rightarrow 0$, que solo es verdadera si $r=0$. Con $r=0$, la premisa (c) $s\lor r$ obliga a $s=1$. La variable $t$ queda libre.
-
-Esto deja exactamente **dos renglones críticos**:
-
-| $p$ | $q$ | $r$ | $s$ | $t$ | Premisas (a·b·c·d) | Conclusión $s\lor t$ |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 1 | 1 | 0 | 1 | 0 | **1** | **1** |
-| 1 | 1 | 0 | 1 | 1 | **1** | **1** |
-
-En los dos renglones críticos la conclusión $s\lor t$ es verdadera (porque $s=1$ en ambos). No existe ningún renglón crítico con conclusión falsa: **el argumento es válido.**
-
-## Método 2 — Enfoque axiomático (reglas de inferencia)
-
-En lugar de revisar 32 filas, construimos una cadena de deducciones. Cada línea se justifica por una **regla de inferencia** o una **ley de equivalencia** (las de la Clase 5), citando de qué líneas anteriores proviene. Estas reglas se presentan formalmente en la Parte III; aquí las usamos por adelantado para mostrar el contraste.
-
-**Paso 1 — Obtener $q$.** De la premisa $p$ (a) y $p\rightarrow q$ (b), por Modus Ponens.
-
-**Paso 2 — Reescribir la premisa (d) para poder encadenarla.** La premisa $r\rightarrow\neg q$ tiene $r$ en el antecedente, pero lo que ya tenemos es $q$. Aplicamos Contrarrecíproco para "darle la vuelta" y luego Doble Negación para limpiarla, dejándola como $q\rightarrow\neg r$.
-
-**Paso 3 — Obtener $\neg r$.** Ahora sí: de $q$ (línea 3) y $q\rightarrow\neg r$ (línea 6), por Modus Ponens.
-
-**Paso 4 — Cerrar.** Con $\neg r$ y la premisa $s\lor r$ (c), por Eliminación (silogismo disyuntivo) obtenemos $s$; y de $s$, por Adición, se sigue $s\lor t$.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $p$ | Premisa (a) |
-| 2 | $p\rightarrow q$ | Premisa (b) |
-| 3 | $q$ | Modus Ponens en 1 y 2 |
-| 4 | $r\rightarrow\neg q$ | Premisa (d) |
-| 5 | $\neg(\neg q)\rightarrow\neg r$ | Contrarrecíproco en 4 |
-| 6 | $q\rightarrow\neg r$ | Doble negación en 5 |
-| 7 | $\neg r$ | Modus Ponens en 3 y 6 |
-| 8 | $s\lor r$ | Premisa (c) |
-| 9 | $s$ | Eliminación (silogismo disyuntivo) en 7 y 8 |
-| 10 | $s\lor t$ | Adición en 9 |
-
-Por lo tanto se obtiene $s\lor t$ — **el argumento es válido.**
-
-> [!TIP]
-> **Compare el costo de ambos métodos.** Con 5 variables, la tabla exigió razonar sobre $2^5=32$ filas (aunque el atajo de los renglones críticos nos ahorró escribirlas todas). El enfoque axiomático llegó a la misma conclusión en 10 líneas cortas, sin importar cuántas variables hubiera. Con 10 variables, la tabla tendría 1 024 filas; la demostración axiomática seguiría teniendo un puñado de pasos. **Esa es la razón de ser del enfoque axiomático.**
-
----
-
-# Parte III — Silogismo y Reglas de Inferencia (Enfoque Axiomático)
-
-## III.1 El silogismo
-
-Un **silogismo** es un argumento que consiste en **dos premisas y una conclusión**. La primera premisa se llama **premisa mayor** y la segunda, **premisa menor**.
-
-La forma de silogismo más famosa es el **Modus Ponens**, el mismo del argumento de Sócrates:
-
-$$
-\begin{array}{l}
-\text{Si tiene contraseña vigente, puede iniciar sesión.} \\
-\text{Tiene contraseña vigente.} \\
-\hline
-\therefore\ \text{Puede iniciar sesión.}
-\end{array}
-$$
-
-Simbólicamente, con $p$: *"tiene contraseña vigente"* y $q$: *"puede iniciar sesión"*:
-
-$$p\rightarrow q,\quad p\quad\vdash\quad q$$
-
-## III.2 ¿Qué es una regla de inferencia?
-
-Vimos que validar con tablas es infalible pero costoso. La alternativa es el **enfoque axiomático** (o *sintáctico*): en lugar de evaluar el argumento en todos los modelos, construimos una **demostración** —una cadena de pasos— donde cada línea está justificada por una regla que ya sabemos válida.
-
-> [!IMPORTANT]
-> Una **regla de inferencia** es una forma de argumento que ya se demostró válida. La usamos como una "pieza de construcción" segura: cada vez que en una demostración aparezcan las premisas de una regla, tenemos permiso de escribir su conclusión como una nueva verdad.
-
-Piénselo como el enfoque axiomático de la Clase 5, pero un nivel más arriba: allá transformábamos *una* expresión en otra equivalente (con leyes de equivalencia); aquí **derivamos** una conclusión nueva a partir de varias premisas (con reglas de inferencia).
-
-## III.3 Tabla de reglas de inferencia
-
-Estas son las reglas que usaremos. En cada fracción, lo que está **arriba** de la barra son las premisas (verdades que ya posee) y lo que está **debajo** es la conclusión (lo que tiene permiso de escribir).
-
-| Nombre | Regla | Idea intuitiva |
-| :--- | :---: | :--- |
-| **Modus Ponens** | $\dfrac{{p\rightarrow q}\atop{p}}{q}$ | Si se da la causa, ocurre el efecto. |
-| **Modus Tollens** | $\dfrac{{p\rightarrow q}\atop{\neg q}}{\neg p}$ | Si no veo el efecto, la causa no ocurrió. |
-| **Silogismo hipotético** (Transitividad) | $\dfrac{{p\rightarrow q}\atop{q\rightarrow r}}{p\rightarrow r}$ | Si $p$ lleva a $q$ y $q$ lleva a $r$, entonces $p$ lleva a $r$. |
-| **Silogismo disyuntivo** (Eliminación) | $\dfrac{{p\lor q}\atop{\neg p}}{q}$ | Si tengo dos opciones y descarto una, queda la otra. |
-| **Simplificación** | $\dfrac{p\land q}{p}$ | Si tengo el todo, tengo cada parte. |
-| **Adición** | $\dfrac{p}{p\lor q}$ | Si algo es verdad, "eso o cualquier cosa" también. |
-| **Conjunción** | $\dfrac{{p}\atop{q}}{p\land q}$ | Puedo unir dos verdades independientes. |
-| **Prueba por casos** | $\dfrac{{p\lor q}\atop{{p\rightarrow r}\atop{q\rightarrow r}}}{r}$ | Si mis dos opciones llevan al mismo sitio, ese sitio es seguro. |
-| **Resolución** | $\dfrac{{\neg p\lor r}\atop{p\lor q}}{q\lor r}$ | Se cancela la variable que aparece afirmada y negada; queda el resto. |
-
-
-> [!WARNING]
-> **Modus Tollens no es la falacia de afirmar el consecuente.** Ambas parten de $p\rightarrow q$, pero Modus Tollens usa $\neg q$ (niega el efecto) para concluir $\neg p$ — y es **válida**. La falacia usa $q$ (afirma el efecto) para concluir $p$ — y es **inválida**. La diferencia está en si se niega o se afirma el consecuente.
-
-## III.4 El formato Afirmación–Razón para argumentos
-
-Igual que en la Clase 5, escribimos las demostraciones en una tabla de dos columnas: **Afirmación** (la proposición que se establece) y **Razón** (qué regla la justifica y de qué líneas proviene).
-
-> [!NOTE]
-> **Una diferencia importante frente a la Clase 5.** Allá, cada fila era una *transformación* de la expresión anterior en otra **equivalente** ($\equiv$): la primera fila y la última decían "lo mismo" con distinta forma. Aquí, cada fila es un *nuevo hecho deducido* de las líneas anteriores mediante una regla de inferencia. No transformamos una sola expresión: **construimos** hechos nuevos hasta alcanzar la conclusión. Las premisas se listan primero (razón: "Premisa"), y a partir de ahí cada paso cita las líneas de las que se obtuvo.
-
-Para validar un argumento con este método:
-
-1. **Liste** las premisas, numeradas, con razón "Premisa".
-2. **Identifique la meta**: tenga clara cuál es la conclusión a la que debe llegar.
-3. **Busque patrones**: encuentre dos (o una) líneas que encajen con alguna regla de la tabla.
-4. **Derive**: escriba la conclusión de esa regla en una línea nueva, citando la regla y las líneas usadas.
-5. **Itere** hasta obtener la meta.
-
----
-
-# 📘 Ejercicios resueltos — Enfoque axiomático
-
-Los tres ejercicios siguientes se resuelven íntegramente con reglas de inferencia y el formato Afirmación–Razón. Preste atención a cómo, en cada uno, la estrategia empieza por *identificar la meta* y luego buscar qué reglas acercan a ella.
-
-## Ejercicio 1
-
-Demuestre que el siguiente argumento es válido:
-
-$$
-\begin{array}{rl}
-p\rightarrow q & \text{(a)} \\
-r\lor s & \text{(b)} \\
-\neg s\rightarrow\neg t & \text{(c)} \\
-\neg q\lor s & \text{(d)} \\
-\neg s & \text{(e)} \\
-(\neg p\land r)\rightarrow u & \text{(f)} \\
-w\lor t & \text{(g)} \\
-\hline
-\therefore\ u\land r &
-\end{array}
-$$
-
-**Estrategia.** La meta es $u\land r$. Para $u$ necesitamos disparar la premisa (f), cuyo antecedente es $\neg p\land r$ — es decir, hay que conseguir $\neg p$ y $r$ por separado. Tenemos $\neg s$ (e) como palanca inicial: combinada con (d) da $\neg q$, y de ahí con (a) sale $\neg p$; combinada con (b) da $r$.
-
-**Paso 1 — Obtener $\neg q$.** De $\neg q\lor s$ (d) y $\neg s$ (e), por Eliminación.
-
-**Paso 2 — Obtener $\neg p$.** De $p\rightarrow q$ (a) y $\neg q$ (recién obtenido), por Modus Tollens.
-
-**Paso 3 — Obtener $r$.** De $r\lor s$ (b) y $\neg s$ (e), por Eliminación.
-
-**Paso 4 — Ensamblar y disparar (f).** Unimos $\neg p$ y $r$ por Conjunción, aplicamos (f) por Modus Ponens para obtener $u$, y unimos con $r$ para la meta.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $p\rightarrow q$ | Premisa (a) |
-| 2 | $r\lor s$ | Premisa (b) |
-| 3 | $\neg s\rightarrow\neg t$ | Premisa (c) |
-| 4 | $\neg q\lor s$ | Premisa (d) |
-| 5 | $\neg s$ | Premisa (e) |
-| 6 | $(\neg p\land r)\rightarrow u$ | Premisa (f) |
-| 7 | $w\lor t$ | Premisa (g) |
-| 8 | $\neg q$ | Eliminación en 4 y 5 |
-| 9 | $\neg p$ | Modus Tollens en 1 y 8 |
-| 10 | $r$ | Eliminación en 2 y 5 |
-| 11 | $\neg p\land r$ | Conjunción en 9 y 10 |
-| 12 | $u$ | Modus Ponens en 6 y 11 |
-| 13 | $u\land r$ | Conjunción en 12 y 10 |
-
-Por lo tanto se obtiene $u\land r$ — **el argumento es válido.**
-
-> [!NOTE]
-> Note que las premisas (c) y (g) nunca se usaron. Esto es normal y perfectamente válido: un argumento puede contener premisas que no hacen falta para llegar a la conclusión. Lo que importa es que exista *un* camino desde las premisas hasta la meta, no que se usen todas.
-
-## Ejercicio 2
-
-Demuestre que el siguiente argumento es válido:
-
-$$
-\begin{array}{rl}
-(\neg p\lor q)\rightarrow r & \text{(a)} \\
-s\lor\neg q & \text{(b)} \\
-\neg t & \text{(c)} \\
-p\rightarrow t & \text{(d)} \\
-(\neg p\land r)\rightarrow\neg s & \text{(e)} \\
-\hline
-\therefore\ \neg q &
-\end{array}
-$$
-
-**Estrategia.** La meta es $\neg q$. Si logramos $\neg s$, entonces con (b) por Eliminación sale $\neg q$. Para $\neg s$ hay que disparar (e), cuyo antecedente es $\neg p\land r$. Y $\neg p$ sale de (d) con $\neg t$; con $\neg p$ conseguimos también $r$ a través de (a).
-
-**Paso 1 — Obtener $\neg p$.** De $p\rightarrow t$ (d) y $\neg t$ (c), por Modus Tollens.
-
-**Paso 2 — Obtener $r$.** De $\neg p$ se sigue $\neg p\lor q$ por Adición; y con (a), por Modus Ponens, se obtiene $r$.
-
-**Paso 3 — Disparar (e).** Unimos $\neg p$ y $r$ por Conjunción y aplicamos (e) por Modus Ponens para obtener $\neg s$.
-
-**Paso 4 — Cerrar.** De $s\lor\neg q$ (b) y $\neg s$, por Eliminación, la meta $\neg q$.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $(\neg p\lor q)\rightarrow r$ | Premisa (a) |
-| 2 | $s\lor\neg q$ | Premisa (b) |
-| 3 | $\neg t$ | Premisa (c) |
-| 4 | $p\rightarrow t$ | Premisa (d) |
-| 5 | $(\neg p\land r)\rightarrow\neg s$ | Premisa (e) |
-| 6 | $\neg p$ | Modus Tollens en 4 y 3 |
-| 7 | $\neg p\lor q$ | Adición en 6 |
-| 8 | $r$ | Modus Ponens en 1 y 7 |
-| 9 | $\neg p\land r$ | Conjunción en 6 y 8 |
-| 10 | $\neg s$ | Modus Ponens en 5 y 9 |
-| 11 | $\neg q$ | Eliminación en 2 y 10 |
-
-Por lo tanto se obtiene $\neg q$ — **el argumento es válido.**
-
-## Ejercicio 3 — De lenguaje natural a demostración
-
-Considere el siguiente argumento:
-
-> *"Si la ley no fue aprobada, entonces la constitución del país queda sin modificaciones. Si la constitución queda sin modificaciones, no se pueden elegir nuevos diputados. O se eligen nuevos diputados o el informe del presidente se retrasará. El informe no se retrasó. Por lo que la ley fue aprobada."*
-
-Verifique su validez mediante una prueba formal.
-
-**Paso 1 — Identificar premisas y conclusión.** El conector *"por lo que"* marca la conclusión (*"la ley fue aprobada"*); todo lo anterior son premisas.
-
-**Paso 2 — Definir proposiciones simples.**
-
-- $L$: la ley fue aprobada.
-- $C$: la constitución queda sin modificaciones.
-- $D$: se pueden elegir nuevos diputados.
-- $I$: el informe del presidente se retrasará.
-
-**Paso 3 — Traducir al lenguaje formal.**
-
-$$
-\begin{array}{rl}
-\neg L\rightarrow C & \text{(a)} \\
-C\rightarrow\neg D & \text{(b)} \\
-D\lor I & \text{(c)} \\
-\neg I & \text{(d)} \\
-\hline
-\therefore\ L &
-\end{array}
-$$
-
-**Paso 4 — Estrategia y demostración.** La meta es $L$. De (c) y (d) sale $D$; con (b) y $D$, por Modus Tollens, sale $\neg C$; con (a) y $\neg C$, otra vez Modus Tollens, sale $\neg(\neg L)$; y Doble Negación cierra en $L$.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $\neg L\rightarrow C$ | Premisa (a) |
-| 2 | $C\rightarrow\neg D$ | Premisa (b) |
-| 3 | $D\lor I$ | Premisa (c) |
-| 4 | $\neg I$ | Premisa (d) |
-| 5 | $D$ | Eliminación en 3 y 4 |
-| 6 | $\neg C$ | Modus Tollens en 2 y 5 |
-| 7 | $\neg(\neg L)$ | Modus Tollens en 1 y 6 |
-| 8 | $L$ | Doble negación en 7 |
-
-Por lo tanto se obtiene $L$ — **el argumento es válido: la ley fue aprobada.**
-
-> [!TIP]
-> **Antes de continuar, pregúntese:** en el paso 6, ¿por qué de $C\rightarrow\neg D$ y $D$ se concluye $\neg C$?
->
-> <details><summary>Ver respuesta</summary>
->
-> Es Modus Tollens. La premisa es $C\rightarrow\neg D$; su "efecto" es $\neg D$. Tener $D$ es tener $\neg(\neg D)$, es decir, la negación del efecto. Modus Tollens ($p\rightarrow q,\ \neg q\vdash\neg p$, con $p=C$ y $q=\neg D$) niega entonces la causa: $\neg C$.
+> En lógica proposicional hacen falta **tres letras distintas** ( $p$, $q$, $r$ ), sin ninguna relación visible entre ellas. En lógica de predicados basta **un solo predicado** $funciona(x)$ aplicado a tres objetos: $funciona(L1)$, $funciona(L2)$, $funciona(L3)$. La estructura común ("…funciona") queda capturada una sola vez. Esa economía es justamente lo que nos permitirá, más adelante, decir "todos funcionan" de un solo golpe.
 >
 > </details>
 
 ---
 
-# 🐛 Bitácora de Depuración — Cerrando el caso del bug
+# Parte II — Los Bloques de la Lógica de Predicados
 
-Volvamos a la reunión del equipo. Ana, Beto, Carla y Diego tienen cuatro observaciones confirmadas en los *logs*, pero nadie ha sabido combinarlas. Vamos a hacer lo que hizo Grace Hopper con la polilla: no adivinar, sino **aislar la causa** con un razonamiento que cualquiera pueda auditar.
+Para trabajar con lógica de predicados necesitamos un vocabulario preciso. Esta parte define, uno por uno, los conceptos clave: universo, objeto, constante, variable, predicado, función proposicional y conjunto de verdad. Cada uno viene con su definición y un ejemplo neutro.
 
-## Fase 1 — Formalizar los testimonios
+## II.1 Universo (dominio del discurso)
 
-Primero traducimos cada observación a lenguaje formal. Definimos las proposiciones simples:
+> [!IMPORTANT]
+> El **universo** (también llamado **dominio del discurso**) es el conjunto de **todos los objetos** sobre los que estamos razonando dentro de una teoría lógica. En otras palabras, es el "mundo" que se está modelando.
 
-- $E$: aparece el error.
-- $T$: el servicio de pagos registró un *timeout*.
-- $F_p$: falló el servicio de pagos.
-- $F_c$: falló la caché.
-- $R$: el tiempo de respuesta superó un segundo.
+Un punto crucial: **el universo lo define quien modela el problema**. No es algo fijo ni universal; depende del contexto. La misma pregunta puede tener respuestas distintas según el universo elegido. Vea cómo cambia:
 
-Los cuatro testimonios, más un hecho técnico que el equipo da por sabido (*"un fallo del servicio de pagos siempre se registra como un timeout de pagos"*, es decir $F_p\rightarrow T$), quedan así:
+| Contexto | Universo |
+|:---|:---|
+| Computadores del laboratorio | $\{L1, L2, L3, L4, L5, L6, L7, L8\}$ |
+| Transformers | $\{Megatron, Optimus, \dots\}$ |
+| Números reales | $(-\infty, +\infty)$ |
+| Apóstoles | $\{Pedro, Juan, Santiago, \dots\}$ |
+| Números enteros | $\{\dots, -2, -1, 0, 1, 2, \dots\}$ |
 
-$$
-\begin{array}{rl}
-E\rightarrow T & \text{(a) — Ana} \\
-\neg T & \text{(b) — Beto} \\
-F_p\lor F_c & \text{(c) — Carla} \\
-F_c\rightarrow R & \text{(d) — Diego} \\
-F_p\rightarrow T & \text{(e) — hecho técnico}
-\end{array}
-$$
-
-La meta no la fija nadie de antemano: es *descubrir* qué falló. Vamos a dejar que las reglas nos lleven.
-
-## Fase 2 — Deducir la causa
-
-**Paso 1 — Descartar el servicio de pagos.** Beto confirmó que no hubo *timeout* ($\neg T$). Pero un fallo de pagos siempre produce *timeout* (e). Por Modus Tollens, si no hubo *timeout*, no pudo fallar el servicio de pagos: $\neg F_p$. *(Este es exactamente el movimiento de Holmes descartando a un sospechoso, y el de Hopper descartando un relé sano.)*
-
-**Paso 2 — Señalar al culpable.** Carla confirmó que uno de los dos falló: $F_p\lor F_c$. Ya descartamos $F_p$. Por Eliminación, solo queda una posibilidad: $F_c$ — **falló la caché**.
-
-**Paso 3 — Predecir un síntoma verificable.** Si falló la caché, Diego nos dice que el tiempo de respuesta se disparó (d). Por Modus Ponens: $R$. Esto es una **predicción comprobable**: el equipo puede ir a los *logs* de rendimiento y confirmar que, en efecto, hubo respuestas por encima de un segundo — lo que valida toda la cadena.
-
-| # | Afirmación | Razón |
-|:---:|:---:|:---|
-| 1 | $E\rightarrow T$ | Premisa (a) |
-| 2 | $\neg T$ | Premisa (b) |
-| 3 | $F_p\lor F_c$ | Premisa (c) |
-| 4 | $F_c\rightarrow R$ | Premisa (d) |
-| 5 | $F_p\rightarrow T$ | Premisa (e) |
-| 6 | $\neg F_p$ | Modus Tollens en 5 y 2 |
-| 7 | $F_c$ | Eliminación en 3 y 6 |
-| 8 | $R$ | Modus Ponens en 4 y 7 |
-
-Por lo tanto se obtiene $F_c\land R$ — **falló la caché, y el tiempo de respuesta se disparó.**
-
-## El veredicto
-
-El equipo no votó ni siguió una corazonada. Partiendo de cuatro observaciones que cada quien tenía por separado, tres pasos de razonamiento formal señalaron la caché como causa y predijeron un síntoma que se puede verificar. La discusión de días se resolvió en ocho líneas que **cualquiera del equipo puede revisar y confirmar** — que es, al final, de lo que se trata una buena depuración.
-
-Observe también que la premisa de Ana ($E\rightarrow T$) no se usó en la cadena. Como en el Ejercicio 1, sobraba información: no toda pista es necesaria, y parte del oficio es distinguir la que sostiene la conclusión de la que solo acompaña.
-
----
-
-# Ejercicios propuestos
-
-Resuelva cada ejercicio a mano antes de consultar el solucionario (al final del documento). Para los que piden validación, indique siempre el método usado y justifique cada paso.
-
-**Validación por tablas de verdad**
-
-**P1.** Determine, con una tabla de verdad, si el siguiente argumento es válido: $\ p\rightarrow q,\ \ q\rightarrow r\ \vdash\ p\rightarrow r$.
-
-**P2.** Determine, con una tabla de verdad, si es válido: $\ p\lor q,\ \ \neg p\ \vdash\ q$.
-
-**P3.** Determine, con una tabla de verdad, si el siguiente argumento es válido o corresponde a una falacia. Si es falacia, señale el renglón crítico que lo demuestra: $\ p\rightarrow q,\ \ \neg p\ \vdash\ \neg q$.
-
-**Validación por enfoque axiomático (reglas de inferencia)**
-
-**P4.** Demuestre que es válido: $\ p\rightarrow q,\ \ q\rightarrow r,\ \ p\ \vdash\ r$.
-
-**P5.** Demuestre que es válido: $\ p\lor q,\ \ \neg p,\ \ q\rightarrow r\ \vdash\ r$.
-
-**P6.** Demuestre que es válido: $\ p\rightarrow q,\ \ r\rightarrow s,\ \ p\lor r,\ \ \neg q\ \vdash\ s$.
-
-**P7.** Demuestre que es válido: $\ (p\land q)\rightarrow r,\ \ p,\ \ q\ \vdash\ r$.
-
-**P8.** Traduzca a lenguaje formal y demuestre la validez del siguiente argumento:
-
-> *"Si el despliegue fue exitoso, el sitio está en línea. El sitio no está en línea. O el despliegue fue exitoso o hubo un* rollback*. Si hubo* rollback*, se envió una alerta. Por lo tanto, se envió una alerta."*
-
-**P9.** Demuestre que es válido: $\ a\rightarrow b,\ \ b\rightarrow c,\ \ \neg c,\ \ a\lor d,\ \ d\rightarrow e\ \vdash\ e$.
-
-**P10.** El siguiente argumento *parece* válido pero no lo es. Identifique de qué falacia se trata y constrúyala como tabla de verdad para probar su invalidez: $\ p\rightarrow q,\ \ q\ \vdash\ p$.
-
----
-
-## Cierre — El olfato, la lógica y una polilla
-
-Empezamos esta sesión con Grace Hopper y una polilla atrapada en un relé. Terminamos con un equipo que resolvió, en ocho líneas, un bug que llevaba días sin explicación. Entre ambos hay casi un siglo de distancia y la misma idea: **la deducción rigurosa no adivina, aísla**.
-
-Lo que Holmes hacía por intuición entrenada, lo que Hopper convirtió en método de laboratorio, y lo que este curso convierte en matemática, es exactamente la misma habilidad — y trasciende cualquier carrera. Un médico que descarta diagnósticos, una abogada que arma un caso, un ingeniero que caza un error en producción: todos están haciendo, con más o menos formalidad, lo mismo que usted acaba de aprender a escribir en una tabla de Afirmación–Razón.
-
-Hopper no fue solo la persona junto a la primera "polilla". Fue una de las mentes que hizo posible que hoy usted programe en lenguajes legibles en vez de en ceros y unos. Que una de las fundadoras de la disciplina en la que se está formando haya sido una matemática con un olfato extraordinario para los errores no es un dato decorativo: es un recordatorio de quiénes construyeron este campo, y de que el rigor lógico —no la corazonada— es lo que lo sostiene.
+Elegir bien el universo es la primera decisión de todo modelado: fija de qué objetos se puede hablar y, con ello, qué afirmaciones tienen sentido.
 
 > [!NOTE]
-> **Hacia la próxima sesión.** Hasta ahora todos nuestros argumentos han tratado sobre proposiciones completas ($p$, $q$, "llueve", "falló la caché"). Pero muchos razonamientos reales hablan de *"todos"* y *"algunos"*: *"todo usuario autenticado tiene permisos"*, *"existe al menos un registro corrupto"*. Para formalizar eso, la lógica proposicional se queda corta — necesitaremos los **cuantificadores** de la lógica de predicados. Ahí es donde seguimos.
+> **Un adelanto importante.** Cambiar el universo no solo cambia si una afirmación resulta verdadera o falsa (eso ya es bastante) — a veces cambia **la forma misma de la fórmula**: cuántos predicados hacen falta y si se necesita o no un conectivo. Un mismo enunciado en español puede traducirse con una fórmula más simple o más compleja según qué tan amplio se elija el universo. Lo vemos con un ejemplo completo, resuelto de las dos maneras, en el **Ejercicio 4** ("No todo lo que brilla es oro") más adelante — y se repite, con el propio pollo robot, entre el **Expediente Gallinero** y los **Ejercicios propuestos**.
+
+## II.2 Objeto (individuo o elemento)
+
+> [!IMPORTANT]
+> Un **objeto** (también llamado **individuo** o **elemento**) es un **miembro concreto** del universo sobre el cual se está razonando.
+
+Si el universo es el conjunto de computadores, un objeto es `L6`. Si es el de los Transformers, un objeto es `Optimus`. Si es el de los números reales, un objeto es $\pi$. Si es el de los apóstoles, un objeto es `Pedro`. Si es el de los enteros, un objeto es `4`.
+
+| Contexto | Universo | Un objeto |
+|:---|:---:|:---:|
+| Computadores del laboratorio | $\{L1, \dots, L8\}$ | $L6$ |
+| Transformers | $\{Megatron, Optimus, \dots\}$ | $Optimus$ |
+| Números reales | $(-\infty, +\infty)$ | $\pi$ |
+| Apóstoles | $\{Pedro, Juan, \dots\}$ | $Pedro$ |
+| Números enteros | $\{\dots, -1, 0, 1, \dots\}$ | $4$ |
+
+## II.3 Constante
+
+> [!IMPORTANT]
+> Una **constante** es un símbolo que **nombra a un objeto específico** del universo. Se refiere siempre al mismo individuo.
+
+`L6`, `Optimus`, `Pedro` y `4` son constantes: cada una señala a un individuo fijo y determinado. La diferencia con una variable es que una constante **no cambia**: siempre apunta al mismo objeto del universo.
+
+## II.4 Variable
+
+> [!IMPORTANT]
+> Una **variable** es un símbolo que representa a **cualquier objeto** (no específico) del universo. No tiene un valor fijo por sí sola: puede tomar cualquier valor del dominio.
+
+La distinción entre constante y variable es la misma que en programación:
+
+- $x$ es una **variable**: no sabemos quién es, puede cambiar. Escribimos $persona(x)$: *"x es una persona"*.
+- $homero$ es una **constante**: se refiere a un individuo específico del universo. Escribimos $persona(homero)$: *"Homero es una persona"*.
+
+En símbolos, decir que la variable $x$ toma valores en el universo $U$ se escribe $x \in U$, o de forma más explícita $\{\ x \mid x \in U\ \}$, que se lee *"los x tales que x pertenece a U"*.
+
+## II.5 Predicado
+
+> [!IMPORTANT]
+> Un **predicado** es una **función lógica** que expresa una **propiedad** de un objeto o una **relación** entre objetos dentro del universo. Permite describir *qué es cierto* respecto a los elementos del universo.
+
+Los predicados se clasifican por cuántos objetos relacionan (su **aridad**):
+
+| Tipo | Notación | Significado | Ejemplo |
+|:---|:---:|:---|:---|
+| **Unitario** | $P(x)$ | Propiedad de **un** objeto | $enfermo(x)$: *"x está averiado"* |
+| **Binario** | $Q(x, y)$ | Relación entre **dos** objetos | $medico(x, y)$: *"x es el técnico de y"* |
+| **Ternario** | $R(x, y, z)$ | Relación entre **tres** objetos | $dijo(x, y, z)$: *"x le dijo a y que z"* |
+
+Veámoslos con los Transformers, tal como aparecen en las diapositivas del curso.
+
+**Predicado unitario.** *"Optimus Prime está averiado"* se modela con el predicado unitario $enfermo(x)$ aplicado al objeto $optimus$:
+
+<img src="images/optimus_enfermo.png" alt="Optimus Prime en reparación, representando el predicado enfermo(optimus)" width="220">
+
+$$enfermo(optimus)$$
+
+**Predicado binario.** *"Ratchet es el técnico de Optimus"* relaciona **dos** objetos, así que usamos un predicado binario $medico(x, y)$:
+
+<img src="images/optimus-doctor.png" alt="Ratchet revisando a Optimus Prime, representando el predicado medico(ratchet, optimus)" width="320">
+
+$$medico(ratchet, optimus)$$
+
+**Predicado ternario.** *"Ratchet le dijo a Optimus que está averiado"* relaciona **tres** cosas: quién habla ( $ratchet$ ), a quién ( $optimus$ ) y qué ( $enfermo(optimus)$ ). Usamos un predicado ternario:
+
+$$dijo(ratchet,\ optimus,\ enfermo(optimus))$$
+
+> [!NOTE]
+> **Una precisión honesta.** En lógica de primer orden **estricta**, el tercer argumento de $dijo$ debería ser un objeto, no una fórmula como $enfermo(optimus)$ (que es una proposición). Aquí lo usamos de forma **informal** para ilustrar la idea de un predicado ternario de manera intuitiva. Más adelante en su formación verá cómo se maneja esto con todo el rigor; por ahora, quédese con la idea de que un predicado puede relacionar tres objetos.
+
+## II.6 Función proposicional
+
+> [!IMPORTANT]
+> Una **función proposicional** es una expresión lógica que **contiene variables libres** ( $x$, $y$, …) y que **todavía no es una proposición completa** —es decir, todavía no tiene un valor de verdad definido—.
+
+Una función proposicional se convierte en **proposición** (con valor de verdad V o F) de dos maneras:
+
+1. **Asignándole valores** a sus variables (reemplazando la variable por un objeto concreto).
+2. **Cuantificando todas sus variables libres** (lo veremos en la Parte III).
+
+En el segundo camino hay un matiz importante: el cuantificador debe ligar **todas** las variables que quedan libres, no solo alguna. Por ejemplo, con el predicado binario $R(x, y)$, la expresión $\forall x\ R(x, y)$ **todavía no es una proposición**: $x$ quedó ligada por el cuantificador, pero $y$ sigue libre. Solo al ligar también $y$ —con otro cuantificador, o asignándole un valor— se obtiene una proposición completa.
+
+Veamos el primer camino con dos ejemplos. En ambos, el universo $U$ son los números enteros.
+
+**Ejemplo con una variable.** Sea $P(x):\ x$ *es mayor que 5*.
+
+| Expresión | ¿Qué es? |
+|:---:|:---|
+| $P(x)$ | Función proposicional (1 variable) — sin valor de verdad |
+| $P(7)$ | Proposición **verdadera** ( $7 > 5$ ) |
+| $P(3)$ | Proposición **falsa** ( $3 \not> 5$ ) |
+| $\forall x\ P(x)$ | Proposición general (con cuantificador) |
+
+**Ejemplo con tres variables.** Sea $R(x, y, z):\ x + y = z$.
+
+| Expresión | ¿Qué es? |
+|:---:|:---|
+| $R(x, y, z)$ | Función proposicional (3 variables) |
+| $R(2, -1, 5)$ | Proposición **falsa** ( $2 + (-1) = 1 \neq 5$ ) |
+| $R(3, 4, 7)$ | Proposición **verdadera** ( $3 + 4 = 7$ ) |
+| $R(x, 3, z)$ | Función proposicional (2 variables libres: $x$ y $z$ ) |
+
+Note el último caso: si fijamos **algunas** variables pero dejamos otras libres, seguimos teniendo una función proposicional (con menos variables), no todavía una proposición.
+
+**Variable libre vs. variable ligada.** Una variable está **ligada** cuando un cuantificador la alcanza; está **libre** si ningún cuantificador la menciona. Solo cuando **todas** las variables de la expresión quedan ligadas (o instanciadas) se obtiene una proposición:
+
+| Expresión | Variables libres | Variables ligadas | ¿Qué es? |
+|:---:|:---:|:---:|:---|
+| $P(x)$ | $x$ | — | Función proposicional |
+| $P(a)$ (con $a$ una constante) | — | — | Proposición |
+| $\forall x\ P(x)$ | — | $x$ | Proposición |
+| $R(x, y)$ | $x$, $y$ | — | Función proposicional |
+| $\forall x\ R(x, y)$ | $y$ | $x$ | **Sigue siendo función proposicional** — $y$ no fue alcanzada por ningún cuantificador |
+| $\forall x\ R(x, 3)$ | — | $x$ | Proposición — $x$ quedó ligada por el cuantificador y $y$ fue reemplazada por el valor $3$ |
+
+> [!NOTE]
+> **Predicado y función proposicional: ¿son lo mismo?** En cursos introductorios, muchos textos usan ambos términos casi como sinónimos, y para efectos prácticos de esta clase puede tratarlos así. La distinción fina es: el **predicado** es la propiedad o relación en sí ( $funciona$, $enfermo$ ), y la **función proposicional** es la expresión que se obtiene al aplicarlo a variables ( $funciona(x)$ ). Formalmente, **predicado** es el término más usado en lógica de primer orden.
+
+## II.7 Conjunto de verdad
+
+> [!IMPORTANT]
+> El **conjunto de verdad** de un predicado $P(x)$ es el **subconjunto del dominio** $D$ formado por **todos los elementos para los cuales el predicado es verdadero**. Se escribe:
+> $$\{\ x \in D \mid P(x)\text{ es verdadero}\ \}$$
+
+Es la forma de responder *"¿para cuáles objetos se cumple esta propiedad?"*. Un ejemplo con los Transformers: sea $D$ el dominio de todos los Transformers (Autobots y Decepticons) y el predicado $autobot(x):\ x$ *es un autobot*. El conjunto de verdad es:
+
+<img src="images/transformers.png" alt="Los Autobots en acción; el conjunto de verdad de autobot(x) reúne a los que cumplen la propiedad" width="320">
+
+
+$$\{\ x \in D \mid autobot(x)\ \}$$
+
+es decir, el subconjunto de los Transformers que son autobots. Evaluando el predicado en dos objetos concretos:
+
+$$autobot(optimus) = \textbf{Verdadero} \qquad autobot(megatron) = \textbf{Falso}$$
+
+Así, $optimus$ **pertenece** al conjunto de verdad y $megatron$ **no**.
+
+> [!TIP]
+> **Compruebe su comprensión.** Sea el universo $U=\{L1,\dots,L8\}$ (los computadores del laboratorio) y el predicado $tieneVirus(x)$. Suponga que solo `L5` y `L7` están infectados. ¿Cuál es el conjunto de verdad de $tieneVirus(x)$?
+>
+> <details><summary>Ver respuesta</summary>
+>
+> El conjunto de verdad es $\{\ x \in U \mid tieneVirus(x)\ \} = \{L5, L7\}$: exactamente los objetos del universo para los cuales el predicado es verdadero. Todos los demás computadores quedan fuera de ese conjunto.
+>
+> </details>
+
+---
+
+# Parte III — Cuantificadores
+
+Ya sabemos hablar de objetos individuales. Ahora viene la herramienta que da nombre a toda esta rama —la lógica *cuantificacional*— y que resuelve el problema con el que abrimos la clase: poder decir *"todos"* y *"algunos"*.
+
+## III.1 Qué es un cuantificador
+
+> [!IMPORTANT]
+> Los **cuantificadores** son símbolos lógicos que indican **cuántos elementos** del dominio cumplen una determinada propiedad (expresada por un predicado o función proposicional). Existen dos:
+> - **Cuantificador universal** $\forall x$: se lee *"para todo x"*.
+> - **Cuantificador existencial** $\exists x$: se lee *"existe al menos un x"*.
+
+La idea es visual. Partimos de un objeto genérico $x$ y de un predicado, por ejemplo $smiling(x)$: *"x está sonriendo"*.
+
+<img src="images/cara_predicado.png" alt="Una variable x que se conecta con el predicado smiling(x)" width="150">
+
+Ahora aplicamos cada cuantificador sobre una población de caritas:
+
+**Cuantificador existencial — $\exists x\ smiling(x)$** (*"existe al menos una carita que sonríe"*): basta con que **una** cumpla. En la siguiente población, algunas sonríen y otras no — y como **hay al menos una** sonriendo, la proposición es **verdadera**.
+
+<img src="images/cuantificador_existencial.png" alt="Población de caritas, algunas sonriendo y otras no; basta una para el existencial" width="360">
+
+**Cuantificador universal — $\forall x\ smiling(x)$** (*"todas las caritas sonríen"*): se exige que **todas** cumplan. En esta otra población, **todas** sonríen, así que la proposición es **verdadera**. (Si una sola no sonriera, sería falsa.)
+
+<img src="images/cuantificador_universal.png" alt="Población de caritas donde todas sonríen; el universal se cumple" width="360">
+
+## III.2 El cuantificador convierte una función proposicional en proposición
+
+Este es el punto clave que conecta con la Parte II. Recuerde que $smiling(x)$, por sí sola, es una **función proposicional**: no es verdadera ni falsa hasta que sepamos quién es $x$. Pero al anteponerle un cuantificador, la expresión pasa a hablar de **toda la población de una vez**, y entonces **sí** tiene un valor de verdad definido:
+
+$$\underbrace{smiling(x)}_{\text{función proposicional (sin V/F)}} \qquad\longrightarrow\qquad \underbrace{\forall x\ smiling(x)}_{\text{proposición (V o F)}}$$
+
+Volviendo al ejemplo con el que abrimos la Parte I: *"Todos los computadores del laboratorio están funcionando correctamente"* ya no es una caja cerrada. Ahora la podemos escribir así:
+
+$$\forall x\ \bigl(computadorLIS(x) \rightarrow funciona(x)\bigr)$$
+
+que se lee *"para todo x, si x es un computador del laboratorio, entonces x funciona"*. Y de una afirmación así **sí** podemos deducir, por ejemplo, que si `L1` es un computador del laboratorio, entonces `L1` funciona. Exactamente lo que la lógica proposicional no podía hacer.
+
+> [!NOTE]
+> **Precisando el universo.** Aquí el universo $U$ se toma **amplio** —computadores en general, no solo los ocho del laboratorio ( $L1,\dots,L8$ ) con los que abrimos la Parte I—, por eso $computadorLIS(x)$ aporta información real y hace falta el conectivo $\rightarrow$. Si en cambio el universo fuera *solo* esos ocho computadores, $computadorLIS(x)$ sería verdadero para todo el universo (redundante), y la fórmula se simplificaría a $\forall x\ funciona(x)$ — el mismo fenómeno que va a ver, con el pollo robot, entre el Expediente Gallinero y los Ejercicios propuestos.
+
+> [!WARNING]
+> **El error más común al cuantificar: emparejar mal el cuantificador y el conectivo.** Hay una regla práctica que evita la mayoría de los errores de traducción:
+> - El cuantificador **universal** $\forall$ se empareja casi siempre con la **implicación** $\rightarrow$.
+> - El cuantificador **existencial** $\exists$ se empareja casi siempre con la **conjunción** $\land$.
+>
+> Es decir, se escribe $\forall x\ (S(x) \rightarrow P(x))$ y $\exists x\ (S(x) \land P(x))$. Escribir $\exists x\ (S(x) \rightarrow P(x))$ es casi siempre un error: por la tabla de verdad de $\rightarrow$, esa expresión se vuelve verdadera de forma "tramposa" apenas exista **un solo** objeto que **no** cumpla $S(x)$ (porque entonces el antecedente es falso y la implicación, verdadera), sin importar nada sobre $P$. En la Parte V veremos esto con las formas aristotélicas.
+
+## III.3 Negar un cuantificador
+
+> [!IMPORTANT]
+> Negar una afirmación cuantificada **cambia el cuantificador**:
+> - $\neg\ \forall x\ P(x) \equiv \exists x\ \neg P(x)$ — *"no todos cumplen P"* equivale a *"existe al menos uno que no cumple P"*.
+> - $\neg\ \exists x\ P(x) \equiv \forall x\ \neg P(x)$ — *"no existe ninguno que cumpla P"* equivale a *"todos incumplen P"*.
+
+La intuición: decir *"no todos los pollos robot funcionan"* no significa que ninguno funcione — significa que **al menos uno** falla. Y decir *"no existe ningún pollo con virus"* sí significa que **todos** están limpios. En ambos casos, la negación "empuja" hacia adentro del cuantificador y lo invierte: $\forall$ se convierte en $\exists$ (o viceversa), y el predicado queda negado.
+
+> [!TIP]
+> **Compruebe su comprensión.** ¿Cuál es la negación de $\forall x\ tieneVirus(x)$ (*"todos los pollos tienen virus"*), simplificada hasta dejarla como un existencial? ¿Qué dice en lenguaje natural?
+>
+> <details><summary>Ver respuesta</summary>
+>
+> $\neg\ \forall x\ tieneVirus(x) \equiv \exists x\ \neg tieneVirus(x)$: *"existe al menos un pollo robot que no tiene virus"*. Note que negar *"todos"* no da *"ninguno"* — da *"no todos"*, que es más débil.
+>
+> </details>
+
+---
+
+# Parte IV — Expresiones Compuestas y Verificación de Tipos
+
+## IV.1 Combinar predicados con conectivos
+
+Los predicados y cuantificadores no viven aislados: se combinan entre sí usando los **conectivos lógicos** que ya conoce ( $\neg$, $\land$, $\lor$, $\rightarrow$, $\leftrightarrow$ ) para formar **expresiones compuestas**. Estas permiten construir afirmaciones complejas sobre múltiples objetos, relaciones y condiciones dentro de un mismo razonamiento.
+
+Un ejemplo. Suponga los predicados:
+
+- $P(x):$ *"x es un profesor"*
+- $Q(x):$ *"x es un ingeniero"*
+
+La expresión compuesta *"x es un profesor **y** x es un ingeniero"* se escribe:
+
+$$P(x) \land Q(x)$$
+
+Mientras tenga la variable libre $x$, esto sigue siendo una **función proposicional** (sin valor de verdad). Pero si reemplazamos $x$ por un objeto específico —digamos **CPS** (Charles Proteus Steinmetz, ingeniero eléctrico e instructor histórico)— se convierte en una **proposición**:
+
+<img src="images/charles-proteus.png" alt="Fotografía histórica de un grupo de ingenieros, entre ellos Charles Proteus Steinmetz" width="240">
+
+$$P(\text{CPS}) \land Q(\text{CPS})$$
+
+que afirma *"CPS es profesor y CPS es ingeniero"*, y ahora sí es verdadera o falsa.
+
+## IV.2 Tabla de verificación de tipos
+
+Cuando las expresiones se complican, es fácil combinar mal las piezas. Una herramienta simple y poderosa para evitarlo es la **tabla de verificación de tipos**: describe, para cada componente lógico, **sobre qué opera** (su entrada) y **qué produce** (su salida).
+
+| Elemento | Opera sobre… | Produce…* | Ejemplo |
+|:---|:---|:---|:---|
+| **Conectivos** ( $\neg, \land, \lor, \rightarrow, \leftrightarrow$ ) | Proposiciones | Una proposición | $P \land Q,\ \neg P,\ P \rightarrow Q$ |
+| **Predicados** ( $=, <, \dots$ ) | Objetos | Una proposición | $mayorQue(x, y),\ x = y,\ par(x)$ |
+| **Funciones** | Objetos | Un **objeto** | $doble(x),\ padreDe(x),\ suma(x, y)$ |
+
+*\*Estrictamente, esto vale cuando ya no quedan variables libres. Si algún argumento sigue siendo una variable sin asignar ni cuantificar —como en $mayorQue(x, y)$ o en $P(x) \land Q(x)$ —, el resultado sigue siendo una **función proposicional** (Parte II.6), no todavía una proposición. La tabla muestra el caso ya instanciado, que es el más simple para fijar la distinción entre predicado y función matemática.*
+
+La distinción más útil de esta tabla es la última fila: una **función** (en el sentido matemático, como $doble(x)$ o $suma(x,y)$ ) toma objetos y **devuelve otro objeto** —un número, una persona—, mientras que un **predicado** toma objetos y devuelve un **valor de verdad** (una vez resueltas sus variables). Confundir ambos es una fuente típica de errores: $par(x)$ es verdadero o falso una vez asignado o cuantificado $x$ (predicado), pero $doble(x)$ es siempre un número (función).
+
+> [!NOTE]
+> **Un vistazo adelante: el "modelo" (opcional).** En lógica, un **modelo** es una interpretación que asigna significado a los símbolos de un lenguaje lógico y que hace que un conjunto de fórmulas sea verdadero. Es contenido de profundización, no indispensable para seguir esta clase.
+>
+> <details><summary>Ver la idea completa</summary>
+>
+> <img src="images/modelos.png" alt="Diagrama que separa la sintaxis (fórmulas y reglas de inferencia) de la semántica (modelos)" width="360">
+>
+> Un modelo es una representación de la realidad construida a partir de ciertos elementos y reglas. En **lógica proposicional**, un modelo simplemente mapea cada símbolo proposicional a un valor de verdad (una fila de la tabla de verdad). En **lógica cuantificacional**, un modelo es más rico: define un universo de objetos y asigna un significado a cada constante, predicado y función. La construcción formal completa de un modelo en lógica de predicados es tema de sesiones posteriores; por ahora basta con la intuición de que *elegir el universo y el significado de los predicados es, precisamente, construir el modelo*.
+>
+> </details>
+
+---
+
+# Parte V — Traducción: Lenguaje Natural ↔ Lenguaje Formal
+
+Una de las habilidades centrales de esta rama —y una de las más útiles para un ingeniero— es **traducir** entre el lenguaje natural (cómo hablamos) y el lenguaje formal (cómo escribe la lógica). Es importante en dos direcciones: para dar sentido preciso a conceptos matemáticos nuevos, y para analizar con rigor un problema complicado (por ejemplo, leer un requisito de software y capturar exactamente lo que pide, sin ambigüedad).
+
+<img src="images/homero.png" alt="Homero pensando dos frases: una en lenguaje natural y otra en lógica formal">
+
+Un ejemplo de traducción de lenguaje natural a formal, con Homero: *"Sin tele y sin cerveza, Homero pierde la cabeza"*. Con los predicados $C(x)$: *"x es cerveza"*, $T(y)$: *"y es tele"*, $P(z)$: *"z pierde la cabeza"*, y la constante $h$ (Homero), la frase se formaliza como:
+
+$$\bigl(\neg\exists x\ C(x) \land \neg\exists y\ T(y)\bigr) \rightarrow P(h)$$
+
+*"Si no existe cerveza y no existe tele, entonces Homero pierde la cabeza"*.
+
+## V.1 Un proceso en seis pasos
+
+Para traducir enunciados del lenguaje natural a lógica de predicados, conviene seguir un método ordenado:
+
+1. **Identificar** las proposiciones simples o propiedades involucradas.
+2. **Definir** las funciones proposicionales y constantes — el "diccionario" del problema.
+3. **Determinar** el dominio del discurso: ¿sobre qué universo estamos hablando?
+4. **Identificar la estructura** de la oración: ¿es universal, existencial, negada, condicional?
+5. **Aplicar la forma aristotélica** correspondiente, si aplica (ver abajo).
+6. **Escribir** la expresión en lógica de predicados y **verificar** que captura el significado original.
+
+## V.2 Las cuatro formas aristotélicas
+
+Las **cuatro formas aristotélicas** (llamadas A, E, I, O desde la lógica medieval) son plantillas de traducción muy útiles: cubren los cuatro patrones más comunes de cuantificación. Son una guía, no una camisa de fuerza — el lenguaje natural puede ser más complejo y requerir combinarlas —, pero dominar estas cuatro resuelve la mayoría de los casos.
+
+| Forma | Nombre | Enunciado típico | Traducción en lógica de predicados | Emparejamiento clave |
+|:---:|:---|:---|:---:|:---|
+| **A** | Universal afirmativa | *"Todo S es P"* | $\forall x\ (S(x) \rightarrow P(x))$ | $\forall$ con $\rightarrow$ |
+| **E** | Universal negativa | *"Ningún S es P"* | $\forall x\ (S(x) \rightarrow \neg P(x))$ | $\forall$ con $\rightarrow$ y $\neg$ |
+| **I** | Particular afirmativa | *"Algún S es P"* | $\exists x\ (S(x) \land P(x))$ | $\exists$ con $\land$ |
+| **O** | Particular negativa | *"Algún S no es P"* | $\exists x\ (S(x) \land \neg P(x))$ | $\exists$ con $\land$ y $\neg$ |
+
+Observe el patrón que anticipamos en la Parte III: las dos formas **universales** (A, E) usan $\forall$ con $\rightarrow$; las dos **particulares** (I, O) usan $\exists$ con $\land$.
+
+> [!WARNING]
+> **Error común en la forma I.** Para *"Algún S es P"* se tiende a escribir, por error, $\exists x\ (S(x) \rightarrow P(x))$ en lugar de $\exists x\ (S(x) \land P(x))$. Con la implicación $\rightarrow$, la expresión se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto $x$ para el cual $S(x)$ sea **falso** (antecedente falso $\Rightarrow$ implicación verdadera), lo que **no** captura el significado de *"algún S es P"*. La forma correcta con $\exists$ es siempre con $\land$: exige que **exista** un objeto que sea $S$ **y además** sea $P$.
+
+---
+
+# 📘 Ejercicios resueltos — Traducción y modelado
+
+Estos ejercicios son los que se resolvieron en clase. Cada uno se desarrolla paso a paso, explicando *por qué* se hace cada movimiento, no solo el resultado. El objetivo es que pueda reproducir el razonamiento por su cuenta.
+
+## Ejercicio 1 — ¿Cuáles frases dicen lo mismo?
+
+Considere el enunciado:
+
+> *"Para todo jugador de baloncesto x, x es alto."*
+
+¿Cuáles de las siguientes formas de expresión son **equivalentes** a este enunciado?
+
+- **(a)** Todo jugador de baloncesto es alto.
+- **(b)** Entre todos los jugadores de baloncesto, algunos son altos.
+- **(c)** Algunas de las personas altas son jugadores de baloncesto.
+- **(d)** Cualquier persona alta es un jugador de baloncesto.
+- **(e)** Todas las personas que son jugadores de baloncesto son altas.
+- **(f)** Cualquier persona que es un jugador de baloncesto es una persona alta.
+
+**Paso 1 — Formalizar el enunciado base.** Definimos el diccionario: $B(x)$: *"x es jugador de baloncesto"*, $A(x)$: *"x es alto"*. El enunciado *"para todo jugador de baloncesto x, x es alto"* tiene la estructura de una **forma A** (universal afirmativa: *"todo B es A"*):
+
+$$\forall x\ \bigl(B(x) \rightarrow A(x)\bigr)$$
+
+**Paso 2 — Comparar cada opción con esa estructura.** Una frase es equivalente si, y solo si, tiene la misma forma lógica. Revisemos:
+
+- **(a), (e), (f)** son tres maneras distintas de decir *"todo jugador de baloncesto es alto"* — todas se formalizan como $\forall x\ (B(x) \rightarrow A(x))$. **Son equivalentes.** ✔
+- **(b)** dice *"algunos jugadores son altos"*: eso es $\exists x\ (B(x) \land A(x))$ (forma I). Afirma menos que el original (el original dice *todos*, no *algunos*). **No equivalente.**
+- **(c)** dice *"algunas personas altas son jugadores"*: $\exists x\ (A(x) \land B(x))$. También es un existencial, no un universal. **No equivalente.**
+- **(d)** dice *"cualquier persona alta es jugador"*: $\forall x\ (A(x) \rightarrow B(x))$. ¡Ojo! Esto **invierte la flecha**: afirma que ser alto implica ser jugador, que es lo contrario de lo que dice el original. **No equivalente.**
+
+**Respuesta.** Las formas equivalentes son **(a), (e) y (f)**.
+
+> [!TIP]
+> **Antes de continuar, pregúntese:** ¿por qué (d) no es equivalente, si "usa las mismas palabras"? La diferencia está en la **dirección de la implicación**: $B(x)\rightarrow A(x)$ ("si es jugador, es alto") no es lo mismo que $A(x)\rightarrow B(x)$ ("si es alto, es jugador"). Confundir una implicación con su recíproca es uno de los errores más frecuentes al traducir — y aquí lo ve en acción.
+
+## Ejercicio 2 — Del lenguaje formal al natural
+
+Traduzca las siguientes expresiones a lenguaje natural, donde $C(x)$: *"x es un comediante"* y $F(x)$: *"x es gracioso"*, y el dominio son todas las personas.
+
+**(a)** $\forall x\ (C(x) \rightarrow F(x))$
+**(b)** $\forall x\ (C(x) \land F(x))$
+**(c)** $\exists x\ (C(x) \rightarrow F(x))$
+**(d)** $\exists x\ (C(x) \land F(x))$
+
+**Paso 1 — Leer el cuantificador y el conectivo juntos.** La clave es interpretar el emparejamiento cuantificador–conectivo con cuidado, sobre todo distinguir las formas "sanas" (A e I) de las que producen lecturas raras.
+
+**(a)** $\forall x\ (C(x) \rightarrow F(x))$ — forma A. Se lee: ***"Todo comediante es gracioso"*** (para toda persona, si es comediante entonces es graciosa).
+
+**(b)** $\forall x\ (C(x) \land F(x))$ — universal con conjunción. Se lee: ***"Todas las personas son comediantes y graciosas"***. Note lo fuerte (y absurdo) de la afirmación: no dice algo sobre los comediantes, sino que **toda persona del universo** es a la vez comediante y graciosa.
+
+**(c)** $\exists x\ (C(x) \rightarrow F(x))$ — existencial con implicación. Se lee literalmente: *"Existe una persona tal que, si es comediante, entonces es graciosa"*. Es una afirmación **lógicamente débil**: basta que exista una sola persona que **no** sea comediante para que sea verdadera (antecedente falso). Por eso, como vimos en la advertencia de la Parte V, esta forma casi nunca captura lo que uno quiere decir.
+
+**(d)** $\exists x\ (C(x) \land F(x))$ — forma I. Se lee: ***"Existe (hay) al menos un comediante que es gracioso"***.
+
+**Paso 2 — Contrastar (c) y (d).** Este par ilustra perfectamente la advertencia de la Parte V: para expresar *"hay un comediante gracioso"*, la forma correcta es **(d)** con $\land$, no **(c)** con $\rightarrow$. La (c), aunque sintácticamente válida, dice algo mucho más débil y engañoso.
+
+## Ejercicio 3 — Un objeto con dos propiedades (Einstein)
+
+Formalice: *"Albert Einstein era un físico alemán."*
+
+**Paso 1 — Determinar el universo y el diccionario.** Universo: las personas. Diccionario: $P(x)$: *"x es físico"*, $A(x)$: *"x es alemán"*. La frase atribuye **dos propiedades** al **mismo** individuo.
+
+**Paso 2 — Escribir la función proposicional.** *"x es físico y x es alemán"* es una expresión compuesta:
+
+$$P(x) \land A(x)$$
+
+**Paso 3 — Instanciar en el objeto concreto.** Como el sujeto es un individuo específico, reemplazamos la variable por la constante $einstein$, y la función proposicional se convierte en una **proposición**:
+
+$$P(einstein) \land A(einstein)$$
+
+que afirma *"Einstein es físico y Einstein es alemán"*. Este ejercicio muestra el segundo camino de la Parte II.6: una función proposicional se vuelve proposición al **asignar un valor** a su variable.
+
+## Ejercicio 4 — La importancia del universo ("No todo lo que brilla es oro")
+
+Formalice el refrán: *"No todo lo que brilla es oro."*
+
+Este ejercicio enseña una lección profunda: **la formalización correcta depende del universo que uno elija**. Lo resolvemos de dos maneras, ambas correctas.
+
+**Interpretación 1 — Universo restringido: $U = \{\text{cosas que brillan}\}$.**
+
+**Paso 1 — Fijar el universo y el diccionario.** Si decidimos que el universo son *solo las cosas que brillan* (una estrella, una lámpara…), entonces "brillar" ya está incorporado en el universo y no necesita predicado. Solo necesitamos $oro(x)$: *"x es oro"*.
+
+**Paso 2 — Traducir.** *"No todo (lo que brilla) es oro"* dice que no es cierto que todos los objetos del universo sean oro:
+
+$$\neg\ \forall x\ oro(x)$$
+
+Por la regla de negación de cuantificadores, esto equivale a $\exists x\ \neg oro(x)$: *"existe algo (que brilla) que no es oro"*.
+
+**Interpretación 2 — Universo amplio: $U = \{\text{todas las cosas}\}$.**
+
+**Paso 1 — Fijar el universo y el diccionario.** Si el universo son *todas las cosas* (estrellas, lámparas, pero también personas, piedras…), entonces "brillar" ya **no** está garantizado, y necesitamos un predicado explícito: $brilla(x)$: *"x brilla"*, además de $oro(x)$.
+
+**Paso 2 — Traducir.** Ahora la frase afirma que no es cierto que *todo lo que brilla* sea oro:
+
+$$\neg\ \forall x\ \bigl(brilla(x) \rightarrow oro(x)\bigr)$$
+
+que equivale a $\exists x\ \bigl(brilla(x) \land \neg oro(x)\bigr)$: *"existe algo que brilla y no es oro"*.
+
+**Paso 3 — La moraleja.** Las dos formalizaciones son correctas y dicen lo mismo *en el mundo real*, pero **se escriben distinto porque el universo es distinto**. En la primera, "brillar" es una condición de pertenencia al universo; en la segunda, es un predicado que hay que verificar. **Antes de traducir, siempre pregúntese: ¿cuál es mi universo?** Esa decisión determina toda la fórmula.
+
+Guarde esta lección: la va a ver otra vez, con el pollo robot, unas páginas más adelante — entre el **Expediente Gallinero** y los **Ejercicios propuestos** el enunciado *"todos los pollos robot funcionan"* se formaliza dos veces, con dos universos distintos, y da dos fórmulas de distinta forma. Es exactamente este mismo fenómeno.
+
+Este es también un buen momento para volver a la **tabla de verificación de tipos** (Parte IV.2) y confirmar que todo encaja: $brilla$ y $oro$ son **predicados** (operan sobre objetos, producen valores de verdad); $\neg$, $\rightarrow$, $\land$ son **conectivos** (operan sobre proposiciones, producen proposiciones); $\forall$ y $\exists$ son **cuantificadores** (convierten funciones proposicionales en proposiciones). Los tipos calzan.
+
+## Problema guiado — Complete el último paso
+
+Formalice: *"Hay alguien mayor de 21 años"*, con universo *"las personas"* y predicado $mayor21(x)$: *"x es mayor de 21 años"*.
+
+**Paso 1 — Identificar la estructura.** La palabra *"hay alguien"* señala una afirmación **existencial**: no se habla de todos, sino de que **existe al menos uno**. El cuantificador es $\exists$.
+
+**Paso 2 — Elegir el conectivo (o la ausencia de él).** Como hay un solo predicado ( $mayor21$ ) y ninguna condición adicional que restrinja el sujeto, no necesitamos combinar con $\land$ ni $\rightarrow$: basta aplicar el predicado directamente. **Complete usted la fórmula final:**
+
+$$\exists x\ \bigl(\rule[-0.2em]{6em}{0.06em}\bigr)$$
+
+> [!TIP]
+> <details><summary>Ver la respuesta del último paso</summary>
+>
+> La fórmula completa es:
+> $$\exists x\ \bigl(mayor21(x)\bigr)$$
+> que se lee *"existe al menos una persona x tal que x es mayor de 21 años"*. Aquí no hace falta ningún conectivo porque el universo (*"las personas"*) ya delimita el sujeto y solo se afirma una propiedad. Compare con *"algún estudiante es mayor de 21"*, que **sí** requeriría $\exists x\ (estudiante(x) \land mayor21(x))$ — forma I, con $\land$ — porque ahí *"estudiante"* es una restricción adicional dentro de un universo más amplio.
+>
+> </details>
+
+---
+
+# 🐔 Expediente Gallinero — El ingeniero pone orden en el laboratorio
+
+*Este bloque aplica —no explica— los conceptos ya vistos. Toda la teoría quedó atrás; aquí solo se usa.*
+
+Volvamos al gallinero con el que abrimos la clase. El ingeniero ya no está atado a la lógica proposicional: ahora tiene predicados y cuantificadores. Definamos su modelo formal.
+
+**El universo:** $U = \{P1, P2, P3, P4, P5, P6, P7, P8\}$, los ocho pollos robot del laboratorio.
+
+**El diccionario de predicados:**
+
+> [!NOTE]
+> **Sobre el universo y el predicado $robot$.** Como el universo $U=\{P1,\dots,P8\}$ ya está restringido de entrada a *"los ocho pollos robot del laboratorio"*, un predicado $robot(x)$ que dijera *"x es un pollo robot"* sería verdadero para **todo** el universo — es decir, redundante: no aportaría información. Por eso el diccionario de este Expediente no lo incluye; las fórmulas hablan directamente de $x$ como pollo robot, sin necesidad de decirlo dos veces.
+>
+> Este es el mismo principio del **Ejercicio 4** ("brilla y oro"): el universo elegido determina la forma de la fórmula. Aquí, al cerrar el universo a solo pollos robot, la fórmula se simplifica. Más adelante, en los **Ejercicios propuestos**, el universo del laboratorio se amplía para incluir también otros dispositivos — y ahí sí hace falta recuperar $robot(x)$ y el conectivo $\rightarrow$, porque ya no todo el universo es un pollo robot.
+
+| Predicado | Significado |
+|:---|:---|
+| $funciona(x)$ | *"x está operativo (sin avería)"* |
+| $tieneVirus(x)$ | *"x tiene el firmware infectado"* |
+| $tecnico(x, y)$ | *"x es el técnico responsable de y"* |
+
+Ahora el ingeniero puede escribir, por fin, la frase con la que soñaba al inicio — la que la lógica proposicional no sabía representar:
+
+$$\forall x\ funciona(x)$$
+
+*"Para todo x (del gallinero), x funciona"* — es decir, *"todos los pollos robot funcionan"*. Y a diferencia de la caja cerrada $p$ del inicio, de esta afirmación **sí** puede deducir información sobre cada pollo: si $\forall x\ funciona(x)$ es verdadera, entonces en particular $funciona(P3)$ también lo es.
+
+Con el mismo vocabulario, el ingeniero formaliza el resto de su tablero de monitoreo:
+
+- *"Existe al menos un pollo robot con el firmware infectado"* — como el universo ya son solo pollos robot y no hay ninguna condición adicional que restrinja el sujeto, basta el predicado directo, sin conectivo (el mismo caso del Problema guiado más adelante):
+$$\exists x\ tieneVirus(x)$$
+
+- *"Ningún pollo robot con virus está operativo"* (forma E, con $\rightarrow$ y $\neg$ ):
+$$\forall x\ \bigl(tieneVirus(x) \rightarrow \neg funciona(x)\bigr)$$
+
+- *"Ratchet es el técnico del pollo P3"* (predicado binario, con una constante):
+$$tecnico(ratchet, P3)$$
+
+Cuatro afirmaciones que la lógica proposicional no podía ni empezar a escribir, ahora expresadas con precisión. El ingeniero cierra su tablero satisfecho… pero hay una pregunta que todavía no puede formular. La retomaremos en el veredicto.
+
+---
+
+## Ejercicios propuestos
+
+Resuelva los siguientes ejercicios. Las respuestas finales están en el **Solucionario** al final del documento; intente cada uno antes de mirarlas.
+
+**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica, que incluye los ocho pollos robot ( $P1,\dots,P8$ ) junto con otros dispositivos de monitoreo (cámaras, sensores fijos, estaciones de carga) que **no** son pollos robot. Predicados: $robot(x)$ (*"x es un pollo robot"*), $funciona(x)$, $tieneVirus(x)$, $vuela(x)$ (*"x puede volar"*).
+
+> [!NOTE]
+> **Por qué aquí sí necesitamos $robot(x)$.** En el Expediente Gallinero, el universo era *solo* los ocho pollos robot, así que $robot(x)$ sobraba y las fórmulas quedaron más simples (por ejemplo, $\forall x\ funciona(x)$ ). Aquí el universo es más amplio —incluye dispositivos que no son pollos robot—, así que $robot(x)$ vuelve a aportar información real, y las fórmulas de los ejercicios siguientes sí necesitan la estructura completa $robot(x) \rightarrow \dots$ o $robot(x) \land \dots$. Es el mismo enunciado tipo *"todos los pollos robot funcionan"* que en el Expediente, pero con universo distinto — la misma lección del Ejercicio 4.
+
+**P1.** Traduzca a lógica de predicados: *"Todos los pollos robot pueden volar."*
+
+**P2.** Traduzca a lógica de predicados: *"Algún pollo robot tiene el firmware infectado."*
+
+**P3.** Traduzca a lógica de predicados: *"Ningún pollo robot infectado está operativo."*
+
+**P4.** Traduzca a lógica de predicados: *"Algún pollo robot no está operativo."* (Identifique cuál de las cuatro formas aristotélicas es.)
+
+**P5.** Identifique a qué **forma aristotélica** (A, E, I u O) corresponde cada una de las expresiones de P1 a P4.
+
+**P6.** Escriba la **negación** de la afirmación *"Todos los pollos robot funcionan"* —es decir, $\neg\ \forall x\ (robot(x)\rightarrow funciona(x))$ — y simplifíquela hasta dejarla como un existencial (sin el $\neg$ delante del cuantificador). ¿Qué dice en lenguaje natural?
+
+**P7.** Sea el predicado $P(x):\ x$ *es mayor que 5*, con universo los números enteros. Clasifique cada expresión como **función proposicional** o **proposición** (y en este último caso, indique si es V o F): (a) $P(x)$; (b) $P(9)$; (c) $P(2)$; (d) $\exists x\ P(x)$.
+
+**P8.** Sea el predicado $R(x, y, z):\ x + y = z$, con universo los enteros. Determine el valor de verdad de: (a) $R(2, 3, 5)$; (b) $R(4, 1, 6)$. Y clasifique: (c) $R(x, 2, z)$ — ¿función proposicional o proposición?
+
+**P9.** Sea el universo los números enteros y el predicado $C(x):\ x^2 \le 4$. Describa por extensión (listando sus elementos) el **conjunto de verdad** $\{\ x \in \mathbb{Z} \mid C(x)\ \}$.
+
+**P10.** Para la afirmación *"Todos hablan español"* con predicado $H(x):\ x$ *habla español*: proponga **un universo donde sea verdadera** y **un universo donde sea falsa**. (Este ejercicio muestra que el valor de verdad de una proposición cuantificada depende del universo elegido.)
+
+**P11.** Traduzca a **lenguaje natural** la expresión $\exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$.
+
+**P12.** Un estudiante tradujo *"Algún pollo robot vuela"* como $\exists x\ \bigl(robot(x) \rightarrow vuela(x)\bigr)$. Explique por qué esta traducción es **incorrecta** y escriba la correcta.
+
+---
+
+## Veredicto (parcial) — Lo que ya podemos y lo que aún no
+
+El ingeniero resolvió casi todo su tablero. Pero al final del día se topó con una pregunta que, con las herramientas de **esta** clase, todavía no puede formalizar del todo. Imagine que quisiera decir algo como:
+
+> *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
+
+Una afirmación así relaciona **varios individuos a la vez, cada uno con su propio cuantificador**, unos dentro del alcance de otros. Eso se llama **cuantificación anidada** (cuantificadores dentro de cuantificadores, como $\forall x$ $\exists y\ (\dots)$ ), y es justo lo que necesitaríamos para cerrar preguntas de este tipo — por ejemplo, la del zoológico donde *"hay un perro, un gato y un pájaro que tienen todos el mismo color"*, o afirmaciones como *"cada persona conoce a alguien"*.
+
+Con lo visto hoy llegamos hasta aquí, y no es poco: pasamos de no poder decir nada sobre `P3` a modelar poblaciones enteras, propiedades, relaciones y traducciones complejas — incluso con **varios cuantificadores independientes** en una misma fórmula, como en el ejemplo de Homero ( $\neg\exists x\ C(x)$ $\land\ \neg\exists y\ T(y)$ ), donde cada cuantificador abre y cierra su propio alcance sin depender de los demás. Lo que todavía no podemos hacer es **anidar** cuantificadores: escribir uno **dentro del alcance de otro**, de modo que uno dependa del otro — y el hecho, nada obvio, de que $\forall x$ $\exists y$ **no** significa lo mismo que $\exists y$ $\forall x$.
+
+> [!NOTE]
+> **Lo que viene más adelante.** Hoy abrimos la caja cerrada de la lógica proposicional y aprendimos a hablar de objetos, propiedades y de *"todos"* y *"algunos"*, incluso combinando varios cuantificadores independientes. Lo que queda para una sesión posterior del curso —no necesariamente la inmediatamente siguiente— es aprender a **anidar** cuantificadores: expresar frases donde un *"para todo"* contiene un *"existe"* (o al revés), y descubrir por qué el **orden** de los cuantificadores cambia por completo el significado.
 
 ---
 
@@ -661,38 +693,42 @@ Hopper no fue solo la persona junto a la primera "polilla". Fue una de las mente
 
 Al finalizar este documento, usted debería ser capaz de:
 
-- Distinguir con precisión entre la **verdad** de una proposición y la **validez** de un argumento, reconociendo que un argumento válido puede tener premisas falsas.
-- Representar un mismo argumento en sus tres notaciones (estándar, horizontal con $\vdash$, y condicional).
-- Determinar la validez de un argumento mediante **tablas de verdad**, identificando renglones críticos.
-- Reconocer la **falacia de afirmar el consecuente** y explicar por qué es inválida.
-- Demostrar la validez de un argumento mediante el **enfoque axiomático**, aplicando reglas de inferencia en formato Afirmación–Razón.
-- Decidir cuándo conviene el enfoque por tablas (pocas variables) y cuándo el axiomático (muchas variables), justificando la elección por escalabilidad.
+- **Explicar y distinguir** por qué la lógica proposicional se queda corta para razonar sobre objetos individuales, generalizaciones y excepciones, y manejar con precisión el vocabulario básico de la lógica de predicados: universo, objeto, constante, variable, predicado y función proposicional.
+- **Diferenciar** una función proposicional (sin valor de verdad) de una proposición, e **identificar** los dos mecanismos que convierten la una en la otra: asignar valores a sus variables, o cuantificar todas sus variables libres.
+- **Traducir** enunciados entre lenguaje natural y lógica de predicados usando las cuatro formas aristotélicas (A, E, I, O), emparejando correctamente $\forall$ con $\rightarrow$ y $\exists$ con $\land$, y **reconocer y evitar** el error de emparejarlos al revés.
+- **Determinar** el conjunto de verdad de un predicado sobre un dominio dado, y **justificar** cómo la elección del universo afecta tanto el valor de verdad de una proposición cuantificada como la forma misma de la fórmula que la representa.
 
 ## Ficha de bolsillo
 
-**Verdad vs. validez**: la verdad es de las *proposiciones* (depende del contexto); la validez es de los *argumentos* (depende solo de la forma). Un argumento válido puede tener premisas falsas.
+**Los bloques de la lógica de predicados:**
 
-**Criterio de validez**: un argumento es válido $\iff$ su forma condicional $(P_1\land\cdots\land P_n)\rightarrow Q$ es una **tautología** $\iff$ en todo **renglón crítico** (premisas todas en 1) la conclusión es 1.
+| Concepto | Qué es | Ejemplo |
+|:---|:---|:---|
+| Universo / Dominio | Conjunto de todos los objetos sobre los que se razona | $\{P1, \dots, P8\}$ |
+| Objeto / Individuo | Un miembro concreto del universo | $P3,\ Optimus,\ \pi$ |
+| Constante | Símbolo que nombra un objeto específico | $homero,\ ratchet$ |
+| Variable | Símbolo que representa cualquier objeto del dominio | $x,\ y,\ z$ |
+| Predicado | Propiedad o relación; produce V o F | $funciona(x),\ tecnico(x,y)$ |
+| Función (matemática) | Operación sobre objetos; produce **otro objeto** | $doble(x),\ suma(x,y)$ |
+| Función proposicional | Expresión con variables libres; aún **no** es proposición | $P(x) \land Q(x)$ |
+| Conjunto de verdad | Subconjunto del dominio donde el predicado es verdadero | $\{x \in D \mid autobot(x)\}$ |
+| Cuantificador universal | *"Para todo x…"* | $\forall x\ funciona(x)$ |
+| Cuantificador existencial | *"Existe al menos un x…"* | $\exists x\ tieneVirus(x)$ |
 
-**Las 9 reglas de inferencia**:
+**Verificación de tipos:** los **conectivos** operan sobre proposiciones y producen una proposición; los **predicados** operan sobre objetos y producen una proposición; las **funciones** operan sobre objetos y producen un objeto.
 
-| Regla | De… | …se obtiene |
-|:---|:---:|:---:|
-| Modus Ponens | $p\rightarrow q,\ p$ | $q$ |
-| Modus Tollens | $p\rightarrow q,\ \neg q$ | $\neg p$ |
-| Silogismo hipotético | $p\rightarrow q,\ q\rightarrow r$ | $p\rightarrow r$ |
-| Silogismo disyuntivo (Eliminación) | $p\lor q,\ \neg p$ | $q$ |
-| Simplificación | $p\land q$ | $p$ |
-| Adición | $p$ | $p\lor q$ |
-| Conjunción | $p,\ q$ | $p\land q$ |
-| Prueba por casos | $p\lor q,\ p\rightarrow r,\ q\rightarrow r$ | $r$ |
-| Resolución | $\neg p\lor r,\ p\lor q$ | $q\lor r$ |
+**Las cuatro formas aristotélicas** (regla de oro del emparejamiento):
 
-**Dos falacias que NO son reglas** (parecen válidas, no lo son):
-- Afirmar el consecuente: $p\rightarrow q,\ q\ \not\vdash\ p$.
-- Negar el antecedente: $p\rightarrow q,\ \neg p\ \not\vdash\ \neg q$.
+| Forma | Enunciado | Traducción |
+|:---:|:---|:---:|
+| **A** | Todo $S$ es $P$ | $\forall x\ (S(x) \rightarrow P(x))$ |
+| **E** | Ningún $S$ es $P$ | $\forall x\ (S(x) \rightarrow \neg P(x))$ |
+| **I** | Algún $S$ es $P$ | $\exists x\ (S(x) \land P(x))$ |
+| **O** | Algún $S$ no es $P$ | $\exists x\ (S(x) \land \neg P(x))$ |
 
-**Estrategia de demostración**: (1) liste premisas, (2) fije la meta, (3) busque patrones de reglas, (4) derive citando líneas, (5) itere. Sobran premisas sin usar — es normal.
+**Emparejamiento correcto (patrón de traducción, no regla de formación):** para traducir *"todo S es P"* y *"algún S es P"*, $\forall$ va con $\rightarrow$ y $\exists$ va con $\land$. Escribir $\exists x\ (S(x)\rightarrow P(x))$ para *"algún S es P"* es casi siempre un error — aunque la fórmula sea sintácticamente válida, dice algo distinto (débil y engañoso, ver Ejercicio 2c). El patrón guía la traducción; no prohíbe que $\forall$ aparezca alguna vez con $\land$ (como en $\forall x\ (P(x)\land Q(x))$, que simplemente afirma otra cosa: que todo el universo cumple ambas propiedades a la vez).
+
+**Negación de cuantificadores:** $\neg\ \forall x\ P(x) \equiv \exists x\ \neg P(x)$ y $\neg\ \exists x\ P(x) \equiv \forall x\ \neg P(x)$.
 
 ## Referencias y material para profundizar
 
@@ -702,13 +738,13 @@ Al finalizar este documento, usted debería ser capaz de:
 
 ### Libros de texto del curso
 
-- **Rosen, K. H.** *Discrete Mathematics and Its Applications* (8ª ed.). McGraw-Hill. Capítulo 1: "The Foundations: Logic and Proofs", sección "Rules of Inference".
+- **Rosen, K. H.** *Discrete Mathematics and Its Applications* (8ª ed.). McGraw-Hill. Capítulo 1: "The Foundations: Logic and Proofs", secciones 1.4 y 1.5 ("Predicates and Quantifiers", "Nested Quantifiers").
 - **Liben-Nowell, D.** *Connecting Discrete Mathematics and Computer Science*. Cambridge University Press.
 
 ### Material web
 
-- **MIT OpenCourseWare — 6.042J, Mathematics for Computer Science**: [ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/). En inglés.
-- **Grace Hopper y el primer *bug* (bitácora original)** — National Museum of American History (Smithsonian): [americanhistory.si.edu/collections/object/nmah_334663](https://americanhistory.si.edu/collections/object/nmah_334663). Fuente del contexto histórico de esta sesión.
+- **MIT — *Mathematics for Computer Science* (Lehman, Leighton, Meyer)**: [people.csail.mit.edu/meyer/mcs.pdf](https://people.csail.mit.edu/meyer/mcs.pdf). En inglés. La sección 3.6 ("Predicate Formulas") desarrolla cuantificadores y su orden con excelentes ejemplos.
+- **Stanford CS103 — *Guide to Logic Translations* y *First-Order Translation Checklist***: [web.stanford.edu/class/archive/cs/cs103/cs103.1232](https://web.stanford.edu/class/archive/cs/cs103/cs103.1232/). En inglés. Un checklist muy práctico para traducir a lógica de primer orden sin errores, incluido el emparejamiento cuantificador–conectivo.
 
 > [!NOTE]
 > Si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento es suficiente.
@@ -719,33 +755,28 @@ Al finalizar este documento, usted debería ser capaz de:
 <summary><b>Presione aquí para ver las respuestas</b></summary>
 <br>
 
-**P1.** **Válido** (es la regla de Silogismo Hipotético). En la tabla, ningún renglón crítico tiene conclusión falsa.
+**P1.** $\forall x\ \bigl(robot(x) \rightarrow vuela(x)\bigr)$. *"Para todo x, si x es un pollo robot, entonces x vuela."*
 
-**P2.** **Válido** (es la regla de Silogismo Disyuntivo / Eliminación). Ningún renglón crítico con conclusión falsa.
+**P2.** $\exists x\ \bigl(robot(x) \land tieneVirus(x)\bigr)$. *"Existe al menos un x que es pollo robot y tiene el firmware infectado."*
 
-**P3.** **No válido** — es la falacia de *negar el antecedente*. Renglón crítico que lo demuestra: $p=0,\ q=1$: ambas premisas ($p\rightarrow q=1$ y $\neg p=1$) son verdaderas, pero la conclusión $\neg q=0$ es falsa.
+**P3.** $\forall x\ \bigl((robot(x) \land tieneVirus(x)) \rightarrow \neg funciona(x)\bigr)$. *"Para todo x, si x es un pollo robot infectado, entonces x no está operativo."*
 
-**P4.** **Válido**. Una derivación posible: (1) $p\rightarrow q$ Prem.; (2) $q\rightarrow r$ Prem.; (3) $p$ Prem.; (4) $q$ Modus Ponens 1,3; (5) $r$ Modus Ponens 2,4.
+**P4.** $\exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$. Es la **forma O** (particular negativa: *"algún S no es P"*), con $\exists$ y $\land$.
 
-**P5.** **Válido**. (1) $p\lor q$; (2) $\neg p$; (3) $q\rightarrow r$; (4) $q$ Eliminación 1,2; (5) $r$ Modus Ponens 3,4.
+**P5.** P1 → **forma A** (universal afirmativa). P2 → **forma I** (particular afirmativa). P3 → **forma E** (universal negativa; aquí el sujeto $S$ es "pollo robot infectado"). P4 → **forma O** (particular negativa).
 
-**P6.** **Válido**. (1) $p\rightarrow q$; (2) $r\rightarrow s$; (3) $p\lor r$; (4) $\neg q$; (5) $\neg p$ Modus Tollens 1,4; (6) $r$ Eliminación 3,5; (7) $s$ Modus Ponens 2,6.
+**P6.** $\neg\ \forall x\ (robot(x)\rightarrow funciona(x)) \equiv \exists x\ \bigl(robot(x) \land \neg funciona(x)\bigr)$. En lenguaje natural: *"Existe al menos un pollo robot que no funciona"* (es decir, *"no todos funcionan"*). Note que la negación de una **forma A** produce una **forma O**.
 
-**P7.** **Válido**. (1) $(p\land q)\rightarrow r$; (2) $p$; (3) $q$; (4) $p\land q$ Conjunción 2,3; (5) $r$ Modus Ponens 1,4.
+**P7.** (a) $P(x)$: **función proposicional** (variable libre). (b) $P(9)$: **proposición verdadera** ( $9 > 5$ ). (c) $P(2)$: **proposición falsa** ( $2 \not> 5$ ). (d) $\exists x\ P(x)$: **proposición verdadera** (existen enteros mayores que 5, p. ej. 6).
 
-**P8.** Proposiciones: $D$: el despliegue fue exitoso; $S$: el sitio está en línea; $R$: hubo *rollback*; $A$: se envió una alerta. Formal: $D\rightarrow S,\ \neg S,\ D\lor R,\ R\rightarrow A\ \vdash\ A$. Derivación: (1) $D\rightarrow S$; (2) $\neg S$; (3) $D\lor R$; (4) $R\rightarrow A$; (5) $\neg D$ Modus Tollens 1,2; (6) $R$ Eliminación 3,5; (7) $A$ Modus Ponens 4,6. **Válido.**
+**P8.** (a) $R(2,3,5)$: **verdadera** ( $2+3=5$ ). (b) $R(4,1,6)$: **falsa** ( $4+1=5 \neq 6$ ). (c) $R(x,2,z)$: **función proposicional** (le quedan dos variables libres, $x$ y $z$ ).
 
-**P9.** **Válido**. (1) $a\rightarrow b$; (2) $b\rightarrow c$; (3) $\neg c$; (4) $a\lor d$; (5) $d\rightarrow e$; (6) $a\rightarrow c$ Silogismo Hipotético 1,2; (7) $\neg a$ Modus Tollens 6,3; (8) $d$ Eliminación 4,7; (9) $e$ Modus Ponens 5,8.
+**P9.** $\{\ x \in \mathbb{Z} \mid x^2 \le 4\ \} = \{-2, -1, 0, 1, 2\}$. (Son los enteros cuyo cuadrado no pasa de 4; $(\pm 3)^2 = 9 > 4$ quedan fuera.)
 
-**P10.** Es la falacia de **afirmar el consecuente**. Tabla:
+**P10.** Un ejemplo: la afirmación *"todos hablan español"* es **verdadera** si el universo es *"los habitantes de un pueblo hispanohablante"* (o *"los miembros de una familia colombiana"*), y **falsa** si el universo es *"todos los seres humanos"* (hay millones que no hablan español). La misma fórmula $\forall x\ H(x)$ cambia de valor de verdad según el universo — esa es la lección.
 
-| $p$ | $q$ | $p\rightarrow q$ | $q$ | $p$ (concl.) |
-|:-:|:-:|:-:|:-:|:-:|
-| 0 | 0 | 1 | 0 | 0 |
-| **0** | **1** | **1** | **1** | **0** |
-| 1 | 0 | 0 | 0 | 1 |
-| 1 | 1 | 1 | 1 | 1 |
+**P11.** *"Existe al menos un pollo robot que no está operativo"* (equivalentemente, *"algún pollo robot está averiado"*).
 
-El renglón $p=0,\ q=1$ es crítico (ambas premisas en 1) con conclusión $p=0$ falsa. **No válido.**
+**P12.** Es incorrecta porque empareja $\exists$ con $\rightarrow$. Con esa forma, la expresión $\exists x\ (robot(x) \rightarrow vuela(x))$ se vuelve **verdadera de forma trivial** en cuanto exista un solo objeto del universo que **no** sea pollo robot (antecedente falso $\Rightarrow$ implicación verdadera), sin que ningún pollo vuele realmente. La traducción correcta usa $\land$ (forma I): $\exists x\ \bigl(robot(x) \land vuela(x)\bigr)$.
 
 </details>

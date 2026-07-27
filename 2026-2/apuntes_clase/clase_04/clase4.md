@@ -1,537 +1,397 @@
 ![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-# 🕵️ El Caso del Broche de Zafiro
-### Equivalencia Lógica, Leyes de De Morgan, Variantes del Condicional y Condiciones de Necesidad y Suficiencia
+# 🕵️ El Caso del Broche de Zafiro — La Ecuación de Holmes
+### Enfoque Axiomático: Leyes del Álgebra de Proposiciones y Demostraciones por Cadena de Equivalencias
 
 *Notas de clase — Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional*
 *Universidad de Antioquia · Ingeniería de Sistemas*
 
 ---
 
-## Contexto de apoyo
+## El caso — donde lo dejamos
 
-Sherlock Holmes, el detective consultor creado por Arthur Conan Doyle, es célebre por resolver casos mediante deducción rigurosa: elimina explicaciones imposibles, contrasta coartadas y detecta cuándo dos testimonios no pueden ser ciertos al mismo tiempo. No es una coincidencia estilística: el método de Holmes es, en esencia, razonamiento lógico formal aplicado a hechos cotidianos — precisamente las herramientas que se desarrollan en esta sesión.
+Con las herramientas de la sesión anterior, Holmes descartó a Lady Constance, encontró que las declaraciones del Coronel Whitmore y de la Srta. Hart son negaciones exactas la una de la otra, y estableció que ni el acceso a una llave ($L$) ni haberse ausentado del salón ($F$) son, por separado, prueba suficiente de culpabilidad ($R$) — apenas son condiciones necesarias. El caso quedó acotado a dos sospechosos: el Sr. Finch y el Coronel Whitmore. *"Tengo las piezas"*, dijo Holmes, *"pero todavía no la ecuación que las una."*
 
-El caso que sigue es original (no corresponde a ninguna obra publicada de Conan Doyle); solo toma prestado el estilo del detective y su compañero, el Dr. Watson.
+Esta sesión le da esa ecuación: un conjunto de leyes que permiten combinar y simplificar todas las condiciones lógicas recogidas hasta ahora en una sola expresión, sin construir una tabla de verdad gigantesca para hacerlo.
 
-## El caso — El enigma de las dos versiones
+## Antes de comenzar — lo que ya debería saber
 
-En una cena en Ashworth Manor, un broche de zafiro desaparece de una vitrina en el estudio del anfitrión, Lord Ashworth. El estudio permaneció cerrado con llave durante los treinta minutos que duró el robo, y la cerradura no fue forzada. Durante ese intervalo, cinco personas —Lord Ashworth, Lady Constance (su esposa), el Coronel Whitmore, la Srta. Eleanor Hart (sobrina del anfitrión) y el Sr. Alistair Finch (secretario personal de Lord Ashworth)— se encontraban, en teoría, reunidas en el salón contiguo tomando café.
+Este documento retoma directamente las herramientas de la sesión anterior. Antes de continuar, verifique que puede hacer lo siguiente:
 
-Al interrogarlos, Holmes obtiene dos testimonios que no pueden ser ciertos simultáneamente:
+- Construir la tabla de verdad de una expresión con cualquier número de variables y clasificarla como **tautología**, **contradicción** o **contingencia**.
+- Demostrar que dos proposiciones son **equivalentes** ($p\equiv q$) verificando que $p\leftrightarrow q$ es una tautología.
+- Aplicar la **definición del condicional** ($p\rightarrow q\equiv\neg p\lor q$) y las **Leyes de De Morgan** ($\neg(p\land q)\equiv\neg p\lor\neg q$, $\neg(p\lor q)\equiv\neg p\land\neg q$).
+- Reconocer el **contrarrecíproco** ($p\rightarrow q\equiv\neg q\rightarrow\neg p$) y distinguirlo del recíproco (no equivalente al original).
 
-- El **Coronel Whitmore** declara: *"Finch salió del salón, y tuvo tiempo de conseguir una llave."*
-- La **Srta. Hart**, en defensa de Finch, declara: *"Finch no salió del salón, o no tuvo acceso a ninguna llave."*
-
-¿Son estas dos declaraciones realmente incompatibles, o podría existir una lectura que las concilie? Responder esto con precisión —no por intuición— es el primer problema que resuelve esta sesión.
-
-## Antes de comenzar: lo que ya debería saber
-
-Este documento retoma las herramientas construidas en la sesión anterior. Antes de continuar, verifique que puede hacer lo siguiente:
-
-- Construir la tabla de verdad de una expresión con cualquier número de variables (Protocolo de 6 pasos: identificar variables → calcular filas $2^n$ → construir columnas → agregar columnas auxiliares → evaluar respetando jerarquía → validar).
-- Clasificar una proposición como **tautología** (columna final siempre $V$), **contradicción** (siempre $F$) o **contingencia** (mezcla de $V$ y $F$).
-- Aplicar la jerarquía y asociatividad de los operadores ($\neg$ primero; luego $\land$; luego $\lor$; luego $\oplus$; luego $\rightarrow$, que asocia a la derecha; y por último $\leftrightarrow$).
-
-Si alguno de estos puntos no le resulta claro, repáselo en la sesión anterior (Tablas de Verdad) antes de continuar.
+Si alguno de estos puntos no le resulta claro, repáselo en el documento de la sesión anterior antes de continuar. Este documento no depende de conexión a internet para poder estudiarlo — todo lo necesario está aquí.
 
 ---
 
-# Parte I — Equivalencia Lógica
+# Parte I — Del Álgebra Escolar al Álgebra de Proposiciones
 
-## I.1 Definición
+Seguramente, en el colegio resolvió ejercicios de simplificación como el siguiente:
 
-Dos proposiciones compuestas $p$ y $q$ son **lógicamente equivalentes** (o simplemente *equivalentes*) si la proposición $p \leftrightarrow q$ es una **tautología**: es decir, si $p$ y $q$ tienen exactamente el mismo valor de verdad en todas las combinaciones posibles de sus variables.
+> **Simplifique:** $\dfrac{x^2-x-6}{x^2-9}$
 
-- **Notación**: $p \leftrightarrow q$ o $p \equiv q$ (ambas se usan indistintamente para afirmar la equivalencia).
-- Esto no requiere ninguna herramienta nueva: basta con construir la tabla de verdad de $p\leftrightarrow q$ (o, de forma equivalente, construir las tablas de $p$ y de $q$ por separado y comparar columna por columna) y verificar que coinciden en todas las filas.
-
-> [!IMPORTANT]
-> **La herramienta más usada de esta sesión**: la definición del condicional en términos de disyunción.
-> $$p \rightarrow q \equiv \neg p \lor q$$
-> Esta equivalencia es la base de casi todas las demostraciones que siguen — apréndala de memoria.
-
-## I.2 Demostración: $\neg p \lor q \equiv p \rightarrow q$
-
-| $p$ | $q$ | $\neg p$ | $\neg p \lor q$ | $p\rightarrow q$ |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 0 | 1 | 1 |
-| 1 | 0 | 0 | 0 | 0 |
-| 0 | 1 | 1 | 1 | 1 |
-| 0 | 0 | 1 | 1 | 1 |
-
-Las columnas $\neg p \lor q$ y $p\rightarrow q$ son idénticas en las cuatro filas, así que $\neg p\lor q \equiv p\rightarrow q$.
-
-## I.3 Leyes de De Morgan
-
-August De Morgan estableció que la negación de una conjunción o una disyunción sigue un patrón fijo:
-
-$$\neg(p\land q) \equiv \neg p\lor\neg q \qquad\qquad \neg(p\lor q) \equiv \neg p\land\neg q$$
-
-En palabras: **negar** una expresión unida por "y"/"o" **invierte el conector** y **niega cada componente por separado**. Ambas leyes se demuestran en la sección de Ejercicios resueltos.
-
-> [!WARNING]
-> **La "falsa distributiva"**: un error frecuente es asumir que la negación simplemente "se reparte" sin cambiar el conector, es decir, creer que $\neg(p\land q) \equiv \neg p \land \neg q$. Esto es **falso** — compruébelo con $p=1, q=0$: $\neg(p\land q) = \neg(0) = 1$, pero $\neg p\land\neg q = 0\land 1 = 0$. Las Leyes de Morgan exigen cambiar también el conector, no solo negar cada término.
-
-> [!TIP]
-> **Compruebe su comprensión**
->
-> Usando la primera Ley de Morgan, escriba una expresión equivalente a $\neg(r\land\neg s)$.
->
-> <details><summary>Ver respuesta</summary>
-> $\neg(r\land\neg s) \equiv \neg r\lor\neg(\neg s) \equiv \neg r \lor s$ (aplicando Morgan y luego doble negación).
-> </details>
-
-> [!NOTE]
-> **Conexión con Lógica y Representación I**: Morgan también mejora la legibilidad del código, no solo la notación matemática. En vez de escribir `if not (sensor_activo and lectura_valida):`, conviene escribir `if not sensor_activo or not lectura_valida:` — es la misma ley aplicada directamente. Además de ser más legible, esta segunda forma evalúa en **cortocircuito**: si `sensor_activo` es falso, Python ni siquiera evalúa `lectura_valida`.
-
----
-
-# Parte II — Variantes del Condicional
-
-## II.1 Recíproco, contrarrecíproco y contrario
-
-A partir de una proposición condicional original $p\rightarrow q$, se derivan tres variantes cambiando el orden y aplicando negaciones:
-
-| Nombre | Fórmula | Se obtiene... |
-|---|:---:|---|
-| **Original** | $p\rightarrow q$ | — |
-| **Recíproco** (converse) | $q\rightarrow p$ | intercambiando hipótesis y conclusión |
-| **Contrarrecíproco** (contrapositive) | $\neg q\rightarrow \neg p$ | intercambiando y negando ambas |
-| **Contrario / Inverso** (inverse) | $\neg p\rightarrow \neg q$ | negando ambas, sin intercambiar |
-
-> [!WARNING]
-> **Falacia de afirmación del consecuente**: asumir que $p\rightarrow q$ y su recíproco $q\rightarrow p$ son equivalentes es uno de los errores lógicos más comunes. En general **no lo son** — se demuestra en los Ejercicios resueltos.
-
-## II.2 ¿Cuáles variantes son equivalentes al original?
-
-Solo dos de las cuatro formas comparten siempre el mismo valor de verdad:
-
-$$p\rightarrow q \;\equiv\; \neg q\rightarrow\neg p \qquad\qquad q\rightarrow p \;\equiv\; \neg p\rightarrow\neg q$$
-
-Es decir: **el original es equivalente a su contrarrecíproco**, y **el recíproco es equivalente al contrario**. Esto se demuestra con tabla de verdad en los Ejercicios resueltos, pero también puede obtenerse por **cadena algebraica**, encadenando herramientas que ya conoce (la definición del condicional de la Parte I, y dos de las leyes de la tabla de referencia de la Parte V):
+Para resolverlo, usted no probó valores de $x$ al azar. Aplicó una regla estructural ya demostrada como válida (factorización):
 
 $$
 \begin{aligned}
-p\rightarrow q &\equiv \neg p\lor q &&\text{(definición del condicional)}\\
-&\equiv q\lor\neg p &&\text{(conmutativa)}\\
-&\equiv \neg(\neg q)\lor\neg p &&\text{(doble negación)}\\
-&\equiv \neg q\rightarrow\neg p &&\text{(definición del condicional, en sentido inverso)}
+\frac{x^2-x-6}{x^2-9} &= \frac{(x-3)(x+2)}{(x-3)(x+3)} &&\text{(factorización de ambos polinomios)}\\
+&= \frac{x+2}{x+3} &&\text{(cancelación del factor común }(x-3)\text{)}
 \end{aligned}
 $$
 
-Esta cadena no es una herramienta nueva — es un adelanto de lo que la próxima sesión formalizará como método general: encadenar leyes para transformar una expresión sin construir la tabla completa.
+Note lo importante: aplicando reglas que ya sabía verdaderas, transformó una expresión en otra **equivalente y más simple**, sin evaluar $x$ ni una sola vez.
+
+En lógica proposicional vamos a hacer exactamente lo mismo. Cambian las fichas —variables proposicionales ($p,q,r$) en vez de numéricas, y $\land,\lor,\neg,\rightarrow$ en vez de $+,-,\times,\div$— pero el juego es idéntico: aplicar reglas ya demostradas para transformar una expresión en otra equivalente, sin evaluar cada combinación de valores de verdad.
+
+## I.1 ¿Por qué necesitamos esto?
+
+Hasta ahora, la única forma que conoce para verificar una equivalencia es construir la tabla de verdad completa (el **enfoque basado en modelos**). Es un método infalible, pero se vuelve impráctico muy rápido: una expresión con 4 variables ya necesita $2^4=16$ filas; con 6 variables, 64 filas. Necesitamos una forma de simplificar y demostrar sin fuerza bruta.
+
+## I.2 El enfoque axiomático — la analogía del edificio
+
+Alrededor del año 300 a. C., Euclides organizó gran parte de la geometría griega partiendo de un pequeño conjunto de verdades que se aceptaban sin demostración —los **axiomas**— y, mediante deducción lógica pura, construyó a partir de ellos resultados cada vez más complejos —los **teoremas**. Cada teorema nuevo se apoya en axiomas o teoremas ya establecidos; nunca se construye desde cero.
+
+Un sistema axiomático se puede imaginar como un edificio:
+
+```mermaid
+
+graph BT
+    A1["Conmutatividad"]:::axioma
+    A2["Distributividad"]:::axioma
+    A3["De Morgan"]:::axioma
+    A4["Complemento"]:::axioma
+    A5["Identidad"]:::axioma
+
+    TA["Teorema A (p. ej. Absorción)"]:::teorema
+    TB["Teorema B"]:::teorema
+
+    TC["Teorema Complejo — lo <br>que queremos demostrar"]:::complejo
+
+    A1 --> TA
+    A2 --> TA
+    A3 --> TB
+    A4 --> TB
+    A5 --> TB
+    TA --> TC
+    TB --> TC
+
+    subgraph BASE["Axiomas — cimientos, no requieren demostración"]
+        A1
+        A2
+        A3
+        A4
+        A5
+    end
+
+    subgraph PISO1["Teoremas ya demostrados"]
+        TA
+        TB
+    end
+
+    classDef axioma fill:#eee3c8,stroke:#a3894f,stroke-width:1.5px,color:#3d3220
+    classDef teorema fill:#d7e8d9,stroke:#4f8a5c,stroke-width:1.5px,color:#1f3d24
+    classDef complejo fill:#f6d998,stroke:#b8860b,stroke-width:2.5px,color:#4a3800,font-weight:bold
+    style BASE fill:none,stroke:#a3894f,stroke-dasharray: 4 3,stroke-width:1px
+    style PISO1 fill:none,stroke:#4f8a5c,stroke-dasharray: 4 3,stroke-width:1px
+```
+
+En nuestro caso, los **axiomas** son un conjunto de leyes lógicas que ya sabemos verdaderas (varias de ellas las demostramos con tabla de verdad en la sesión anterior). Una **demostración axiomática** consiste en partir de una expresión y transformarla, paso a paso, aplicando siempre una de estas leyes, hasta llegar a la expresión que queremos:
+
+$$
+\begin{array}{rl}
+A & \equiv A_1 \\
+  & \equiv A_2 \\
+  & \quad\vdots \\
+  & \equiv A_n \\
+  & \equiv B \\
+\hline
+A & \equiv B
+\end{array}
+$$
+
+Cada $\equiv$ de la cadena debe estar justificado por una ley concreta — nunca por intuición.
 
 > [!NOTE]
-> **Conexión con Lógica y Representación I**: en programación, reformular una condición usando su contrarrecíproco suele simplificar el código mediante *cláusulas de guarda* (verificar primero el caso de fallo para salir temprano):
-> ```python
-> # Original: "si el sensor es válido, procesamos la lectura"
-> if sensor_valido:
->     procesar_lectura()
->
-> # Contrarrecíproco: "si no vamos a procesar, es porque el sensor no es válido"
-> if not sensor_valido:
->     return
-> procesar_lectura()
-> ```
-> Esta reescritura reduce el anidamiento sin cambiar el significado lógico — es un argumento de la Unidad 4 (condiciones de parada) del curso de programación: verificar la condición de fallo primero es, en el fondo, razonar con el contrarrecíproco.
+> **Conexión con Lógica y Representación I**: simplificar una expresión booleana con estas leyes es exactamente lo que hace que una condición compleja en código sea más legible y eficiente. Un `if` con cinco operadores anidados casi siempre puede reducirse aplicando las mismas leyes que va a aprender aquí — verá un ejemplo concreto en los Ejercicios propuestos.
 
 ---
 
-# Parte III — Condiciones de Necesidad y Suficiencia
+# Parte II — Inventario de Leyes del Álgebra de Proposiciones
 
-## III.1 Definiciones
+La siguiente tabla es la **fuente de verdad** del curso para justificar pasos en talleres y exámenes. Ya conocía nueve de estas leyes desde la sesión anterior (donde se presentaron como "adelanto"); ahora se añaden tres más que formalizan lo que ya usó allí de forma intuitiva: Implicación, Contrarrecíproco y Equivalencia.
 
-Dado un condicional $p\rightarrow q$:
-
-- **$p$ es condición suficiente para $q$**: basta con que $p$ ocurra para garantizar que $q$ ocurra. (Es decir, $p\rightarrow q$ es verdadero.)
-- **$p$ es condición necesaria para $q$**: sin $p$, $q$ no puede ocurrir. Esto equivale a decir que $q\rightarrow p$ es verdadero (o, lo que es lo mismo por el contrarrecíproco, $\neg p\rightarrow\neg q$).
-- **$p$ es necesaria y suficiente para $q$**: ambas relaciones se cumplen a la vez, es decir, $p\leftrightarrow q$.
-
-> [!TIP]
-> **Regla práctica**: para decidir, hágase estas dos preguntas por separado (la respuesta debe ser SÍ para afirmar cada una):
-> 1. **Suficiencia**: *"Si tengo $p$, ¿$q$ está 100% garantizado?"*
-> 2. **Necesidad**: *"Si NO tengo $p$, ¿$q$ se vuelve imposible?"*
->
-> Note que estas dos preguntas son independientes — una puede ser cierta sin que lo sea la otra, como se verá en los Ejercicios resueltos.
->
-> **Cuando la intuición no basta — prueba del contraejemplo**: las mismas dos preguntas, convertidas en un procedimiento de búsqueda activa (no es una herramienta nueva, es la definición del condicional aplicada como algoritmo):
-> - **Suficiencia**: busque un caso con $p$ verdadero y $q$ falso. Si lo encuentra, **no** es suficiente; si no existe ninguno, **sí** lo es.
-> - **Necesidad**: busque un caso con $q$ verdadero y $p$ falso. Si lo encuentra, **no** es necesaria; si no existe ninguno, **sí** lo es.
->
-> *Ejemplo breve*: sea $p$: "el número es múltiplo de 10" y $q$: "el número es múltiplo de 5". ¿Existe un caso con $p$ verdadero y $q$ falso? No — todo múltiplo de 10 es múltiplo de 5. → **suficiente**. ¿Existe un caso con $q$ verdadero y $p$ falso? Sí, el 15. → **no necesaria**. Un solo contraejemplo bastó para cerrar la segunda pregunta sin razonar en abstracto.
-
-## III.2 Indicadores lingüísticos
-
-| Indicadores de suficiencia ($p\rightarrow$) | Indicadores de necesidad ($\rightarrow q$) |
-|---|---|
-| Si..., entonces... | ...solo si... |
-| Cuando... | ...solamente si... |
-| Cada vez que... | ...únicamente si... |
-| Siempre que... | ...es una condición necesaria para... |
-| Basta que... | ...es un requisito para... |
-| Es suficiente que... | ...implica... |
-
-> [!TIP]
-> **Compruebe su comprensión**
->
-> En el enunciado "Cuando el motor se sobrecalienta, se activa la alarma", ¿"el motor se sobrecalienta" es la condición necesaria o suficiente para "se activa la alarma"?
->
-> <details><summary>Ver respuesta</summary>
-> Suficiente. "Cuando..." introduce el antecedente (Parte III.2): sobrecalentarse basta para que la alarma se active. Esto no descarta que existan otras causas que también activen la alarma — solo afirma que esta es una de ellas y que, si ocurre, la alarma es inevitable.
-> </details>
-
-
-> [!WARNING]
-> **La trampa del "solo si"**: la expresión "$p$ **solo si** $q$" se traduce como $p\rightarrow q$ (no como $q\rightarrow p$), aunque en el lenguaje cotidiano $q$ suela mencionarse como si fuera un requisito previo en el tiempo. El "solo si" siempre introduce el **consecuente**, sin importar el orden en que aparezcan las palabras en la oración.
-
----
-
-# Parte IV — Traducción de Lenguaje Natural a Lógica Formal
-
-## IV.1 Tabla de conectores
-
-| Conector lógico | Forma simbólica | Expresiones equivalentes en español |
-|---|:---:|---|
-| Conjunción | $p\land q$ | • $p$ y $q$<br>• $p$, pero $q$<br>• $p$ aun $q$<br>• $p$, aunque $q$<br>• $p$ sin embargo $q$ |
-| Disyunción (inclusiva) | $p\lor q$ | • $p$ o $q$<br>• $p$, a menos que $q$<br>• al menos una entre $p$ y $q$ |
-| Disyunción exclusiva | $p\oplus q$ | • $p$ o $q$, pero no ambos<br>• exactamente uno de $p$ y $q$ |
-| Condicional | $p\rightarrow q$ | • si $p$, entonces $q$<br>• $q$ si $p$<br>• $p$ solo si $q$<br>• $q$ siempre que $p$<br>• $p$ implica $q$ |
-| Bicondicional | $p\leftrightarrow q$ | • $p$ si y solo si $q$<br>• $p$ es necesario y suficiente para $q$<br>• $p$ y $q$ son equivalentes |
-
-> [!NOTE]
-> **No existe una única regla para nombrar variables.** El estilo clásico ($p,q,r$) es el estándar en matemáticas; el estilo semántico (nombres descriptivos como `sensorActivo`) es el estándar en programación. El nombre de la variable nunca cambia la lógica — en esta sesión se usan ambos estilos.
-
-## IV.2 Receta mecánica para "a menos que"
-
-"$p$ a menos que $q$" equivale a la disyunción $p\lor q$, pero traducirla de memoria puede llevar a error. Existe un procedimiento mecánico —documentado en la literatura de razonamiento condicional aplicado, que dedica material extenso a esta traducción por ser una fuente frecuente de errores— que evita derivar la equivalencia desde cero cada vez:
-
-1. Lo que sigue inmediatamente a "a menos que" se coloca como el **consecuente**.
-2. El resto de la oración se **niega** y se coloca como el **antecedente**.
-
-> [!TIP]
-> **Aplicación**: "Saldremos a caminar, a menos que esté lloviendo."
->
-> - Sea $p$: saldremos a caminar. $s$: está lloviendo.
-> - Paso 1 — lo que sigue a "a menos que": "esté lloviendo" → consecuente $s$.
-> - Paso 2 — el resto de la oración, negado: "no saldremos a caminar" → antecedente $\neg p$.
-> - Resultado: $\neg p\rightarrow s$ ("Si no salimos a caminar, entonces está lloviendo").
->
-> Esta receta no reemplaza el razonamiento por equivalencia — produce el **contrarrecíproco** de la forma que se obtiene leyendo "a menos que" directamente como $\neg s\rightarrow p$ (si no llueve, entonces salimos). Ambas son correctas y equivalentes entre sí (Parte II); la receta es solo un atajo mecánico para enunciados largos o ambiguos.
-
-## IV.3 Traducción en dirección inversa: de lógica a lenguaje natural
-
-El proceso también funciona al revés: dada una fórmula, se identifica el conector principal (respetando la jerarquía) y se reconstruye la oración. Por ejemplo, dado $\neg s\rightarrow r$ con $s$: "el sistema detecta señal" y $r$: "se activa el modo manual", la traducción es: *"Si el sistema no detecta señal, entonces se activa el modo manual"*.
-
-> [!NOTE]
-> **Conexión con Lógica y Representación I**: leer especificaciones de software con precisión —distinguir si un requisito describe una condición necesaria, suficiente o ambas— es exactamente la misma habilidad de traducción que se practica aquí. Un requisito mal traducido de lenguaje natural a código es una de las causas más comunes de errores de lógica en un programa.
-
-> [!TIP]
-> **Compruebe su comprensión**
->
-> Traduzca a lenguaje natural la expresión $b\rightarrow\neg c$, donde $b$: "el usuario está bloqueado" y $c$: "puede iniciar sesión".
->
-> <details><summary>Ver respuesta</summary>
-> "Si el usuario está bloqueado, entonces no puede iniciar sesión."
-> </details>
-
----
-
-# Parte V — Álgebra de Proposiciones (adelanto)
-
-Las herramientas anteriores —tablas de verdad, equivalencia, Morgan— permiten comparar y transformar expresiones, pero construir una tabla completa deja de ser práctico cuando el número de variables crece ($2^n$ filas). Existe un conjunto de **leyes del álgebra de proposiciones** que permite transformar expresiones sin construir la tabla completa cada vez. Por ahora, basta con conocer la tabla de referencia; **su aplicación para simplificar expresiones se desarrollará en la próxima sesión**.
-
-| Nombre de la ley | Forma con $\land$ | Forma con $\lor$ |
+| Nombre | Forma con $\land$ | Forma con $\lor$ |
 |---|:---:|:---:|
-| Identidad | $p\land V \equiv p$ | $p\lor F \equiv p$ |
-| Dominación | $p\land F \equiv F$ | $p\lor V \equiv V$ |
-| Idempotencia | $p\land p \equiv p$ | $p\lor p \equiv p$ |
-| Doble negación | $\neg(\neg p) \equiv p$ | (aplica igual, no depende de $\land$/$\lor$) |
-| Conmutativa | $p\land q \equiv q\land p$ | $p\lor q \equiv q\lor p$ |
-| Asociativa | $(p\land q)\land r \equiv p\land(q\land r)$ | $(p\lor q)\lor r \equiv p\lor(q\lor r)$ |
-| Distributiva | $p\land(q\lor r)\equiv(p\land q)\lor(p\land r)$ | $p\lor(q\land r)\equiv(p\lor q)\land(p\lor r)$ |
-| De Morgan | $\neg(p\land q)\equiv\neg p\lor\neg q$ | $\neg(p\lor q)\equiv\neg p\land\neg q$ |
+| Conmutatividad | $p\land q\equiv q\land p$ | $p\lor q\equiv q\lor p$ |
+| Asociatividad | $(p\land q)\land r\equiv p\land(q\land r)$ | $(p\lor q)\lor r\equiv p\lor(q\lor r)$ |
+| Distributividad | $p\land(q\lor r)\equiv(p\land q)\lor(p\land r)$ | $p\lor(q\land r)\equiv(p\lor q)\land(p\lor r)$ |
+| Idempotencia | $p\land p\equiv p$ | $p\lor p\equiv p$ |
+| Doble negación | $\neg(\neg p)\equiv p$ | (aplica igual, no depende de $\land$/$\lor$) |
+| Leyes de De Morgan | $\neg(p\land q)\equiv\neg p\lor\neg q$ | $\neg(p\lor q)\equiv\neg p\land\neg q$ |
+| Identidad | $p\land V\equiv p$ | $p\lor F\equiv p$ |
+| Dominación | $p\land F\equiv F$ | $p\lor V\equiv V$ |
 | Absorción | $p\land(p\lor q)\equiv p$ | $p\lor(p\land q)\equiv p$ |
+| Complemento | $p\land\neg p\equiv F$ | $p\lor\neg p\equiv V$ |
+| Implicación | $p\rightarrow q\equiv\neg p\lor q$ | — |
+| Contrarrecíproco | $p\rightarrow q\equiv\neg q\rightarrow\neg p$ | — |
+| Equivalencia | $p\leftrightarrow q\equiv(p\rightarrow q)\land(q\rightarrow p)$ | — |
 
-> [!NOTE]
-> Cada una de estas leyes puede demostrarse con el Protocolo de 6 pasos que ya conoce (construir la tabla de ambos lados y comparar columnas) — es exactamente el mismo procedimiento usado en la Parte I para demostrar las Leyes de Morgan. Lo que falta todavía no es la herramienta de verificación, sino el criterio para *usar* estas leyes en cadena y simplificar una expresión compleja paso a paso. Eso —y su conexión con la simplificación de condiciones compuestas en código (Unidad 3 y 4 de Lógica y Representación I)— es el tema de la próxima sesión.
+> [!IMPORTANT]
+> **Todas las leyes son de doble vía.** Cada $\equiv$ se puede leer de izquierda a derecha (para "expandir" una expresión) o de derecha a izquierda (para "factorizar" o compactar). La Distributividad leída de derecha a izquierda, por ejemplo, es precisamente cómo se factoriza una expresión — la usará así en varios de los ejercicios de esta sesión.
 
----
+Para orientarse dentro de la tabla, es útil agrupar las leyes mentalmente en tres familias: las que gobiernan cómo interactúan $\land$ y $\lor$ entre sí (Conmutatividad, Asociatividad, Distributividad, Idempotencia, Absorción), las que gobiernan la negación (Doble negación, De Morgan, Complemento), y las que traducen flechas ($\rightarrow,\leftrightarrow$) a los operadores básicos (Implicación, Contrarrecíproco, Equivalencia) — casi siempre conviene aplicar estas últimas primero, para quedarse trabajando solo con $\land,\lor,\neg$.
 
-# 📘 Ejercicios resueltos — Equivalencia y Leyes de Morgan
-
-**1. Demuestre la primera Ley de Morgan: $\neg(p\land q) \equiv \neg p\lor\neg q$**
-
-**Paso 1 — Determinar filas.** Dos variables, $N=2^2=4$.
-
-**Paso 2 — Construir columnas auxiliares y evaluar ambos lados.**
-
-| $p$ | $q$ | $p\land q$ | $\neg(p\land q)$ | $\neg p$ | $\neg q$ | $\neg p\lor\neg q$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 1 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 0 | 1 | 0 | 1 | 1 |
-| 0 | 1 | 0 | 1 | 1 | 0 | 1 |
-| 0 | 0 | 0 | 1 | 1 | 1 | 1 |
-
-**Paso 3 — Interpretar.** Las columnas $\neg(p\land q)$ y $\neg p\lor\neg q$ son idénticas en las cuatro filas. **Confirmado**: $\neg(p\land q) \equiv \neg p\lor\neg q$.
-
-**2. Demuestre la segunda Ley de Morgan: $\neg(p\lor q) \equiv \neg p\land\neg q$**
-
-**Paso 1 — Determinar filas.** $N=2^2=4$.
-
-**Paso 2 — Construir columnas auxiliares y evaluar.**
-
-| $p$ | $q$ | $p\lor q$ | $\neg(p\lor q)$ | $\neg p$ | $\neg q$ | $\neg p\land\neg q$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 1 | 0 | 0 | 0 | 0 |
-| 1 | 0 | 1 | 0 | 0 | 1 | 0 |
-| 0 | 1 | 1 | 0 | 1 | 0 | 0 |
-| 0 | 0 | 0 | 1 | 1 | 1 | 1 |
-
-**Paso 3 — Interpretar.** Nuevamente las columnas coinciden en las cuatro filas. **Confirmado**: $\neg(p\lor q) \equiv \neg p\land\neg q$.
+> [!WARNING]
+> **Distributividad no es Absorción.** Es un error frecuente confundirlas porque ambas involucran un paréntesis con una variable repetida. La Distributividad **expande** (rompe un paréntesis en dos términos): $p\land(q\lor r)\to(p\land q)\lor(p\land r)$. La Absorción **reduce drásticamente** (elimina el paréntesis completo): $p\land(p\lor q)\to p$. Antes de aplicar una, verifique si la variable que se repite es la *misma* en ambos lugares (señal de Absorción) o si son variables *distintas* (señal de Distributividad).
 
 > [!TIP]
-> **Antes de continuar, pregúntese**: ¿por qué las dos leyes de Morgan invierten el conector ($\land \leftrightarrow \lor$) al negar, en vez de simplemente negar cada término?
+> **Compruebe su comprensión**
+>
+> Simplifique $\neg p\lor(\neg p\land q)$ usando una sola ley.
 >
 > <details><summary>Ver respuesta</summary>
-> Porque negar "ambas cosas son ciertas" ($p\land q$) no significa que "ambas son falsas" — basta con que **una** de las dos falle. Por eso la negación de una conjunción se convierte en una disyunción de negaciones (basta que una falle), y simétricamente, negar "al menos una es cierta" ($p\lor q$) exige que **ambas** sean falsas a la vez, por eso se convierte en una conjunción.
+> 
+> Por Absorción, con $\neg p$ en el rol de "$p$" y $q$ en el rol de "$q$" de la tabla ($p\lor(p\land q)\equiv p$): $\neg p\lor(\neg p\land q)\equiv\neg p$.
+> 
 > </details>
 
 ---
 
-# 🕵️ Expediente del Broche de Zafiro — Fase 1: La Contradicción
+# Parte III — Cómo se Escribe una Demostración Axiomática
 
-*Se retoman las declaraciones presentadas en "El caso — El enigma de las dos versiones".*
+Existen dos formas de escribir una demostración:
 
-Holmes formaliza las dos declaraciones. Sea $F$: "Finch salió del salón durante el intervalo", y $L$: "Finch tuvo acceso a una llave del estudio durante el intervalo".
+1. **En prosa**, encadenando cada transformación en un párrafo continuo. Es la forma estándar en libros universitarios, pero exige mayor claridad de redacción para no perder al lector.
+2. **Afirmación–Razón** (formato de dos columnas): cada paso se numera, y junto a él se escribe explícitamente qué ley se aplicó y sobre qué operador. Es la forma más usada en cursos introductorios de lógica porque hace explícita y verificable cada transformación.
 
-- **Coronel Whitmore**: "Finch salió del salón, y tuvo tiempo de conseguir una llave" → $F\land L$
-- **Srta. Hart**: "Finch no salió del salón, o no tuvo acceso a ninguna llave" → $\neg F\lor\neg L$
+> [!IMPORTANT]
+> **A partir de esta sesión, el formato Afirmación–Razón es el oficial del curso** para justificar demostraciones en talleres y exámenes. Úselo así:
+>
+> | # | Afirmación | Razón |
+> |:---:|:---:|---|
+> | 1 | expresión original | Hipótesis |
+> | 2 | expresión transformada | Nombre de la ley, indicando sobre qué operador ($\land$/$\lor$) y en qué paso anterior |
+> | $\vdots$ | $\vdots$ | $\vdots$ |
+> | $n$ | expresión final | Nombre de la ley |
 
-Por la primera Ley de Morgan, demostrada arriba:
+## III.1 Ejemplo ilustrativo: demostrar la Ley de Absorción
 
-$$\neg(F\land L) \equiv \neg F\lor\neg L$$
+Antes de usar la tabla de leyes para demostrar cosas nuevas, es razonable preguntarse: ¿y esas leyes, cómo se sabe que son ciertas? Tómelo con la ley de Absorción para la conjunción: $P\land(P\lor Q)\equiv P$.
 
-La declaración de la Srta. Hart es, formalmente, **la negación exacta** de la declaración del Coronel Whitmore — no una versión distinta con otro énfasis, sino su contradicción lógica precisa. Esto descarta de inmediato la posibilidad de que ambos testimonios sean, en el fondo, compatibles y solo estén expresados con palabras diferentes: uno de los dos está equivocado o mintiendo. Holmes anota el hallazgo en su libreta y continúa el interrogatorio.
+**Por el enfoque basado en modelos** (repaso rápido, ya lo domina):
 
----
+| $P$ | $Q$ | $P\lor Q$ | $P\land(P\lor Q)$ |
+|:---:|:---:|:---:|:---:|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 1 |
+| 1 | 1 | 1 | 1 |
 
-# 📘 Ejercicios resueltos — Variantes del Condicional
+La columna final coincide exactamente con la columna de $P$ en las cuatro filas: confirmado, $P\land(P\lor Q)\equiv P$.
 
-**3. Dada la siguiente tabla de valores para $p\rightarrow q$, $q\rightarrow p$, $\neg q\rightarrow\neg p$ y $\neg p\rightarrow\neg q$, determine cuáles expresiones son lógicamente equivalentes.**
+**Por el enfoque axiomático** — usando *otras* leyes de la tabla (nunca la propia Absorción, para no caer en un razonamiento circular):
 
-**Paso 1 — Construir la tabla completa.**
+**Paso 1 — Romper el paréntesis.** $P\land(P\lor Q)$ tiene la forma $p\land(q\lor r)$, así que aplicamos Distributividad para separarlo en dos términos que podamos manipular por separado.
 
-| $p$ | $q$ | $\neg p$ | $\neg q$ | $p\rightarrow q$ | $q\rightarrow p$ | $\neg q\rightarrow\neg p$ | $\neg p\rightarrow\neg q$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 0 | 0 | 1 | 1 | 1 | 1 | 1 | 1 |
-| 0 | 1 | 1 | 0 | 1 | 0 | 1 | 0 |
-| 1 | 0 | 0 | 1 | 0 | 1 | 0 | 1 |
-| 1 | 1 | 0 | 0 | 1 | 1 | 1 | 1 |
+**Paso 2 — Reducir el término repetido.** El primer término, $P\land P$, es una variable multiplicada por sí misma: aplicamos Idempotencia.
 
-**Paso 2 — Comparar columnas.** La columna de $p\rightarrow q$ es $(1,1,0,1)$, idéntica a la de $\neg q\rightarrow\neg p$. La columna de $q\rightarrow p$ es $(1,0,1,1)$, idéntica a la de $\neg p\rightarrow\neg q$.
+**Paso 3 — Reescribir $P$ para poder factorizar de nuevo.** Usamos Identidad *en sentido inverso* ($P\equiv P\land V$) para poder volver a sacar $P$ como factor común en el siguiente paso.
 
-**Paso 3 — Concluir.**
+**Paso 4 — Factorizar y cerrar.** Aplicamos Distributividad en sentido inverso (factorización), luego Dominación ($V\lor Q\equiv V$) y finalmente Identidad para llegar a $P$.
 
-$$p\rightarrow q \;\equiv\; \neg q\rightarrow\neg p \qquad\qquad q\rightarrow p \;\equiv\; \neg p\rightarrow\neg q$$
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $P\land(P\lor Q)$ | Hipótesis |
+| 2 | $(P\land P)\lor(P\land Q)$ | Distributividad del $\land$ sobre el $\lor$ en (1) |
+| 3 | $P\lor(P\land Q)$ | Idempotencia del $\land$ en (2) |
+| 4 | $(P\land V)\lor(P\land Q)$ | Identidad del $\land$ (reescritura de $P$) en (3) |
+| 5 | $P\land(V\lor Q)$ | Distributividad (factorización) en (4) |
+| 6 | $P\land V$ | Dominación del $\lor$ en (5) |
+| 7 | $P$ | Identidad del $\land$ en (6) |
 
-> [!WARNING]
-> **Error conceptual frecuente**: al resolver este tipo de ejercicio es común concluir apresuradamente que $p\rightarrow q \equiv q\rightarrow p$ (comparando el original con el recíproco) — pero la tabla muestra claramente que sus columnas, $(1,1,0,1)$ y $(1,0,1,1)$, **no coinciden**. Concluir eso sería caer precisamente en la falacia de afirmación del consecuente señalada en la Parte II. La equivalencia correcta es siempre entre el original y **su contrarrecíproco**, nunca entre el original y su recíproco.
-
-**4. Dado el enunciado "Si llueve, entonces el patio está mojado", complete la tabla de sus variantes.**
-
-**Paso 1 — Definir las proposiciones simples.** $p$: llueve. $q$: el patio está mojado.
-
-**Paso 2 — Construir cada variante y evaluar su equivalencia respecto al original.**
-
-| Caso | Expresión lógica | Expresión en lenguaje natural | ¿Equivalente al original? |
-|---|:---:|---|:---:|
-| Original | $p\rightarrow q$ | Si llueve, entonces el patio está mojado. | — |
-| Recíproco | $q\rightarrow p$ | Si el patio está mojado, entonces llueve. | No |
-| Contrario (inverso) | $\neg p\rightarrow\neg q$ | Si no llueve, entonces el patio no está mojado. | No |
-| Contrarrecíproco | $\neg q\rightarrow\neg p$ | Si el patio no está mojado, entonces no llueve. | **Sí** |
-
-**Paso 3 — Interpretar.** El recíproco y el contrario fallan por la misma razón: el patio podría estar mojado por otra causa (riego, una manguera) sin que haya llovido. Solo el contrarrecíproco preserva con certeza la misma información que el enunciado original.
-
----
-
-# 🕵️ Expediente del Broche de Zafiro — Fase 2: Las Coartadas
-
-Holmes formula una regla general para verificar coartadas. Sea $S$: "el invitado permaneció en el salón durante todo el intervalo", y $E$: "el invitado entró al estudio".
-
-$$S \rightarrow \neg E$$
-
-("Si permaneció en el salón todo el tiempo, entonces no pudo entrar al estudio.") Por la Parte II, esta afirmación es equivalente a su contrarrecíproco:
-
-$$E \rightarrow \neg S$$
-
-("Si entró al estudio, entonces no permaneció en el salón todo el tiempo.") Esto le da a Holmes una herramienta de doble uso: confirmar coartadas ($S$ verdadero descarta $E$) o, de manera igualmente válida, usar evidencia de haber entrado al estudio para descartar la coartada.
-
-Lady Constance tiene tres testigos independientes que confirman que nunca salió del salón — $S$ es verdadero para ella, así que por el condicional original queda descartada de inmediato.
-
-El Coronel Whitmore, en cambio, solo tiene un testigo de su propia permanencia en el salón: la Srta. Hart, la misma persona cuya declaración ya está en entredicho por la Fase 1. Watson sugiere razonar así: *"si Whitmore no entró al estudio, entonces permaneció en el salón"* — pero Holmes lo corrige de inmediato: esa es la forma del **recíproco** ($\neg E\rightarrow S$), no del contrarrecíproco, y no hay garantía de que sea cierta. No haber entrado al estudio no prueba haber estado en el salón; Whitmore pudo estar en cualquier otra habitación de la casa. Su coartada, a diferencia de la de Lady Constance, sigue sin confirmarse de forma concluyente.
+$$\therefore\; P\land(P\lor Q)\equiv P$$
 
 ---
 
-# 📘 Ejercicios resueltos — Condiciones de Necesidad y Suficiencia
+# 📘 Ejercicios resueltos
 
-**5. Clasifique cada enunciado como condición necesaria, suficiente, o ambas para la conclusión indicada.**
+**1. Demuestre que $\neg\bigl(p\lor(\neg p\land q)\bigr)$ es lógicamente equivalente a $\neg p\land\neg q$.**
 
-**(a) "Si un cuadrilátero es un cuadrado, entonces es un rectángulo."**
+**Paso 1 — Identificar la estructura externa.** Toda la expresión está negada por fuera de una disyunción ($p\lor\cdots$), así que el primer movimiento natural es De Morgan sobre esa disyunción.
 
-**Paso 1 — Identificar antecedente y consecuente.** $p$: es un cuadrado. $q$: es un rectángulo.
+**Paso 2 — Simplificar lo que queda dentro.** Tras el primer De Morgan aparece una segunda negación, esta vez sobre una conjunción — se resuelve con una segunda aplicación de De Morgan, seguida de doble negación.
 
-**Paso 2 — Evaluar suficiencia.** ¿Basta con ser cuadrado para garantizar ser rectángulo? Sí — todo cuadrado cumple la definición de rectángulo (cuatro ángulos rectos). → **Suficiente**.
+**Paso 3 — Distribuir y cerrar.** Con la expresión ya solo en términos de $\land,\lor,\neg$, distribuir revela un término que es un Complemento ($F$), y la Identidad limpia el resto.
 
-**Paso 3 — Evaluar necesidad.** ¿Sin ser cuadrado es imposible ser rectángulo? No — existen rectángulos no cuadrados (lados desiguales). → **No necesaria**.
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $\neg\bigl(p\lor(\neg p\land q)\bigr)$ | Hipótesis |
+| 2 | $\neg p\land\neg(\neg p\land q)$ | De Morgan para el $\lor$ en (1) |
+| 3 | $\neg p\land\bigl(\neg(\neg p)\lor\neg q\bigr)$ | De Morgan para el $\land$ en (2) |
+| 4 | $\neg p\land(p\lor\neg q)$ | Doble negación en (3) |
+| 5 | $(\neg p\land p)\lor(\neg p\land\neg q)$ | Distributividad del $\land$ sobre el $\lor$ en (4) |
+| 6 | $F\lor(\neg p\land\neg q)$ | Complemento del $\land$ en (5) |
+| 7 | $\neg p\land\neg q$ | Identidad del $\lor$ en (6) |
 
-**Resultado**: $p$ es suficiente, pero no necesaria, para $q$.
+$$\therefore\;\neg\bigl(p\lor(\neg p\land q)\bigr)\equiv\neg p\land\neg q$$
 
-**(b) "Si un número es divisible por 2, entonces es divisible por 6."**
+**2. Demuestre que $(p\land q)\rightarrow(q\lor p)$ es una tautología.**
 
-**Paso 1 — Identificar.** $p$: divisible por 2. $q$: divisible por 6.
+**Paso 1 — Eliminar la flecha.** Nada en la tabla de leyes opera directamente sobre $\rightarrow$; el primer paso, casi siempre, es aplicar Implicación para dejar la expresión solo en términos de $\land,\lor,\neg$.
 
-**Paso 2 — Evaluar suficiencia.** ¿Basta con ser divisible por 2 para garantizar divisible por 6? No — contraejemplo inmediato: 4 es divisible por 2 pero no por 6. → **No suficiente**.
+**Paso 2 — Abrir la negación de la conjunción.** El antecedente negado, $\neg(p\land q)$, se abre con De Morgan.
 
-**Paso 3 — Evaluar necesidad.** ¿Sin ser divisible por 2 es imposible ser divisible por 6? Sí — todo múltiplo de 6 es par, ya que $6=2\times 3$. → **Necesaria**.
+**Paso 3 — Reagrupar para encontrar un Complemento.** Reordenando con Conmutatividad y Asociatividad aparecen dos pares de la forma $x\lor\neg x$, cada uno un Complemento que colapsa a $V$.
 
-**Resultado**: aquí la intuición inicial engaña. La forma "si $p$, entonces $q$" sugiere que $p$ debería ser la condición suficiente — pero al verificar cada pregunta por separado (Parte III), resulta que la relación real va en sentido contrario: $p$ es necesaria, no suficiente. Esto ocurre porque el enunciado, tomado literalmente como $p\rightarrow q$, es matemáticamente falso en general; lo único cierto es la relación inversa ($q\rightarrow p$). Note que los Pasos 2 y 3 son, precisamente, la prueba del contraejemplo de la Parte III aplicada dos veces: un contraejemplo (el 4) cierra la suficiencia; la imposibilidad de encontrar uno cierra la necesidad.
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $(p\land q)\rightarrow(q\lor p)$ | Hipótesis |
+| 2 | $\neg(p\land q)\lor(q\lor p)$ | Implicación en (1) |
+| 3 | $(\neg p\lor\neg q)\lor(q\lor p)$ | De Morgan para el $\land$ en (2) |
+| 4 | $(\neg p\lor p)\lor(\neg q\lor q)$ | Conmutatividad y Asociatividad en (3) |
+| 5 | $V\lor V$ | Complemento del $\lor$ (dos veces) en (4) |
+| 6 | $V$ | Dominación del $\lor$ en (5) |
 
-**(c) "Un número es divisible por 3 si la suma de sus dígitos es un múltiplo de 3."**
+$$\therefore\;(p\land q)\rightarrow(q\lor p)\equiv V \quad\text{(es una tautología)}$$
 
-**Paso 1 — Identificar la dirección correcta.** La forma "$q$ si $p$" se traduce como $p\rightarrow q$ (Parte IV). Aquí $p$: la suma de dígitos es múltiplo de 3. $q$: el número es divisible por 3.
+> [!TIP]
+> **Antes de continuar, pregúntese**: ¿por qué casi siempre conviene aplicar Implicación como primer paso al demostrar algo sobre un condicional?
+>
+> <details><summary>Ver respuesta</summary>
+> 
+> Porque ninguna otra ley de la tabla opera directamente sobre $\rightarrow$ o $\leftrightarrow$ — todas trabajan con $\land,\lor,\neg$. Mientras la flecha siga presente, la expresión queda "congelada"; convertirla primero es lo que habilita el resto de la cadena.
+> 
+> </details>
 
-**Paso 2 — Evaluar suficiencia.** ¿Basta con que la suma de dígitos sea múltiplo de 3 para garantizar divisibilidad por 3? Sí — es exactamente el criterio de divisibilidad por 3. → **Suficiente**.
+**3. Demuestre que $p\rightarrow(q\rightarrow r)\equiv(p\land q)\rightarrow r$.**
 
-**Paso 3 — Evaluar necesidad.** ¿Sin que la suma sea múltiplo de 3 es imposible que el número sea divisible por 3? Sí — el mismo criterio aplica en ambas direcciones. → **Necesaria**.
+**Paso 1 — Eliminar ambas flechas.** Hay dos condicionales anidados; se aplica Implicación primero al externo, luego al interno.
 
-**Resultado**: $p$ es necesaria y suficiente para $q$ — en realidad describen el mismo hecho matemático desde dos ángulos ($p\leftrightarrow q$), aunque el enunciado use "si" (que gramaticalmente solo afirma una dirección).
+**Paso 2 — Reagrupar y factorizar de vuelta a una flecha.** Una vez todo está en $\land,\lor,\neg$, Asociatividad permite agrupar $\neg p\lor\neg q$, que por De Morgan (en sentido inverso, es decir, factorización) se convierte en $\neg(p\land q)$ — dejando la expresión lista para reescribirse como un único condicional.
 
-**(d) "Si quieres ser su esposo, tienes que decirle."**
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $p\rightarrow(q\rightarrow r)$ | Hipótesis |
+| 2 | $\neg p\lor(q\rightarrow r)$ | Implicación (externa) en (1) |
+| 3 | $\neg p\lor(\neg q\lor r)$ | Implicación (interna) en (2) |
+| 4 | $(\neg p\lor\neg q)\lor r$ | Asociatividad en (3) |
+| 5 | $\neg(p\land q)\lor r$ | De Morgan (factorización) en (4) |
+| 6 | $(p\land q)\rightarrow r$ | Implicación (en sentido inverso) en (5) |
 
-**Paso 1 — Identificar.** $p$: quieres ser su esposo. $q$: se lo dices.
+$$\therefore\; p\rightarrow(q\rightarrow r)\equiv(p\land q)\rightarrow r$$
 
-**Paso 2 — Evaluar necesidad.** ¿Sin decirle es imposible llegar a ser su esposo? Sí — es un requisito ineludible. → **Necesaria**.
+**4. Demuestre que $\bigl[P\rightarrow(Q\lor\neg R)\bigr]\equiv\bigl[(R\land P)\rightarrow Q\bigr]$.**
 
-**Paso 3 — Evaluar suficiencia.** ¿Basta con decirle para garantizar convertirte en su esposo? No — ella podría no aceptar. → **No suficiente**.
+**Paso 1 — Eliminar la flecha e independizar los términos.** Implicación primero; luego Conmutatividad y Asociatividad para dejar $\neg R$ y $\neg P$ juntos, listos para factorizar.
 
-**Resultado**: $q$ es necesaria, pero no suficiente.
+**Paso 2 — Factorizar con De Morgan y volver a cerrar en una flecha.** $\neg R\lor\neg P$ se factoriza (De Morgan de derecha a izquierda) como $\neg(R\land P)$, y el resultado se reescribe como condicional.
 
-**(e) "Si haces la fila, serás atendido."**
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $P\rightarrow(Q\lor\neg R)$ | Hipótesis |
+| 2 | $\neg P\lor(Q\lor\neg R)$ | Implicación en (1) |
+| 3 | $\neg R\lor\neg P\lor Q$ | Conmutatividad en (2) |
+| 4 | $(\neg R\lor\neg P)\lor Q$ | Asociatividad en (3) |
+| 5 | $\neg(R\land P)\lor Q$ | De Morgan (factorización) en (4) |
+| 6 | $(R\land P)\rightarrow Q$ | Implicación en (5) |
 
-**Paso 1 — Identificar.** $p$: haces la fila. $q$: eres atendido.
+$$\therefore\;\bigl[P\rightarrow(Q\lor\neg R)\bigr]\equiv\bigl[(R\land P)\rightarrow Q\bigr]$$
 
-**Paso 2 — Evaluar suficiencia.** ¿Basta con hacer la fila para garantizar ser atendido? Sí, según el enunciado. → **Suficiente**.
+**5. Verdadero o falso: "La negación de 'Si Susana es la madre de Luis, entonces Ali es su primo' es 'Si Susana es la madre de Luis, entonces Ali no es su primo'".**
 
-**Paso 3 — Evaluar necesidad.** ¿Sin hacer la fila es imposible ser atendido? No necesariamente — el enunciado no descarta otras vías (atención prioritaria, cita previa). → **No necesaria**.
+**Paso 1 — Formalizar.** Sea $M$: "Susana es la madre de Luis" y $P$: "Ali es primo de Luis". El enunciado original es $M\rightarrow P$. Lo que el ejercicio propone como su negación es $M\rightarrow\neg P$. La pregunta real es: ¿$\neg(M\rightarrow P)\equiv M\rightarrow\neg P$?
 
-**Resultado**: $p$ es suficiente, pero no necesaria.
+**Paso 2 — Transformar $\neg(M\rightarrow P)$ con las leyes.** Se aplica Implicación y luego De Morgan con doble negación.
 
-**(f) "Para ser atendido, solo tienes que hacer la fila."**
+| # | Afirmación | Razón |
+|:---:|:---:|---|
+| 1 | $\neg(M\rightarrow P)$ | Hipótesis |
+| 2 | $\neg(\neg M\lor P)$ | Implicación en (1) |
+| 3 | $\neg(\neg M)\land\neg P$ | De Morgan para el $\lor$ en (2) |
+| 4 | $M\land\neg P$ | Doble negación en (3) |
 
-**Paso 1 — Identificar la doble señal.** "Para $q$, [...]" introduce una condición necesaria; "solo tienes que $p$" cierra la puerta a cualquier otra vía, señalando también suficiencia.
+Entonces $\neg(M\rightarrow P)\equiv M\land\neg P$ — una **conjunción**, no un condicional.
 
-**Paso 2 — Evaluar ambas.** ¿Basta con hacer la fila? Sí → **Suficiente**. ¿Es la única manera (nada más se requiere ni se acepta)? Sí, por el "solo" → **Necesaria**.
+**Paso 3 — Comparar contra la propuesta del enunciado.** La propuesta era $M\rightarrow\neg P$, que por Implicación equivale a $\neg M\lor\neg P$ — una disyunción distinta a $M\land\neg P$.
 
-**Resultado**: a diferencia del inciso (e), aquí "solo" convierte la condición en necesaria y suficiente a la vez.
+| $M$ | $P$ | $M\land\neg P$ | $\neg M\lor\neg P$ |
+|:---:|:---:|:---:|:---:|
+| 0 | 0 | 0 | **1** |
+| 0 | 1 | 0 | 1 |
+| 1 | 0 | 1 | 1 |
+| 1 | 1 | 0 | 0 |
 
-> [!NOTE]
-> **Contraste (d) vs. (f)**: compare los incisos (d) y (f). Ambos usan una estructura de "requisito", pero (d) solo confirma necesidad (declararse no garantiza el matrimonio), mientras que (f) confirma ambas (la palabra "solo" elimina cualquier otra alternativa). La palabra que marca la diferencia — "solo"— es la señal lingüística más importante de esta parte.
+En la primera fila ($M=0,P=0$) las columnas difieren: $0\neq 1$. Basta ese único contraejemplo para descartar la equivalencia.
 
----
-
-# 🕵️ Expediente del Broche de Zafiro — Fase 3: Lo que las Pruebas Prueban (y lo que no)
-
-Holmes resume el estado del caso con el lenguaje de necesidad y suficiencia. Dado que la cerradura del estudio no fue forzada, tener acceso a una llave ($L$) es **necesaria** para haber robado el broche ($R$): sin llave, entrar era imposible. Pero $L$ **no es suficiente**: tener una llave no prueba haberla usado.
-
-De igual manera, haberse ausentado del salón ($F$) es **necesaria** para $R$ —había que salir para llegar al estudio— pero tampoco **suficiente**: cualquiera pudo ausentarse por una razón inocente.
-
-*"Ninguna de las dos pruebas, por separado, basta para acusar a nadie"*, concluye Holmes ante Watson. *"Lo que necesito no es una prueba más, sino una forma de combinar las que ya tengo."*
-
----
-
-# 📘 Ejercicios resueltos — Traducción de Lenguaje Natural a Formal
-
-**6. Dada la proposición "Si gano la lotería, entonces seré feliz", determine las proposiciones simples y obtenga el recíproco, el contrarrecíproco y el contrario.**
-
-**Paso 1 — Determinar las proposiciones simples.** $p$: gano la lotería. $q$: seré feliz.
-
-**Paso 2 — Construir cada variante aplicando las definiciones de la Parte II.**
-
-- Recíproco ($q\rightarrow p$): "Si soy feliz, entonces gané la lotería."
-- Contrarrecíproco ($\neg q\rightarrow\neg p$): "Si no soy feliz, entonces no gané la lotería."
-- Contrario ($\neg p\rightarrow\neg q$): "Si no gano la lotería, entonces no seré feliz."
-
-**Paso 3 — Interpretar.** Note que el recíproco y el contrario suenan más "razonables" en el lenguaje cotidiano que en el ejemplo del patio mojado, pero eso no los vuelve lógicamente equivalentes al original — la felicidad podría tener muchas otras causas, igual que el patio podía mojarse sin lluvia.
-
-**7. Traduzca: "El sistema activa el modo de emergencia si detecta una fuga y la presión cae por debajo del umbral, a menos que el operador lo haya desactivado manualmente."**
-
-**Paso 1 — Determinar las proposiciones simples.**
-- $f$: se detecta una fuga.
-- $u$: la presión cae por debajo del umbral.
-- $m$: el operador desactivó el modo manualmente.
-- $a$: se activa el modo de emergencia.
-
-**Paso 2 — Identificar la estructura.** El núcleo "detecta fuga y presión bajo umbral, entonces activa emergencia" es $(f\land u)\rightarrow a$. La cláusula "a menos que $m$" (Parte IV, disyunción/condicional con "a menos que") modifica esa condición: la activación solo aplica si el operador **no** desactivó el sistema.
-
-**Paso 3 — Formalizar.**
-
-$$(f\land u\land\neg m)\rightarrow a$$
-
-*Nota sobre el alcance de la receta de la Parte IV*: la receta mecánica de dos pasos se aplica de forma más directa a un "a menos que" entre dos proposiciones simples (como en el ejemplo de "Saldremos a caminar"). Aquí "a menos que $m$" no niega el sistema completo, sino que restringe cuándo aplica la regla base $(f\land u)\rightarrow a$ — por eso el Paso 2 lo trató como un conjunto adicional en el antecedente, $\neg m$, en vez de aplicar la receta de forma literal. Ante un enunciado anidado como este, razonar directamente el significado (como se hizo arriba) es más seguro que forzar la receta mecánica.
-
----
-
-# 🕵️ Expediente del Broche de Zafiro — Cierre parcial
-
-Con las herramientas de esta sesión, Holmes logra tres avances concretos:
-
-1. **Confirmar formalmente**, con la primera Ley de Morgan, que las declaraciones del Coronel Whitmore y de la Srta. Hart son negaciones exactas la una de la otra — no hay lectura posible que las concilie.
-2. **Descartar a Lady Constance** usando el contrarrecíproco de la regla de coartadas, y **señalar la fragilidad** de la coartada del Coronel Whitmore, cuyo único testigo es, precisamente, la persona en disputa.
-3. **Establecer con precisión** que ni tener acceso a una llave ni haberse ausentado del salón son, por separado, prueba suficiente de culpabilidad — apenas necesarias.
-
-El caso queda acotado a dos sospechosos —el Sr. Finch y el Coronel Whitmore— pero combinar todas las condiciones parciales recogidas hasta ahora en una única expresión simplificada, que señale sin ambigüedad quién mintió y por qué, requiere las leyes del álgebra de proposiciones adelantadas en la Parte V. *"Tengo las piezas"*, dice Holmes, guardando su libreta, *"pero todavía no la ecuación que las una."* Esa ecuación —y el nombre del culpable— se construirán en la próxima sesión.
+**Resultado: la afirmación es Falsa.** La negación de un condicional nunca es otro condicional — es la conjunción del antecedente con la negación del consecuente ($\neg(p\rightarrow q)\equiv p\land\neg q$, exactamente lo obtenido en el Paso 2). Es el mismo tipo de error que la falacia de afirmación del consecuente vista la sesión anterior: la intuición sugiere una forma "simétrica", pero las leyes muestran que la estructura real es distinta.
 
 ---
 
 > [!TIP]
 > **Problema guiado**
 >
-> Clasifique la condición: *"Un triángulo es equilátero si tiene sus tres ángulos iguales."*
+> Simplifique $(p\rightarrow q)\land(p\land\neg q)$.
 >
-> **Paso 1 — Identificar la forma.** La estructura "$q$ si $p$" se traduce como $p\rightarrow q$ (Parte IV). Aquí $p$: tiene sus tres ángulos iguales. $q$: es equilátero.
+> **Paso 1 — Eliminar la flecha.** Por Implicación: $(\neg p\lor q)\land(p\land\neg q)$.
 >
-> **Paso 2 — Evaluar suficiencia.** ¿Basta con que los tres ángulos sean iguales (60° cada uno) para garantizar que el triángulo sea equilátero? Sí — en todo triángulo, los lados opuestos a ángulos iguales son iguales entre sí, así que los tres ángulos iguales fuerzan los tres lados iguales. → **Suficiente**.
+> **Paso 2 — Distribuir sobre el segundo factor.** Por Distributividad (con $(p\land\neg q)$ como el término que se reparte): $\bigl[\neg p\land(p\land\neg q)\bigr]\lor\bigl[q\land(p\land\neg q)\bigr]$.
 >
-> **Paso 3 — Evalúe usted la necesidad.** ¿Sin que los tres ángulos sean iguales, es imposible que el triángulo sea equilátero? Complete el razonamiento antes de revelar la respuesta.
+> **Paso 3 — Simplificar cada mitad por separado.** En la primera mitad, reagrupando con Asociatividad y Conmutatividad, aparece $\neg p\land p$; en la segunda, $q\land\neg q$. Ambos son Complemento: cada mitad colapsa a $F$.
+>
+> **Paso 4 — Complete usted el último paso.** Con ambas mitades en $F$, la expresión completa es $F\lor F$. ¿Qué ley aplica aquí, y a qué se simplifica?
 >
 > <details><summary>Ver respuesta</summary>
-> Sí — un triángulo equilátero (tres lados iguales) tiene, por el teorema recíproco, sus tres ángulos iguales (60° cada uno) sin excepción. Por lo tanto, sin ángulos iguales es imposible ser equilátero → <strong>Necesaria</strong>. Conclusión: $p$ es necesaria y suficiente para $q$ — como en el caso de la divisibilidad por 3 (Ejercicio 5c), el enunciado usa "si" (una sola dirección gramatical) para describir, en realidad, un hecho matemático que va en ambas direcciones.
+> 
+> Por Idempotencia del $\lor$ (o, equivalentemente, Dominación): $F\lor F\equiv F$. La expresión original es una <strong>contradicción</strong>.
+> 
 > </details>
 
 ---
 
-# Parte VI — Ejercicios propuestos
+# 🕵️ Expediente del Broche de Zafiro — La Ecuación
 
-**P1.** Demuestre mediante tabla de verdad que $\neg(p\leftrightarrow q) \equiv p\oplus q$.
+Holmes reúne lo que ya tiene formalizado: tener acceso a una llave ($L$) es necesaria para el robo ($R$), y haberse ausentado del salón ($F$) también es necesaria para $R$. Si ambas condiciones son, cada una por separado, necesarias para $R$, entonces $R$ solo puede ser cierto si **las dos** lo son a la vez:
 
-**P2.** Utilizando las Leyes de Morgan y la ley de doble negación, simplifique $\neg(\neg p\land q)$.
+$$R\rightarrow(L\land F)$$
 
-**P3.** Dado el enunciado "Si un triángulo es equilátero, entonces es isósceles", escriba el recíproco, el contrarrecíproco y el contrario, e indique cuál es lógicamente equivalente al original.
+*"Esto no es una simple reescritura con nuestras leyes de hoy"*, advierte Holmes a Watson, *"es un paso deductivo distinto — combinar dos condiciones necesarias en una sola. La próxima sesión le pondrá nombre formal a este tipo de razonamiento."*
 
-**P4.** Escriba el contrarrecíproco de $(p\land q)\rightarrow r$.
+Pero lo que sí puede hacer con las herramientas de hoy es transformar esa expresión en algo más útil, aplicando el Contrarrecíproco:
 
-**P5.** Clasifique la condición: "Para aprobar el curso, es necesario obtener al menos 3.0 en cada corte."
+$$R\rightarrow(L\land F) \;\equiv\; \neg(L\land F)\rightarrow\neg R$$
 
-**P6.** Clasifique la condición: "Si llueve, las calles se mojan."
+*"Ahí está mi ecuación"*, dice Holmes. *"Si puedo demostrar que un sospechoso no tuvo, a la vez, la llave y la ausencia del salón, queda descartado de inmediato."*
 
-**P7.** Clasifique la condición: "Basta con que un número sea múltiplo de 4 para que sea par."
+El problema es aplicarla: para Finch, el Coronel Whitmore y la Srta. Hart dieron declaraciones que son negaciones exactas la una de la otra sobre precisamente $L\land F$ — no hay forma de saber, solo con eso, si la conjunción es verdadera o falsa para él. Y para el propio Whitmore, su ausencia de la escena ($\neg F$) solo está atestiguada por la Srta. Hart, cuya palabra ya está en entredicho.
 
-**P8.** Traduzca a lógica proposicional, definiendo las proposiciones simples: "El sistema envía la alerta si la temperatura supera los 90°C, a menos que el modo de mantenimiento esté activo."
+*"Tengo la ecuación correcta"*, concluye Holmes, guardando su libreta, *"pero no una forma de decidir, entre dos testimonios que se contradicen, cuál sostiene el peso de una conclusión. Eso no es álgebra de proposiciones — es validez de argumentos. Y ahí es exactamente donde debo mirar a continuación."*
 
-**P9.** Traduzca a lenguaje natural: $\neg a \rightarrow (b\land c)$, donde $a$: el archivo existe, $b$: se crea uno nuevo, $c$: se registra el evento.
+---
 
-**P10.** Dada la proposición "Puedes matricular la asignatura solo si aprobaste el prerrequisito", determine las proposiciones simples y la expresión lógica asociada.
+# Ejercicios propuestos
+
+**P1.** Simplifique: $(p\land q)\lor(p\land\neg q)$
+
+**P2.** Simplifique: $\neg(\neg p\land\neg q)\lor(p\land q)$
+
+**P3.** Demuestre que $\bigl[(p\rightarrow q)\land p\bigr]\rightarrow q$ es una tautología.
+
+**P4.** Demuestre que $(p\land\neg p)\rightarrow q$ es una tautología.
+
+**P5.** Simplifique: $p\lor(\neg p\land q)$
+
+**P6.** Demuestre que $\neg(p\leftrightarrow q)\equiv(p\land\neg q)\lor(\neg p\land q)$
+
+**P7.** Un programa está escrito así: *"El sistema lanza una excepción si el archivo no existe o si los permisos son inválidos, a menos que el modo de recuperación esté activo."* Defina las proposiciones simples, formalice la condición, y simplifique el antecedente usando De Morgan hasta dejarlo con el menor número de operadores posible.
+
+**P8.** Determine, usando el enfoque axiomático, si $(p\rightarrow q)\lor(q\rightarrow p)$ es una tautología, una contradicción o una contingencia.
+
+**P9.** Simplifique: $(p\lor q)\land(\neg p\lor q)$
+
+**P10.** Reescriba $\neg q\rightarrow(\neg p\lor r)$ como un condicional cuyo antecedente sea $p\land\neg r$, usando De Morgan y Contrarrecíproco.
 
 ---
 
@@ -539,32 +399,31 @@ El caso queda acotado a dos sospechosos —el Sr. Finch y el Coronel Whitmore—
 
 Al finalizar este documento, usted debería ser capaz de:
 
-- Demostrar la equivalencia lógica entre dos proposiciones, incluyendo las Leyes de De Morgan, mediante tabla de verdad.
-- Construir el recíproco, el contrarrecíproco y el contrario de un condicional, e identificar correctamente cuál es equivalente al original.
-- Distinguir con precisión entre condiciones necesarias y suficientes en enunciados de lenguaje cotidiano y matemático.
-- Traducir enunciados compuestos de lenguaje natural a lógica formal (y viceversa), usando las tablas de conectores como referencia.
-- Reconocer que la verificación de las leyes del álgebra de proposiciones no requiere herramientas nuevas — es el mismo protocolo de tablas de verdad ya dominado.
-- Aplicar la prueba del contraejemplo para decidir necesidad/suficiencia cuando la intuición no sea suficiente, y la receta mecánica de "a menos que" para traducir ese conector sin derivar la equivalencia desde cero cada vez.
+- Aplicar las leyes del álgebra de proposiciones para simplificar expresiones lógicas sin construir tablas de verdad.
+- Elaborar demostraciones de equivalencias lógicas usando el formato Afirmación–Razón.
+- Justificar cuándo conviene el enfoque basado en modelos (tablas) y cuándo el enfoque axiomático (leyes), y alternar entre ambos con soltura.
+- Demostrar que una expresión es tautología o contradicción mediante una cadena de equivalencias, sin evaluar cada fila.
+- Reconocer que simplificar una expresión booleana con estas leyes es la misma habilidad que hace legible y eficiente una condición compuesta en código.
 
 ## Ficha de bolsillo
 
-**Equivalencia**: $p\equiv q$ si $p\leftrightarrow q$ es tautología. Herramienta clave: $p\rightarrow q\equiv\neg p\lor q$.
+**Regla de oro**: si hay una flecha ($\rightarrow,\leftrightarrow$), conviértala primero (Implicación / Equivalencia) — ninguna otra ley opera sobre ella directamente.
 
-**Morgan**: $\neg(p\land q)\equiv\neg p\lor\neg q$ · $\neg(p\lor q)\equiv\neg p\land\neg q$ (siempre invierte el conector).
+**Las 13 leyes** (todas de doble vía — sirven para expandir o para factorizar):
 
-**Variantes del condicional**: Original $p\to q$ ≡ Contrarrecíproco $\neg q\to\neg p$. Recíproco $q\to p$ ≡ Contrario $\neg p\to\neg q$. **Nunca** original ≡ recíproco.
+Conmutatividad · Asociatividad · Distributividad · Idempotencia · Doble negación · De Morgan · Identidad · Dominación · Absorción · Complemento · Implicación ($p\to q\equiv\neg p\lor q$) · Contrarrecíproco ($p\to q\equiv\neg q\to\neg p$) · Equivalencia ($p\leftrightarrow q\equiv(p\to q)\land(q\to p)$).
 
-**Necesidad/Suficiencia**: $p$ suficiente para $q$ ⟺ $p\to q$ verdadero. $p$ necesaria para $q$ ⟺ $q\to p$ verdadero. Ambas ⟺ $p\leftrightarrow q$. Cuidado con "solo si" (introduce el consecuente) y con la palabra "solo" (cierra la puerta a otras alternativas).
+**Distributividad vs. Absorción**: Distributividad *expande* (dos variables distintas dentro y fuera del paréntesis); Absorción *reduce a una variable* (la misma variable dentro y fuera).
 
-**Prueba del contraejemplo**: busque $p$V/$q$F para refutar suficiencia; busque $q$V/$p$F para refutar necesidad. Si no encuentra ninguno, la condición se sostiene.
+**Formato oficial de demostración**: tabla Afirmación–Razón, cada fila justificada por una ley concreta sobre un operador concreto, referenciando el paso anterior.
 
-**Receta "a menos que"**: lo que sigue a "a menos que" → consecuente. El resto de la oración, negado → antecedente. (Aplica mejor a enunciados de dos términos simples; para enunciados anidados, razone el significado directamente.)
+**Negación de un condicional**: $\neg(p\rightarrow q)\equiv p\land\neg q$ — nunca es otro condicional.
 
 ## Referencias y material para profundizar
 
 ### Notas del curso
 
-- **Sitio de notas de clase de Matemáticas Discretas 1**: [discretas1-udea.github.io/discretas1-udea-20261](https://discretas1-udea.github.io/discretas1-udea-20261/). Sitio oficial del curso, actualmente **en construcción**: no todas las sesiones están publicadas todavía.
+- **Sitio de notas de clase de Matemáticas Discretas 1**: [discretas1-udea.github.io/discretas1-udea-20261](https://discretas1-udea.github.io/discretas1-udea-20261/). Sitio oficial del curso, actualmente **en construcción**. La página de esta sesión aún no ha sido actualizada allí.
 
 ### Libros de texto del curso
 
@@ -573,48 +432,35 @@ Al finalizar este documento, usted debería ser capaz de:
 
 ### Material web de universidades
 
-- **MIT OpenCourseWare — 6.042J, Mathematics for Computer Science**: [ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/). En inglés.
-- **Stanford CS103 — Mathematical Foundations of Computing, Lección 3: Propositional Logic**: [web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03](https://web.stanford.edu/class/archive/cs/cs103/cs103.1234/lectures/03/). En inglés.
-
-### Fuentes de las técnicas complementarias (Parte III y Parte IV)
-
-La prueba del contraejemplo y la receta de "a menos que" no provienen de las diapositivas del curso, sino de literatura especializada en razonamiento condicional revisada específicamente para esta sesión:
-
-- **Impetus LSAT** — "How To Diagram 'Unless' and 'None' On The LSAT": [impetuslsat.com/post/unless-and-none-on-the-lsat](https://www.impetuslsat.com/post/unless-and-none-on-the-lsat). Fuente del algoritmo mecánico de dos pasos para "a menos que" (IV.2).
-- **PowerScore LSAT Blog** — "How to Avoid 2 Common Mistakes in Conditional Reasoning": [blog.powerscore.com/lsat/how-to-avoid-the-two-most-common-mistakes-in-lsat-conditional-reasoning](https://blog.powerscore.com/lsat/how-to-avoid-the-two-most-common-mistakes-in-lsat-conditional-reasoning/). Fuente del principio de que una condición necesaria, por sí sola, no permite ninguna inferencia válida sin pasar por el contrarrecíproco — la base conceptual de la advertencia sobre la falacia de afirmación del consecuente (Parte II).
-
-*Evaluada durante la investigación previa, pero no incorporada al documento* (se descartó por riesgo de sobrecarga cognitiva — introduce un canal visual nuevo que compite, en vez de reforzar, la notación de flechas ya establecida):
-
-- **SciELO Venezuela** — "Las reglas de Irving Copi y Carl Cohen son una condición necesaria y suficiente de la validez en los silogismos categóricos de forma estándar": [ve.scielo.org/scielo.php?script=sci_arttext&pid=S0798-43242005000100006](https://ve.scielo.org/scielo.php?script=sci_arttext&pid=S0798-43242005000100006). Fundamenta el uso de diagramas de Venn (conjuntos anidados) para visualizar necesidad y suficiencia, técnica evaluada en la discusión previa a esta sección.
+- **MIT OpenCourseWare — 6.042J, Mathematics for Computer Science**: [ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/). Cubre las equivalencias proposicionales como base para las demostraciones formales del curso. En inglés.
+- **Stanford CS103 — Mathematical Foundations of Computing, Lección 3: Propositional Logic**: [web.stanford.edu/class/archive/cs/cs103/cs103.1252/lectures/03](https://web.stanford.edu/class/archive/cs/cs103/cs103.1252/lectures/03/). En inglés.
 
 > [!NOTE]
 > Si el acceso a internet es limitado, no es necesario consultar estas fuentes para completar el curso — el contenido de este documento y de las clases es suficiente.
-
----
 
 ## Solucionario — Ejercicios propuestos
 
 <details>
 <summary><b>Presione aquí para ver las respuestas</b></summary>
 
-**P1.** Sí son equivalentes. Columna $\neg(p\leftrightarrow q)$: $(0,1,1,0)$; columna $p\oplus q$: $(0,1,1,0)$ — coinciden en las cuatro filas.
+**P1.** $p$ (Distributividad, luego Complemento e Identidad).
 
-**P2.** $\neg(\neg p\land q) \equiv \neg(\neg p)\lor\neg q \equiv p\lor\neg q$.
+**P2.** $p\lor q$ (De Morgan y doble negación en el primer término; el resultado ya "absorbe" al segundo).
 
-**P3.** Recíproco: "Si es isósceles, entonces es equilátero" (falso en general). Contrarrecíproco: "Si no es isósceles, entonces no es equilátero" (equivalente al original). Contrario: "Si no es equilátero, entonces no es isósceles" (falso en general, equivale al recíproco). El contrarrecíproco es el equivalente.
+**P3.** Tautología ($\equiv V$).
 
-**P4.** $\neg r\rightarrow\neg(p\land q)$, que por Morgan también puede escribirse $\neg r\rightarrow(\neg p\lor\neg q)$.
+**P4.** Tautología ($\equiv V$).
 
-**P5.** Necesaria (no se puede concluir suficiencia con la información dada — podría haber otros requisitos).
+**P5.** $p\lor q$.
 
-**P6.** Suficiente, no necesaria (las calles podrían mojarse por otras causas).
+**P6.** Ambos lados se reducen, por Equivalencia, Implicación y De Morgan, a $(p\land\neg q)\lor(\neg p\land q)$ — que es, de hecho, la misma expresión que ya conoce como $p\oplus q$.
 
-**P7.** Suficiente, no necesaria (hay números pares que no son múltiplos de 4, por ejemplo 6).
+**P7.** $e$: el archivo existe. $v$: los permisos son válidos. $r$: el modo de recuperación está activo. $x$: se lanza la excepción. Formalización: $\bigl[(\neg e\lor\neg v)\land\neg r\bigr]\rightarrow x$. Simplificado: $\neg\bigl[(e\land v)\lor r\bigr]\rightarrow x$.
 
-**P8.** $t$: la temperatura supera 90°C. $m$: el modo de mantenimiento está activo. $a$: se envía la alerta. Expresión: $(t\land\neg m)\rightarrow a$.
+**P8.** Tautología — para cualquier valor de $p$ y $q$, al menos uno de los dos condicionales es verdadero.
 
-**P9.** "Si el archivo no existe, entonces se crea uno nuevo y se registra el evento."
+**P9.** $q$ (Distributividad en sentido inverso, factorizando $q$).
 
-**P10.** $M$: puedes matricular la asignatura. $P$: aprobaste el prerrequisito. Expresión: $M\rightarrow P$.
+**P10.** $(p\land\neg r)\rightarrow q$.
 
 </details>

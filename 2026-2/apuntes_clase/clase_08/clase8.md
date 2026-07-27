@@ -1,492 +1,479 @@
 ![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-# 🐔 Expediente Gallinero — Uno y Solo Uno
-### Cuantificador de unicidad, dependencia del dominio, cuantificadores como conjunción/disyunción, y la negación cuantificacional revisitada
+# 🐔 Expediente Gallinero — El Orden Importa
+### Cuantificadores anidados, alcance y precedencia, equivalencias cuantificacionales, y ambigüedad en lógica formal
 
 *Notas de clase — Matemáticas Discretas 1 · Módulo 2: Lógica Cuantificacional (Lógica de Predicados)*
 *Universidad de Antioquia · Ingeniería de Sistemas*
 
 ---
 
-## Cerrando el caso anterior (parcialmente)
+## Cerrando el caso anterior
 
-La sesión pasada, el ingeniero del gallinero terminó su tablero de monitoreo con casi todo resuelto — pero se topó con una frase que no pudo formalizar del todo:
+La sesión pasada, el ingeniero del gallinero le respondió a su jefe con precisión matemática sobre el líder de sincronización — pero el reporte quedó a medias. El jefe había preguntado, de pasada, algo más:
 
-> *"Existe un pollo, un tornillo y una batería tales que el tornillo y la batería pertenecen al mismo pollo, y los tres fallan a la vez."*
+> *"El gallinero, ¿tiene un único técnico, o cada pollo tiene el suyo?"*
 
-Dejamos ahí un vacío explícito: sabíamos escribir varios cuantificadores **independientes** en una misma fórmula (como en $\neg\exists x\ C(x) \land \neg\exists y\ T(y)$, donde cada uno abre y cierra su propio alcance sin depender del otro), pero no sabíamos **anidar** cuantificadores — escribir uno *dentro* del alcance de otro. **Ese vacío sigue abierto**: es material denso, se presta a confusiones, y merece su propia sesión completa la próxima clase. Lo que sí resolvemos hoy son otras piezas que también faltaban: qué hacer cuando queremos decir que existe **exactamente un** objeto con cierta propiedad, y por qué el valor de verdad de una afirmación cuantificada puede cambiar por completo según el universo que elijamos — algo que ya intuimos en el Ejercicio propuesto P10 de la sesión pasada, pero que hoy formalizamos con una técnica de refutación con nombre propio.
+Esa pregunta se quedó pendiente porque exige combinar **dos** cuantificadores en una misma fórmula — uno *dentro* del alcance del otro — y eso era, literalmente, el vacío que dejamos abierto. El ingeniero ya había escrito ambas fórmulas candidatas y sospechaba, por las advertencias del profesor, que no eran la misma afirmación:
+
+$$\forall x\ \exists y\ tecnico(y,x) \qquad\text{vs.}\qquad \exists y\ \forall x\ tecnico(y,x)$$
+
+Hoy cerramos esa pregunta con rigor. Pero antes, una historia que muestra por qué esto no es un simple tecnicismo de notación.
+
+## El caso — un malentendido en la fábrica de microchips
+
+Imagine que visita una fábrica de microchips y el guía le dice: *"Hay una persona que supervisa todos los detalles del proceso de producción."* Esa frase admite, honestamente, dos lecturas muy distintas:
+
+1. **Hay una sola persona** que supervisa, ella sola, cada detalle del proceso.
+2. **Para cada detalle** del proceso hay alguien que lo supervisa — pero podrían ser personas distintas para detalles distintos.
+
+Con lenguaje natural, el guía sabe cuál de las dos quiso decir; usted, escuchándolo, podría quedarse con la duda. Esa clase de ambigüedad — una especificación que admite más de una lectura razonable — no es un problema exclusivo del lenguaje cotidiano, y en ingeniería de software ha costado caro más de una vez: la sonda *Mars Climate Orbiter* (1999) se destruyó al entrar a la atmósfera de Marte porque dos equipos asumieron sistemas de unidades distintos sin que los requerimientos lo aclararan; el cohete *Ariane 5* (vuelo 501, 1996) explotó 37 segundos después del despegue por un desbordamiento numérico en software reutilizado sin revalidar sus supuestos; y el sistema de inventario de Hershey's (1999) falló en plena temporada alta por requerimientos ambiguos entre dos módulos que debían comunicarse. Ninguno de los tres fue, específicamente, un error de orden de cuantificadores — pero los tres comparten la misma raíz: alguien leyó una especificación de una manera cuando el sistema necesitaba la otra. El orden de "para todo" y "existe" es, precisamente, uno de los lugares donde esa clase de ambigüedad aparece en lógica formal — y hoy construimos las herramientas para que ahí, al menos, deje de ser posible.
 
 ---
 
 ## Antes de comenzar — lo que ya debería saber
 
-Este documento continúa directamente el anterior. Antes de seguir, repase mentalmente (no hace falta abrir el otro documento, aunque puede consultar [Clase 7](clase7.md) si quiere el detalle completo):
+Este documento continúa directamente los dos anteriores. Antes de seguir, repase mentalmente (no hace falta abrir los otros documentos, aunque puede consultar [Clase 7](clase7.md) y [Clase 8](clase8.md) si quiere el detalle completo):
 
-| Concepto | En una frase |
-|:---|:---|
-| Universo / dominio | El conjunto de todos los objetos sobre los que se razona |
-| Predicado | Una propiedad o relación que se vuelve V o F al aplicarse a un objeto, ej. $funciona(x)$ |
-| Cuantificador universal $\forall x\ P(x)$ | *"Para todo x, se cumple P"* — falso si hay un solo contraejemplo |
-| Cuantificador existencial $\exists x\ P(x)$ | *"Existe al menos un x que cumple P"* — falso solo si ninguno lo cumple |
-| Formas aristotélicas | $\forall$ se empareja con $\rightarrow$ (formas A, E); $\exists$ se empareja con $\land$ (formas I, O) |
-| Negación básica | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$, y $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ |
+| Concepto | En una frase | De dónde viene |
+|:---|:---|:---|
+| Universo / dominio, predicado | El conjunto de objetos sobre el que se razona; una propiedad que se vuelve V o F al aplicarse a un objeto | Clase 7 |
+| $\forall x\ P(x)$ / $\exists x\ P(x)$ | *"Para todo"* (falso con un contraejemplo) / *"Existe al menos uno"* (falso solo si ninguno cumple) | Clase 7 |
+| Formas aristotélicas | $\forall$ se empareja con $\rightarrow$ (A, E); $\exists$ se empareja con $\land$ (I, O) | Clase 7 |
+| Cuantificador de unicidad $\exists!\ x\ P(x)$ | *"Existe exactamente un x"* — combina $\exists$, $\forall$ e igualdad | Clase 8 |
+| Negación de cuantificadores | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ ; $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ | Clase 8 |
 
 Eso es todo lo que se necesita. Este documento no depende de conexión a internet para estudiarlo.
 
 ---
 
-## El caso — una pregunta del jefe del ingeniero
+# Parte I — Alcance y Precedencia
 
-El ingeniero recibe un correo de su jefe con una pregunta para el reporte semanal:
+## I.1 Los cuantificadores se "pegan" a lo que sigue inmediatamente
 
-> *"¿Hay un pollo que actúe como 'líder de sincronización' de la bandada — uno y solo uno?"*
-
-Es una pregunta que suena sencilla, pero *"uno y solo uno"* es más exigente que *"al menos uno"* — con lo que sabemos hasta la sesión pasada, no bastaba con un $\exists$. Al final del documento el ingeniero le responde a su jefe con precisión matemática.
+Al igual que $\neg$ tiene mayor precedencia que $\land$, $\lor$, $\rightarrow$ y $\leftrightarrow$, los cuantificadores $\forall$ y $\exists$ también tienen **mayor precedencia que todos los conectivos lógicos**: sin paréntesis, un cuantificador gobierna solo el predicado atómico que tiene inmediatamente al lado, no todo lo que sigue en la línea.
 
 > [!NOTE]
-> El jefe también preguntó, de pasada, si el gallinero tiene un único técnico o si cada pollo tiene el suyo. Esa pregunta va a tener que esperar: para responderla con rigor hace falta combinar dos cuantificadores en una misma fórmula, y eso es justo lo que la sesión pasada dejó pendiente y esta todavía no cubre. Vuelve al cierre de este documento.
-
----
-
-# Parte I — El Cuantificador de Unicidad ( $\exists!$ )
-
-## I.1 Cuando "existe uno" no basta
-
-El cuantificador existencial $\exists x\ P(x)$ solo garantiza que **hay al menos un** objeto que cumple $P$ — podría haber uno, podría haber cien. Muchas veces necesitamos algo más fuerte: decir que hay **uno y solo uno**.
-
-> [!IMPORTANT]
-> El **cuantificador de unicidad**, $\exists!\ x\ P(x)$, afirma que **existe exactamente un** elemento del dominio que cumple $P(x)$. Se lee *"existe un único x tal que..."*, *"existe exactamente un x tal que..."*, o *"hay uno y solo un x tal que..."*.
-
-Antes de formalizarlo, compare los tres cuantificadores que ya conoce (o casi) sobre la **misma** población de caritas y el mismo predicado $smiling(x)$: *"x sonríe"*.
-
-**∃ — al menos una.** Basta con que una sonría — no importa cuántas más frunzan el ceño.
-
-<img src="images/exists.png" alt="Grupo de caritas donde solo una sonríe y las demás no; alcanza con esa para que el existencial sea verdadero" width="220">
-
-**∀ — todas.** Se exige que todas sonrían — una sola que no sonría lo arruina.
-
-<img src="images/for-all.png" alt="Grupo de caritas donde todas sonríen; se necesita esto para que el universal sea verdadero" width="220">
-
-**∃! — exactamente una (nuevo hoy).** Se exige que sonría una, y ninguna más — ni cero, ni dos o más.
-
-<img src="images/only-one.png" alt="Grupo de caritas donde exactamente una sonríe; el cuantificador de unicidad es verdadero" width="220">
-
-Fíjese que en el dibujo de $\exists!$ la población es, de hecho, la misma que la de $\exists$ (una sola sonríe): ahí $\exists x\ smiling(x)$ y $\exists!\ x\ smiling(x)$ son **ambas** verdaderas a la vez — no son cuantificadores que compitan, sino que $\exists!$ simplemente exige más que $\exists$.
-
-## I.2 No es un cuantificador nuevo, es un atajo
-
-$\exists!$ no agrega poder expresivo nuevo al lenguaje: es una abreviatura de algo que ya podemos escribir combinando $\exists$, $\forall$ y la igualdad. La idea tiene dos partes:
-
-| Parte | Qué exige | En símbolos |
-|:---|:---|:---|
-| **Existencia** | Que haya al menos un objeto que cumpla $P$ | $\exists x\ P(x)$ |
-| **Unicidad** | Que cualquier otro objeto que también cumpla $P$ sea, en realidad, ese mismo objeto | $\forall y\ \bigl(P(y) \rightarrow y = x\bigr)$ |
-
-Uniendo ambas partes:
-
-$$\exists!\ x\ P(x) \quad\equiv\quad \exists x\ \Bigl(P(x) \land \forall y\ \bigl(P(y) \rightarrow y = x\bigr)\Bigr)$$
-
-que se lee *"existe un x que cumple P, y además cualquier y que también cumpla P es igual a ese mismo x"*.
-
-> [!NOTE]
-> Fíjese bien en esta fórmula: tiene un $\forall y$ **dentro del alcance** de un $\exists x$. Técnicamente, eso ya es un patrón de cuantificadores anidados — el mismo tipo de construcción que dijimos que quedaba pendiente para la próxima clase. Aquí lo usamos de forma puntual y limitada, solo para poder escribir la definición de unicidad; no estamos aprendiendo a anidar cuantificadores en general todavía. La próxima sesión, cuando veamos la anidación como tema central, va a quedar claro por qué esta combinación específica ( $\exists$ por fuera, $\forall$ por dentro, terminando en una igualdad) es segura, y qué otras combinaciones cambian el significado por completo.
-
-**Ejemplo genérico.** Sea el dominio $\mathbb{Z}^+$ (enteros positivos) y el predicado $P(x)$: *"x es par y primo"*. ¿Es verdadera $\exists!\ x\ P(x)$?
-
-$$\underbrace{2}_{\text{par y primo}},\quad \underbrace{4, 6, 8, \dots}_{\text{pares, pero no primos (divisibles entre 2 y otro número)}},\quad \underbrace{3, 5, 7, \dots}_{\text{primos, pero no pares}}$$
-
-El número $2$ cumple $P$: es par y primo. Y es el **único**: si $n>2$ es par, entonces $n=2k$ con $k>1$; por lo tanto $2$ es un divisor de $n$ distinto de $1$ y de $n$ mismo, así que $n$ no es primo. Por lo tanto $\exists!\ x\ P(x)$ es **verdadera**, con **testigo** $x=2$ (llamamos *testigo* al objeto concreto que se exhibe para probar una afirmación existencial).
+> Esta es la convención que adoptamos en este curso, siguiendo a Rosen (nuestro libro de texto): sin paréntesis, $\forall x\ \phi$ toma como argumento **una única** subfórmula $\phi$ — el átomo más cercano — nunca una secuencia libre de símbolos sueltos. No es la única convención posible en lógica formal (otros textos tratan el alcance por defecto de forma distinta), pero es la que usaremos siempre aquí. Por eso $\forall x\ P(x)\lor Q(x)$ se lee en este curso como $(\forall x\ P(x))\lor Q(x)$ — y precisamente porque la convención no es universal entre textos, la regla de oro de abajo (paréntesis siempre que haya más de un predicado) importa todavía más: elimina la dependencia de cuál convención esté usando quien lee la fórmula.
 
 > [!WARNING]
-> Un error común es declarar $\exists!\ x\ P(x)$ verdadera apenas se encuentra **un** testigo, sin comprobar que sea el único. Encontrar un testigo solo resuelve la mitad del trabajo (la existencia); todavía falta revisar el resto del dominio para descartar un segundo testigo. Basta con que aparezca uno más para que $\exists!$ se vuelva falsa — aunque $\exists$ (sin el símbolo de admiración) siga siendo perfectamente verdadera.
+> Considere la cadena de símbolos $\forall x\ P(x) \lor Q(x)$, sin paréntesis. Por precedencia, esto se lee como $\bigl(\forall x\ P(x)\bigr) \lor Q(x)$ — el $\forall x$ solo alcanza a $P(x)$. Pero fíjese en el problema: en esa lectura, la $x$ dentro de $Q(x)$ queda **fuera** del alcance de cualquier cuantificador — es una variable libre, sin dueño. Una fórmula con una variable libre no es una proposición cerrada (no tiene, por sí sola, un valor de verdad fijo). Esto no es un defecto del sistema: es la razón por la que, en la práctica, **nunca se escribe un cuantificador seguido de un conectivo sin paréntesis** — si la intención era que la $x$ de $Q(x)$ también estuviera ligada, la forma correcta es $\forall x\ \bigl(P(x) \lor Q(x)\bigr)$, una fórmula completamente distinta (y esta vez sí, correctamente formada).
+
+> [!IMPORTANT]
+> **Regla de oro.** Cuando un cuantificador va seguido de más de un predicado o de un conectivo lógico, **use paréntesis siempre** para dejar explícito hasta dónde llega su alcance. No confíe en la precedencia por defecto salvo para el caso más simple: un cuantificador seguido de un único predicado atómico.
+
+## I.2 Alcance (scope)
+
+> [!IMPORTANT]
+> El **alcance** de un cuantificador es la porción de la fórmula sobre la cual ese cuantificador —y la variable que introduce— tiene efecto. Sin paréntesis, el alcance se extiende hasta el final de la subfórmula; con paréntesis, el alcance es exactamente lo que queda encerrado.
+
+Tome el enunciado *"todo estudiante lee al menos un libro"*, con $estudiante(x)$, $libro(y)$ y $lee(x,y)$:
+
+$$\forall x\ \underbrace{\Bigl(estudiante(x) \rightarrow \exists y\ \bigl(libro(y)\land lee(x,y)\bigr)\Bigr)}_{\text{alcance de }\forall x}$$
+
+Dentro de ese alcance más grande, hay uno más pequeño:
+
+$$\exists y\ \underbrace{\bigl(libro(y)\land lee(x,y)\bigr)}_{\text{alcance de }\exists y}$$
+
+El alcance de $\forall x$ es *todo* el paréntesis grande (incluyendo el $\exists y$ completo); el alcance de $\exists y$ es solo la conjunción interna. Esto importa por tres razones prácticas: evita ambigüedad (queda claro qué variable pertenece a qué cuantificador), es requisito para que una deducción sea válida (usar una variable fuera de su alcance es un error lógico), y es la base de todo lo que sigue hoy — los cuantificadores anidados.
 
 > [!TIP]
-> **Compruebe su comprensión.** Sea el dominio $\{1,2,3,4,5\}$ y $Q(x)$: *"x es múltiplo de 3"*. ¿Es verdadera $\exists!\ x\ Q(x)$?
+> **Compruebe su comprensión.** En $\exists x\ \bigl(robot(x) \land \forall y\ (bateria(y)\rightarrow compatible(x,y))\bigr)$, ¿cuál es el alcance de $\forall y$?
 >
 > <details><summary>Ver respuesta</summary>
 >
-> Sí. El único múltiplo de $3$ en $\{1,2,3,4,5\}$ es $3$ mismo ( $1,2,4,5$ no lo son). Existencia: $Q(3)$ es verdadero. Unicidad: ningún otro elemento del dominio cumple $Q$. Por lo tanto $\exists!\ x\ Q(x)$ es verdadera.
+> Solo $bateria(y)\rightarrow compatible(x,y)$ — la implicación que está entre el paréntesis que abre inmediatamente después de $\forall y$. El alcance de $\exists x$, en cambio, es la fórmula completa desde $robot(x)$ hasta el final.
 >
 > </details>
 
+## I.3 Ocurrencias libres y ligadas — nombrando lo que ya vimos
+
+> [!IMPORTANT]
+> Una **ocurrencia** de una variable es **ligada** si está dentro del alcance de un cuantificador que la introduce; si no, es **libre**. En $\forall x\ (estudiante(x)\rightarrow\exists y\ (libro(y)\land lee(x,y)))$, todas las ocurrencias de $x$ y de $y$ son ligadas — no queda ninguna suelta. En el ejemplo mal formado de la advertencia anterior, $\forall x\ P(x)\lor Q(x)$, la $x$ dentro de $Q(x)$ es exactamente una ocurrencia **libre**: por eso la fórmula no es una proposición cerrada.
+
+Esta distinción importa para algo concreto: **sustituir una variable por un objeto específico solo tiene sentido en sus ocurrencias libres** — una ocurrencia ligada ya está "hablando de todos" o "de alguno", no de un objeto en particular, así que no hay nada que sustituir ahí. Esta idea de sustitución es la base formal de las reglas de inferencia cuantificacional (instanciación y generalización) que veremos más adelante en el curso; por ahora basta con reconocer libre vs. ligada a simple vista.
+
 ---
 
-# Parte II — El Valor de Verdad Depende del Dominio
+# Parte II — Cuantificadores Anidados: el Orden Importa
 
-## II.1 La misma fórmula, universos distintos
+## II.1 Qué es un cuantificador anidado
 
-Ya habíamos visto (Ejercicio propuesto P10 de la sesión anterior) que una misma afirmación cuantificada puede ser verdadera en un universo y falsa en otro. Formalicémoslo con tres casos que muestran las distintas combinaciones posibles.
+> [!IMPORTANT]
+> Una fórmula tiene **cuantificadores anidados** cuando un cuantificador aparece dentro del alcance de otro — como el $\exists y$ dentro del $\forall x$ del ejemplo anterior. Muchos enunciados técnicamente importantes necesitan varios cuantificadores a la vez, y el orden en que se escriben **no es intercambiable en general**.
 
-Sea el predicado $P(x)$: *"x < 2"*.
+Compare estas dos fórmulas, con dominio de personas y $sigue(x,y)$: *"x sigue a y en redes sociales"*:
 
-| Dominio $U$ | $\exists x\ P(x)$ | $\forall x\ P(x)$ | Explicación |
-|:---|:---:|:---:|:---|
-| $\mathbb{Z}^+ = \{1, 2, 3, \dots\}$ | **V** | **F** | $1<2$ es verdadero (existe al menos uno), pero $2<2$ es falso (no todos) |
-| $\mathbb{Z}^- = \{\dots, -3, -2, -1\}$ | **V** | **V** | Todo entero negativo es menor que $2$: se cumple para al menos uno y para todos a la vez |
-| $\{3, 4, 5\}$ | **F** | **F** | Ningún elemento del dominio es menor que $2$ |
+$$\forall x\ \exists y\ sigue(x,y) \qquad\text{vs.}\qquad \exists y\ \forall x\ sigue(x,y)$$
 
-La lección: **ni el predicado ni la fórmula cambiaron** — lo único que cambió fue el universo, y eso bastó para mover el valor de verdad de ambos cuantificadores. Por eso, cuando el dominio no se especifica en un ejercicio, la traducción está incompleta.
+La primera dice *"cada persona sigue a alguien"* — el testigo puede **depender de quién sea $x$**: Ana podría seguir a Beto, y Beto a alguien completamente distinto; no hace falta que sea la misma cuenta para todos. La segunda dice *"hay (al menos) una cuenta a la que todos siguen"* — una cuenta común, la misma para cada persona del dominio; podría haber una sola, o incluso más de una, pero el enunciado solo exige que exista al menos esa. Son afirmaciones con contenido claramente distinto, y no es difícil construir una situación donde una es verdadera y la otra falsa.
+
+**Ejemplo concreto.** Sea el dominio $U=\lbrace Ana, Beto, Carla\rbrace$ y la relación $sigue(x,y)$ dada por: Ana sigue a Beto, Beto sigue a Carla, Carla sigue a Ana (un ciclo, sin repeticiones).
+
+| $x$ | ¿A quién sigue $x$? |
+|:---:|:---:|
+| Ana | Beto |
+| Beto | Carla |
+| Carla | Ana |
+
+**Verifique $\forall x\ \exists y\ sigue(x,y)$**: Ana → Beto ✓, Beto → Carla ✓, Carla → Ana ✓. Las tres personas siguen a alguien. **Verdadera.**
+
+**Verifique $\exists y\ \forall x\ sigue(x,y)$**: ¿hay alguien seguido por las tres a la vez? Beto solo lo sigue Ana; Carla solo la sigue Beto; Ana solo la sigue Carla. Ningún nombre aparece en las tres filas de la tabla. **Falsa.**
+
+$$\forall x\ \exists y\ sigue(x,y) \text{ es verdadera, pero } \exists y\ \forall x\ sigue(x,y) \text{ es falsa — con la misma relación.}$$
 
 > [!NOTE]
-> Los dos cuantificadores no varían de forma completamente libre. En cualquier dominio **no vacío**, $\forall x\ P(x) \Rightarrow \exists x\ P(x)$: si la propiedad se cumple para todos, en particular se cumple para al menos uno. Por eso, de las cuatro combinaciones posibles de V/F, una nunca ocurre:
->
-> | $\forall x\ P(x)$ | $\exists x\ P(x)$ | ¿Posible? |
-> |:---:|:---:|:---|
-> | V | V | Sí — como en $\mathbb{Z}^-$ arriba |
-> | F | V | Sí — como en $\mathbb{Z}^+$ arriba |
-> | F | F | Sí — como en $\{3,4,5\}$ arriba |
-> | V | F | **Nunca**, en un dominio no vacío |
->
-> Esta implicación —y, de hecho, toda la teoría de cuantificadores que estamos construyendo— **asume que el dominio nunca es vacío**. Es la convención estándar en lógica de primer orden y la que usamos en todo el curso; si el dominio fuera vacío, $\forall x\ P(x)$ sería verdadera por vacuidad (no hay ningún elemento que la contradiga) mientras que $\exists x\ P(x)$ sería falsa (no hay ningún testigo), rompiendo la implicación anterior.
+> Cuando **ambos** cuantificadores son del mismo tipo ( $\forall\forall$ o $\exists\exists$ ), el orden sí se puede intercambiar sin cambiar el significado: $\forall x\forall y\ P(x,y) \equiv \forall y\forall x\ P(x,y)$, y lo mismo para $\exists\exists$. El problema aparece únicamente cuando se mezclan $\forall$ y $\exists$.
 
-## II.2 El método del contraejemplo, formalizado
+## II.2 Cinco reglas para trabajar con cuantificadores anidados
 
-Para refutar una afirmación existencial ( $\exists x\ P(x)$ es falsa) hay que revisar *todo* el dominio y comprobar que ninguno cumple $P$. Pero para refutar una afirmación **universal** basta con mucho menos trabajo:
-
-> [!IMPORTANT]
-> **Método del contraejemplo.** Es la técnica de refutación que consiste en encontrar **un solo caso** donde una proposición universal ( $\forall x\ P(x)$ ) no se cumple. Formalmente: encontrar un elemento $x_0$ del dominio tal que $P(x_0)$ sea falso. Un único contraejemplo basta para declarar falsa toda la afirmación — sin importar cuántos elementos sí la cumplan.
-
-Ya usamos esta técnica sin nombrarla en la sesión anterior, al mostrar que $\forall x\in\mathbb{R},\ x^2\geq x$ es falsa con el contraejemplo $x_0 = \tfrac{1}{2}$. La volveremos a usar, ya con nombre propio, en los ejercicios resueltos.
-
----
-
-# Parte III — Cuantificadores como Conjunción y Disyunción
-
-## III.1 En un dominio finito, un cuantificador es una conjunción o disyunción disfrazada
-
-Ya sabemos que $\forall x\ P(x)$ exige que $P$ se cumpla para todos, y $\exists x\ P(x)$ exige que se cumpla para al menos uno. Cuando el dominio es **finito**, esta idea se puede escribir sin ningún cuantificador — reemplazándolo por una larga conjunción o disyunción.
-
-> [!IMPORTANT]
-> Si el dominio finito es $U=\{x_1, x_2, \dots, x_n\}$, entonces:
-> $$\forall x\ P(x) \;\equiv\; P(x_1) \land P(x_2) \land \cdots \land P(x_n)$$
-> $$\exists x\ P(x) \;\equiv\; P(x_1) \lor P(x_2) \lor \cdots \lor P(x_n)$$
-> Esta equivalencia **no** se puede aplicar en dominios infinitos dentro de la lógica de primer orden clásica que estudiamos aquí — ahí no existe una fórmula finita que tenga un término por cada elemento del dominio.
-
-**Ejemplo.** Sea el dominio $U=\{Martin, Nelson, Bart\}$ y el predicado $aprobo(x)$: *"x aprobó"*.
-
-<img src="images/martin-nelson-bart.png" alt="Martin, Nelson y Bart, los tres estudiantes que forman el dominio U del ejemplo" width="320">
-
-Enunciado *"Todos los estudiantes aprobaron"*:
-
-$$\forall x\ aprobo(x) \;\equiv\; aprobo(Martin) \land aprobo(Nelson) \land aprobo(Bart)$$
-
-Enunciado *"Algunos estudiantes aprobaron"*:
-
-$$\exists x\ aprobo(x) \;\equiv\; aprobo(Martin) \lor aprobo(Nelson) \lor aprobo(Bart)$$
-
-La primera dice que los tres aprobaron, todos a la vez (basta con que uno repruebe para que toda la conjunción sea falsa). La segunda dice que al menos uno aprobó (basta con que uno apruebe para que toda la disyunción sea verdadera). Este es el mismo patrón que ya conoce de las tablas de verdad: $\forall$ se comporta como un $\land$ gigante, y $\exists$ como un $\lor$ gigante.
-
----
-
-# Parte IV — La Negación de Cuantificadores, Revisitada
-
-## IV.1 La regla ya la sabemos — ahora vemos de dónde sale
-
-En la sesión anterior aprendimos la regla de negación de cuantificadores sin demostrarla:
-
-$$\begin{aligned}
-\neg\ \forall x\ P(x) &\equiv \exists x\ \neg P(x) \\
-\neg\ \exists x\ P(x) &\equiv \forall x\ \neg P(x)
-\end{aligned}$$
-
-Estas dos equivalencias se conocen como las **leyes de De Morgan para cuantificadores**, por su parecido con las leyes de De Morgan de lógica proposicional ( $\neg(p\land q)\equiv\neg p\lor\neg q$ ). No hace falta memorizarlas sueltas: se pueden **justificar** con herramientas que ya tenemos.
-
-**Justificación en un dominio finito.** Retomemos la Parte III: en un dominio finito $U=\{x_1,\dots,x_n\}$, $\forall x\ P(x) \equiv P(x_1)\land\cdots\land P(x_n)$. Neguemos ambos lados y apliquemos De Morgan proposicional (ya conocido de Clase 6, aplicado dos términos a la vez tantas veces como haga falta):
-
-$$\begin{aligned}
-\neg\bigl(\forall x\ P(x)\bigr) &\equiv \neg\bigl(P(x_1)\land P(x_2)\land\cdots\land P(x_n)\bigr) \\
-&\equiv \neg P(x_1)\lor\neg P(x_2)\lor\cdots\lor\neg P(x_n)
-\end{aligned}$$
-
-Y esa disyunción es, otra vez por la Parte III (aplicada ahora al predicado $\neg P$ ), exactamente $\exists x\ \neg P(x)$:
-
-$$\neg\bigl(\forall x\ P(x)\bigr) \;\equiv\; \exists x\ \neg P(x)$$
-
-Esta vez sí es una derivación genuina: parte de la equivalencia entre $\forall$ y una conjunción (ya establecida en la Parte III) y de De Morgan proposicional (ya conocido) — en ningún momento se usó la propia regla que se quería obtener.
-
-**¿Y en un dominio infinito?** Ahí no hay una conjunción finita que expandir, así que el argumento anterior no aplica directamente. Pero la equivalencia sigue siendo válida por una razón semántica, directamente desde el significado de los cuantificadores: $\neg\bigl(\forall x\ P(x)\bigr)$ es verdadera exactamente cuando $\forall x\ P(x)$ es falsa, es decir, cuando **no** es cierto que *todo* elemento cumpla $P$ — lo cual, por la propia definición de "para todo", significa que hay al menos un elemento que no lo cumple. Eso es, precisamente, $\exists x\ \neg P(x)$.
-
-El resultado dice algo revelador: *"todos los computadores funcionan"* es exactamente lo mismo que decir *"no existe ninguno que no funcione"* — la misma idea, expresada con el cuantificador contrario.
+1. **El orden importa** cuando se mezclan $\forall$ y $\exists$ — cambiarlo puede cambiar el valor de verdad.
+2. **Cada cuantificador usa su propia variable.** Reutilizar el mismo nombre en dos cuantificadores anidados no deja la fórmula sin significado — el cuantificador más interno "sombrea" (captura) al externo, y el significado técnico queda perfectamente definido — pero es una fuente segura de errores de lectura. Evítelo siempre.
+3. **El alcance sigue siempre una de dos reglas, nunca "hasta donde parezca":** sin paréntesis, es solo el átomo inmediato (Parte I.1); con paréntesis, es exactamente la subfórmula que encierran (Parte I.2) — nunca algo intermedio o ambiguo.
+4. **Use paréntesis siempre que haya duda** sobre qué parte pertenece a qué cuantificador.
+5. **El dominio debe quedar explícito** — de qué conjunto provienen las variables cuantificadas.
 
 > [!WARNING]
-> El error más común al negar una afirmación cuantificada es cambiar **solo el cuantificador** y olvidar negar el predicado interno. $\neg\bigl(\forall x\ funciona(x)\bigr)$ **no** es $\exists x\ funciona(x)$ — eso diría que sigue habiendo un computador que funciona, lo cual no niega nada. La negación correcta es $\exists x\ \neg funciona(x)$: tiene que haber uno que **no** funcione. Cambiar el cuantificador sin negar adentro es el paso a medias más frecuente en este tema — revise siempre que el $\neg$ haya quedado pegado al predicado, no perdido en el camino.
+> **Error frecuente 1 — reutilizar la variable.** $\forall x\ \exists x\ marca(x,x)$ ( una persona $x$ que marca como favorita una página $x$ ) reutiliza $x$ en el segundo cuantificador: la $x$ del $\exists$ "sombrea" (captura) la del $\forall$ — dentro de su alcance, toda referencia a $x$ pertenece al $\exists$, no al $\forall$ externo. De hecho, el $\forall x$ externo queda *vacuo*: todo lo que sigue ( $\exists x\ marca(x,x)$ ) ya no contiene ninguna $x$ libre sobre la que ese $\forall x$ pueda actuar — todas quedaron capturadas por el $\exists$. La fórmula termina significando exactamente lo mismo que $\exists x\ marca(x,x)$ solo, con un $\forall x$ inútil al frente. El significado queda técnicamente definido, pero a simple vista no queda claro cuál es cuál. **Corrección**: $\forall x\ \exists y\ marca(x,y)$ — cada cuantificador con su propia variable, sin ese riesgo de lectura.
 
-> [!TIP]
-> **Antes de continuar, pregúntese.** ¿Cuáles son los dos pasos mecánicos para negar una afirmación cuantificada, sin importar qué tan complicado sea el predicado interno?
+> [!WARNING]
+> **Error frecuente 2 — invertir el orden sin darse cuenta.** Traducir *"cada persona tiene un plato favorito"* como $\exists y\ \forall x\ favorito(x,y)$ dice, en realidad, *"hay (al menos) un plato que es favorito de todos"* — una afirmación mucho más fuerte y probablemente falsa. La traducción correcta es $\forall x\ \exists y\ favorito(x,y)$: cada quien con el suyo, no necesariamente el mismo.
+
+## II.3 Traducción paso a paso: "cada persona sigue a alguien más"
+
+Tomemos un enunciado con una condición adicional (que no es la misma persona) y traduzcámoslo con método — el mismo patrón que usaremos en la Parte III.
+
+**Paso 1 — Identificar sujeto y predicados.** $persona(x)$: *"x es una persona"*; $sigue(x,y)$: *"x sigue a y"*.
+
+**Paso 2 — Reescribir en lenguaje natural más cercano a la lógica.** *"Cada persona x sigue a alguna otra persona"* → *"para cada persona x, existe una persona y, distinta de x, tal que x sigue a y"*.
+
+**Paso 3 — Formalizar, incluyendo la condición de distinción $x\neq y$.**
+
+$$\forall x\ \Bigl(persona(x) \rightarrow \exists y\ \bigl(persona(y) \land x\neq y \land sigue(x,y)\bigr)\Bigr)$$
+
+> [!NOTE]
+> **Anexo opcional — la misma idea en Python.** Si el dominio es una colección finita (una lista, por ejemplo), $\forall x\ \exists y\ P(x,y)$ y $\exists y\ \forall x\ P(x,y)$ se escriben de forma directa con `all()` y `any()` anidados — el orden de anidación en el código refleja exactamente el orden de los cuantificadores:
+> ```python
+> # ∀x∃y P(x,y) — "todos tienen su y"
+> all(any(P(x, y) for y in dominio) for x in dominio)
 >
-> <details><summary>Ver respuesta</summary>
+> # ∃y∀x P(x,y) — "hay un y que sirve para todos"
+> any(all(P(x, y) for x in dominio) for y in dominio)
+> ```
+> Fíjese que invertir cuál `for` queda "afuera" y cuál "adentro" es exactamente invertir el orden de los cuantificadores — el mismo cambio de significado, ahora en código.
 >
-> 1. **Cambiar el cuantificador** ( $\forall\to\exists$ o $\exists\to\forall$ ).
-> 2. **Negar la proposición interna** ( $P\to\neg P$ ), simplificando dobles negaciones si aparecen ( $\neg\neg P\equiv P$ ).
->
-> </details>
+> **Advertencia.** Esta analogía es literal solo cuando el dominio es finito y enumerable, como una lista de nombres o los ocho pollos del gallinero. Casi todos los ejercicios de hoy trabajan sobre $\mathbb{R}$, un dominio infinito — ahí no hay ningún `for` que termine de recorrerlo, y el valor de verdad se determina matemáticamente (con testigos y contraejemplos), no ejecutando código. La lógica de primer orden no es un algoritmo; `all()`/`any()` son una ayuda para la intuición, no una definición.
 
 ---
 
-# 📘 Ejercicios resueltos — Bloque 1: Verdad y falsedad según el dominio
+# Parte III — Traducción Metódica: de Lenguaje Natural a Lógica de Predicados
 
-Estos son los ejercicios que se resolvieron en clase.
+Cuando una frase mezcla varios cuantificadores, conviene un método fijo en vez de traducir "a ojo". Estos son los pasos que usaremos en todos los ejercicios de hoy:
 
-## Ejercicio 1 — Enunciados universales y existenciales sobre dominios explícitos
+1. **Identifique el dominio** de cada variable (¿personas, números, pollos, técnicos?).
+2. **Relacione palabras clave con cuantificadores**: *"todo", "cada", "cualquiera"* → $\forall$ ; *"existe", "algún", "hay al menos uno"* → $\exists$.
+3. **Descomponga la oración** en sujeto (quién) y relación (qué ocurre entre sujetos).
+4. **Nombre los predicados con claridad** — $lee(x,y)$, $supervisa(x,y)$ — y agregue condiciones si hacen falta ( $x\neq y$, tipos de dominio ).
+5. **Delimite el alcance con paréntesis** en cuanto haya más de un cuantificador.
 
-**(a)** Sea $D=\{1,2,3,4,5\}$. Demuestre que $\forall x\in D,\ x^2\geq x$ es verdadero.
+**Ejemplo — "cada profesor supervisa al menos un estudiante".**
 
-**Paso 1 — Reconocer que, en un dominio finito, un universal se verifica caso por caso.** Como $D$ tiene solo cinco elementos, basta con comprobar la desigualdad para cada uno.
+Dominio: personas. Predicados: $profesor(p)$, $estudiante(e)$, $supervisa(p,e)$.
 
-$$
-\begin{array}{c|c|c}
-x & x^2 & x^2 \geq x \\\hline
-1 & 1 & 1\geq 1\ \checkmark \\
-2 & 4 & 4\geq 2\ \checkmark \\
-3 & 9 & 9\geq 3\ \checkmark \\
-4 & 16 & 16\geq 4\ \checkmark \\
-5 & 25 & 25\geq 5\ \checkmark
-\end{array}
-$$
+$$\forall p\ \Bigl(profesor(p) \rightarrow \exists e\ \bigl(estudiante(e) \land supervisa(p,e)\bigr)\Bigr)$$
 
-**Paso 2 — Concluir.** Los cinco elementos cumplen la desigualdad, así que $\forall x\in D,\ x^2\geq x$ es **verdadero**.
-
-**(b)** Considere $\forall x\in\mathbb{R},\ x^2\geq x$. Encuentre un contraejemplo que demuestre que es falso.
-
-**Paso 1 — Aplicar el método del contraejemplo (Parte II.2).** Basta con un solo real que rompa la desigualdad. Los números entre $0$ y $1$ son buenos candidatos, porque al elevarlos al cuadrado se hacen *más pequeños*, no más grandes.
-
-**Paso 2 — Probar $x_0=\tfrac12$.**
-
-$$x_0^2 = \left(\frac12\right)^2 = \frac14 \qquad\text{y}\qquad \frac14 < \frac12$$
-
-Como $x_0^2 < x_0$, la desigualdad falla en $x_0=\tfrac12\in\mathbb{R}$. Por lo tanto $\forall x\in\mathbb{R},\ x^2\geq x$ es **falso** — un solo contraejemplo basta.
-
-## Ejercicio 2 — Enunciados existenciales sobre dominios explícitos
-
-**(a)** Demuestre que $\exists m\in\mathbb{Z}^+$ tal que $m^2=m$ es verdadero.
-
-**Paso 1 — Para un existencial, basta con un testigo.** No hace falta revisar todo $\mathbb{Z}^+$: alcanza con encontrar un solo entero positivo que cumpla la igualdad.
-
-**Paso 2 — Probar $m=1$.** $1^2 = 1 = m$. Se cumple. Por lo tanto $\exists m\in\mathbb{Z}^+,\ m^2=m$ es **verdadero**, con testigo $m=1$.
-
-**(b)** Sea $E=\{5,6,7,8\}$. Demuestre que $\exists m\in E$ tal que $m^2=m$ es falso.
-
-**Paso 1 — Para refutar un existencial hace falta revisar todo el dominio finito**, porque hay que garantizar que *ninguno* lo cumple.
-
-**Paso 2 — Revisar los cuatro elementos de $E$.**
-
-$$5^2=25\neq 5 \qquad 6^2=36\neq 6 \qquad 7^2=49\neq 7 \qquad 8^2=64\neq 8$$
-
-Ninguno cumple la igualdad. Por lo tanto $\exists m\in E,\ m^2=m$ es **falso**.
-
-## Ejercicio 3 — Un universal verdadero sobre los reales
-
-Sea $P(x)$ la afirmación $x+1>x$. ¿Cuál es el valor de verdad de $\forall x\ P(x)$, con dominio $\mathbb{R}$?
-
-**Paso 1 — Reescribir la desigualdad de forma más simple.** $x+1>x$ es equivalente a $1>0$ (restando $x$ a ambos lados), una afirmación que no depende en absoluto de $x$.
-
-**Paso 2 — Concluir.** Como $1>0$ es verdadera siempre, y no importa qué real se sustituya por $x$, $\forall x\in\mathbb{R},\ P(x)$ es **verdadero**: no existe ningún real que pueda romperla.
-
-## Ejercicio 4 — Un universal falso sobre los reales
-
-Sea $Q(x)$ la afirmación $x<2$. ¿Cuál es el valor de verdad de $\forall x\ Q(x)$, con dominio $\mathbb{R}$?
-
-**Paso 1 — Buscar un contraejemplo.** Basta un real que no sea menor que $2$.
-
-**Paso 2 — Probar $x_0=2$.** $2<2$ es falso. Por lo tanto $\forall x\in\mathbb{R},\ Q(x)$ es **falso**.
-
-## Ejercicio 5 — Otro universal falso, con un contraejemplo menos obvio
-
-Supongamos que $P(x)$ es la afirmación $x^2>0$. ¿Cuál es el valor de verdad de $\forall x\ P(x)$, con dominio $\mathbb{R}$?
-
-**Paso 1 — Recordar que el cuadrado de un real nunca es negativo, pero sí puede ser cero.** El caso frontera que hay que probar es $x=0$.
-
-**Paso 2 — Probar $x_0=0$.** $0^2=0$, y $0>0$ es falso. Por lo tanto $\forall x\in\mathbb{R},\ P(x)$ es **falso** — el contraejemplo es precisamente el elemento neutro de la suma.
-
-## Ejercicio 6 — Interpretar, sin evaluar verdad o falsedad
-
-¿Qué significa la afirmación $\forall x\ N(x)$ si $N(x)$ es *"la computadora x está conectada a la red"* y el dominio consta de todas las computadoras del campus?
-
-**Paso único — Traducir el cuantificador y el predicado en conjunto.** $\forall x$ exige la propiedad para *cada* elemento del dominio, y aquí el dominio son *todas las computadoras del campus* (no solo las de un laboratorio). Por lo tanto, la afirmación significa: **"todas las computadoras del campus están conectadas a la red"**. No hay excepciones permitidas: bastaría una sola computadora desconectada para hacerla falsa.
-
-## Ejercicio 7 — El mismo predicado, dos dominios distintos
-
-¿Cuál es el valor de verdad de $\forall x\ (x^2\geq x)$ si el dominio son todos los números reales? ¿Y si el dominio son todos los números enteros?
-
-**Paso 1 — Caso $\mathbb{R}$.** Ya lo resolvimos en el Ejercicio 1(b): el contraejemplo $x_0=\tfrac12$ lo hace **falso**.
-
-**Paso 2 — Caso $\mathbb{Z}$.** Ahora no hay fracciones disponibles como contraejemplo. Separamos por casos: si $x\leq 0$, entonces $x^2\geq 0\geq x$ (el cuadrado nunca es negativo, y $x$ sí lo es o es cero), así que se cumple. Si $x\geq 1$, entonces $x^2 = x\cdot x \geq x\cdot 1 = x$ (porque $x\geq1$ ), así que también se cumple. No queda ningún entero sin cubrir.
-
-**Paso 3 — Concluir.** Sobre $\mathbb{Z}$, $\forall x\ (x^2\geq x)$ es **verdadero** — exactamente el mismo predicado que era falso sobre $\mathbb{R}$, cambia de valor de verdad al restringir el dominio a los enteros (el contraejemplo $\tfrac12$ ya no está disponible).
-
-## Ejercicio 8 — Un existencial verdadero
-
-Sea $P(x)$ la afirmación $x>3$. ¿Cuál es el valor de verdad de $\exists x\ P(x)$, con dominio $\mathbb{R}$?
-
-**Paso único — Un testigo basta.** $x=4$ cumple $4>3$. Por lo tanto $\exists x\in\mathbb{R},\ P(x)$ es **verdadero**.
-
-## Ejercicio 9 — Un existencial falso
-
-Sea $Q(x)$ el enunciado $x=x+1$. ¿Cuál es el valor de verdad de $\exists x\ Q(x)$, con dominio $\mathbb{R}$?
-
-**Paso 1 — Analizar si la ecuación tiene solución.** $x=x+1$ es equivalente, restando $x$ a ambos lados, a $0=1$ — una contradicción que no depende de $x$.
-
-**Paso 2 — Concluir.** Como ningún real puede satisfacer $0=1$, no hay ningún testigo posible. Por lo tanto $\exists x\in\mathbb{R},\ Q(x)$ es **falso**.
+Fíjese en el patrón: el cuantificador universal exterior usa una **implicación** (forma A — "todo profesor..."), y el existencial interior usa una **conjunción** (forma I — "...existe un estudiante que..."), exactamente la misma regla de emparejamiento de Clase 7, aplicada ahora dos veces, una anidada en la otra.
 
 ---
 
-# 📘 Ejercicios resueltos — Bloque 2: Traducción y negación de cuantificadores
+# Parte IV — Equivalencias Cuantificacionales
 
-## Ejercicio 10 — Negar un existencial y un universal en lenguaje cotidiano
+## IV.1 Qué significa que dos fórmulas cuantificadas sean equivalentes
 
-¿Cuáles son las negaciones de *"Hay un político honesto"* y *"Todos los colombianos comen frijoles con mazamorra"*?
+> [!IMPORTANT]
+> Dos fórmulas $S$ y $T$ con predicados y cuantificadores son **lógicamente equivalentes** ( $S\equiv T$ ) si tienen el **mismo valor de verdad** para cualquier predicado que se sustituya en ellas y para cualquier dominio del discurso que se elija. No basta con que coincidan en un solo ejemplo — deben coincidir siempre.
 
-**Paso 1 — Formalizar la primera frase.** Dominio: colombianos. Predicados: $P(x)$: *"x es político"*, $H(x)$: *"x es honesto"*. *"Hay un político honesto"* es una forma I (particular afirmativa): $\exists x\ (P(x)\land H(x))$.
+## IV.2 Negación (repaso — ya demostrado en Clase 8)
 
-**Paso 2 — Negar aplicando las leyes de De Morgan cuantificacionales (Parte IV).**
+$$\neg\ \forall x\ P(x) \equiv \exists x\ \neg P(x) \qquad\qquad \neg\ \exists x\ P(x) \equiv \forall x\ \neg P(x)$$
 
-$$\begin{aligned}
-\neg\ \exists x\ \bigl(P(x)\land H(x)\bigr) &\equiv \forall x\ \neg\bigl(P(x)\land H(x)\bigr) \\
-&\equiv \forall x\ \bigl(\neg P(x) \lor \neg H(x)\bigr)
-\end{aligned}$$
+No repetimos la demostración aquí; si necesita repasar por qué son válidas (no solo memorizarlas), vea la Parte IV de [Clase 8](clase8.md).
 
-**Paso 3 — Reconocer la disyunción como una implicación.** La expresión $\neg P(x)\lor\neg H(x)$ tiene la misma forma que el condicional de lógica proposicional ( $\neg p\lor q \equiv p\rightarrow q$, aquí con $q=\neg H(x)$ ), así que:
+## IV.3 Distribución de cuantificadores — cuándo sí funciona
 
-$$\forall x\ \bigl(\neg P(x) \lor \neg H(x)\bigr) \;\equiv\; \forall x\ \bigl(P(x) \rightarrow \neg H(x)\bigr)$$
+> [!IMPORTANT]
+> $$\forall x\ \bigl(P(x) \land Q(x)\bigr) \quad\equiv\quad \forall x\ P(x) \land \forall x\ Q(x)$$
+> $$\exists x\ \bigl(P(x) \lor Q(x)\bigr) \quad\equiv\quad \exists x\ P(x) \lor \exists x\ Q(x)$$
+> Y si una fórmula $Q$ **no contiene** la variable cuantificada $x$:
+> $$\forall x\ \bigl(P(x) \land Q\bigr) \quad\equiv\quad \forall x\ P(x) \land Q \qquad\qquad \exists x\ \bigl(P(x) \lor Q\bigr) \quad\equiv\quad \exists x\ P(x) \lor Q$$
 
-En lenguaje natural: *"para todo x, si x es político, entonces no es honesto"*, es decir, **"ningún político es honesto"**.
+**Justificación en un dominio finito.** Igual que en Clase 8, no se memorizan sueltas — se derivan. Sea $U=\lbrace x_1,\dots,x_n\rbrace$. Por la equivalencia entre $\forall$ y una conjunción extendida (Clase 8, Parte III):
 
-**Paso 4 — Formalizar la segunda frase.** Predicado: $F(x)$: *"x come frijoles con mazamorra"*. *"Todos los colombianos comen frijoles con mazamorra"* es $\forall x\ F(x)$ (el dominio ya está restringido a colombianos, no hace falta conectivo).
+$$\forall x\ (P(x)\land Q(x)) \equiv \bigl(P(x_1)\land Q(x_1)\bigr)\land\cdots\land\bigl(P(x_n)\land Q(x_n)\bigr)$$
 
-**Paso 5 — Negar.** $\neg\ \forall x\ F(x) \equiv \exists x\ \neg F(x)$: **"existe al menos un colombiano que no come frijoles con mazamorra"**.
+Reagrupando por conmutatividad y asociatividad de $\land$ (Clase 6):
 
-## Ejercicio 11 — Negar la forma A y su contraparte existencial
+$$\equiv \bigl(P(x_1)\land\cdots\land P(x_n)\bigr)\land\bigl(Q(x_1)\land\cdots\land Q(x_n)\bigr) \equiv \forall x\ P(x)\land\forall x\ Q(x)$$
 
-¿Cuáles son las negaciones de *"Todos los estudiantes de esta clase han tomado un curso de Java"* y *"Uno o más estudiantes de esta clase han hecho un curso de Java"*?
+La misma reagrupación, cambiando $\land$ por $\lor$, prueba la versión de $\exists$.
 
-**Paso 1 — Formalizar ambas.** Dominio: estudiantes de esta clase. Predicado: $J(x)$: *"x ha tomado un curso de Java"*. La primera es $\forall x\ J(x)$. La segunda ( *"uno o más"* es el mismo patrón que *"existe al menos uno"* ) es $\exists x\ J(x)$.
+**¿Y en un dominio infinito?** Ahí no hay una conjunción finita que expandir, pero la equivalencia se demuestra directamente por doble implicación, sin asumir nada sobre el tamaño del dominio:
 
-**Paso 2 — Negar la primera.** $\neg\ \forall x\ J(x)\equiv\exists x\ \neg J(x)$: **"existe al menos un estudiante de esta clase que no ha tomado un curso de Java"**.
+**( $\Rightarrow$ )** Suponga que $\forall x\ (P(x)\land Q(x))$ es verdadera. Entonces, para *cualquier* elemento $a$ del dominio, $P(a)\land Q(a)$ es verdadera — es decir, $P(a)$ es verdadera **y** $Q(a)$ es verdadera. Como $a$ era arbitrario, $P(a)$ es verdadera para todo $a$ (así que $\forall x\ P(x)$ es verdadera), y por separado $Q(a)$ es verdadera para todo $a$ (así que $\forall x\ Q(x)$ es verdadera). Luego $\forall x\ P(x)\land\forall x\ Q(x)$ es verdadera.
 
-**Paso 3 — Negar la segunda.** $\neg\ \exists x\ J(x)\equiv\forall x\ \neg J(x)$: **"ningún estudiante de esta clase ha tomado un curso de Java"**.
+**( $\Leftarrow$ )** Suponga ahora que $\forall x\ P(x)\land\forall x\ Q(x)$ es verdadera. Entonces $\forall x\ P(x)$ es verdadera (así que $P(a)$ vale para todo $a$ ) y $\forall x\ Q(x)$ es verdadera (así que $Q(a)$ vale para todo $a$ ). Tome cualquier elemento $a$ del dominio: $P(a)$ es verdadera y $Q(a)$ es verdadera, así que $P(a)\land Q(a)$ es verdadera. Como $a$ era arbitrario, $\forall x\ (P(x)\land Q(x))$ es verdadera.
 
-## Ejercicio 12 — Negar proposiciones puramente matemáticas
+Como cada lado implica al otro, son equivalentes — y este argumento nunca usó que el dominio fuera finito, así que vale igual para $\mathbb{R}$, $\mathbb{Z}$, o cualquier otro dominio infinito.
 
-¿Cuáles son las negaciones de $\forall x\ (x^2>x)$ y $\exists x\ (x^2=2)$?
+Note el patrón: $\forall$ distribuye limpiamente sobre $\land$, y $\exists$ distribuye limpiamente sobre $\lor$ — cada cuantificador con el conectivo de su propia "familia" (recuerde de Clase 7 que $\forall$ ya venía emparejado con $\rightarrow$ y $\exists$ con $\land$ en las formas aristotélicas; aquí el emparejamiento es distinto — $\forall$ con $\land$, $\exists$ con $\lor$ — así que no lo confunda con aquel).
 
-**Paso 1 — Negar la primera aplicando la regla mecánica (cambiar cuantificador, negar el interior).** $\neg\bigl(x^2>x\bigr)$ es $x^2\leq x$ (la negación de "mayor que" es "menor o igual que"). Entonces:
+## IV.4 Cuidado — cuándo NO se puede distribuir
 
-$$\neg\ \forall x\ (x^2>x) \;\equiv\; \exists x\ (x^2\leq x)$$
+> [!WARNING]
+> $\forall$ **no** distribuye sobre $\lor$, ni $\exists$ **sobre** $\land$, en general:
+> $$\forall x\ \bigl(P(x) \lor Q(x)\bigr) \quad\not\equiv\quad \forall x\ P(x) \lor \forall x\ Q(x)$$
+> $$\exists x\ \bigl(P(x) \land Q(x)\bigr) \quad\not\equiv\quad \exists x\ P(x) \land \exists x\ Q(x)$$
+> Un solo contraejemplo alcanza para probar que dos fórmulas **no** son equivalentes — no hace falta revisar todos los dominios posibles, solo exhibir uno donde difieran.
 
-**Paso 2 — Negar la segunda.** $\neg(x^2=2)$ es $x^2\neq 2$. Entonces:
+**Contraejemplo verificado.** Dominio $\lbrace 1,2\rbrace$, $par(x)$: *"x es par"*, $impar(x)$: *"x es impar"*.
 
-$$\neg\ \exists x\ (x^2=2) \;\equiv\; \forall x\ (x^2\neq 2)$$
+Para la primera fórmula: $par(1)\lor impar(1)$ es verdadero (impar), y $par(2)\lor impar(2)$ es verdadero (par) — así que $\forall x\ (par(x)\lor impar(x))$ es **verdadera** (todo entero es par o impar). Pero $\forall x\ par(x)$ es falsa ( $1$ no es par ), y $\forall x\ impar(x)$ es falsa ( $2$ no es impar ) — así que $\forall x\ par(x) \lor \forall x\ impar(x)$ es **falsa**. Verdadera $\neq$ falsa: no son equivalentes.
 
-## Ejercicio 13 — Formalizar especificaciones de un sistema
+Para la segunda fórmula, con el mismo dominio y predicados: $\exists x\ (par(x)\land impar(x))$ pregunta si *algún* entero es par y impar **a la vez** — nunca ocurre, así que es **falsa**. Pero $\exists x\ par(x)$ es verdadera ( $2$ ) y $\exists x\ impar(x)$ es verdadera ( $1$ ), así que $\exists x\ par(x) \land \exists x\ impar(x)$ es **verdadera**. Falsa $\neq$ verdadera: tampoco son equivalentes.
 
-Utilice predicados y cuantificadores para expresar: *"Todo mensaje de correo mayor a un megabyte será comprimido"* y *"Si un usuario está activo, al menos un enlace de red estará disponible"*.
+> [!NOTE]
+> **Para quien quiera ir más allá — Forma Normal Prenex.** Toda fórmula de lógica de predicados se puede reescribir en una forma equivalente donde *todos* los cuantificadores quedan al frente, seguidos de una fórmula sin cuantificadores — por ejemplo, $\forall x\ (P(x)\rightarrow\exists y\ Q(x,y))$ se puede reescribir como $\forall x\ \exists y\ (P(x)\rightarrow Q(x,y))$. Esa forma se llama **Forma Normal Prenex**, y es la que usan por dentro los demostradores automáticos de teoremas y los motores de resolución de restricciones (SAT/SMT solvers). No es necesaria para este curso — se menciona aquí solo como referencia, por si quiere profundizar (Rosen, ejercicios de la sección 1.4-1.5, o cualquier texto de lógica computacional).
 
-**Paso 1 — Definir el diccionario de la primera especificación.** Dominio: los correos. $M(x)$: *"x es un mensaje de correo mayor a un megabyte"*, $C(x)$: *"x será comprimido"*. La estructura es *"todo M es C"* — forma A.
+---
+
+# Parte V — Ambigüedad en Lógica Formal
+
+Volviendo al caso de apertura: la ambigüedad en lógica puede aparecer de tres formas distintas.
+
+> [!IMPORTANT]
+> **Ambigüedad sintáctica.** Falta claridad en cómo se agrupan los operadores. Ejemplo: $p\lor q\land r$ — ¿es $(p\lor q)\land r$ o $p\lor(q\land r)$? (Se resuelve con la jerarquía de operadores de Clase 5, o con paréntesis.)
+>
+> **Ambigüedad de alcance.** No queda claro qué parte de la fórmula domina cada cuantificador — exactamente el problema de hoy: $\forall x\ \exists y\ P(x,y)$ y $\exists y\ \forall x\ P(x,y)$ tienen los mismos símbolos, pero no dicen lo mismo.
+>
+> **Ambigüedad semántica.** La misma estructura admite más de un significado según cómo se interprete el mundo. *"Todos los estudiantes leyeron un libro"* — ¿el mismo libro para todos, o cada quien el suyo? La estructura formal por sí sola no lo decide; hace falta el predicado exacto ( $\exists y\ \forall x\dots$ para "el mismo libro", $\forall x\ \exists y\dots$ para "cada quien el suyo" ).
+
+La lección de las tres es la misma: en matemáticas, lógica formal y ciencia de la computación necesitamos que un enunciado se interprete **exactamente igual** cada vez que se lee — precisamente lo que Mars Climate Orbiter, Ariane 5 y Hershey's no lograron garantizar.
+
+---
+
+# 📘 Ejercicios resueltos — Bloque 1: Verdad y falsedad con cuantificadores anidados
+
+## Ejercicio 1 — Multiplicación, dominio $\mathbb{R}$
+
+Sea $U=\mathbb{R}$ y $P(x,y)$ el predicado $x\cdot y=0$. Determine el valor de verdad de las cuatro combinaciones.
+
+**Paso 1 — $\forall x\ \forall y\ P(x,y)$.** Basta un contraejemplo: $x=1,y=1$ da $1\cdot 1=1\neq 0$. **Falsa.**
+
+**Paso 2 — $\forall x\ \exists y\ P(x,y)$.** Para cualquier $x$ fijo, elija $y=0$: $x\cdot 0=0$ siempre se cumple. **Verdadera** (el testigo $y=0$ funciona para todo $x$, aunque el cuantificador exterior sea $\forall$ ).
+
+**Paso 3 — $\exists x\ \forall y\ P(x,y)$.** Elija $x=0$: $0\cdot y=0$ para todo $y$. **Verdadera**, con testigo $x=0$.
+
+**Paso 4 — $\exists x\ \exists y\ P(x,y)$.** Basta un par: $(x,y)=(0,0)$. **Verdadera.**
+
+## Ejercicio 2 — Multiplicación, otra constante
+
+Sea $U=\mathbb{R}$ y $P(x,y)$ el predicado $x\cdot y=1$.
+
+**Paso 1 — $\forall x\ \forall y\ P(x,y)$.** Contraejemplo $x=1,y=2$: $2\neq 1$. **Falsa.**
+
+**Paso 2 — $\forall x\ \exists y\ P(x,y)$.** Para casi todo $x$ existe $y=1/x$. Pero para $x=0$: no hay ningún $y$ tal que $0\cdot y=1$ (siempre da $0$ ). Un solo $x$ sin testigo basta para refutar el $\forall$ exterior. **Falsa.**
+
+**Paso 3 — $\exists x\ \forall y\ P(x,y)$.** ¿Hay un $x$ que funcione con *todo* $y$? Con $y=0$, $x\cdot 0=0\neq 1$ sin importar $x$. Ningún $x$ pasa esa prueba. **Falsa.**
+
+**Paso 4 — $\exists x\ \exists y\ P(x,y)$.** Testigo $x=y=1$: $1\cdot 1=1$. **Verdadera.**
+
+## Ejercicio 3 — Cuando el orden no importa (mismo tipo de cuantificador)
+
+Sea $P(x,y)$ el predicado $x+y=y+x$ (conmutatividad), dominio $\mathbb{R}$. ¿Son equivalentes $\forall x\ \forall y\ P(x,y)$ y $\forall y\ \forall x\ P(x,y)$?
+
+**Paso único.** Ambas exigen que la igualdad se cumpla para **todas** las parejas del dominio, sin importar en qué orden se recorran — recorrer "primero todo x, luego todo y" o "primero todo y, luego todo x" cubre exactamente el mismo conjunto de parejas. Como vimos en la nota de la Parte II.1, cuando ambos cuantificadores son del mismo tipo, el orden es intercambiable. Ambas son **verdaderas** (la suma de reales siempre conmuta), y $\forall x\forall y\ P(x,y)\equiv\forall y\forall x\ P(x,y)$.
+
+## Ejercicio 4 — Inverso aditivo, el orden sí importa
+
+Sea $Q(x,y)$ el predicado $x+y=0$, dominio $\mathbb{R}$. Compare $\forall x\ \exists y\ Q(x,y)$ con $\exists y\ \forall x\ Q(x,y)$.
+
+**Paso 1 — $\forall x\ \exists y\ Q(x,y)$.** Para cada $x$, el testigo $y=-x$ siempre existe en $\mathbb{R}$ y cumple $x+(-x)=0$. **Verdadera.**
+
+**Paso 2 — $\exists y\ \forall x\ Q(x,y)$.** ¿Hay un único $y$ que sea el inverso de *todo* $x$ a la vez? Si $y$ sirviera para $x=6$, tendría que ser $y=-6$; pero ese mismo $y=-6$ no sirve para $x=1$ ( $1+(-6)=-5\neq0$ ). Ningún $y$ fijo funciona para todos los $x$. **Falsa.**
+
+**Conclusión.** $\forall x\ \exists y\ Q(x,y)\not\equiv\exists y\ \forall x\ Q(x,y)$ — el mismo predicado, verdadero con un orden y falso con el otro.
+
+## Ejercicio 5 — Tres variables, propiedad de clausura
+
+Sea $Q(x,y,z)$ el predicado $x+y=z$, dominio $\mathbb{R}$. Compare $\forall x\ \forall y\ \exists z\ Q(x,y,z)$ con $\exists z\ \forall x\ \forall y\ Q(x,y,z)$.
+
+**Paso 1 — $\forall x\ \forall y\ \exists z\ Q(x,y,z)$.** Para cualquier par $(x,y)$, el testigo $z=x+y$ existe en $\mathbb{R}$ (propiedad de clausura de la suma). **Verdadera.**
+
+**Paso 2 — $\exists z\ \forall x\ \forall y\ Q(x,y,z)$.** ¿Hay un único $z$ que sea la suma de *cualquier* par $(x,y)$? Con $x=2,y=3$ se necesitaría $z=5$; con $x=-2,y=3$ se necesitaría $z=1$. Ningún $z$ fijo sirve para ambos pares. **Falsa.**
+
+---
+
+# 📘 Ejercicios resueltos — Bloque 2: Traducción con cuantificadores anidados
+
+## Ejercicio 6 — Computadores y amistad
+
+Dominio: estudiantes de una escuela. $C(x)$: *"x tiene un computador"*, $F(x,y)$: *"x y y son amigos"*. Traduzca a lenguaje natural: $\forall x\ \bigl(C(x)\lor\exists y\ (C(y)\land F(x,y))\bigr)$.
+
+**Paso 1 — Leer el cuantificador exterior.** Para cada estudiante $x$ de la escuela...
+
+**Paso 2 — Leer la disyunción.** ...$x$ tiene un computador, **o** existe un $y$ tal que $y$ tiene un computador y $x$ es amigo de $y$.
+
+**Paso 3 — Reescribir en lenguaje natural fluido.** *"Cada estudiante de la escuela tiene un computador, o tiene un amigo que tiene un computador."*
+
+## Ejercicio 7 — Amigos que no son amigos entre sí
+
+Mismo dominio y $F(x,y)$ del Ejercicio 6, agregando una tercera variable $z$. Traduzca: $\exists x\ \forall y\ \forall z\ \bigl(F(x,y)\land F(x,z)\land y\neq z \rightarrow \neg F(y,z)\bigr)$.
+
+**Paso 1 — Leer el cuantificador exterior.** Existe un estudiante $x$ tal que...
+
+**Paso 2 — Leer la implicación interna.** ...para cualesquiera estudiantes $y$ y $z$: si $x$ es amigo de $y$, $x$ es amigo de $z$, y $y\neq z$, entonces $y$ y $z$ **no** son amigos entre sí.
+
+**Paso 3 — Reescribir en lenguaje natural fluido.** *"Hay un estudiante cuyos amigos no son amigos entre sí."*
+
+> [!NOTE]
+> **Un caso límite que vale la pena notar.** Si $x$ no tiene ningún amigo, la fórmula $\forall y\ \forall z\ (\dots\rightarrow\dots)$ es **verdadera por vacuidad** — no hay ningún par de amigos de $x$ que pueda violar la condición, así que la implicación nunca se pone a prueba. Un estudiante sin amigos técnicamente satisface *"tiene amigos que no son amigos entre sí"*, aunque la lectura intuitiva de la frase sugiera lo contrario. Para excluir ese caso habría que agregar $\exists y\ \exists z\ (F(x,y)\land F(x,z)\land y\neq z)$ como condición adicional — exigir que existan al menos dos amigos distintos.
+
+## Ejercicio 8 — De lenguaje natural a lógica, con condición implícita
+
+Traduzca: *"Si una persona es mujer y es madre, entonces esa persona es la madre de alguien."* Dominio: todas las personas.
+
+**Paso 1 — Definir predicados, con cuidado de no repetir la conclusión en la premisa.** $mujer(x)$: *"x es mujer"*; $esMadre(x)$: *"x tiene registrado el estado civil/parental de madre"* (aquí se trata como un dato atómico dado, sin descomponerlo todavía en "es madre de alguien en particular"); $madreDe(x,y)$: *"x es madre de y"*.
+
+> [!NOTE]
+> Si $esMadre(x)$ se hubiera definido directamente como "x es madre de alguien", la traducción sería casi tautológica: el antecedente ya contendría la conclusión, y la implicación no diría nada nuevo. Por eso aquí $esMadre(x)$ se trata como una etiqueta atómica independiente (un dato dado, no derivado) — así la implicación sí aporta algo real: pasa de una etiqueta general a la existencia concreta de al menos un hijo o hija.
+
+**Paso 2 — Identificar la estructura: "si... entonces" es forma A, con un existencial en el consecuente.**
+
+$$\forall x\ \Bigl(mujer(x)\land esMadre(x) \rightarrow \exists y\ madreDe(x,y)\Bigr)$$
+
+## Ejercicio 9 — Unicidad anidada: "todos tienen un único mejor amigo"
+
+Dominio: todas las personas. $B(x,y)$: *"y es el mejor amigo de x"*. Traduzca *"todos tienen un único mejor amigo"*.
+
+**Paso 1 — Reconocer el patrón "para cada uno, exactamente uno".** Esto combina el $\forall$ de hoy con el $\exists!$ de Clase 8.
+
+**Solución 1 — con el cuantificador de unicidad directamente.**
+
+$$\forall x\ \exists!\ y\ B(x,y)$$
+
+**Solución 2 — expandiendo $\exists!$ con las herramientas de Clase 8, dentro del alcance del $\forall x$ de hoy.**
+
+$$\forall x\ \exists y\ \Bigl(B(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg B(x,z)\bigr)\Bigr)$$
+
+> [!WARNING]
+> **Una tentación que no funciona.** Podría parecer que $\forall x\ \exists y\ \exists z\ \bigl(B(x,y)\land B(x,z)\land z=y\bigr)$ también expresa unicidad, por el aire de "dos variables que terminan siendo iguales". Pero no es así: basta con que $x$ tenga **un solo** mejor amigo (llamémoslo $y_0$ ) para satisfacer la fórmula tomando $y=z=y_0$ — la fórmula nunca llega a comparar $y_0$ contra un *segundo* candidato distinto, así que no descarta que existan más. La unicidad genuina exige, como en la Solución 2, cuantificar sobre un tercer nombre ( $z$ ) e **impedir explícitamente** que sea distinto de $y$ mientras también cumple $B(x,z)$ — no simplemente igualarlos por definición.
+
+---
+
+# 📘 Ejercicios resueltos — Bloque 3: Repaso aplicado (los que usted ya resolvió)
+
+## Ejercicio 10 — El predicado de los correos electrónicos
+
+Sea $Q(x,y)$: *"x ha enviado un correo electrónico a y"*, con dominio los estudiantes de Discretas 1. Traduzca a lenguaje natural cada expresión.
+
+**(a) $\exists x\ \exists y\ Q(x,y)$.** Existe al menos un estudiante que le envió un correo a algún otro estudiante del curso (posiblemente a sí mismo, si nada lo impide).
+
+**(b) $\exists x\ \forall y\ Q(x,y)$.** Existe un estudiante que le envió un correo a **todos** los estudiantes del curso.
+
+**(c) $\forall x\ \exists y\ Q(x,y)$.** Todos los estudiantes del curso enviaron al menos un correo a algún estudiante del curso — no necesariamente al mismo.
+
+**(d) $\forall y\ \exists x\ Q(x,y)$.** Todo estudiante recibió al menos un correo de algún estudiante del curso.
+
+**(e) $\forall y\ \forall x\ Q(x,y)$.** Todos los estudiantes le enviaron un correo a todos los estudiantes del curso — sin excepción.
+
+> [!NOTE]
+> Compare (c) y (b): ambas usan $\exists$ y $\forall$, pero en orden distinto y con papeles distintos. (b) exige un **remitente universal** (uno solo, que le escribió a todos); (c) exige que **cada quien** haya escrito al menos un correo, sin exigir que sea el mismo destinatario. Son, otra vez, el mismo par de símbolos con distinto orden y distinto significado.
+
+## Ejercicio 11 — El inverso aditivo, formalizado
+
+Exprese en lenguaje formal: *"cada número real tiene un inverso"* (aditivo).
+
+**Paso 1 — Definir el predicado con precisión.** $P(x,y)$ es el predicado $x+y=0$ — la definición misma de inverso aditivo.
 
 **Paso 2 — Formalizar.**
 
-$$\forall x\ \bigl(M(x) \rightarrow C(x)\bigr)$$
+$$\forall x\ \exists y\ \bigl(x+y=0\bigr)$$
 
-**Paso 3 — Definir el diccionario de la segunda.** Aquí hay dos ideas distintas: el estado de un usuario, y la disponibilidad de *algún* enlace de red. Sea $A$: *"el usuario está activo"* (una condición simple del contexto) y $D(y)$: *"el enlace de red y está disponible"*, con $y$ recorriendo el conjunto de enlaces de red.
+Ya verificamos en el Ejercicio 4 que esta afirmación es verdadera sobre $\mathbb{R}$, y que invertir el orden de los cuantificadores la vuelve falsa.
 
-**Paso 4 — Formalizar como una implicación cuyo consecuente es, en sí mismo, una afirmación existencial.**
+## Ejercicio 12 — Interpretar una expresión ya formalizada
 
-$$A \rightarrow \exists y\ D(y)$$
+Diga con palabras qué significa $\forall x\ \forall y\ \bigl((x>0)\land(y>0)\rightarrow xy>0\bigr)$.
 
-Este es un buen ejemplo de por qué la traducción cuidadosa importa en ingeniería de software: leer mal esta especificación (por ejemplo, exigir que *todos* los enlaces estén disponibles en vez de *al menos uno*) cambiaría por completo el comportamiento esperado del sistema.
+**Paso 1 — Leer los dos cuantificadores universales y la implicación.** Para todo número real $x$ y para todo número real $y$: si $x$ es positivo y $y$ es positivo, entonces el producto $xy$ es positivo.
 
-## Ejercicio 14 — Traducción con tres predicados y una trampa de lenguaje
+**Paso 2 — Reconocer la ley que describe.** Es la ley de los signos para la multiplicación: el producto de dos números positivos cualesquiera es siempre positivo.
 
-Sea el dominio de discurso un conjunto de objetos, con $F(x)$: *"x es un cachivache"*, $S(x)$: *"x es un aparato raro"*, $T(x)$: *"x es una cosa"*. Escriba en lenguaje formal: *"Nada es un aparato raro"*; *"Todos los cachivaches son aparatos raros"*; *"Algunos cachivaches son cosas"*; *"Si algún cachivache es un aparato raro, entonces también es una cosa"*; *"Cualquier cachivache que sea aparato raro, es también una cosa"*.
+## Ejercicio 13 — Hay una mujer que ha volado en todas las aerolíneas del mundo
 
-**Paso 1 — "Nada es un aparato raro" es una negación de existencial disfrazada.** Decir que *nada* cumple $S$ es lo mismo que decir que no existe ningún $x$ que la cumpla: $\neg\exists x\ S(x)$, que por la Parte IV equivale a $\forall x\ \neg S(x)$.
+Use cuantificadores para expresar: *"Hay una mujer que ha tomado un vuelo en todas las aerolíneas del mundo."*
 
-**Paso 2 — "Todos los cachivaches son aparatos raros" es forma A.** $\forall x\ (F(x)\rightarrow S(x))$.
+**Paso 1 — Identificar que hay dos tipos de objetos distintos.** Personas (para las que preguntamos si son mujeres) y aerolíneas (sobre las que se cuantifica "todas"). Dominio único = todas las entidades relevantes (personas y aerolíneas), restringido con predicados.
 
-**Paso 3 — "Algunos cachivaches son cosas" es forma I.** $\exists x\ (F(x)\land T(x))$.
+**Paso 2 — Definir predicados.** $mujer(x)$: *"x es mujer"*; $aerolinea(y)$: *"y es una aerolínea"*; $volo(x,y)$: *"x ha tomado un vuelo en la aerolínea y"*.
 
-**Paso 4 — Las dos últimas frases son, en realidad, la misma afirmación con distintas palabras.** Aunque *"si algún cachivache es..."* contiene la palabra *"algún"*, la estructura *"si... entonces"* aplicada objeto por objeto es universal, no existencial — es la misma trampa que ya vimos con la forma I en la sesión anterior, pero en sentido inverso: aquí el *"algún"* no dispara un $\exists$, porque la frase completa describe una regla que aplica a *cualquier* cachivache que además sea aparato raro. Ambas se traducen igual:
+**Paso 3 — Reconocer la estructura: "hay una S que P" es forma I (existencial + conjunción); "todas las aerolíneas" dentro de eso es forma A (universal + implicación), anidada dentro del existencial.**
 
-$$\forall x\ \bigl((F(x)\land S(x)) \rightarrow T(x)\bigr)$$
-
-> [!NOTE]
-> **Una honestidad necesaria.** La frase *"si algún cachivache es un aparato raro, entonces también es una cosa"*, leída de forma completamente literal en español, admite cierta ambigüedad: alguien podría entenderla como *"existe un cachivache que es aparato raro, y ese en particular es una cosa"* (una lectura existencial), en vez de la lectura universal que acabamos de usar. En la práctica, el contexto de la frase completa —una regla general, no la descripción de un caso puntual— deja claro que la lectura universal es la que se busca, y es también la que produce una traducción útil (una regla, no la afirmación de un solo caso). Pero vale la pena quedarse con la idea: el lenguaje natural rara vez es matemáticamente inequívoco, y frente a una frase ambigua, conviene preguntarse explícitamente qué información aportaría cada lectura antes de formalizar.
-
-## Ejercicio 15 — El silogismo de los leones de Lewis Carroll
-
-Traduzca a lógica de predicados: *"Todos los leones son feroces"*, *"Algunos leones no toman café"*, *"Algunas criaturas feroces no toman café"*.
-
-**Paso 1 — Definir el diccionario.** $L(x)$: *"x es un león"*, $F(x)$: *"x es feroz"*, $C(x)$: *"x toma café"*.
-
-**Paso 2 — La primera es forma A.** $\forall x\ (L(x)\rightarrow F(x))$.
-
-**Paso 3 — La segunda es forma O (particular negativa).** *"Algunos leones no toman café"* es *"algún L es no-C"*: $\exists x\ (L(x)\land\neg C(x))$.
-
-**Paso 4 — La tercera, la conclusión, también es forma O**, pero sobre "criaturas feroces" en vez de "leones": $\exists x\ (F(x)\land\neg C(x))$.
-
-> [!NOTE]
-> **Un vistazo adelante.** Fíjese que la conclusión realmente *se deduce* de las dos premisas: si existe un león que no toma café (premisa 2), y ese león en particular es feroz porque todo león lo es (premisa 1), entonces ese mismo individuo es una criatura feroz que no toma café — exactamente la conclusión. Encadenar cuantificadores de esta manera para demostrar argumentos es el tema de una sesión posterior del curso.
-
-## Problema guiado — Negar cuatro expresiones, una ya resuelta
+$$\exists x\ \Bigl(mujer(x) \land \forall y\ \bigl(aerolinea(y) \rightarrow volo(x,y)\bigr)\Bigr)$$
 
 > [!TIP]
-> **Niegue cada una de las siguientes expresiones, simplificando hasta que el símbolo $\neg$ quede pegado directamente al predicado (nunca delante de un cuantificador).** El primer caso ya está resuelto como modelo — seguido usted con los otros tres.
+> **Antes de continuar, pregúntese.** ¿Por qué la parte de "aerolínea" usa $\rightarrow$ y no $\land$, mientras que la parte de "mujer" sí usa $\land$?
 >
-> **(a)** $\forall x\ \neg P(x)$
+> <details><summary>Ver respuesta</summary>
 >
-> **Resuelto:** $\neg\bigl(\forall x\ \neg P(x)\bigr) \equiv \exists x\ \neg\neg P(x) \equiv \exists x\ P(x)$. (Se cambió $\forall\to\exists$, se negó el interior, y $\neg\neg P(x)$ se simplificó a $P(x)$.)
->
-> **(b)** $\exists x\ Q(x)$
->
-> **(c)** $\forall x\ \bigl(P(x)\rightarrow Q(x)\bigr)$ — forma A. Recuerde de Clase 7 que $\neg(p\rightarrow q)\equiv p\land\neg q$.
->
-> **(d)** $\exists x\ \bigl(P(x)\land\neg Q(x)\bigr)$ *(forma O)*
->
-> <details><summary>Ver solución de (b), (c) y (d)</summary>
->
-> **(b)** $\neg\bigl(\exists x\ Q(x)\bigr) \equiv \forall x\ \neg Q(x)$.
->
-> **(c)** Primero se cambia el cuantificador y se niega el interior; luego se niega el condicional con la equivalencia proposicional ya conocida ( $\neg(p\rightarrow q)\equiv p\land\neg q$ ):
-> $$\neg\Bigl(\forall x\ \bigl(P(x)\rightarrow Q(x)\bigr)\Bigr) \equiv \exists x\ \neg\bigl(P(x)\rightarrow Q(x)\bigr) \equiv \exists x\ \bigl(P(x)\land\neg Q(x)\bigr)$$
->
-> **(d)** Mismo procedimiento, en sentido contrario ( $\neg p\lor q\equiv p\rightarrow q$ ):
-> $$\neg\Bigl(\exists x\ \bigl(P(x)\land\neg Q(x)\bigr)\Bigr) \equiv \forall x\ \neg\bigl(P(x)\land\neg Q(x)\bigr) \equiv \forall x\ \bigl(\neg P(x)\lor Q(x)\bigr) \equiv \forall x\ \bigl(P(x)\rightarrow Q(x)\bigr)$$
->
-> Fíjese en algo bonito: **(c) y (d) resultaron ser la negación exacta una de la otra** — la negación de una forma A es siempre una forma O, y viceversa. No es casualidad: así funcionan las cuatro formas aristotélicas en pares (A↔O, E↔I).
+> Porque son formas aristotélicas distintas, ancladas en cuantificadores distintos. *"Mujer"* está bajo un $\exists$ ("existe **una** que..."), y $\exists$ se empareja con $\land$ (forma I). *"Aerolínea"* está bajo un $\forall$ anidado ("...voló en **todas** las..."), y $\forall$ se empareja con $\rightarrow$ (forma A): no decimos que $y$ sea aerolínea Y que $x$ voló en ella para **cada** $y$ del dominio entero (eso exigiría que absolutamente todo objeto del universo fuera aerolínea) — decimos que **si** $y$ es aerolínea, **entonces** $x$ voló en ella.
 >
 > </details>
 
 ---
 
-# 🐔 Expediente Gallinero — El reporte para el jefe
+# 🐔 Expediente Gallinero — El reporte, esta vez completo
 
 *Este bloque aplica — no explica — los conceptos ya vistos. Toda la teoría quedó atrás; aquí solo se usa.*
 
-Volvamos al ingeniero y a la pregunta de su jefe. Recordemos el vocabulario que ya construimos en la sesión anterior: universo $U=\{P1,\dots,P8\}$ (los ocho pollos robot).
+Volvamos al ingeniero y a la pregunta pendiente del jefe. Universo de pollos: $U_{pollo}=\lbrace P1,\dots,P8\rbrace$ (ya conocido). Se agrega ahora el universo de técnicos: $U_{tec}=\lbrace T1,T2,T3\rbrace$, y el predicado $tecnico(y,x)$: *"el técnico y da mantenimiento al pollo x"*.
 
-## El líder de sincronización (unicidad)
+El ingeniero se da cuenta de que la pregunta del jefe en realidad son **tres** preguntas distintas, no una:
 
-La pregunta del jefe — *"¿hay un pollo que actúe como líder de sincronización, uno y solo uno?"* — es una pregunta de unicidad. Sea el predicado $lider(x)$: *"x es el líder de sincronización de la bandada"*. La pregunta se formaliza directamente con lo visto en la Parte I:
-
-$$\exists!\ x\ lider(x)$$
-
-El ingeniero revisa la tabla de configuración de la bandada:
-
-| Pollo | ¿Emite señal de sincronización? |
-|:---:|:---:|
-| `P1` | Sí |
-| `P2` | No |
-| `P3` | No |
-| `P4` | No |
-| `P5` | No |
-| `P6` | No |
-| `P7` | No |
-| `P8` | No |
-
-**Verifique usted mismo, antes de seguir leyendo:** ¿se cumple la existencia ( $\exists x\ lider(x)$ )? ¿se cumple la unicidad (ningún otro pollo además de `P1`)? Con esta tabla, ambas se comprueban en una sola pasada, exactamente como en el Ejercicio 1 de esta sesión. Como se cumplen las dos, $\exists!\ x\ lider(x)$ es verdadera, con testigo `P1`.
+| Pregunta | Fórmula |
+|:---|:---|
+| ¿Cada pollo tiene su técnico? | $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$ |
+| ¿Hay (al menos) un técnico común a los ocho? | $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
+| ¿Hay **exactamente un** técnico común a los ocho? | $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ |
 
 > [!NOTE]
-> Este mismo patrón —garantizar que existe **exactamente un** responsable de algo— tiene nombre en sistemas reales: se llama **elección de líder** (*leader election*), y es el problema que resuelven algoritmos como Raft o Paxos en sistemas distribuidos. La misma idea, aplicada a datos en vez de a procesos, es lo que impone una restricción `UNIQUE` en una base de datos: garantizar por diseño que a lo sumo un registro cumple cierta condición.
+> **Dos formas de escribir lo mismo.** Aquí se usa $\forall x\in U_{pollo}$ porque el ingeniero ya tiene dos universos separados y con nombre. Cuando en cambio se trabaja con un solo dominio grande y se filtra con un predicado (como en el Ejercicio 13 o en P3/P8, donde se usa $\forall x\ (robot(x)\rightarrow\dots)$ ), ambas notaciones dicen exactamente lo mismo: $\forall x\in U_{pollo}\ \phi(x)$ es solo una forma abreviada de escribir $\forall x\ (pollo(x)\rightarrow\phi(x))$ sobre un dominio único que incluya a los pollos. Se usa una u otra según si conviene más nombrar los universos por separado o filtrarlos con un predicado — no son reglas distintas.
+
+El ingeniero revisa la bitácora de asignaciones:
+
+| Pollo | Técnico asignado |
+|:---:|:---:|
+| `P1` | `T1` |
+| `P2` | `T1` |
+| `P3` | `T2` |
+| `P4` | `T2` |
+| `P5` | `T3` |
+| `P6` | `T3` |
+| `P7` | `T1` |
+| `P8` | `T2` |
+
+**Pregunta 1 — $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$**: recorriendo la tabla, cada uno de los ocho pollos tiene exactamente una fila con un técnico asignado — el testigo $y$ depende de $x$ (a `P1` le sirve `T1`; a `P3` le sirve `T2`). **Verdadera.**
+
+**Pregunta 2 — $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$**: `T1` solo cubre a `P1`, `P2`, `P7`; `T2` solo cubre a `P3`, `P4`, `P8`; `T3` solo cubre a `P5`, `P6`. Ningún técnico aparece en las ocho filas. **Falsa.**
+
+**Pregunta 3 — $\exists!\ y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$**: como la Pregunta 2 ya es falsa —no existe *ningún* técnico común, ni uno solo— la unicidad no tiene nada que evaluar: si no hay ni un testigo, mucho menos hay exactamente un testigo. **Falsa**, por la misma razón que la Pregunta 2, un paso más exigente.
+
+> [!NOTE]
+> **Para ver la Pregunta 2 y la Pregunta 3 divergir de verdad**, imagine una bitácora distinta: que tanto `T1` como `T2` estuvieran *cada uno*, por separado, certificados para los ocho pollos (en vez de que `T2` cubra solo a `P3`, `P4`, `P8`). En ese escenario hipotético, $\exists y\ \forall x\ tecnico(y,x)$ sería **verdadera** (`T1` es testigo), pero $\exists!\ y\ \forall x\ tecnico(y,x)$ seguiría siendo **falsa** — porque `T2` es un *segundo* testigo que también cumple, y la unicidad exige descartarlo. Existencia solo pide encontrar uno; unicidad pide, además, comprobar que no hay un segundo.
+
+$$\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x) \text{ es verdadera}, \qquad \exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x) \text{ es falsa.}$$
+
+El ingeniero ya puede responder con total precisión — y sin ambigüedad de fábrica de microchips.
 
 ---
 
@@ -494,37 +481,39 @@ El ingeniero revisa la tabla de configuración de la bandada:
 
 Resuelva los siguientes ejercicios. Las respuestas finales están en el **Solucionario** al final del documento; intente cada uno antes de mirarlas.
 
-**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica ampliado, que incluye los ocho pollos robot ( $P1,\dots,P8$ ) junto con otros dispositivos. Predicados: $robot(x)$, $funciona(x)$, $tieneVirus(x)$, $bateria(x)$ (ya definidos en clases anteriores).
+**Definiciones para varios ejercicios.** Universo: el laboratorio de robótica ampliado (los ocho pollos robot $P1,\dots,P8$ junto con otros dispositivos y sus componentes). Predicados ya conocidos: $robot(x)$, $funciona(x)$, $tieneVirus(x)$, $bateria(x)$.
 
-**P1.** Sea el dominio $\mathbb{Z}^+$ menor que $20$, y $Q(x)$ la afirmación *"x es múltiplo de 7"*. ¿Es verdadera $\exists!\ x\ Q(x)$? Justifique.
+**P1.** Sea el dominio $\mathbb{R}$ y $P(x,y)$ el predicado $x-y=0$. Determine el valor de verdad de $\forall x\ \exists y\ P(x,y)$ y de $\exists y\ \forall x\ P(x,y)$. Justifique cada una.
 
-**P2.** Proponga un dominio donde la afirmación *"todos hablan inglés"* sea verdadera, y otro donde sea falsa. (Mismo principio del Ejercicio 7.)
+**P2.** Traduzca a lenguaje natural: $\exists x\ \bigl(robot(x)\land\forall y\ (bateria(y)\rightarrow compatible(x,y))\bigr)$, con $compatible(x,y)$: *"la batería y es compatible con el robot x"*.
 
-**P3.** Proponga un contraejemplo que demuestre que $\forall x\in\mathbb{R},\ x^3\geq x$ es falsa. Luego proponga un dominio finito de al menos dos elementos donde la misma afirmación sí sea verdadera.
+**P3.** Traduzca: *"Todo pollo tiene al menos un tornillo que le pertenece"*, con $tornillo(y)$ y $pertenece(y,x)$. Luego escriba la versión (probablemente falsa en la práctica) que diría que *"hay un único tornillo compartido por todos los pollos"*, e indique cuál de las dos cuantificaciones corresponde a cada frase.
 
-**P4.** En un sistema de autenticación, sea $A(x)$: *"x es el administrador activo del sistema"*. La política de seguridad exige que $\exists!\ x\ A(x)$. Explique en una frase qué garantiza esta política, y qué cambiaría si en su lugar se hubiera exigido solo $\exists x\ A(x)$.
+**P4.** Sea $D=\lbrace 1,2,3\rbrace$ y $P(x,y)$ el predicado $x<y$. Calcule el valor de verdad de las cuatro combinaciones ( $\forall\forall$, $\forall\exists$, $\exists\forall$, $\exists\exists$ ).
 
-**P5.** Sea el dominio $U=\{u1,u2,u3\}$ (tres usuarios) y el predicado $activo(x)$. Escriba $\forall x\ activo(x)$ y $\exists x\ activo(x)$ como conjunción y disyunción, respectivamente, sin usar cuantificadores.
+**P5.** Dé un contraejemplo (con dominio y predicados propios, distintos a los ya usados en el documento) que muestre que $\exists x\ (P(x)\land Q(x)) \not\equiv \exists x\ P(x)\land\exists x\ Q(x)$.
 
-**P6.** Escriba la negación de *"Todo estudiante entregó la tarea a tiempo"*, simplificada hasta dejarla como un existencial.
+**P6.** Sea $S(x,y)$: *"x supervisa a y"*, dominio los pollos robot. Traduzca *"hay un pollo que se supervisa a sí mismo, pero ningún otro pollo lo supervisa"* usando cuantificadores anidados y la condición $x\neq y$ donde corresponda.
 
-**P7.** Traduzca a predicados y cuantificadores: *"Si un archivo supera los 500 MB, se enviará una alerta"*. Luego escriba su negación.
+**P7.** Simplifique la negación de $\forall x\ \exists y\ P(x,y)$ hasta dejarla con el símbolo $\neg$ pegado directamente al predicado. (Ayuda: aplique la ley de De Morgan cuantificacional de Clase 8 dos veces, una por cada cuantificador.)
 
-**P8.** Sea $P(x)$: *"x es primo"*, con dominio $\mathbb{Z}^+$. Determine el valor de verdad de $\exists!\ x\ (P(x) \land x<3)$.
+**P8.** Traduzca: *"Ningún pollo sin batería tiene un técnico asignado"*, e identifique si la estructura general (antes de agregar el cuantificador anidado del técnico) corresponde a alguna forma aristotélica.
 
-**P9.** Traduzca: *"Ningún pollo robot sin batería está operativo"*, e identifique la forma aristotélica correspondiente.
+**P9.** Sea el predicado $Q(x,y,z)$ dado por $x\cdot y=z$, dominio $\mathbb{R}$. Determine el valor de verdad de $\forall x\ \forall y\ \exists z\ Q(x,y,z)$ y de $\exists z\ \forall x\ \forall y\ Q(x,y,z)$.
 
-**P10.** Sea el predicado $S(x,y)$: *"x supervisa a y"*, dominio los pollos robot. Traduzca *"hay un pollo que se supervisa a sí mismo"* usando un cuantificador existencial y repitiendo la misma variable en ambas posiciones del predicado.
+**P10.** El jefe hace una última pregunta: *"¿existe una configuración del gallinero en la que un solo técnico sí baste para los ocho pollos?"* Sin usar números concretos, explique con sus propias palabras qué tendría que cambiar en la bitácora de asignaciones para que $\exists y\ \forall x\ tecnico(y,x)$ pasara de falsa a verdadera.
 
 ---
 
-## Veredicto (parcial) — El reporte queda a medias
+## Veredicto — El reporte queda cerrado
 
-El ingeniero responde el correo de su jefe:
+El ingeniero completa su respuesta al jefe:
 
-> **Respuesta a la pregunta del líder de sincronización** — *"Sí: hay un único líder de sincronización de la bandada."* En símbolos: $\exists!\ x\ lider(x)$ es verdadera, con testigo `P1`.
+> **Sobre el líder de sincronización** (respondido en Clase 8): hay uno y solo uno, `P1`.
+>
+> **Sobre el técnico:** *"El gallinero no tiene un técnico común a los ocho pollos — el mantenimiento está distribuido entre tres personas. Lo que sí es cierto es que cada pollo, individualmente, tiene su técnico asignado; ninguno queda sin responsable."* En símbolos: $\forall x\in U_{pollo}\ \exists y\in U_{tec}\ tecnico(y,x)$ es verdadera; $\exists y\in U_{tec}\ \forall x\in U_{pollo}\ tecnico(y,x)$ es falsa.
 
-Con eso, el ingeniero envía su reporte — pero todavía le debe a su jefe la respuesta sobre el técnico. Ya sabe cómo se vería esa pregunta escrita con dos cuantificadores: *"cada pollo tiene su técnico"* sería algo como $\forall x\ \exists y\ tecnico(y,x)$, y *"hay un único técnico para todos"* sería algo como $\exists y\ \forall x\ tecnico(y,x)$ — y sospecha, por las advertencias del profesor, que **no son la misma afirmación**. Pero comprobarlo con rigor —decidir cuál es la verdadera, y entender por qué invertir el orden de dos cuantificadores puede cambiar completamente el significado— es exactamente el trabajo de la próxima sesión, cuando por fin aprendamos a **anidar** cuantificadores.
+Con esto, el gallinero queda completamente formalizado: sabemos hablar de todos, de algunos, de exactamente uno, y ahora también de cómo se relacionan varios objetos entre sí incluso cuando un cuantificador depende de otro. Lo que sigue en el curso es usar estas mismas herramientas — universo, predicados, cuantificadores, anidamiento — no solo para *traducir* argumentos, sino para **demostrar** su validez con reglas de inferencia formales, extendiendo a la lógica de predicados el mismo trabajo que ya hicimos con lógica proposicional en el Bug de la Polilla (Clase 6).
 
 ---
 
@@ -532,10 +521,12 @@ Con eso, el ingeniero envía su reporte — pero todavía le debe a su jefe la r
 
 | Error | Por qué está mal | Dónde se explica |
 |:---|:---|:---|
-| Confundir $\exists$ con $\exists!$ | Encontrar un testigo no descarta que exista un segundo | Parte I |
-| Negar solo el cuantificador, dejando el predicado sin negar | $\neg\forall x\ funciona(x)$ **no** es $\exists x\ funciona(x)$ | Parte IV |
-| Suponer que $\forall$ y $\exists$ varían "libremente" | En dominio no vacío, $\forall x\ P(x)\Rightarrow\exists x\ P(x)$ siempre | Parte II |
-| Leer "algún X que sea Y, entonces Z" como existencial | La estructura "si...entonces" suele ser universal, aunque contenga "algún" | Ejercicio 14 |
+| Escribir un cuantificador seguido de un conectivo sin paréntesis | Deja variables libres fuera del alcance pretendido | Parte I |
+| Asumir que $\forall x\exists y\ P(x,y)$ y $\exists y\forall x\ P(x,y)$ dicen lo mismo | El orden cambia el significado cuando se mezclan $\forall$ y $\exists$ | Parte II |
+| Reutilizar el mismo nombre de variable en dos cuantificadores anidados | El cuantificador más interno sombrea al externo — significado definido, pero imposible de leer con claridad | Parte II |
+| Distribuir $\forall$ sobre $\lor$ (o $\exists$ sobre $\land$ ) como si fuera $\land$/$\lor$ respectivamente | No es una equivalencia válida en general — existen contraejemplos | Parte IV |
+| Confundir "existen y y z que cumplen P, y además y=z" con unicidad genuina | No descarta un tercer candidato distinto; solo repite el mismo nombre | Ejercicio 9 |
+| Asumir que "x tiene [amigos, hijos, técnicos] que cumplen tal condición" excluye el caso de que $x$ no tenga ninguno | Un $\forall y\ \forall z\ (\dots\rightarrow\dots)$ es verdadero por vacuidad si nunca hay un $y$ que dispare la condición | Ejercicio 7 |
 
 ---
 
@@ -543,36 +534,41 @@ Con eso, el ingeniero envía su reporte — pero todavía le debe a su jefe la r
 
 Al finalizar este documento, usted debería ser capaz de:
 
-- **Distinguir** el cuantificador de unicidad ( $\exists!$ ) del cuantificador existencial ( $\exists$ ), y **expresar** el primero como una combinación del segundo con el cuantificador universal y la igualdad.
-- **Determinar** el valor de verdad de una proposición cuantificada sobre distintos dominios, y **aplicar** el método del contraejemplo para refutar afirmaciones universales con el mínimo trabajo posible.
-- **Convertir** entre cuantificadores y conjunciones/disyunciones extendidas cuando el dominio es finito, y **explicar** por qué esa conversión no es posible en dominios infinitos.
-- **Justificar** las leyes de De Morgan para cuantificadores mediante su relación con conjunciones/disyunciones finitas y mediante su interpretación semántica, en vez de memorizarlas como una regla aislada.
+- **Determinar** el alcance de un cuantificador en una fórmula con o sin paréntesis, y **explicar** por qué un cuantificador seguido de un conectivo sin paréntesis puede dejar variables libres.
+- **Reconocer** una ocurrencia libre de una ligada, y explicar por qué la sustitución solo tiene sentido en las libres.
+- **Traducir y evaluar** cuantificadores anidados, **reconociendo** que el orden de $\forall$ y $\exists$ cambia el significado (y a menudo el valor de verdad) de la expresión, salvo cuando ambos cuantificadores son del mismo tipo.
+- **Aplicar** un método sistemático de cinco pasos para traducir enunciados de lenguaje natural con dos o más cuantificadores a lógica de predicados.
+- **Aplicar y refutar** las leyes de distribución de cuantificadores sobre $\land$ y $\lor$, construyendo contraejemplos concretos cuando la distribución no es válida.
+- **Distinguir** los tres tipos de ambigüedad en lógica formal (sintáctica, de alcance, semántica) y **relacionarlos** con fallas reales de especificación en ingeniería de software.
 
 ## Ficha de bolsillo
 
 | Concepto | Símbolo / fórmula | Lectura |
 |:---|:---|:---|
-| Unicidad | $\exists!\ x\ P(x) \equiv \exists x\bigl(P(x)\land\forall y(P(y)\rightarrow y=x)\bigr)$ | "Existe exactamente un x que cumple P" |
-| Método del contraejemplo | Encontrar $x_0$ tal que $P(x_0)$ es falso | Refuta $\forall x\ P(x)$ con un solo caso |
-| $\forall$ como $\land$ (dominio finito) | $\forall x\ P(x) \equiv P(x_1)\land\cdots\land P(x_n)$ | Todos a la vez |
-| $\exists$ como $\lor$ (dominio finito) | $\exists x\ P(x) \equiv P(x_1)\lor\cdots\lor P(x_n)$ | Al menos uno |
-| Negación de cuantificadores | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ ; $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ | Cambia el cuantificador, niega el interior |
+| Alcance | La subfórmula que sigue al cuantificador, delimitada por paréntesis (o el átomo inmediato si no hay) | "Hasta dónde llega" el cuantificador |
+| Libre vs. ligada | Ligada: dentro del alcance de su cuantificador. Libre: fuera de cualquier alcance | Solo se sustituye lo libre |
+| Orden importa (tipos mixtos) | $\forall x\exists y\ P(x,y) \not\equiv \exists y\forall x\ P(x,y)$ | "Cada uno el suyo" vs. "al menos uno, común a todos" |
+| Orden no importa (mismo tipo) | $\forall x\forall y\ P \equiv \forall y\forall x\ P$ ; $\exists x\exists y\ P\equiv\exists y\exists x\ P$ | Se puede reordenar libremente |
+| Distribución válida | $\forall x(P\land Q)\equiv\forall xP\land\forall xQ$ ; $\exists x(P\lor Q)\equiv\exists xP\lor\exists xQ$ | $\forall$ con $\land$, $\exists$ con $\lor$ |
+| Distribución inválida | $\forall x(P\lor Q)\not\equiv\forall xP\lor\forall xQ$ ; $\exists x(P\land Q)\not\equiv\exists xP\land\exists xQ$ | Requiere contraejemplo, no demostración |
+| Tres ambigüedades | Sintáctica / de alcance / semántica | Agrupación / orden de cuantificadores / interpretación del mundo |
 
 ## Referencias y material para profundizar
 
 ### Notas del curso
 
 - **Sitio de notas de clase de Matemáticas Discretas 1**: [discretas1-udea.github.io/discretas1-udea-20261](https://discretas1-udea.github.io/discretas1-udea-20261/). Sitio oficial del curso, actualmente **en construcción**. La página de esta sesión puede aún no estar actualizada allí.
-- **[Clase 7](clase7.md)**: introduce universo, predicado, variable, cuantificadores básicos y formas aristotélicas — prerrequisito directo de este documento.
+- **[Clase 7](clase7.md)**: universo, predicado, variable, cuantificadores básicos y formas aristotélicas.
+- **[Clase 8](clase8.md)**: cuantificador de unicidad, método del contraejemplo, y la negación de cuantificadores demostrada.
 
 ### Libros de texto del curso
 
-- **Rosen, K. H.** *Discrete Mathematics and Its Applications* (8ª ed.). McGraw-Hill. Capítulo 1, sección 1.4 (cuantificadores) para lo cubierto hoy; la sección 1.5 ("Nested Quantifiers") corresponde a la próxima sesión.
+- **Rosen, K. H.** *Discrete Mathematics and Its Applications* (8ª ed.). McGraw-Hill. Capítulo 1, sección 1.5: *"Nested Quantifiers"* — corresponde exactamente al contenido de hoy.
 - **Liben-Nowell, D.** *Connecting Discrete Mathematics and Computer Science*. Cambridge University Press.
 
 ### Material web
 
-- **MIT — *Mathematics for Computer Science* (Lehman, Leighton, Meyer)**: [people.csail.mit.edu/meyer/mcs.pdf](https://people.csail.mit.edu/meyer/mcs.pdf). En inglés. La sección 3.6 ("Predicate Formulas") es un buen adelanto de la próxima sesión (cuantificadores anidados), si quiere ir preparándose.
+- **MIT — *Mathematics for Computer Science* (Lehman, Leighton, Meyer)**: [people.csail.mit.edu/meyer/mcs.pdf](https://people.csail.mit.edu/meyer/mcs.pdf). En inglés. Sección 3.6, *"Predicate Formulas"*.
 - **Stanford CS103 — *Guide to Logic Translations***: [web.stanford.edu/class/cs103/guide_to_translation](https://web.stanford.edu/class/cs103/guide_to_translation). En inglés. Checklist práctico para traducir a lógica de primer orden.
 
 > [!NOTE]
@@ -584,24 +580,26 @@ Al finalizar este documento, usted debería ser capaz de:
 <summary><b>Presione aquí para ver las respuestas</b></summary>
 <br>
 
-**P1.** Falsa. En $\{1,\dots,19\}$ hay **dos** múltiplos de $7$: el propio $7$ y $14$. La existencia se cumple, pero falla la unicidad — hay más de un testigo, así que $\exists!\ x\ Q(x)$ es falsa. (Si el dominio fuera "menor que $10$ ", el único testigo sería $7$ y la respuesta sí sería verdadera — la unicidad es sensible al tamaño exacto del dominio.)
+**P1.** $\forall x\ \exists y\ (x-y=0)$: para cualquier $x$, el testigo $y=x$ siempre cumple $x-x=0$. **Verdadera.** $\exists y\ \forall x\ (x-y=0)$: exigiría un único $y$ tal que $x=y$ para *todo* $x$ — imposible salvo que el dominio tuviera un solo elemento. **Falsa.**
 
-**P2.** Un ejemplo: universo estipulado explícitamente, $U=\{a,b,c\}$, donde se declara por definición del conjunto que las tres personas hablan inglés (verdadera, por construcción); universo = todos los seres humanos (falsa — la mayoría no habla inglés).
+**P2.** *"Existe un robot tal que toda batería es compatible con él"* — un robot universalmente compatible con cualquier batería del inventario.
 
-**P3.** Contraejemplo: $x=-2$, pues $(-2)^3=-8$ y $-8\geq -2$ es falso (también sirve $x=0.5$: $0.125\geq 0.5$ es falso). Dominio finito donde sí es verdadera: $\{0,1\}$, pues $0^3=0\geq 0$ y $1^3=1\geq 1$.
+**P3.** *"Todo pollo tiene al menos un tornillo que le pertenece"*: $\forall x\ (robot(x)\rightarrow\exists y\ (tornillo(y)\land pertenece(y,x)))$ — corresponde a $\forall\exists$ (cada uno el suyo). *"Hay un único tornillo compartido por todos"*: $\exists!\ y\ \forall x\ (robot(x)\rightarrow(tornillo(y)\land pertenece(y,x)))$ — el $\exists!$ es imprescindible aquí: sin él, la fórmula solo diría que existe *al menos* un tornillo así, no que sea el único. Es una lectura todavía más fuerte que $\exists\forall$ solo, y en la práctica poco plausible.
 
-**P4.** $\exists!\ x\ A(x)$ garantiza que hay **exactamente un** administrador activo a la vez — ni cero (el sistema siempre tiene responsable) ni más de uno (no hay conflicto de autoridad simultánea). Con solo $\exists x\ A(x)$, el sistema permitiría que dos o más administradores estuvieran activos al mismo tiempo, sin garantizar que la responsabilidad esté claramente asignada a una sola persona.
+**P4.** Con $D=\lbrace 1,2,3\rbrace$ y $P(x,y)$: $x<y$: $\forall x\forall y\ P(x,y)$ es **falsa** (por ejemplo $1<1$ es falso). $\forall x\exists y\ P(x,y)$ es **falsa**: para $x=3$ no existe ningún $y\in D$ con $3<y$. $\exists x\forall y\ P(x,y)$ es **falsa** por la misma razón que la anterior (ningún $x$ es menor que todos, incluyéndose a sí mismo). $\exists x\exists y\ P(x,y)$ es **verdadera**: por ejemplo $1<2$.
 
-**P5.** $\forall x\ activo(x) \equiv activo(u1)\land activo(u2)\land activo(u3)$. $\exists x\ activo(x) \equiv activo(u1)\lor activo(u2)\lor activo(u3)$.
+**P5.** Ejemplo: dominio $\lbrace gato, perro\rbrace$, $P(x)$: *"x maúlla"*, $Q(x)$: *"x ladra"*. $\exists x\ (P(x)\land Q(x))$ es falsa (ningún animal del dominio hace ambas cosas), pero $\exists x\ P(x)\land\exists x\ Q(x)$ es verdadera (el gato maúlla, el perro ladra). Mismo patrón que el contraejemplo de la Parte IV.4.
 
-**P6.** *"Todo estudiante entregó la tarea a tiempo"* es $\forall x\ E(x)$. Su negación: $\exists x\ \neg E(x)$ — *"existe al menos un estudiante que no entregó la tarea a tiempo"*.
+**P6.** $\exists x\ \bigl(S(x,x)\land\forall y\ (y\neq x\rightarrow\neg S(y,x))\bigr)$ — existe un pollo que se supervisa a sí mismo, y ningún otro pollo lo supervisa a él.
 
-**P7.** $A(x)$: *"x es un archivo que supera los 500 MB"*, $V(x)$: *"se enviará una alerta por x"*. Traducción: $\forall x\ (A(x)\rightarrow V(x))$. Negación: $\exists x\ (A(x)\land\neg V(x))$ — *"existe un archivo que supera los 500 MB y no genera alerta"*.
+**P7.** Se cambia cada cuantificador por su contrario, de afuera hacia adentro, hasta que el $\neg$ queda pegado al predicado:
 
-**P8.** Los primos menores que $3$ en $\mathbb{Z}^+$: solo el $2$ ( $1$ no es primo). Verdadera, con testigo $x=2$.
+$$\neg\bigl(\forall x\ \exists y\ P(x,y)\bigr) \equiv \exists x\ \neg\bigl(\exists y\ P(x,y)\bigr) \equiv \exists x\ \forall y\ \neg P(x,y)$$
 
-**P9.** $\forall x\ \bigl((robot(x)\land\neg bateria(x))\rightarrow\neg funciona(x)\bigr)$ — forma **E** (universal negativa), con sujeto compuesto "pollo robot sin batería".
+**P8.** *"Ningún pollo sin batería tiene un técnico asignado"*: $\forall x\ \bigl((robot(x)\land\neg bateria(x))\rightarrow\neg\exists y\ tecnico(y,x)\bigr)$. Antes de agregar el cuantificador anidado del técnico, la estructura general ("todo S es no-P", con sujeto compuesto) corresponde a la forma **E** (universal negativa).
 
-**P10.** $\exists x\ S(x,x)$ — *"existe un x tal que x se supervisa a sí mismo"*.
+**P9.** $\forall x\forall y\exists z\ (x\cdot y=z)$: para cualquier par $(x,y)$, el testigo $z=x\cdot y$ existe en $\mathbb{R}$ (clausura del producto). **Verdadera.** $\exists z\forall x\forall y\ (x\cdot y=z)$: ningún $z$ fijo es el producto de *todo* par — por ejemplo $2\cdot3=6$ pero $2\cdot4=8$. **Falsa.**
+
+**P10.** Tendría que existir (al menos) un técnico, digamos `T1`, que apareciera asignado a los ocho pollos a la vez en la bitácora — es decir, que la columna "Técnico asignado" mostrara `T1` en las ocho filas, sin excepción. (Note que esto solo haría verdadera la Pregunta 2 del Gallinero, $\exists y\ \forall x\ tecnico(y,x)$ — no dice nada todavía sobre si sería el *único* que cumple; para eso haría falta además que ningún otro técnico cubriera también los ocho.) Basta con que **un solo** pollo tenga un técnico distinto para que $\exists y\ \forall x\ tecnico(y,x)$ vuelva a ser falsa — la misma fragilidad que ya vimos en el método del contraejemplo de Clase 8.
 
 </details>

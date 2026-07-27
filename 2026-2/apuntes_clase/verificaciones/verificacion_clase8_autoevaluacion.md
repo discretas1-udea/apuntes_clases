@@ -1,107 +1,91 @@
-# Verificación (uso exclusivo del profesor) — `clase8_autoevaluacion.md`
+# Verificación (uso exclusivo del profesor) — `clase9_autoevaluacion.md`
 
 *No compartir con estudiantes. Contiene el desarrollo completo de los ítems de Serie 2 en adelante, para permitir una revisión rápida (5-6 líneas por ítem) en vez de resolver cada uno desde cero.*
 
 > [!IMPORTANT]
-> `clase8.md` todavía no enseña un formato de inferencia formal (Afirmación-Razón) para lógica cuantificacional — ese formato se enseñó en Clase 6 para lógica proposicional. Aquí se usa, en su lugar, una justificación **paso a paso** equivalente, como lo permite el prompt maestro (Sección 5, punto 7).
+> `clase9.md` todavía no enseña un formato de inferencia formal (Afirmación-Razón) para lógica cuantificacional — ese formato se enseñó en Clase 6 para lógica proposicional. Aquí se usa, en su lugar, una justificación **paso a paso** equivalente, como lo permite el prompt maestro (Sección 5, punto 7).
 
 > [!NOTE]
-> **Alcance.** Este archivo cubre únicamente los Ítems 10 a 24 (Serie 2, Serie 3 — Integración, Reto Final), por diseño: los Ítems 1-9 (Calentamiento y Serie 1) son de concepto único y se verifican por inspección directa contra `clase8.md`, sin necesitar desarrollo adicional.
+> **Alcance.** Este archivo cubre únicamente los Ítems 9 a 19 (Serie 2, Serie 3 — Entrenamiento cruzado, Reto Final), por diseño: los Ítems 1-8 (Calentamiento y Serie 1) son de concepto único y se verifican por inspección directa contra `clase9.md`, sin necesitar desarrollo adicional.
 
 ---
 
 ## Serie 2
 
-**Ítem 10.** $\exists!\ x\ perfecto(x)$ con tabla $U=\{E1,\dots,E5\}$, solo $E2$="sí".
-1. Existencia: $perfecto(E2)=V$.
-2. Unicidad, formalmente (definición I.2): se verifica $\forall y\bigl(perfecto(y)\rightarrow y=E2\bigr)$. Para $y\in\{E1,E3,E4,E5\}$, $perfecto(y)=F$, así que el condicional es vacuamente V; para $y=E2$, se cumple trivialmente ($E2=E2$). El universal es V.
-3. Conclusión: $\exists!\ x\ perfecto(x)$ es **V**, testigo $E2$.
+**Ítem 9.** Traducción con método de 5 pasos (Parte III).
+1. Dominio: personas (clientes) y productos.
+2. Palabra clave "todo cliente" → $\forall x$; "al menos un producto" → $\exists y$.
+3. Sujeto: $cliente(x)$; relación: $comprado(x,y)$, restringida a productos en oferta con $oferta(y)$.
+4. Forma A en el exterior (implicación), forma I en el interior (conjunción) — mismo patrón de Clase 7 aplicado dos veces.
+5. Conclusión: $\forall x\ \bigl(cliente(x) \rightarrow \exists y\ (producto(y)\land oferta(y)\land comprado(x,y))\bigr)$.
 
-**Ítem 11.** Negar "Algún estudiante que tomó Lógica y Representación I reprobó el examen de admisión a prácticas".
-1. $R(x)$: "x tomó Lógica y Representación I"; $F(x)$: "x reprobó el examen". Traducción: $\exists x(R(x)\land F(x))$.
-2. Negar con De Morgan cuantificacional (Parte IV): $\neg\exists x(R(x)\land F(x))\equiv\forall x\ \neg(R(x)\land F(x))$.
-3. De Morgan proposicional (Clase 6): $\neg(R(x)\land F(x))\equiv\neg R(x)\lor\neg F(x)$.
-4. Reconocer como implicación ($\neg p\lor q\equiv p\rightarrow q$, con $q=\neg F(x)$): $\neg R(x)\lor\neg F(x)\equiv R(x)\rightarrow\neg F(x)$.
-5. Conclusión: $\forall x\bigl(R(x)\rightarrow\neg F(x)\bigr)$ — "todo el que tomó LyR1 no reprobó el examen". **Cuidado:** $\neg F(x)$ es "no reprobó", no "aprobó" — el enunciado no declaró una partición binaria aprobar/reprobar, así que no debe traducirse como "aprobó" (error señalado por ambas auditorías externas, ChatGPT y Gemini).
+**Ítem 10.** $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, tabla $S1\to V1$, $S2\to V1$, $S3\to V2$.
+1. $\forall x\exists y\ reporta(x,y)$: $S1$→testigo $V1$ ✓; $S2$→testigo $V1$ ✓; $S3$→testigo $V2$ ✓. Los tres sensores tienen testigo. **V.**
+2. $\exists y\forall x\ reporta(x,y)$: probar $y=V1$ — falla en $S3$ ($S3$ no reporta a $V1$). Probar $y=V2$ — falla en $S1$ y $S2$. Ningún $y$ sirve para los tres. **F.**
+3. Conclusión: mismo patrón que Ana/Beto/Carla (Parte II.1) — testigo dependiente de $x$ sí existe, testigo único para todos no.
 
-**Ítem 12.** $P(x)$: $x^2\leq 9$, dominios $\{-3,\dots,3\}$ y $\mathbb{Z}$.
-1. En $\{-3,\dots,3\}$: los siete cuadrados ($9,4,1,0,1,4,9$) son todos $\leq 9$. $\forall x\ P(x)$ es **V**.
-2. En $\mathbb{Z}$: contraejemplo $x=4$, $16\leq 9$ es F. $\forall x\ P(x)$ es **F**.
-3. Conclusión: mismo predicado, el dominio infinito reintroduce el contraejemplo que el dominio finito excluía (Parte II.1).
+**Ítem 11.** Letrero mal formalizado, $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$.
+1. Por precedencia (Parte I.1), $\forall x$ solo alcanza al átomo inmediato: $entregoCarnet(x)$.
+2. La fórmula completa se lee como $\bigl((\forall x\ entregoCarnet(x)) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)$.
+3. En esa lectura, las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedan fuera de cualquier alcance — libres (Parte I.3) — exactamente el caso de la Advertencia de Parte I.1.
+4. Clasificación (Parte V): es ambigüedad **de alcance** — no queda claro qué parte de la fórmula domina el cuantificador.
+5. Corrección con paréntesis: $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.
 
-**Ítem 13.** $\exists!\ x\ Q(x)$, $Q(x)$: múltiplo de 4, dominio $\{1,\dots,15\}$.
-1. Múltiplos de 4 en el rango: $4, 8, 12$ — tres testigos.
-2. Existencia: $Q(4)=V$.
-3. Unicidad, formalmente: se busca refutar $\forall y\bigl(Q(y)\rightarrow y=4\bigr)$. Basta $y=8$: $Q(8)=V$ pero $8\neq4$, así que el condicional es F — el universal queda refutado, la unicidad falla (también existe $12$ como testigo adicional).
-4. Conclusión: $\exists!\ x\ Q(x)$ es **F**; testigos que rompen la unicidad: $4$ y $8$.
+**Ítem 12.** Cláusula **extendida** de IV.3 (Q sin la variable cuantificada) — deliberadamente distinta del Ítem 7, que ya cubre la cláusula básica ($\forall x(P\land Q(x))$ con ambos predicados dependientes de $x$).
+1. $vigente$ es una proposición atómica sin ocurrencia de $x$ — no es $vigente(x)$, es una constante proposicional.
+2. La cláusula extendida de IV.3 dice exactamente: $\forall x\ (P(x)\land Q) \equiv \forall x\ P(x)\land Q$ cuando $Q$ no contiene $x$.
+3. Sustituyendo $P=responsable$, $Q=vigente$: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x)\land vigente$.
+4. Intuición de por qué es válido: $vigente$ no cambia según qué $x$ se elija, así que "sacarla" del alcance del cuantificador no pierde ni agrega información — el cuantificador nunca tenía nada que hacer sobre ella.
 
-**Ítem 14.** $U=\{a,b\}$, $R(x)$, derivar $\neg\forall xR(x)\equiv\exists x\neg R(x)$ desde cero.
-1. Parte III: $\forall x\ R(x)\equiv R(a)\land R(b)$.
-2. Negar con De Morgan proposicional (Clase 6): $\neg(R(a)\land R(b))\equiv\neg R(a)\lor\neg R(b)$.
-3. Parte III aplicada a $\neg R$: $\neg R(a)\lor\neg R(b)\equiv\exists x\ \neg R(x)$.
-4. Conclusión: $\neg\forall x\ R(x)\equiv\exists x\ \neg R(x)$ — coincide con la ley de De Morgan cuantificacional (Parte IV), aquí reconstruida para $n=2$.
-5. **Nota de alcance:** este ítem ilustra el caso $n=2$. La generalización a un $n$ arbitrario no se sigue automáticamente de este caso particular — sigue el mismo patrón, pero aplicando De Morgan proposicional de dos términos a la vez, tantas veces como haga falta, exactamente como ya lo hace `clase8.md` en su propia derivación simbólica general (Parte IV, con $U=\{x_1,\dots,x_n\}$). Este ítem no reemplaza esa prueba general; solo la ilustra en el caso más pequeño posible.
-
----
-
-## Serie 3 — Integración
-
-**Ítem 15.** $U=\{L1,L2,L3\}$, $activo(x)$.
-1. (a) $\forall x\ activo(x)$.
-2. (b) Parte III: $activo(L1)\land activo(L2)\land activo(L3)$.
-3. (c) Vía De Morgan cuantificacional (Parte IV): $\neg\forall x\ activo(x)\equiv\exists x\ \neg activo(x)$.
-4. Verificación cruzada — negar (b) con De Morgan proposicional: $\neg activo(L1)\lor\neg activo(L2)\lor\neg activo(L3)$, que por Parte III aplicada a $\neg activo$ es exactamente $\exists x\ \neg activo(x)$.
-5. Conclusión: ambos caminos coinciden.
-
-**Ítem 16.** $P(x)$: $x>5$, dominio $\{5,\dots,9\}$.
-1. $\forall x\ P(x)$: falla en $x=5$ ($5>5$ es F) → **F**.
-2. $\exists x\ P(x)$: $6>5$ es V → **V**.
-3. Combinación $(F,V)$: consistente con la tabla de la Parte II (no es la combinación prohibida $(V,F)$).
-4. $\exists!$: testigos $6,7,8,9$ (cuatro) → unicidad falla → $\exists!\ x\ P(x)$ es **F**.
-
-**Ítem 17.** "Todo sensor de temperatura defectuoso genera una alerta falsa".
-1. $D(x)$: "x es un sensor de temperatura defectuoso"; $F(x)$: "x genera una alerta falsa". Forma A: $\forall x(D(x)\rightarrow F(x))$.
-2. Negar cuantificador (Parte IV): $\exists x\ \neg(D(x)\rightarrow F(x))$.
-3. Negar el condicional (Clase 7, $\neg(p\rightarrow q)\equiv p\land\neg q$): $\exists x(D(x)\land\neg F(x))$.
-4. Conclusión: "existe un sensor de temperatura defectuoso que no genera una alerta falsa".
-
-**Ítem 18.** $P(x)$: $x^2\leq4$.
-1. (a) $x_0=3$: $9\leq4$ es F — contraejemplo válido.
-2. (b) Resolver $x^2\leq4\Leftrightarrow -2\leq x\leq2$. Dominio finito: $\{-2,-1,0,1,2\}$.
-3. Verificar los cinco: $4,1,0,1,4$, todos $\leq4$ — todos V.
-4. Conclusión: (a) $x_0=3$. (b) $P(-2)\land P(-1)\land P(0)\land P(1)\land P(2)$, verdadera.
-
-**Ítem 19 (Depuración).** Tres formalizaciones de "hay un único administrador con acceso root".
-1. (A) $\exists x(admin(x)\land root(x))$ — solo existencia, sin la cláusula $\forall y(\dots\rightarrow y=x)$; es el error de confundir $\exists$ con $\exists!$ (Parte I). Incorrecta.
-2. (B) Coincide exactamente con la definición de la Parte I.2 aplicada a $P(x)=admin(x)\land root(x)$. Correcta.
-3. (C) Es forma A ($\forall x(admin(x)\rightarrow root(x))$): dice "todo administrador tiene root", no exige existencia de ninguno ni habla de unicidad. Incorrecta, y es un error distinto al de (A) — aquí se cambió la estructura completa, no solo se omitió una cláusula.
-
-**Ítem 20 (Construcción de dominios).** No tiene solución única; la respuesta de referencia es: Dominio 1 $=\{2,4,6\}$, $V(x)$="par": los tres cumplen, $\forall$ y $\exists$ ambas V (combinación V,V de la tabla de la Parte II). Dominio 2 $=\{2,3,5\}$, mismo $V$: solo el 2 es par, $\exists$ V (testigo 2), $\forall$ F (falla en 3 y 5) — combinación F,V. Al calificar, aceptar cualquier propuesta del estudiante que efectivamente produzca esas dos combinaciones y las justifique.
-
-**Ítem 21 (Especificación CS).** Sistema de reservas, $\exists!\ x\ reservada(x)$ vs. $\exists x\ reservada(x)$.
-1. $\exists!$ garantiza exactamente una sala por franja: existencia (siempre hay asignación) y unicidad (sin conflicto simultáneo).
-2. Relajar a $\exists$ permite dos o más salas reservadas a la vez para la misma franja, sin que el sistema distinga cuál es la vigente.
-3. Consecuencia operacional concreta: dos equipos podrían presentarse a la misma sala física el día del evento. (Dominio distinto al de P4 de `clase8.md`, que usa administradores de sistema — aquí se usa un sistema de reservas, evitando la repetición señalada por la auditoría de ChatGPT.)
+**Ítem 13.** Traducción con condición de distinción + nota de vacuidad (paralelo a Ejercicio 7).
+1. Predicados: $colaboraCon(x,y)$, dominio de proyectos.
+2. Estructura: $\exists x$ (existe un proyecto) $\forall y\forall z$ (para cualesquiera dos colaboradores) con antecedente $colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z$ y consecuente $\neg colaboraCon(y,z)$.
+3. Fórmula: $\exists x\ \forall y\ \forall z\ \bigl(colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z \rightarrow \neg colaboraCon(y,z)\bigr)$.
+4. Vacuidad: si $x$ no tiene dos colaboradores distintos que satisfagan el antecedente, la implicación nunca se pone a prueba — verdadera por vacuidad, igual que en el Ejercicio 7.
 
 ---
 
-## Reto Final — El Pastorcito Mentiroso
+## Serie 3 — Entrenamiento cruzado
 
-**Ítem 22.** $\exists!\ x\ acudio(x)$, tabla con solo $A4$="Sí".
-1. Existencia: $acudio(A4)=V$.
-2. Unicidad: $acudio(A1)=acudio(A2)=acudio(A3)=acudio(A5)=F$.
-3. Conclusión: $\exists!\ x\ acudio(x)$ es **V**, testigo $A4$.
+**Ítem 14.** Unicidad anidada (Clase 8 + hoy), paralelo a Ejercicio 9.
+1. Solución 1 — con $\exists!$: $\forall x\ \exists!\ y\ primerContacto(x,y)$.
+2. Solución 2 — expandiendo $\exists!$ (Clase 8, Parte I.2) dentro del alcance de $\forall x$ de hoy: se agrega $\forall z\ (z\neq y \rightarrow \neg primerContacto(x,z))$ dentro del alcance del $\exists y$.
+3. Conclusión: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.
 
-**Ítem 23.** Barrio Alto $=\{A1,A4\}$, Barrio Bajo $=\{A2,A3,A5\}$, mismo predicado $acudio(x)$.
-1. Barrio Alto: $acudio(A4)=V$ → $\exists x\ acudio(x)$ es **V** (testigo $A4$).
-2. Barrio Bajo: $acudio(A2)=acudio(A3)=acudio(A5)=F$ → $\exists x\ acudio(x)$ es **F** (sin testigo).
-3. Conclusión: el predicado y sus valores fijos por aldeano no cambiaron; el universo de cuantificación sí, y eso basta para cambiar el valor de verdad — Parte II.1 aplicada a un caso binario.
+**Ítem 15.** $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$, $U_{mesero}=\{MeseroA,MeseroB\}$, bitácora de turno con registros múltiples posibles (no una tabla funcional pre-filtrada) — rediseñado tras auditoría externa para que la unicidad pueda fallar genuinamente y no sea trivial por construcción.
+1. Registros: $atiende(MeseroA,Mesa1)$, $atiende(MeseroA,Mesa2)$, $atiende(MeseroB,Mesa2)$, $atiende(MeseroA,Mesa3)$.
+2. $Mesa1$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa1$. $\exists!$ se cumple.
+3. $Mesa2$: existencia — $MeseroA$ (o $MeseroB$). Unicidad — **falla**: hay dos registros distintos, $MeseroA$ y $MeseroB$, ambos atendieron $Mesa2$. Formalmente, se refuta $\forall y\bigl(atiende(y,Mesa2)\rightarrow y=MeseroA\bigr)$ con el contraejemplo $y=MeseroB$. $\exists!$ **no** se cumple para $Mesa2$.
+4. $Mesa3$: existencia — $MeseroA$. Unicidad — ningún otro registro menciona $Mesa3$. $\exists!$ se cumple.
+5. Como $\exists!\ y\ atiende(y,x)$ falla al menos en $Mesa2$, el universal $\forall x\ \exists!\ y\ atiende(y,x)$ es **F** — basta un contraejemplo de $x$ para refutar un $\forall$ (el mismo principio del método del contraejemplo de Clase 8, aplicado aquí a una fórmula con $\exists!$ anidado).
 
-**Ítem 24 (Construcción — modificación mínima).** Modificar la tabla del Ítem 22 para que $\exists!\ x\ acudio(x)$ deje de cumplirse.
-1. Estado actual: solo $A4$ cumple $acudio(x)$ → $\exists!$ es V.
-2. Cambiar cualquier otro aldeano de F a V (p. ej. $A1$) introduce un segundo testigo.
-3. Conclusión: existencia se mantiene (sigue habiendo al menos uno), pero unicidad se rompe (ya hay dos) → $\exists!\ x\ acudio(x)$ pasa de V a F. Cualquier aldeano distinto de $A4$ sirve como respuesta válida.
+**Ítem 16.** Negación de $\forall x\ \exists y\ (reporta(x,y)\land activo(y))$.
+1. Negar $\forall x$ (Clase 8): $\neg\forall x\ \exists y(\dots) \equiv \exists x\ \neg\exists y(\dots)$.
+2. Negar $\exists y$ (Clase 8): $\exists x\ \forall y\ \neg(reporta(x,y)\land activo(y))$.
+3. De Morgan proposicional (Clase 6) sobre lo interno: $\neg(reporta\land activo)\equiv\neg reporta\lor\neg activo$.
+4. Conclusión: $\exists x\ \forall y\ \bigl(\neg reporta(x,y)\lor\neg activo(y)\bigr)$.
+
+**Ítem 17.** Negación de $\exists x\ \forall y\ (disponible(x,y)\lor enMantenimiento(x,y))$.
+1. Negar $\exists x$ (Clase 8): $\neg\exists x\ \forall y(\dots) \equiv \forall x\ \neg\forall y(\dots)$.
+2. Negar $\forall y$ (Clase 8): $\forall x\ \exists y\ \neg(disponible(x,y)\lor enMantenimiento(x,y))$.
+3. De Morgan proposicional (Clase 6) sobre lo interno: $\neg(disponible\lor enMantenimiento)\equiv\neg disponible\land\neg enMantenimiento$.
+4. Conclusión: $\forall x\ \exists y\ \bigl(\neg disponible(x,y)\land\neg enMantenimiento(x,y)\bigr)$.
 
 ---
 
-*Fin del bloque de verificación. 15 ítems desarrollados en total: Serie 2 (Ítems 10-14, 5 ítems), Serie 3 — Integración (Ítems 15-21, 7 ítems), Reto Final (Ítems 22-24, 3 ítems).*
+## Reto Final — La ruta del domiciliario
+
+**Ítem 18.** Formalización comparativa, sin tabla todavía.
+1. "Cada cliente tiene un repartidor asignado": $\forall$ exterior con testigo dependiente de $x$ → $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$.
+2. "Hay un repartidor que cubre a todos": $\exists$ exterior con testigo fijo para todo $x$ → $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$.
+3. Diferencia (núcleo de la Parte II): la primera permite un repartidor distinto por cliente; la segunda exige uno solo, común a todos — afirmación estrictamente más fuerte.
+
+**Ítem 19.** Evaluación con tabla $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$, y negación. Notación uniformada con el Ítem 18 (explícita sobre $U_{cliente}$ y $U_{repartidor}$).
+1. $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$: cada cliente tiene fila con repartidor ($C1,C2,C4\to R1$; $C3\to R2$). **V.**
+2. $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$: probar $y=R1$ — falla en $C3$. Probar $y=R2$ — falla en $C1,C2,C4$. Ningún $y$ cubre los cuatro. **F.**
+3. Negar la fórmula falsa (Clase 8, dos pasos): $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \neg\forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$.
+4. Lectura: "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor" — cierto para ambos repartidores del caso ($R1$ falla con $C3$; $R2$ falla con $C1,C2,C4$).
+
+---
+
+*Fin del bloque de verificación. 11 ítems desarrollados en total: Serie 2 (Ítems 9-13, 5 ítems), Serie 3 — Cruzada (Ítems 14-17, 4 ítems), Reto Final (Ítems 18-19, 2 ítems).*

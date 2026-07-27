@@ -1,25 +1,28 @@
-# Autoevaluación — Clase 9: Cuantificadores Anidados, Alcance y Equivalencias
+![Built with AI](https://img.shields.io/badge/Built%20with-AI-blue.svg)
 
-*Matemáticas Discretas 1 · Módulo 2: Lógica Cuantificacional (Lógica de Predicados)*
-*Universidad de Antioquia · Ingeniería de Sistemas*
+# 🐛 Autoevaluación — Clase 10
+### Formas Aristotélicas y Reglas de Inferencia Cuantificacionales
+*Matemáticas Discretas 1 · Universidad de Antioquia · Ingeniería de Sistemas*
 
-**[Volver a Clase 9](clase9.md)**
+⬅️ Basado en [Clase 10 — Expediente Depuración: Probar Casos no es Demostrar Siempre](clase10.md)
 
 ---
 
-## Cómo usar este documento
+Este bloque es práctica nueva: ningún ítem repite los Ejemplos 1-3, los Ejercicios 4-9 ni los Ejercicios propuestos P1-P12 de `clase10.md` — todos usan escenarios distintos, aunque varios ejerciten exactamente los mismos patrones de razonamiento.
 
-Cada ítem sigue el mismo patrón: primero resuelva el procedimiento completo a mano y escriba su resultado, luego declare qué tan seguro está, y solo después revele la respuesta final (sin desarrollo, como el apéndice de un libro de texto). No se salte el paso de intento — es la parte que realmente entrena.
+Cada ítem sigue el mismo formato: intente resolverlo a mano por completo, escriba aquí solo su resultado final, declare qué tan seguro está, y solo entonces revele la respuesta.
 
 > [!NOTE]
-> Este bloque **no repite** ningún ejercicio ya resuelto o propuesto en `clase9.md` (Ejercicios 1-13, las Preguntas 1-3 del Expediente Gallinero, ni P1-P10). Todos los ítems son práctica nueva sobre los mismos conceptos, con dominios y predicados distintos a los ya usados.
+> Este documento sigue el patrón de respuesta dentro de cada ítem (intento + confianza + respuesta final), el mismo usado en `clase6_autoevaluacion.md` — no incluye un Solucionario consolidado aparte al final. El desarrollo completo, paso a paso, de los ítems de Serie 2 en adelante está disponible para el profesor en `verificacion_clase10_autoevaluacion.md`.
 
 ---
 
 ## Calentamiento
 
+*Un solo paso — reconocer la forma o aplicar una regla una única vez.*
+
 **Ítem 1**
-En la fórmula $\exists x\ \bigl(P(x) \land R(x,y)\bigr)$, clasifique cada ocurrencia de $x$ y de $y$ como libre o ligada.
+Clasifique según su forma aristotélica y formalice: *"Todo servidor de respaldo enciende automáticamente ante una falla."* Use $servidorRespaldo(x)$, $enciendeAutomatico(x)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -27,10 +30,10 @@ En la fórmula $\exists x\ \bigl(P(x) \land R(x,y)\bigr)$, clasifique cada ocurr
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Las dos ocurrencias de $x$ (en $P(x)$ y en $R(x,y)$) son ligadas — ambas están dentro del alcance de $\exists x$. La ocurrencia de $y$ en $R(x,y)$ es libre — ningún cuantificador la introduce.</details>
+<details><summary>Ver respuesta final</summary>Forma <b>A</b>. $\forall x\ \bigl(servidorRespaldo(x)\rightarrow enciendeAutomatico(x)\bigr)$</details>
 
 **Ítem 2**
-Sin resolver ningún ejemplo numérico: enuncie la condición exacta que deben cumplir dos fórmulas cuantificadas $S$ y $T$ para poder afirmar $S\equiv T$.
+Clasifique según su forma aristotélica y formalice: *"Algún dispositivo IoT del laboratorio está fuera de línea."* Use $dispositivoIoT(x)$, $fueraDeLinea(x)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -38,10 +41,10 @@ Sin resolver ningún ejemplo numérico: enuncie la condición exacta que deben c
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Deben tener el mismo valor de verdad para cualquier predicado que se sustituya en ellas y para cualquier dominio del discurso que se elija — no basta con que coincidan en un solo ejemplo.</details>
+<details><summary>Ver respuesta final</summary>Forma <b>I</b>. $\exists x\ \bigl(dispositivoIoT(x)\land fueraDeLinea(x)\bigr)$</details>
 
 **Ítem 3**
-Aplique la regla de negación de cuantificadores (repaso de Clase 8) a $\neg\ \exists x\ tieneVirus(x)$, sin evaluar ningún dominio concreto.
+Dada la premisa $\forall x\ \bigl(app(x)\rightarrow requierePermiso(x)\bigr)$, aplique Instanciación universal para el objeto concreto $\text{Calendario}$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -49,31 +52,27 @@ Aplique la regla de negación de cuantificadores (repaso de Clase 8) a $\neg\ \e
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \neg tieneVirus(x)$.</details>
+<details><summary>Ver respuesta final</summary>$app(\text{Calendario})\rightarrow requierePermiso(\text{Calendario})$</details>
+
+**Ítem 4**
+Dado el hecho concreto $seguro(\text{Nodo7})$, aplique Generalización existencial.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$\exists x\ seguro(x)$</details>
 
 ---
 
 ## Serie 1 — Repeticiones básicas
 
-**Ítem 4**
-Considere estas dos fórmulas sobre el mismo dominio de estudiantes, con $inscrito(x)$ y $activo(x)$:
-
-(a) $\forall x\ inscrito(x)\rightarrow activo(x)$ (sin paréntesis)
-
-(b) $\forall x\ \bigl(inscrito(x) \rightarrow activo(x)\bigr)$ (con paréntesis)
-
-Indique el alcance de $\forall x$ en cada una, y diga cuál de las dos deja una ocurrencia libre de $x$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>(a) El alcance de $\forall x$ es solo $inscrito(x)$ — la $x$ dentro de $activo(x)$ queda libre; la fórmula no es una proposición cerrada. (b) El alcance es todo el paréntesis; ambas ocurrencias de $x$ son ligadas.</details>
+*Aplicación directa de una sola regla o forma, con un paso adicional de justificación cuando corresponde.*
 
 **Ítem 5**
-Sea $U=\{D1,D2,D3,D4\}$ (cuatro dispositivos IoT) y $sincroniza(x,y)$: "el dispositivo x sincroniza sus datos con el dispositivo y". Según los registros: $D1$ sincroniza con $D2$; $D2$ sincroniza con $D3$; $D3$ sincroniza con $D3$ (consigo mismo); $D4$ sincroniza con $D3$. Evalúe $\forall x\ \exists y\ sincroniza(x,y)$ y $\exists y\ \forall x\ sincroniza(x,y)$.
+Clasifique según su forma aristotélica y formalice: *"Ningún archivo sin respaldo puede eliminarse de forma segura."* Use $archivo(x)$, $tieneRespaldo(x)$, $eliminableSeguro(x)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -81,10 +80,10 @@ Sea $U=\{D1,D2,D3,D4\}$ (cuatro dispositivos IoT) y $sincroniza(x,y)$: "el dispo
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ sincroniza(x,y)$ es **verdadera** (los cuatro tienen testigo: $D1{\to}D2$, $D2{\to}D3$, $D3{\to}D3$, $D4{\to}D3$). $\exists y\ \forall x\ sincroniza(x,y)$ es **falsa**: pruebe $y=D3$ — funciona para $D2,D3,D4$ pero $D1$ no sincroniza con $D3$ (solo con $D2$); ningún otro $y$ hace mejor. Ningún dispositivo es testigo común a los cuatro.</details>
+<details><summary>Ver respuesta final</summary>Forma <b>E</b>, sobre el sujeto compuesto "archivo sin respaldo". $\forall x\ \Bigl(\bigl(archivo(x)\land\neg tieneRespaldo(x)\bigr)\rightarrow\neg eliminableSeguro(x)\Bigr)$</details>
 
 **Ítem 6**
-Al traducir "cada empleado tiene un supervisor" (con $supervisa(y,x)$: "y supervisa a x"), alguien escribió $\exists y\ \forall x\ supervisa(y,x)$. Identifique cuál de los dos errores frecuentes de la Parte II.2 se cometió, y corrija la traducción.
+Clasifique según su forma aristotélica y formalice: *"Algún proceso en segundo plano no libera memoria correctamente."* Use $proceso(x)$, $liberaMemoria(x)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -92,10 +91,11 @@ Al traducir "cada empleado tiene un supervisor" (con $supervisa(y,x)$: "y superv
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Error frecuente 2 — invertir el orden sin darse cuenta: la traducción dada dice "hay un supervisor común a todos los empleados", una afirmación mucho más fuerte. Corrección: $\forall x\ \exists y\ supervisa(y,x)$ — cada empleado con el suyo, no necesariamente el mismo.</details>
+<details><summary>Ver respuesta final</summary>Forma <b>O</b>. $\exists x\ \bigl(proceso(x)\land\neg liberaMemoria(x)\bigr)$</details>
 
 **Ítem 7**
-Sea el dominio $\{-1,2,3\}$, $P(x)$: "x es positivo", $Q(x)$: "x es entero". Verifique, evaluando ambos lados por separado, si $\forall x\ (P(x)\land Q(x)) \equiv \forall x\ P(x) \land \forall x\ Q(x)$ se cumple en este caso.
+El siguiente argumento, ¿es válido? Justifique.
+$$\begin{aligned}&1.\ \ rindeBien(\text{EquipoA}) &&\text{Premisa}\\ &2.\ \ \forall x\ \ rindeBien(x) &&\text{"Generalización universal" en 1}\end{aligned}$$
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -103,10 +103,10 @@ Sea el dominio $\{-1,2,3\}$, $P(x)$: "x es positivo", $Q(x)$: "x es entero". Ver
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Izquierda: en $x=-1$, $P(-1)\land Q(-1) = F\land V = F$, así que $\forall x(P(x)\land Q(x))$ es **falsa**. Derecha: $\forall x\ P(x)$ es falsa (falla en $-1$), $\forall x\ Q(x)$ es verdadera; $F\land V=$ **falsa**. Ambos lados coinciden en falso — la equivalencia se cumple también en este caso.</details>
+<details><summary>Ver respuesta final</summary>Inválido. $\text{EquipoA}$ es un objeto específico nombrado en la premisa, no arbitrario; Generalización universal exige que el objeto no dependa de ninguna suposición particular previa.</details>
 
 **Ítem 8**
-Proponga usted mismo(a) un contraejemplo (dominio y predicados propios, distintos a los usados en `clase9.md`) que muestre que $\forall x\ (P(x)\lor Q(x)) \not\equiv \forall x\ P(x) \lor \forall x\ Q(x)$.
+En una demostración ya tiene, en un paso anterior, $\exists x\ error(x)$ instanciado como $error(bugA)$. Ahora aparece la premisa $\exists x\ \bigl(error(x)\land x\neq bugA\bigr)$. Al aplicar Instanciación existencial sobre esta nueva premisa, ¿puede el testigo llamarse también $bugA$? Si no, ¿cómo debería llamarse?
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -114,25 +114,27 @@ Proponga usted mismo(a) un contraejemplo (dominio y predicados propios, distinto
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Respuesta de referencia (otras propuestas válidas también son correctas): dominio $\{6,7\}$, $P(x)$: "x es divisible entre 2", $Q(x)$: "x es divisible entre 7". $P(6)\lor Q(6)=V$, $P(7)\lor Q(7)=V$, así que $\forall x(P(x)\lor Q(x))$ es verdadera. Pero $\forall x\ P(x)$ es falsa (falla en 7) y $\forall x\ Q(x)$ es falsa (falla en 6), así que $\forall xP(x)\lor\forall xQ(x)$ es falsa. Verdadera $\neq$ falsa: no son equivalentes.</details>
+<details><summary>Ver respuesta final</summary>No. $bugA$ ya fue fijado como testigo en el paso anterior; el testigo de esta nueva existencial debe ser un nombre genuinamente nuevo, por ejemplo $bugB$.</details>
+
+**Ítem 9**
+Dadas las premisas *"Todo endpoint documentado pasa la revisión de API"* y *"El endpoint `/checkout` no pasa la revisión de API"*, demuestre en Afirmación-Razón que *"el endpoint `/checkout` no está documentado"*.
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$\neg documentado(\text{/checkout})$ — el endpoint <code>/checkout</code> no está documentado.</details>
 
 ---
 
 ## Serie 2 — Aplicación combinada
 
-**Ítem 9**
-Traduzca, usando el método de 5 pasos de la Parte III: "Todo cliente de la tienda ha comprado al menos un producto en oferta." Use $cliente(x)$, $producto(y)$, $oferta(y)$ y $comprado(x,y)$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>$\forall x\ \Bigl(cliente(x) \rightarrow \exists y\ \bigl(producto(y)\land oferta(y)\land comprado(x,y)\bigr)\Bigr)$.</details>
+*Cadenas de 2 o más pasos que combinan varias de las reglas de la Parte V con reglas proposicionales.*
 
 **Ítem 10**
-Sea $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, y $reporta(x,y)$: "el sensor x reporta datos al servidor y". Según la tabla de configuración: $S1\to V1$, $S2\to V1$, $S3\to V2$. Evalúe $\forall x\ \exists y\ reporta(x,y)$ y $\exists y\ \forall x\ reporta(x,y)$.
+Dadas las premisas *"Alguien en el equipo de soporte domina Kubernetes"* y *"Todo el que domina Kubernetes puede resolver incidentes de nivel 3"*, demuestre que *"alguien en el equipo de soporte puede resolver incidentes de nivel 3"*.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -140,10 +142,10 @@ Sea $U_{sensor}=\{S1,S2,S3\}$, $U_{servidor}=\{V1,V2\}$, y $reporta(x,y)$: "el s
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ reporta(x,y)$ es **verdadera** (cada sensor reporta a alguno). $\exists y\ \forall x\ reporta(x,y)$ es **falsa** ($V1$ solo cubre $S1,S2$; $V2$ solo cubre $S3$; ningún servidor recibe de los tres).</details>
+<details><summary>Ver respuesta final</summary>$\exists x\ \bigl(soporte(x)\land resuelveNivel3(x)\bigr)$</details>
 
 **Ítem 11**
-Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMulta(x) \rightarrow puedeRetirar(x)$. (a) Usando la regla de precedencia de la Parte I.1, explique exactamente hasta dónde llega el alcance de $\forall x$ tal como está escrita la fórmula, y qué ocurrencias de $x$ quedan libres como consecuencia. (b) Reescríbala con paréntesis para que exprese "para todo estudiante, si entregó el carnet o pagó la multa, entonces puede retirar un libro".
+Dadas las premisas: (a) *"Todo paquete de red llega, se pierde o se retransmite"*; (b) *"el paquete $p_7$ no se pierde"*; (c) *"el paquete $p_7$ no se retransmite"*. Deduzca *"el paquete $p_7$ llega"*.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -151,10 +153,11 @@ Un letrero mal formalizado quedó como $\forall x\ entregoCarnet(x) \lor pagoMul
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(a) Por precedencia (Parte I.1), sin paréntesis $\forall x$ gobierna únicamente el átomo inmediato, $entregoCarnet(x)$ — no toda la línea. La fórmula se lee como $\bigl((\forall x\ entregoCarnet(x)) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)$, y las ocurrencias de $x$ en $pagoMulta(x)$ y $puedeRetirar(x)$ quedan fuera de ese alcance — libres (Parte I.3). (b) $\forall x\ \Bigl(\bigl(entregoCarnet(x) \lor pagoMulta(x)\bigr) \rightarrow puedeRetirar(x)\Bigr)$.</details>
+<details><summary>Ver respuesta final</summary>$llega(p_7)$</details>
 
 **Ítem 12**
-Dominio: los estudiantes becados de este semestre. Sea $responsable(x)$ el predicado de siempre, y $vigente$ una proposición **sin variable** que dice "el programa de becas está vigente este semestre". Traduzca "todos los becados son responsables, y además el programa está vigente" como $\forall x\ (responsable(x)\land vigente)$, y aplique la cláusula **extendida** de la Parte IV.3 (la que aplica cuando $Q$ no contiene la variable cuantificada) para simplificarla.
+El siguiente argumento es **inválido**. Identifique cuál paso viola una restricción de la Parte V y explique por qué:
+$$\begin{aligned}&1.\ \ \exists x\ sospechoso(x) &&\text{Premisa}\\ &2.\ \ sospechoso(testigo1) &&\text{Instanciación existencial en 1}\\ &3.\ \ \forall x\ sospechoso(x) &&\text{"Generalización universal" en 2}\end{aligned}$$
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -162,10 +165,10 @@ Dominio: los estudiantes becados de este semestre. Sea $responsable(x)$ el predi
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>Como $vigente$ no contiene la variable $x$, aplica la cláusula extendida de IV.3: $\forall x\ (responsable(x)\land vigente) \equiv \forall x\ responsable(x) \land vigente$ — el cuantificador "no tiene nada que hacer" sobre $vigente$, así que sale del alcance sin cambiar el significado.</details>
+<details><summary>Ver respuesta final</summary>El paso 3 es inválido. $testigo1$ es exactamente el objeto que Instanciación existencial introdujo en el paso 2 — el testigo garantizado por la existencial, no un objeto arbitrario. Generalización universal exige arbitrariedad genuina, no un testigo ya fijado por otra regla.</details>
 
 **Ítem 13**
-Dominio: los proyectos de un semillero de investigación, $colaboraCon(x,y)$: "x colabora con y". Traduzca, incluyendo una condición de distinción (como en la Parte II.3): "existe un proyecto cuyos colaboradores no colaboran entre sí". Luego explique bajo qué condición esta fórmula resultaría verdadera por vacuidad.
+Dadas las premisas: (a) *"Todo servidor está activo o en mantenimiento"*; (b) *"Todo servidor sin certificado no está activo"*; (c) *"Existe un servidor sin mantenimiento o con alerta"*. Deduzca $\exists x\ \bigl(certificado(x)\lor alerta(x)\bigr)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -173,27 +176,27 @@ Dominio: los proyectos de un semillero de investigación, $colaboraCon(x,y)$: "x
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\exists x\ \forall y\ \forall z\ \bigl(colaboraCon(x,y)\land colaboraCon(x,z)\land y\neq z \rightarrow \neg colaboraCon(y,z)\bigr)$. Si el proyecto $x$ no tiene dos colaboradores distintos que cumplan a la vez $colaboraCon(x,y)$ y $colaboraCon(x,z)$, el antecedente nunca se satisface y la implicación es verdadera por vacuidad.</details>
+<details><summary>Ver respuesta final</summary>$\exists x\ \bigl(certificado(x)\lor alerta(x)\bigr)$ — se deduce por una cadena de resolución; vea la razón completa, si la necesita, con su profesor.</details>
+
+**Ítem 14**
+Explique, en sus propias palabras: cuando una premisa existencial y una premisa universal comparten la misma variable, ¿por qué hay que instanciar primero la existencial (Instanciación existencial) y no al revés?
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>Porque el testigo que Instanciación existencial introduce debe fijarse primero como una constante concreta; solo después de tener ese testigo fijo tiene sentido instanciar las premisas universales exactamente en ese mismo objeto, para poder combinarlas con reglas proposicionales. Si se instanciara primero la universal con un objeto genérico distinto del testigo existencial, las dos premisas hablarían de objetos distintos y no podrían combinarse.</details>
 
 ---
 
 ## Serie 3 — Entrenamiento cruzado
 
-*Mezcla con Clase 8 (unicidad anidada) y Clase 6 (De Morgan proposicional combinado con la negación cuantificacional).*
-
-**Ítem 14**
-Dominio de personas y de contactos. $primerContacto(x,y)$: "y es el contacto que primero le responde a x". Formalice "cada persona tiene un único contacto que le responde primero" usando $\exists!$ anidado dentro de $\forall x$ (Solución 1, Clase 8 + hoy), y luego escriba la versión expandida (Solución 2) sin usar el símbolo $\exists!$.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>Solución 1: $\forall x\ \exists!\ y\ primerContacto(x,y)$. Solución 2: $\forall x\ \exists y\ \Bigl(primerContacto(x,y) \land \forall z\ \bigl(z\neq y \rightarrow \neg primerContacto(x,z)\bigr)\Bigr)$.</details>
+*Mezcla explícita con Parte II de `clase10.md` (equivalencias y reglas de inferencia proposicionales, originadas en Clase 5-6) y Parte III (equivalencias cuantificacionales, originadas en Clase 9) — el propio documento de Clase 10 ya las trae como repaso; aquí se ejercitan.*
 
 **Ítem 15**
-Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$, y $atiende(y,x)$: "el mesero y atendió la mesa x en algún momento del turno". La bitácora del turno (puede haber más de un registro por mesa, no es una asignación fija) muestra: $MeseroA$ atendió $Mesa1$; $MeseroA$ atendió $Mesa2$; $MeseroB$ atendió $Mesa2$; $MeseroA$ atendió $Mesa3$. Evalúe $\forall x\ \exists!\ y\ atiende(y,x)$, verificando existencia y unicidad mesa por mesa.
+Simplifique, aplicando Leyes de Morgan y Doble negación: $\neg(\neg p\land q)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -201,10 +204,10 @@ Sea $U_{mesa}=\{Mesa1,Mesa2,Mesa3\}$ y $U_{mesero}=\{MeseroA,MeseroB\}$, y $atie
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>**Falsa.** $Mesa1$: existencia ($MeseroA$) y unicidad, se cumple $\exists!$. $Mesa2$: existencia sí, pero **unicidad falla** — tanto $MeseroA$ como $MeseroB$ la atendieron, dos testigos distintos. $Mesa3$: existencia y unicidad, se cumple $\exists!$. Como $Mesa2$ rompe la unicidad, $\exists!\ y\ atiende(y,x)$ ya no se cumple para todo $x$, así que $\forall x\ \exists!\ y\ atiende(y,x)$ es falsa — testigo del fallo: $Mesa2$, con $MeseroA$ y $MeseroB$ como los dos testigos que rompen la unicidad.</details>
+<details><summary>Ver respuesta final</summary>$p\lor\neg q$</details>
 
 **Ítem 16**
-Niegue $\forall x\ \exists y\ \bigl(reporta(x,y)\land activo(y)\bigr)$ hasta que el $\neg$ quede pegado directamente a cada predicado atómico, aplicando la negación cuantificacional (Clase 8) dos veces y la ley de De Morgan (Clase 6) una vez.
+Dadas las premisas $p\lor q$, $\neg p$, $q\rightarrow r$, deduzca $r$ (indique qué regla de inferencia proposicional usa en cada paso).
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -212,10 +215,10 @@ Niegue $\forall x\ \exists y\ \bigl(reporta(x,y)\land activo(y)\bigr)$ hasta que
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\exists x\ \forall y\ \bigl(\neg reporta(x,y)\lor\neg activo(y)\bigr)$.</details>
+<details><summary>Ver respuesta final</summary>$r$</details>
 
 **Ítem 17**
-Niegue $\exists x\ \forall y\ \bigl(disponible(x,y)\lor enMantenimiento(x,y)\bigr)$ hasta que el $\neg$ quede pegado directamente a cada predicado atómico, aplicando la negación cuantificacional (Clase 8) dos veces y la ley de De Morgan (Clase 6) una vez.
+Reescriba, aplicando primero De Morgan cuántico y luego Leyes de Morgan: $\neg\exists x\ \bigl(seguro(x)\land estable(x)\bigr)$.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -223,29 +226,34 @@ Niegue $\exists x\ \forall y\ \bigl(disponible(x,y)\lor enMantenimiento(x,y)\big
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\ \exists y\ \bigl(\neg disponible(x,y)\land\neg enMantenimiento(x,y)\bigr)$.</details>
+<details><summary>Ver respuesta final</summary>$\forall x\ \bigl(\neg seguro(x)\lor\neg estable(x)\bigr)$</details>
+
+**Ítem 18**
+Dadas las premisas: (a) $\neg\exists x\ \neg disponible(x)$; (b) $\forall x\ \bigl(disponible(x)\rightarrow puedeAtender(x)\bigr)$. Demuestre $puedeAtender(\text{Marco})$. (Ayuda: el primer paso no es de la Parte V, sino de la Parte III.)
+
+> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
+>
+> _______________________
+
+> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
+
+<details><summary>Ver respuesta final</summary>$puedeAtender(\text{Marco})$</details>
 
 ---
 
-## 🛵 Reto Final — La ruta del domiciliario
+## Reto Final — El Enigma del Bosque Blorpiter
 
-*Este bloque aplica — no explica — los conceptos ya vistos. La narrativa es solo el envoltorio del enunciado; se resuelve exclusivamente con herramientas formales de `clase9.md`. Es un hilo nuevo, distinto al Expediente Gallinero (que quedó completamente cerrado en esta clase).*
-
-Un domiciliario reparte pedidos en un barrio. Universo de clientes $U_{cliente}=\{C1,C2,C3,C4\}$ y universo de repartidores $U_{repartidor}=\{R1,R2\}$. Predicado $asignado(y,x)$: "el repartidor y tiene asignada la entrega al cliente x".
-
-**Ítem 18**
-Formalice y contraste las dos afirmaciones siguientes (sin evaluar todavía ninguna tabla): "cada cliente tiene un repartidor asignado" y "hay un repartidor que cubre a todos los clientes". Explique en una frase la diferencia de significado entre ambas.
-
-> ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
->
-> _______________________
-
-> 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
-
-<details><summary>Ver respuesta final</summary>"Cada cliente tiene un repartidor asignado": $\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$ — el testigo puede depender del cliente. "Hay un repartidor que cubre a todos los clientes": $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$ — un mismo repartidor, común a todos. La primera exige un responsable por cliente (posiblemente distintos); la segunda exige uno solo que cubra a todos a la vez, una afirmación mucho más fuerte.</details>
+*Caso aplicado, en formato de puzzle lógico al estilo de los que escribía Lewis Carroll (autor de* Alicia en el país de las maravillas*, y también de varios libros de silogismos con premisas disparatadas). El universo narrativo es nuevo — no continúa el hilo de Ana, Beto, Carla y Diego. La historia es solo el envoltorio del enunciado: se resuelve enteramente con las herramientas formales de hoy, sin pistas escondidas en el texto.*
 
 **Ítem 19**
-La bitácora de asignaciones del día es: $C1\to R1$, $C2\to R1$, $C3\to R2$, $C4\to R1$. Evalúe las dos fórmulas del Ítem 18 con esta tabla. Luego, tome la que resulte falsa y niéguela hasta dejar el $\neg$ pegado a $asignado$.
+
+En el Bosque Blorpiter viven toda clase de criaturas imaginarias. Se sabe que:
+
+- Todos los grifomorsos que maúllan de noche son luminiscentes.
+- Ningún ser luminiscente teme a la niebla.
+- Existe un grifomorso en el Bosque Blorpiter que maúlla de noche.
+
+Use $grifomorso(x)$, $maullaDeNoche(x)$, $luminiscente(x)$, $temeNiebla(x)$, $enBosque(x)$. Demuestre, en Afirmación-Razón completa, que existe un ser en el Bosque Blorpiter que no teme a la niebla.
 
 > ✍️ *Antes de ver la respuesta: resuelva el procedimiento completo a mano y escriba aquí su resultado final, aunque no esté seguro.*
 >
@@ -253,40 +261,62 @@ La bitácora de asignaciones del día es: $C1\to R1$, $C2\to R1$, $C3\to R2$, $C
 
 > 🎯 *Nivel de confianza antes de revelar*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\forall x\in U_{cliente}\ \exists y\in U_{repartidor}\ asignado(y,x)$ es **verdadera** (los cuatro clientes tienen repartidor). $\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x)$ es **falsa** ($R1$ cubre a $C1,C2,C4$ pero no a $C3$; $R2$ solo cubre a $C3$). Negando la falsa: $\neg\exists y\in U_{repartidor}\ \forall x\in U_{cliente}\ asignado(y,x) \equiv \forall y\in U_{repartidor}\ \exists x\in U_{cliente}\ \neg asignado(y,x)$ — "para cada repartidor existe al menos un cliente que no tiene asignado ese repartidor".</details>
-
-> [!NOTE]
-> **Moraleja.** La diferencia entre "cada cliente resuelto" y "un solo repartidor que resuelve todo" no es un tecnicismo — es exactamente la diferencia entre un servicio que funciona (aunque repartido entre varios) y uno que dependería de una sola persona disponible siempre.
+<details><summary>Ver respuesta final</summary>$\exists x\ \bigl(enBosque(x)\land\neg temeNiebla(x)\bigr)$ — existe un ser en el Bosque Blorpiter que no teme a la niebla.</details>
 
 ---
 
 ## Cierre — Autodiagnóstico
 
-No cuente solo aciertos ni solo confianza: para cada ítem, compare su respuesta escrita con la revelada y clasifíquela en una sola casilla de la matriz. La última columna es la más importante — un ítem incorrecto en el que usted declaró confianza Alta señala un concepto que cree dominar pero no domina; repáselo primero.
+Antes de continuar con el curso, complete esta tabla con honestidad — le sirve a usted, no al profesor.
 
-| Bloque | Ítems | Correcto + Confianza Alta | Correcto + Confianza Media/Baja | Incorrecto + Confianza Media/Baja | Incorrecto + Confianza Alta (¡atención!) | Repasar |
-|:---|:---:|:---:|:---:|:---:|:---:|:---|
-| Calentamiento | 3 | ___ | ___ | ___ | ___ | Partes I.3, IV.1, IV.2 |
-| Serie 1 | 5 | ___ | ___ | ___ | ___ | Partes I.1, I.2, II.1, II.2, IV.3, IV.4 |
-| Serie 2 | 5 | ___ | ___ | ___ | ___ | Partes III, II.1, V, IV.3, II.3 |
-| Serie 3 — Cruzada | 4 | ___ | ___ | ___ | ___ | Clase 8 (unicidad anidada), Clase 6 (De Morgan) + IV.2 |
-| Reto Final | 2 | ___ | ___ | ___ | ___ | Parte II (orden de cuantificadores) |
+| Bloque | Ítems totales | Con confianza Alta | Con confianza Media | Con confianza Baja | ¿Repasar antes de seguir? |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| Calentamiento | 4 | | | | |
+| Serie 1 | 5 | | | | |
+| Serie 2 | 5 | | | | |
+| Serie 3 | 4 | | | | |
+| Reto Final | 1 | | | | |
+
+> [!TIP]
+> Si en alguna fila 2 o más ítems quedaron en confianza **Baja**, vuelva a esa parte de `clase10.md` antes de seguir a la próxima clase — no antes de haber intentado resolver de nuevo el ítem con el que tuvo dificultad. Un acierto con confianza Baja también es una señal de alerta: significa que llegó a la respuesta correcta sin estar seguro del procedimiento, y vale la pena repasar igual.
 
 ---
 
 ## Hoja de fórmulas y conceptos clave
 
-| Concepto | Símbolo / fórmula | Lectura |
-|:---|:---|:---|
-| Alcance | La subfórmula que sigue al cuantificador, delimitada por paréntesis (o el átomo inmediato si no hay) | "Hasta dónde llega" el cuantificador |
-| Libre vs. ligada | Ligada: dentro del alcance de su cuantificador. Libre: fuera de cualquier alcance | Solo se sustituye lo libre |
-| Orden importa (tipos mixtos) | $\forall x\exists y\ P(x,y) \not\equiv \exists y\forall x\ P(x,y)$ | "Cada uno el suyo" vs. "al menos uno, común a todos" |
-| Orden no importa (mismo tipo) | $\forall x\forall y\ P \equiv \forall y\forall x\ P$ ; $\exists x\exists y\ P\equiv\exists y\exists x\ P$ | Se puede reordenar libremente |
-| Distribución válida | $\forall x(P\land Q)\equiv\forall xP\land\forall xQ$ ; $\exists x(P\lor Q)\equiv\exists xP\lor\exists xQ$ | $\forall$ con $\land$, $\exists$ con $\lor$ |
-| Distribución inválida | $\forall x(P\lor Q)\not\equiv\forall xP\lor\forall xQ$ ; $\exists x(P\land Q)\not\equiv\exists xP\land\exists xQ$ | Requiere contraejemplo, no demostración |
-| Tres ambigüedades | Sintáctica / de alcance / semántica | Agrupación / orden de cuantificadores / interpretación del mundo |
-| Unicidad anidada (Clase 8 + hoy) | $\forall x\ \exists!\ y\ P(x,y)$ | "Cada x tiene exactamente un y" |
-| Negación anidada + De Morgan (Clase 6 + Clase 8) | $\neg\forall x\exists y(P\land Q)\equiv\exists x\forall y(\neg P\lor\neg Q)$ | Negar cada cuantificador, luego De Morgan proposicional sobre lo interno |
+*Referencia ultra-compacta. Extiende la Ficha de bolsillo de `clase10.md` con lo que la Serie 3 agregó.*
 
-> [!NOTE]
-> Este documento sigue el patrón de respuesta-dentro-de-cada-ítem (intento + confianza + respuesta final), la misma variación ya aprobada como plantilla desde `clase7_autoevaluacion.md`.
+**De Clase 10 (Parte I y V):**
+
+| Concepto | Forma | Restricción |
+|:---|:---|:---|
+| Formas aristotélicas | A: $\forall(S\rightarrow P)$ · E: $\forall(S\rightarrow\neg P)$ · I: $\exists(S\land P)$ · O: $\exists(S\land\neg P)$ | $\forall$ con $\rightarrow$, $\exists$ con $\land$ — nunca al revés |
+| Instanciación universal (UI) | $\forall x\ P(x)\ \therefore P(c)$ | Ninguna |
+| Generalización universal (UG) | $P(c)\ \therefore \forall x\ P(x)$ | $c$ debe ser genuinamente arbitrario |
+| Instanciación existencial (EI) | $\exists x\ P(x)\ \therefore P(c)$ | $c$ debe ser un nombre nuevo |
+| Generalización existencial (EG) | $P(c)\ \therefore \exists x\ P(x)$ | Ninguna |
+| Orden típico | EI primero → UI en el mismo testigo → UG o EG al cerrar | — |
+
+**De Clase 5-6 (repasado en Serie 3):**
+
+| Nombre | Equivalencia / Regla |
+|:---|:---|
+| Leyes de Morgan | $\neg(P\land Q)\equiv\neg P\lor\neg Q$ &nbsp;&nbsp; $\neg(P\lor Q)\equiv\neg P\land\neg Q$ |
+| Doble negación | $\neg(\neg P)\equiv P$ |
+| Implicación | $P\rightarrow Q\equiv\neg P\lor Q$ |
+| Contrarrecíproco | $P\rightarrow Q\equiv\neg Q\rightarrow\neg P$ |
+| Silogismo disyuntivo | $p\lor q,\ \neg p\ \therefore q$ |
+| Resolución | $\neg p\lor r,\ p\lor q\ \therefore q\lor r$ |
+| Modus Ponens / Modus Tollens | $p\rightarrow q, p\ \therefore q$ &nbsp;&nbsp; $p\rightarrow q,\neg q\ \therefore \neg p$ |
+
+**De Clase 9 (repasado en Serie 3):**
+
+| Nombre | Equivalencia |
+|:---|:---|
+| De Morgan cuántico | $\neg\forall x\ P(x)\equiv\exists x\ \neg P(x)$ &nbsp;&nbsp; $\neg\exists x\ P(x)\equiv\forall x\ \neg P(x)$ |
+
+## Referencias
+
+- **[Clase 10](clase10.md)**: notas de clase completas — formas aristotélicas y reglas de inferencia con cuantificadores.
+- **[Clase 6](clase6.md)**: reglas de inferencia proposicionales, formato Afirmación-Razón.
+- **[Clase 9](clase9.md)**: equivalencias cuantificacionales, con derivación completa.
