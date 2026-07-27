@@ -3,7 +3,7 @@
 # 🛰️ Autoevaluación — El Incidente del Discovery One
 ### Proposición, Lenguaje Formal, Axiomas de Verdad y Jerarquía de Operadores
 
-*Bloque de autoevaluación independiente. Documento de clase: [`README.md`](./README.md)*
+*Bloque de autoevaluación independiente. Documento de clase: [`README.md`](./clase1.md)*
 
 ---
 

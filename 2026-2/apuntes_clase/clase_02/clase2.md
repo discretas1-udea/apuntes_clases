@@ -10,7 +10,7 @@
 
 ## Contexto de apoyo — Continuación del caso
 
-Este documento continúa directamente el caso trabajado en la sesión anterior: [El Incidente del Discovery One — Proposición, Lenguaje Formal, Axiomas de Verdad y Jerarquía de Operadores](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase2/). Si no ha leído esa sesión, se recomienda hacerlo antes de continuar; aquí no se repite el contexto completo de la misión.
+Este documento continúa directamente el caso trabajado en la sesión anterior: [El Incidente del Discovery One — Proposición, Lenguaje Formal, Axiomas de Verdad y Jerarquía de Operadores](../clase_01/clase1.md). Si no ha leído esa sesión, se recomienda hacerlo antes de continuar; aquí no se repite el contexto completo de la misión.
 
 **Recordatorio mínimo**: la nave *Discovery One*, en ruta a Júpiter, tiene a bordo la computadora **HAL 9000**. HAL reportó un fallo en la unidad AE-35 (el componente que alinea la antena con la Tierra) que Bowman no pudo confirmar con una inspección física.
 

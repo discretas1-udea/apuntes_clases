@@ -3,7 +3,7 @@
 # Autoevaluación — Tablas de Verdad
 ### Matemáticas Discretas 1 · Módulo 1: Lógica Proposicional
 
-*Complemento de práctica de: [El Incidente del Discovery One — El Veredicto (Tablas de Verdad)](https://discretas1-udea.github.io/discretas1-udea-20261/lessons/mod1/clase3/)*
+*Complemento de práctica de: [El Incidente del Discovery One — El Veredicto (Tablas de Verdad)](clase2.md)*
 
 *Universidad de Antioquia · Ingeniería de Sistemas*
 
