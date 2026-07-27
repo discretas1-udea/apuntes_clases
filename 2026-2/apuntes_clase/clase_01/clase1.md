@@ -616,13 +616,12 @@ $$
 > \end{aligned}
 > $$
 >
-> <details>
-> 
+> <details> 
 > <summary>
 > Ver respuesta
 > </summary>
 >
-> $$
+> ```math
 > \begin{aligned}
 > \neg p &= F
 > \end{aligned}
@@ -630,7 +629,7 @@ $$
 > \begin{aligned}
 > V \rightarrow F &= \mathbf{F}
 > \end{aligned}
-> $$
+> ```
 >
 > </details>
 
