@@ -289,7 +289,7 @@ Para evaluar una expresión con valores dados: (1) sustituya cada variable por s
 
 **Ejemplo**: dados $p=V$, $q=F$, $r=V$, evalúe $\neg p \lor q \rightarrow r$.
 
-$\neg p = F$. $\;\; \neg p \lor q = F \lor F = F$. $\;\; F \rightarrow r = F \rightarrow V = V$. Resultado: $V$.
+$\neg p = F$. $\neg p \lor q = F \lor F = F$. $F \rightarrow r = F \rightarrow V = V$. Resultado: $V$.
 
 > [!TIP]
 > **Compruebe su comprensión**
@@ -297,7 +297,9 @@ $\neg p = F$. $\;\; \neg p \lor q = F \lor F = F$. $\;\; F \rightarrow r = F \ri
 > Agregue los paréntesis correspondientes, según la jerarquía, a la expresión $p \lor q \land \neg r \rightarrow s$.
 >
 > <details><summary>Ver respuesta</summary>
+> 
 > Primero $\neg r$; luego $\land$: $q \land (\neg r)$; luego $\lor$: $p \lor (q \land \neg r)$; luego $\rightarrow$: $\big(p \lor (q \land \neg r)\big) \rightarrow s$.
+> 
 > </details>
 
 ---
@@ -416,7 +418,9 @@ $$
 > **Antes de continuar, pregúntese**: ¿por qué la cláusula interna se tradujo como $\neg r \rightarrow q$ y no como $r \rightarrow q$?
 >
 > <details><summary>Ver respuesta</summary>
+> 
 > Porque el enunciado dice "si los precios <b>no</b> son demasiado altos", es decir, la condición que activa "la gente vendrá" es la negación de $r$, no $r$ directamente.
+> 
 > </details>
 
 ### Bloque B — Evaluación con axiomas de verdad
@@ -450,7 +454,7 @@ $$
 **Paso 1 — Decidir el orden (aplica a ambos casos).** La expresión tiene tres operadores: $\lor$, $\land$ y $\neg$. Antes de sustituir cualquier valor, conviene preguntarse: ¿cuál se resuelve primero? Por la tabla de jerarquía, $\neg$ tiene prioridad 1, $\land$ prioridad 2, y $\lor$ prioridad 3 — la más baja de las tres. Eso significa que el $\lor$ es el operador *principal*: todo lo que está a su derecha se resuelve primero, como si tuviera un paréntesis invisible.
 
 $$
-p \lor q \land \neg(p \land q) \;\;\equiv\;\; p \lor \Big(q \land \neg(p \land q)\Big)
+p \lor q \land \neg(p \land q) \equiv p \lor \Big(q \land \neg(p \land q)\Big)
 $$
 
 **Caso 1: $p=V, q=V$**
@@ -554,7 +558,7 @@ Esta conjunción es falsa **sin importar el valor de $Q$** — la regla de domin
 **Paso 1 — Agrupar por jerarquía.** El condicional asocia a la derecha, así que el segundo $\rightarrow$ se agrupa primero.
 
 $$
-Q \rightarrow R \rightarrow (P \land Q) \lor R \;\;\equiv\;\; Q \rightarrow \Big(R \rightarrow \big((P\land Q)\lor R\big)\Big)
+Q \rightarrow R \rightarrow (P \land Q) \lor R \equiv     Q \rightarrow \Big(R \rightarrow \big((P\land Q)\lor R\big)\Big)
 $$
 
 **Paso 2 — Plantear qué se necesitaría para que sea falsa.** Un condicional externo $Q\rightarrow(\ldots)$ es falso únicamente si $Q=V$ y la parte interna es falsa; a su vez, esa parte interna, $R\rightarrow(\ldots)$, es falsa únicamente si $R=V$ y $(P\land Q)\lor R$ es falso. Es decir, necesitaríamos que $R=V$ y, al mismo tiempo, $(P\land Q)\lor R = F$.

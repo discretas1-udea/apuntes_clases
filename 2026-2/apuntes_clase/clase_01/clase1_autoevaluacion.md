@@ -39,7 +39,14 @@
 >
 > 🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$\neg$, $\land$, $\oplus$.</details>
+<details>
+<summary>
+Ver respuesta final
+</summary>
+
+$\neg$, $\land$, $\oplus$.
+
+</details>
 
 **C4.** ¿Es "$x - 3 = 0$" una proposición? Justifique.
 
@@ -60,37 +67,74 @@
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$</details>
+<details>
+<summary>
+Ver respuesta final
+</summary>
+
+$V$
+
+</details>
 
 **S1-2.** Sean $p=F$, $q=F$. Evalúe $p \land q$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$F$</details>
+<details>
+<summary>Ver respuesta final
+</summary>
+
+$F$
+
+</details>
 
 **S1-3.** Sean $p=F$, $q=V$. Evalúe $p \lor q$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$V$
+
+</details>
 
 **S1-4.** Sean $p=V$, $q=V$. Evalúe $p \oplus q$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$F$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$F$
+
+</details>
 
 **S1-5.** Sean $p=F$, $q=V$. Evalúe $p \rightarrow q$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$V$
+
+</details>
 
 **S1-6.** Sean $p=V$, $q=F$. Evalúe $p \leftrightarrow q$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$F$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$F$
+
+</details>
 
 ---
 
@@ -102,31 +146,60 @@
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$f$: reprueba el examen final. $e$: entrega el trabajo. $r$: repite el curso. Expresión: $(f \lor \neg e) \rightarrow r$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$f$: reprueba el examen final. $e$: entrega el trabajo. $r$: repite el curso. Expresión: $(f \lor \neg e) \rightarrow r$
+
+</details>
 
 **S2-2 (Traducción).** "No es cierto que el usuario esté autenticado y la sesión haya expirado." Defina variables y formalice.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$a$: el usuario está autenticado. $s$: la sesión ha expirado. Expresión: $\neg(a \land s)$</details>
+<details>
+<summary>Ver respuesta final</summary>
+
+$a$: el usuario está autenticado. $s$: la sesión ha expirado. Expresión: $\neg(a \land s)$
+
+</details>
 
 **S2-3 (Evaluación).** Sean $p=V$, $q=V$, $r=F$. Evalúe $p \land q \rightarrow \neg r$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$V$
+
+</details>
 
 **S2-4 (Evaluación).** Sean $p=F$, $q=V$, $r=V$. Evalúe $\neg p \lor q \land r$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$V$
+
+</details>
 
 **S2-5 (Evaluación).** Sean $A=F$, $B=V$, $C=F$. Evalúe $A \rightarrow B \leftrightarrow C$.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$F$</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$F$
+
+</details>
 
 ---
 
@@ -138,19 +211,37 @@
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(a) $a$: tiene clave activa. $b$: está bloqueado. $a \land \neg b$. (b) <code>a and not b</code></details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+(a) $a$: tiene clave activa. $b$: está bloqueado. $a \land \neg b$. (b) <code>a and not b</code>
+
+</details>
 
 **S3-2.** Sean $p=V$, $q=F$, $r=V$. Evalúe $p \lor (q \land r)$. Luego indique qué devuelve en Python `p or (q and r)` con `p=True, q=False, r=True`.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>$V$ en lógica; <code>True</code> en Python. Ambos coinciden.</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+$V$ en lógica; <code>True</code> en Python. Ambos coinciden.
+
+</details>
 
 **S3-3.** La expresión $\neg(p \land q)$, evaluada con $p=V$, $q=F$: (a) ¿cuál es su valor? (b) Escríbala en Python y evalúela con `p=True, q=False`.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>(a) $V$. (b) <code>not (p and q)</code> → <code>True</code>.</details>
+<details>
+
+<summary>
+
+Ver respuesta final</summary>(a) $V$. (b) <code>not (p and q)</code> → <code>True</code>.
+
+</details>
 
 ---
 
@@ -166,13 +257,25 @@ Los datos del ciclo actual son: el sensor de temperatura sí reporta un valor an
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>La expresión evalúa a $F$. La afirmación de HAL es <b>incorrecta</b> — es una segunda discrepancia, del mismo tipo que la del caso AE-35.</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+La expresión evalúa a $F$. La afirmación de HAL es <b>incorrecta</b> — es una segunda discrepancia, del mismo tipo que la del caso AE-35.
+
+</details>
 
 **RF-2.** Usando la regla de oro del condicional, explique en una línea por qué el patrón de este caso es análogo al del AE-35.
 
 > ✍️ *Su respuesta:* _______________________  🎯 *Confianza*: Alto / Medio / Bajo
 
-<details><summary>Ver respuesta final</summary>En ambos casos HAL afirma que una expresión condicional es verdadera cuando, evaluada con los datos reales, el antecedente resulta verdadero y el consecuente falso — la única combinación que hace falso un condicional.</details>
+<details>
+
+<summary>Ver respuesta final</summary>
+
+En ambos casos HAL afirma que una expresión condicional es verdadera cuando, evaluada con los datos reales, el antecedente resulta verdadero y el consecuente falso — la única combinación que hace falso un condicional.
+
+</details>
 
 ---
 
