@@ -616,7 +616,9 @@ $$
 > \end{aligned}
 > $$
 >
-> <details><summary>Ver respuesta</summary>
+> <details>
+> 
+> <summary>Ver respuesta</summary>
 >
 > $$
 > \begin{aligned}
